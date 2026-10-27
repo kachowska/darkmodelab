@@ -7,8 +7,8 @@
 |---|------|-----|--------|
 | 1 | Тема, 3 заголовка + 3 превью → выбор пользователя | `plan/titles.md` | ✔ заголовок + превью P3 (`thumbs/thumb-fru.jpg`, `thumb-fen.jpg`) |
 | 2 | Исследование: `sources.csv`, каталог реального материала | `source-media/real/CATALOG.md` | ◐ sources.csv (22 факта), каталог — после сценария |
-| 3 | Файл креатива (`creative_check.py` пройден) | `plan/creative.md` | ☐ |
-| 4 | Сценарий RU + EN → утверждение | `script/ru.md`, `script/en.md` | ☐ |
+| 3 | Файл креатива (`creative_check.py` пройден) | `plan/creative.md` | ✔ |
+| 4 | Сценарий RU (только RU) → утверждение | `script/ru.md` | ◐ v1 на утверждении |
 | 5 | Три питча + аниматик → выбор | `storyboard/pitches.md`, `storyboard/animatic-*.html` | ☐ |
 | 6 | Раскадровка (карточка на план; самый рискованный план — первым) | `storyboard/board.md` | ☐ |
 | 7 | Ассеты: реальное + Gemini + автопоиск → контактный лист → выбор | `source-media/*`, `plan/contact-sheet.md` | ☐ |
