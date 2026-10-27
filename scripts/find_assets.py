@@ -3,7 +3,9 @@
 Поиск кандидатов картинок/гифок по сценам выпуска.
 Вход:  episodes/<ep>/plan/scenes.json  →  [{"id":"s03","emotion":"absurd","queries":{"gif":["this is fine"],"photo":["wall street trading floor"],"commons":["New York Stock Exchange 2012"]}}, ...]
 Выход: episodes/<ep>/source-media/candidates.md + папки candidates/ (только с --download).
-Источники: Klipy (гифки), Pixabay (фото/видео), Wikimedia Commons (история/документы). Ключи из .env.
+Источники: Klipy (гифки + клипы-мемы из фильмов/сериалов mp4), Pixabay (фото/видео), Wikimedia Commons (история/документы, видео),
+NASA Image and Video Library (видео/фото NASA — общественное достояние), Internet Archive (старые фильмы, Prelinger — общественное достояние). Ключи из .env.
+Ключи сцены: gif, clip, photo, video, commons, commons_video, nasa, archive.
 """
 import json, os, sys, pathlib, argparse, urllib.parse
 import requests
@@ -58,6 +60,38 @@ def commons(q, n=6):
                     "author": (md.get("Artist", {}) or {}).get("value", "")})
     return out
 
+def klipy_clips(q, n=6):
+    """Клипы-мемы (фильмы, сериалы, шоу) — mp4, часто со звуком. Правило устава: ≤ 3 с, свой звук поверх."""
+    if not KLIPY: return []
+    r = requests.get(f"https://api.klipy.com/api/v1/{KLIPY}/clips/search", params={"q": q, "per_page": n}, headers=UA, timeout=20)
+    if r.status_code != 200: return [{"error": f"klipy clips {r.status_code}"}]
+    out = []
+    for it in (r.json().get("data", {}).get("data") or []):
+        f = it.get("file", {}) or {}
+        out.append({"src": "klipy-clip", "title": it.get("title", ""), "url": f.get("mp4") or f.get("gif"), "page": it.get("url", ""),
+                    "license": "Klipy API terms; чужой клип: ≤ 3 с, звук свой", "kind": "video"})
+    return out
+
+def commons_video(q, n=6):
+    return [dict(x, src="commons-video", kind="video") for x in commons(q + " filetype:video", n)]
+
+def nasa(q, n=6, media="video"):
+    r = requests.get("https://images-api.nasa.gov/search", params={"q": q, "media_type": media}, headers=UA, timeout=30)
+    if r.status_code != 200: return [{"error": f"nasa {r.status_code}"}]
+    out = []
+    for it in r.json().get("collection", {}).get("items", [])[:n]:
+        d = (it.get("data") or [{}])[0]; nid = d.get("nasa_id", "")
+        out.append({"src": "nasa", "title": d.get("title", ""), "url": it.get("href", ""), "page": f"https://images.nasa.gov/details/{nid}",
+                    "license": "NASA — общественное достояние (логотипы и люди — с оговорками)", "kind": media})
+    return out
+
+def archive(q, n=6):
+    r = requests.get("https://archive.org/advancedsearch.php", headers=UA, timeout=30, params={
+        "q": f"({q}) AND mediatype:movies AND (collection:prelinger OR licenseurl:*publicdomain*)", "fl[]": ["identifier", "title", "licenseurl"], "rows": n, "output": "json"})
+    if r.status_code != 200: return [{"error": f"archive {r.status_code}"}]
+    return [{"src": "archive", "title": x.get("title", ""), "url": f"https://archive.org/download/{x['identifier']}", "page": f"https://archive.org/details/{x['identifier']}",
+             "license": x.get("licenseurl") or "Prelinger — общественное достояние", "kind": "video"} for x in r.json()["response"]["docs"]]
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("episode", help="папка выпуска, напр. episodes/2026-11-03_knight-capital")
@@ -74,11 +108,15 @@ def main():
         for q in qs.get("photo", []): found += pixabay(q)
         for q in qs.get("video", []): found += pixabay(q, video=True)
         for q in qs.get("commons", []): found += commons(q)
+        for q in qs.get("clip", []): found += klipy_clips(q)
+        for q in qs.get("commons_video", []): found += commons_video(q)
+        for q in qs.get("nasa", []): found += nasa(q)
+        for q in qs.get("archive", []): found += archive(q)
         for i, f in enumerate(found, 1):
             if "error" in f: lines.append(f"- ⚠ {f['error']}"); continue
             lines.append(f"{i}. [{f['src']}] {f['title'][:60]} — {f['url']}  · лицензия: {f['license']}  · стр.: {f['page']}")
             if a.download and f.get("url"):
-                d = ep / "source-media" / ("memes" if f["src"] == "klipy" else "real") / "candidates"; d.mkdir(parents=True, exist_ok=True)
+                d = ep / "source-media" / ("memes" if f["src"].startswith("klipy") else "real") / "candidates"; d.mkdir(parents=True, exist_ok=True)
                 ext = pathlib.Path(urllib.parse.urlparse(f["url"]).path).suffix or ".bin"
                 fn = d / f"{s['id']}_{f['src']}_{i}{ext}"
                 try:
@@ -86,6 +124,7 @@ def main():
                 except Exception as e:
                     lines.append(f"   ⚠ не скачалось: {e}")
         lines.append("")
+    (ep / "source-media").mkdir(parents=True, exist_ok=True)
     (ep / "source-media" / "candidates.md").write_text("\n".join(lines))
     print("→", ep / "source-media" / "candidates.md")
 
