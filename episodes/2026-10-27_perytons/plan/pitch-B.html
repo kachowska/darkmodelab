@@ -1,0 +1,372 @@
+<!doctype html>
+<!-- animatic.html — grey-box animatic BEFORE any asset is generated (SKILL §1 / direction.md §3c, mandatory for pieces ≥ 20 s).
+     Fill window.BEATS (one row per beat: time, duration, caption, boxes = rough shapes with simple moves, sfx events).
+     It already has the living camera (camlife.js) and sound from the same events (sfx.js). Render a 3 fps sheet:
+       node render.cjs animatic.html --fps 3 --w 1920 --h 1080 --out plan/animatic.mp4  → watch.py → give it to the critic.
+     Make one copy per pitch (or let scripts/director.mjs do it). A copy outside scripts/ needs camlife.js, sfx.js, vendor/gsap.min.js beside it, or fix the three <script src> to ../scripts/… -->
+<html><head><meta charset="utf-8"><title>Питч B</title>
+<style>html,body{margin:0;background:#1e1e1e}#stage{position:relative;width:1920px;height:1080px;overflow:hidden;background:#d9d9d9;font:600 44px/1.15 system-ui,sans-serif}
+.box{position:absolute;background:#9a9a9a;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#222;font-size:32px}
+#cap{position:absolute;left:96px;bottom:84px;color:#111;background:#fff;padding:14px 22px;border-radius:10px;max-width:1500px}
+#tc{position:absolute;right:96px;top:72px;color:#555;font:500 30px monospace}</style></head>
+<body><div id="stage"><div id="world" style="position:absolute;inset:0"></div><div id="cap"></div><div id="tc"></div></div>
+<script src="../../../templates/obsion/vendor/gsap.min.js"></script><script src="../../../templates/obsion/camlife.js"></script><script src="../../../templates/obsion/sfx.js"></script>
+<script>
+// ===== PITCH B — brief: Перитоны, только RU, 11 мин, тёмный минимализм + настоящие документы =====
+// ===== PITCH B: «Дорога-сигнал» — камера летит вдоль дуги сигнала как по дороге; документы — щиты у дороги, HUD уровня = календарь 1998→2015 и соты 13 лучей =====
+window.BEATS = [
+ {
+  "t": 0,
+  "d": 3,
+  "cap": "0:00 · чёрное, таймер 0:07→0:05 обрыв; из темноты зажигается дуга-дорога",
+  "boxes": [
+   {
+    "id": "b0_0",
+    "label": "таймер 0:07",
+    "x": 820,
+    "y": 440,
+    "w": 280,
+    "h": 140,
+    "to": {
+     "s": 0.9
+    }
+   },
+   {
+    "id": "b0_1",
+    "label": "дуга-дорога",
+    "x": 200,
+    "y": 700,
+    "w": 1500,
+    "h": 60,
+    "to": {
+     "rot": -14
+    }
+   }
+  ],
+  "sfx": [
+   [
+    0.2,
+    "tick"
+   ],
+   [
+    1.2,
+    "tick"
+   ],
+   [
+    2.4,
+    "riser",
+    {
+     "dur": 0.8
+    }
+   ]
+  ]
+ },
+ {
+  "t": 3,
+  "d": 6,
+  "cap": "полёт вдоль дуги (высокие частоты → низкие); HUD: «Parkes · 1,4 ГГц · 1998»; щит у дороги — фото Parkes",
+  "boxes": [
+   {
+    "id": "b3_0",
+    "label": "дорога (в перспективе)",
+    "x": 300,
+    "y": 520,
+    "w": 1300,
+    "h": 300,
+    "to": {
+     "s": 1.2
+    }
+   },
+   {
+    "id": "b3_1",
+    "label": "щит: фото Parkes",
+    "x": 1300,
+    "y": 200,
+    "w": 420,
+    "h": 300,
+    "to": {
+     "x": 1500
+    }
+   },
+   {
+    "id": "b3_2",
+    "label": "HUD",
+    "x": 60,
+    "y": 60,
+    "w": 520,
+    "h": 110,
+    "to": {}
+   }
+  ],
+  "sfx": [
+   [
+    3.2,
+    "whoosh",
+    {
+     "dur": 1.2,
+     "pan": [
+      -0.6,
+      0.6
+     ]
+    }
+   ]
+  ]
+ },
+ {
+  "t": 9,
+  "d": 6,
+  "cap": "развилка: дорога Лоримера и дорога перитонов — одинаковые (Spider-Man pointing)",
+  "boxes": [
+   {
+    "id": "b9_0",
+    "label": "дорога Лоримера",
+    "x": 200,
+    "y": 380,
+    "w": 700,
+    "h": 120,
+    "to": {
+     "rot": -8
+    }
+   },
+   {
+    "id": "b9_1",
+    "label": "дорога перитонов",
+    "x": 1020,
+    "y": 380,
+    "w": 700,
+    "h": 120,
+    "to": {
+     "rot": 8
+    }
+   },
+   {
+    "id": "b9_2",
+    "label": "мем",
+    "x": 760,
+    "y": 620,
+    "w": 400,
+    "h": 260,
+    "to": {}
+   }
+  ],
+  "sfx": [
+   [
+    10,
+    "swish"
+   ],
+   [
+    11.5,
+    "pop"
+   ]
+  ]
+ },
+ {
+  "t": 15,
+  "d": 6,
+  "cap": "HUD 13 лучей: все горят → дорога ныряет вниз, к Земле",
+  "boxes": [
+   {
+    "id": "b15_0",
+    "label": "соты HUD",
+    "x": 80,
+    "y": 80,
+    "w": 360,
+    "h": 320,
+    "to": {}
+   },
+   {
+    "id": "b15_1",
+    "label": "дорога вниз",
+    "x": 500,
+    "y": 300,
+    "w": 1000,
+    "h": 120,
+    "to": {
+     "rot": 28
+    }
+   }
+  ],
+  "sfx": [
+   [
+    15.4,
+    "pop"
+   ],
+   [
+    17,
+    "downer",
+    {
+     "dur": 0.8
+    }
+   ]
+  ]
+ },
+ {
+  "t": 21,
+  "d": 6,
+  "cap": "чекпойнт: табло уровня = рис. 7 (часы, пик в обед)",
+  "boxes": [
+   {
+    "id": "b21_0",
+    "label": "табло: рис. 7",
+    "x": 520,
+    "y": 220,
+    "w": 880,
+    "h": 560,
+    "to": {
+     "s": 1.05
+    }
+   }
+  ],
+  "sfx": [
+   [
+    21.3,
+    "click"
+   ],
+   [
+    23,
+    "chime",
+    {
+     "note": 67
+    }
+   ]
+  ]
+ },
+ {
+  "t": 27,
+  "d": 8,
+  "cap": "ФИРМЕННЫЙ — «босс» в конце дороги: микроволновка; дверца открывается — дорога выстреливает прямо из неё (бум)",
+  "boxes": [
+   {
+    "id": "b27_0",
+    "label": "микроволновка-босс",
+    "x": 660,
+    "y": 240,
+    "w": 600,
+    "h": 460,
+    "to": {
+     "s": 1.1
+    }
+   },
+   {
+    "id": "b27_1",
+    "label": "дорога из дверцы",
+    "x": 1100,
+    "y": 420,
+    "w": 700,
+    "h": 80,
+    "to": {
+     "x": 1200
+    }
+   }
+  ],
+  "sfx": [
+   [
+    30,
+    "click"
+   ],
+   [
+    30.3,
+    "impact",
+    {
+     "size": 1.2
+    }
+   ],
+   [
+    30.35,
+    "whoosh",
+    {
+     "dur": 0.6
+    }
+   ]
+  ]
+ },
+ {
+  "t": 35,
+  "d": 5,
+  "cap": "разворот: дорога Лоримера уходит в космос — 5:50, тарелка на юг",
+  "boxes": [
+   {
+    "id": "b35_0",
+    "label": "дорога в звёзды",
+    "x": 300,
+    "y": 200,
+    "w": 1300,
+    "h": 100,
+    "to": {
+     "rot": -30
+    }
+   },
+   {
+    "id": "b35_1",
+    "label": "05:50",
+    "x": 80,
+    "y": 800,
+    "w": 300,
+    "h": 140,
+    "to": {}
+   }
+  ],
+  "sfx": [
+   [
+    35.3,
+    "riser",
+    {
+     "dur": 1.5
+    }
+   ]
+  ]
+ },
+ {
+  "t": 40,
+  "d": 6,
+  "cap": "финал: тысячи дорог-всплесков CHIME, одна — из нашей Галактики; дзынь",
+  "boxes": [
+   {
+    "id": "b40_0",
+    "label": "сеть дорог CHIME",
+    "x": 160,
+    "y": 140,
+    "w": 1600,
+    "h": 800,
+    "to": {
+     "s": 0.9
+    }
+   }
+  ],
+  "sfx": [
+   [
+    42,
+    "sparkle",
+    {
+     "n": 12
+    }
+   ],
+   [
+    45,
+    "chime",
+    {
+     "note": 76
+    }
+   ]
+  ]
+ }
+];
+// ===== engine (no edits needed) =====
+var DUR = BEATS.reduce((m, b) => Math.max(m, b.t + b.d), 0), tl = gsap.timeline({ paused: true }), W = document.getElementById("world"), EVENTS = [];
+var cam = CAMLIFE.attach(W, { push: 0.03, period: 6 });
+BEATS.forEach(function (b) {
+  (b.boxes || []).forEach(function (o) {
+    var el = document.createElement("div"); el.className = "box"; el.textContent = o.label || o.id; el.style.cssText += `;left:${o.x}px;top:${o.y}px;width:${o.w}px;height:${o.h}px;opacity:0`; W.appendChild(el);
+    tl.set(el, { opacity: 1 }, b.t); tl.fromTo(el, { scale: 0.9 }, { scale: 1, duration: 0.35, ease: "back.out(2)" }, b.t);
+    var to = o.to || {}; tl.to(el, { x: to.x != null ? to.x - o.x : 0, y: to.y != null ? to.y - o.y : 0, rotation: to.rot || 0, scale: to.s || 1, duration: Math.max(0.3, b.d - 0.4), ease: "power2.inOut" }, b.t + 0.3);
+    tl.set(el, { opacity: 0 }, b.t + b.d);
+  });
+  tl.call(function () { document.getElementById("cap").textContent = b.cap; }, null, b.t);
+  (b.sfx || []).forEach(function (e) { EVENTS.push(e); });
+});
+var CP = { _t: 0 }; Object.defineProperty(CP, "t", { get: function () { return this._t; }, set: function (v) { this._t = v; cam(v); document.getElementById("tc").textContent = v.toFixed(1) + " s"; var cur = BEATS.filter(function (b) { return v >= b.t; }).pop(); document.getElementById("cap").textContent = cur ? cur.cap : ""; } });
+tl.to(CP, { t: DUR, duration: DUR, ease: "none" }, 0);
+window.__duration = DUR; window.__seek = function (t) { tl.seek(t, false); return 0; };
+window.__audioWav = async function () { return SFX.toWavBase64(await SFX.render(EVENTS, DUR, { bed: { bpm: 100, key: "A", mood: "warm", db: -12 } })); };
+var q = /[?&]t=([\d.]+)/.exec(location.search); tl.seek(q ? +q[1] : 0); if (!q) tl.play();
+</script></body></html>
