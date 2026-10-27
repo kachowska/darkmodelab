@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../../assets/common/fonts/candidates/fonts.css">
+<style>
+:root{--red:#E5392B;--fg:#F2F2F0}
+html,body{margin:0;background:#000}
+.t{position:relative;width:1280px;height:720px;overflow:hidden;background:#07070a;color:var(--fg)}
+.abs{position:absolute}
+.grain{position:absolute;inset:0;opacity:.45;mix-blend-mode:screen;pointer-events:none;z-index:20;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .1 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.scan{position:absolute;inset:0;z-index:19;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 4px);mix-blend-mode:multiply}
+.vig{position:absolute;inset:0;z-index:18;pointer-events:none;background:radial-gradient(ellipse at 55% 45%,transparent 45%,rgba(0,0,0,.75) 100%)}
+/* VHS-глитч заголовка: RGB-расслоение + сдвинутые полосы */
+.gl{position:absolute;z-index:10;font:700 128px/.9 Oswald;text-transform:uppercase;letter-spacing:-.005em;color:#f4f4f2}
+.gl .l{position:relative;display:block}
+.gl .l:before,.gl .l:after{content:attr(data-t);position:absolute;left:0;top:0;mix-blend-mode:screen}
+.gl .l:before{color:#ff2a2a;transform:translate(-5px,0);clip-path:inset(0 0 52% 0)}
+.gl .l:after{color:#22e6ff;transform:translate(5px,1px);clip-path:inset(46% 0 0 0);opacity:.8}
+.gl .l.s{transform:translateX(14px)}
+.gl .q{color:var(--red)}
+.strip{position:absolute;left:0;top:0;bottom:0;width:66px;background:#050506;z-index:15;display:flex;align-items:center;justify-content:center;border-right:2px solid var(--red)}
+.strip span{transform:rotate(-90deg);white-space:nowrap;font:700 34px Oswald;letter-spacing:.14em;color:#8d8d94}
+.strip span b{color:var(--red);font-weight:700}
+
+/* ===== K1 СЦЕНА ===== */
+#k1{background:#120d1e}
+#k1 .sky{position:absolute;left:330px;top:-330px;width:950px;height:1186px;background:url(../source-media/real/parkes_csiro-4350_moon.jpg) no-repeat 0 0/950px auto;filter:hue-rotate(-18deg) saturate(1.05) contrast(1.15) brightness(.85)}
+#k1 .skyfade{position:absolute;inset:0;background:linear-gradient(90deg,#120d1e 0%,#120d1e 26%,rgba(18,13,30,.0) 52%),linear-gradient(0deg,rgba(7,7,10,.9) 0%,rgba(7,7,10,0) 35%)}
+#k1 .tealgrade{position:absolute;inset:0;background:linear-gradient(160deg,rgba(20,90,110,.35),rgba(80,10,40,.25));mix-blend-mode:color;z-index:3}
+#k1 .mw{position:absolute;left:-150px;top:322px;width:660px;z-index:6;filter:brightness(.52) contrast(1.25) saturate(.6) hue-rotate(-10deg);transform:rotate(-2deg);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%)}
+#k1 .mwtint{position:absolute;inset:0;background:linear-gradient(120deg,rgba(60,30,110,.55),rgba(229,57,43,.25));mix-blend-mode:multiply;z-index:1}
+#k1 .mwglow{z-index:2}
+#k1 .mw img{width:100%;display:block}
+#k1 .mwglow{position:absolute;left:31%;top:14%;width:57%;height:70%;border-radius:6px;background:radial-gradient(ellipse at 60% 60%,rgba(255,150,60,.95),rgba(229,57,43,.65) 45%,rgba(229,57,43,0) 85%);mix-blend-mode:screen}
+#k1 .spill{position:absolute;left:120px;top:330px;width:700px;height:500px;background:radial-gradient(ellipse at 40% 50%,rgba(229,57,43,.45),transparent 65%);z-index:5;mix-blend-mode:screen}
+#k1 .beam{position:absolute;left:300px;top:110px;width:720px;height:420px;z-index:7}
+#k1 .gl{left:48px;top:30px}
+#k1 .tag{position:absolute;right:46px;bottom:40px;z-index:10;font:700 64px/1 Oswald;color:#fff;background:var(--red);padding:6px 18px 10px;transform:rotate(-3deg);box-shadow:0 12px 30px rgba(0,0,0,.6)}
+
+/* ===== K2 АФИША ===== */
+#k2{background:#050506}
+#k2 .wf{position:absolute;right:30px;top:420px;width:520px;height:268px;background:url(../source-media/real/petroff2015_fig5_waterfall.png) 0 0/100% 100%;filter:contrast(1.6) brightness(.9);transform:perspective(1300px) rotateY(-18deg) rotateZ(-4deg);box-shadow:0 0 90px rgba(229,57,43,.45),0 30px 60px rgba(0,0,0,.8);outline:1px solid #3a1a14;z-index:4}
+#k2 .wfglow{position:absolute;right:0;top:330px;width:700px;height:420px;background:radial-gradient(ellipse,rgba(229,57,43,.25),transparent 65%);mix-blend-mode:screen}
+#k2 .mw{position:absolute;right:-120px;top:-40px;width:560px;filter:grayscale(1) brightness(.42) contrast(1.4);opacity:.9;-webkit-mask-image:linear-gradient(200deg,#000 30%,transparent 80%)}
+#k2 .mw img{width:100%;display:block}
+#k2 .pre{position:absolute;left:104px;top:120px;z-index:10;font:700 36px/1.1 Oswald;letter-spacing:.06em;text-transform:uppercase;color:#f2f2f0}
+#k2 .big{position:absolute;left:96px;top:166px;z-index:10;font:700 214px/.9 Oswald;letter-spacing:-.01em;text-transform:uppercase;color:var(--red);text-shadow:0 0 50px rgba(229,57,43,.35)}
+#k2 .credits{position:absolute;left:104px;bottom:46px;width:720px;z-index:10;font:700 15px/1.45 Oswald;letter-spacing:.05em;text-transform:uppercase;color:#7c7c84;text-align:justify}
+#k2 .credits b{color:#cfcfd4;font-weight:700}
+#k2 .credits i{font-style:normal;color:var(--red)}
+#k2 .src{position:absolute;right:60px;top:396px;z-index:10;font:500 13px 'IBM Plex Mono';color:#77777f}
+
+/* ===== K3 УЛИКИ ===== */
+#k3{background:radial-gradient(ellipse at 60% 40%,#1d1b20,#0a0a0c 75%)}
+.paper{position:absolute;background:#f3f1ea;box-shadow:0 30px 60px rgba(0,0,0,.75),0 4px 10px rgba(0,0,0,.5);z-index:4}
+#k3 .title{left:420px;top:40px;width:560px;height:200px;transform:rotate(4deg);background:#f3f1ea url(../source-media/real/petroff2015_title.png) no-repeat 14px 12px/530px auto}
+#k3 .news{left:640px;top:250px;width:520px;height:205px;transform:rotate(-5deg);background:#fff url(../source-media/real/newdaily_2015-04-14_headline.png) no-repeat 12px 10px/500px auto;z-index:6}
+#k3 .newslogo{position:absolute;left:12px;top:-34px;width:150px;height:32px;background:#fff url(../source-media/real/newdaily_logo.png) center/contain no-repeat;border:0}
+#k3 .photo{left:900px;top:30px;width:330px;height:300px;transform:rotate(7deg);background:#f3f1ea;padding:12px 12px 40px;box-sizing:border-box;z-index:5}
+#k3 .photo div{width:100%;height:100%;background:url(../source-media/real/parkes_csiro-4350_moon.jpg) center 62%/cover}
+#k3 .wfp{left:380px;top:420px;width:360px;height:220px;transform:rotate(-3deg);background:#fff url(../source-media/real/petroff2015_fig5_plot.png) center/cover;z-index:5}
+#k3 .mw{position:absolute;right:-40px;bottom:-60px;width:520px;z-index:7;filter:brightness(.85) contrast(1.15)}
+#k3 .mw img{width:100%;display:block}
+#k3 .mwglow{position:absolute;left:31%;top:14%;width:57%;height:70%;background:radial-gradient(ellipse at 60% 60%,rgba(255,150,60,.9),rgba(229,57,43,.6) 45%,transparent 85%);mix-blend-mode:screen}
+#k3 .circle{position:absolute;left:600px;top:250px;width:420px;height:170px;z-index:8}
+#k3 .big{position:absolute;left:96px;top:300px;z-index:12;font:700 150px/.86 Oswald;text-transform:uppercase;color:#fff;text-shadow:0 10px 40px rgba(0,0,0,.9)}
+#k3 .big span{display:inline-block;background:var(--red);color:#fff;padding:0 14px 6px;margin-top:8px;transform:rotate(-2deg)}
+#k3 .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,7,10,.92) 0%,rgba(7,7,10,.7) 28%,rgba(7,7,10,0) 52%);z-index:9}
+#k3 .hand{position:absolute;left:720px;top:470px;z-index:12;font:700 50px/1 Caveat;color:var(--red);transform:rotate(-6deg);text-shadow:0 2px 10px rgba(0,0,0,.8)}
+</style></head><body>
+
+<!-- K1 · СЦЕНА: настоящий Parkes + настоящая микроволновка, сигнал летит из кухни в тарелку -->
+<div class="t" id="k1">
+  <div class="sky"></div><div class="skyfade"></div><div class="tealgrade"></div>
+  <div class="spill"></div>
+  <svg class="beam" viewBox="0 0 720 420"><g fill="none" stroke="#ff4a35" stroke-linecap="round" style="filter:drop-shadow(0 0 10px #E5392B) drop-shadow(0 0 22px #E5392B)">
+    <path d="M60 380 C 220 300, 420 230, 690 160" stroke-width="6"/>
+    <path d="M60 380 C 230 330, 440 280, 690 160" stroke-width="2.5" opacity=".6" stroke-dasharray="14 10"/>
+  </g><circle cx="690" cy="160" r="10" fill="#fff" style="filter:drop-shadow(0 0 14px #ff4a35)"/></svg>
+  <div class="mw"><img src="../source-media/real/cut_microwave_bgh.png"><div class="mwtint"></div><div class="mwglow"></div></div>
+  <div class="gl"><span class="l" data-t="Сигнал">Сигнал</span><span class="l s" data-t="из космоса?">из космоса<span class="q">?</span></span></div>
+  <div class="tag">17 ЛЕТ</div>
+  <div class="scan"></div><div class="grain"></div><div class="vig"></div>
+</div>
+
+<!-- K2 · АФИША: настоящий график из статьи + титры из настоящих авторов -->
+<div class="t" id="k2">
+  <div class="strip"><span>DARK MODE <b>LAB</b></span></div>
+  <div class="wfglow"></div><div class="wf"></div>
+  <div class="src">MNRAS 451 · рис. 5 · 17.03.2015</div>
+  <div class="pre">17 лет астрономы искали источник:</div>
+  <div class="big">Перитоны</div>
+  <div class="credits">в ролях <b>Э. Петрофф · Э. Кин · Э. Барр · Дж. Рейнольдс · Дж. Саркисян · П. Эдвардс · Дж. Стивенс · К. Брем · Э. Джеймсон · С. Бёрк-Сполар · С. Джонстон</b> радиотелескоп <b>Parkes 64 м</b> и <i>микроволновка в столовой</i> в роли самой себя · по материалам статьи MNRAS 2015</div>
+  <div class="scan" style="opacity:.5"></div><div class="grain"></div><div class="vig"></div>
+</div>
+
+<!-- K3 · УЛИКИ: стол с настоящими документами -->
+<div class="t" id="k3">
+  <div class="strip"><span>DARK MODE <b>LAB</b></span></div>
+  <div class="paper title"></div>
+  <div class="paper photo"><div></div></div>
+  <div class="paper news"><div class="newslogo"></div></div>
+  <div class="paper wfp"></div>
+  <svg class="circle" viewBox="0 0 420 170"><path d="M30 95 C 40 30, 200 10, 330 30 C 410 45, 415 120, 330 145 C 220 175, 60 160, 35 110" fill="none" stroke="#E5392B" stroke-width="6" stroke-linecap="round" transform="rotate(-5 210 85)"/></svg>
+  <div class="mw"><img src="../source-media/real/cut_microwave_bgh.png"><div class="mwglow"></div></div>
+  <div class="shade"></div>
+  <div class="big">Это был<br><span>обед</span></div>
+  <div class="hand">17 лет!</div>
+  <div class="grain"></div><div class="vig"></div>
+</div>
+</body></html>

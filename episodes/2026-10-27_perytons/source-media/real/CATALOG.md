@@ -7,6 +7,12 @@
 | parkes_west_09.jpg | тарелка и башня днём | https://commons.wikimedia.org/wiki/File:Parkes_Radio_Telescope_09.jpg | Stephen West (Diceman) | CC BY-SA 3.0 | 1920×2077, 1,1 МБ | превью A3 |
 | unsplash_rARPAgGkTMk_ye.jpg | радиотелескоп и Млечный Путь (НЕ Parkes: Миюнь, Пекин) | https://unsplash.com/photos/rARPAgGkTMk | Zhenyu Ye (@fantastic_leaf) | Unsplash License | 2400×4267, 3,8 МБ | превью U1 |
 | unsplash_3YAIvBNlZM4_widua.jpg | радиотелескоп Штоккерт 1957 и звёзды (НЕ Parkes: Бад-Мюнстерайфель) | https://unsplash.com/photos/3YAIvBNlZM4 | Stephan Widua (@stewi) | Unsplash License | 2400×1600, 1,2 МБ | превью U2 |
+| unsplash_p9RU1DWwasQ_microwave-washer.jpg | микроволновка BGH на стиральной машине | https://unsplash.com/photos/p9RU1DWwasQ | Ruben Mavarez (@justalifein) | Unsplash License | 2400×3277, 1,9 МБ | превью K1–K3 (вырезка `cut_microwave_bgh.png`) |
+| unsplash_VeU-4x4I7Xs_microwave-bw.jpg | ч/б микроволновка крупно | https://unsplash.com/photos/VeU-4x4I7Xs | Quan Jing (@greedwolf97) | Unsplash License | 2400×1599, 0,5 МБ | резерв |
+| petroff2015_arxiv_1504.02165.pdf | статья Petroff и др. 2015 (arXiv-препринт MNRAS 451:3933) | https://arxiv.org/abs/1504.02165 | Petroff, Keane, Barr и др. | цитирование документа (обзор/комментарий) | 2,6 МБ | источник |
+| petroff2015_fig5_plot.png / _fig5_waterfall.png | рис. 5: перитон из микроволновки, 17.03.2015 | вырезано из PDF, стр. 5 | те же | цитирование | — | превью K2, K3; ролик |
+| petroff2015_title.png | шапка статьи: название и авторы | PDF, стр. 1 | те же | цитирование | — | превью K3; ролик |
+| newdaily_2015-04-14_headline.png, newdaily_logo.png | заголовок «'Alien' signal from space was a guy reheating pizza» | https://thenewdaily.com.au/news/2015/04/14/alien-signal-space-just-scientist-reheating-pizza | The New Daily, Jackson Stiles | скриншот СМИ (цитирование) | — | превью K3; ролик |
 
 Unsplash-фото — не Parkes: на превью без подписи «PARKES», в ролике Parkes показываем только настоящими фото Parkes.
 Атрибуция в описании ролика: «Фото: CSIRO (CC BY 3.0); Amanda Slater (CC BY-SA 2.0); Stephen West (CC BY-SA 3.0) — Wikimedia Commons».
