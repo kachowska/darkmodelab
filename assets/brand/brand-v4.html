@@ -11,11 +11,12 @@ html,body{margin:0;background:#000}
 .slog:before{content:"> ";color:var(--red)}
 
 /* ---------- G1 СБОЙ: экран, который падает ---------- */
-#g1 .term{position:absolute;inset:40px 60px;font:500 25px/40px 'JetBrains Mono';color:#3a3a42;white-space:pre;overflow:hidden}
+#g1 .term{position:absolute;inset:30px 50px;font:500 25px/40px 'JetBrains Mono';color:#3a3a42;white-space:pre;overflow:hidden;columns:3;column-gap:70px}
 #g1 .term .e{color:#6b2320}
 #g1 .lock{position:absolute;left:560px;top:600px}
 #g1 .lock .slog{margin-top:28px}
-#g1 .warm{position:absolute;left:300px;top:380px;width:1500px;height:700px;background:radial-gradient(ellipse at 30% 50%,rgba(229,57,43,.20),transparent 60%)}
+#g1 .warm{position:absolute;left:300px;top:380px;width:1800px;height:700px;background:radial-gradient(ellipse at 40% 50%,rgba(229,57,43,.20),transparent 62%)}
+#g1 .hush{position:absolute;left:400px;top:520px;width:1640px;height:370px;background:radial-gradient(ellipse at 46% 50%,rgba(11,11,13,.98) 0%,rgba(11,11,13,.95) 52%,rgba(11,11,13,0) 78%)}
 
 /* ---------- G2 ЗНАК: огромный DML за кадром ---------- */
 #g2 .huge{position:absolute;right:-420px;top:-170px;font:900 1500px/0.8 Unbounded;letter-spacing:-.07em;color:#141418;white-space:nowrap}
@@ -39,8 +40,8 @@ html,body{margin:0;background:#000}
 
 <div class="bn" id="g1">
   <div class="term" id="t1"></div>
-  <div class="warm"></div>
-  <div class="lock"><div class="name">Dark Mode <span class="r">Lab</span></div><div class="slog">Как ломаются системы, которым все доверяют</div></div>
+  <div class="hush"></div><div class="warm"></div>
+  <div class="lock"><div class="name">Dark Mode <span class="r">Lab</span></div><div class="slog" id="slog1">Как ломаются системы, которым все доверяют</div></div>
 </div>
 
 <div class="bn" id="g2">
@@ -59,7 +60,7 @@ html,body{margin:0;background:#000}
 <script>
 // G1: «падающий» лог — только реальные строки (SEC 34-70694 и тексты событий) + системный мусор
 const L=["08:01 BNET REJECT  <e>Power Peg disabled</e>","08:01 BNET REJECT  <e>Power Peg disabled</e>","08:01 BNET REJECT  <e>Power Peg disabled</e>","09:30 MARKET OPEN","SMARS  route  parent=RLP  child order","SMARS  route  parent=RLP  child order","SMARS  route  parent=RLP  child order","ROLLBACK  servers 1-7  new code uninstalled","<e>this action worsened the problem</e>","10:15 SMARS halted","BALLISTIC MISSILE THREAT INBOUND TO HAWAII. SEEK IMMEDIATE SHELTER. THIS IS NOT A DRILL.","beneficiary: \"Shalika <e>Fandation</e>\"","kernel: watchdog: BUG: soft lockup - CPU#3 stuck","segfault at 0000000000000000 error 4"];
-let o=''; for(let i=0;i<34;i++){o+=L[(i*7)%L.length].replace(/<e>/g,'<span class="e">').replace(/<\/e>/g,'</span>')+'\n';}
+let o=''; for(let i=0;i<108;i++){o+=L[(i*5+Math.floor(i/14)*3)%L.length].replace(/<e>/g,'<span class="e">').replace(/<\/e>/g,'</span>')+'\n';}
 document.getElementById('t1').innerHTML=o;
 // G3: карточки в глубине
 const C=[
@@ -72,5 +73,6 @@ const C=[
  {c:'doc',t:'Knight did not have procedures in place to halt SMARS\'s operations in response to its own aberrant activity.',x:1150,y:1200,z:-500,ry:-10,w:820},
 ];
 document.getElementById('sp').innerHTML=C.map(k=>{const blur=Math.max(0,(-k.z-100)/220).toFixed(1);return `<div class="card ${k.c}" style="left:${k.x}px;top:${k.y}px;width:${k.w}px;transform:translateZ(${k.z}px) rotateY(${k.ry}deg) rotateX(4deg);filter:blur(${blur}px)">${k.t}</div>`}).join('');
+if(location.hash==='#en'){document.getElementById('slog1').textContent='How the systems we trust break';}
 </script>
 </body></html>
