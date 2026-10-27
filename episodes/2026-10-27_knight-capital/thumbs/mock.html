@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../../assets/common/fonts/fonts.css">
+<style>
+:root{--bg:#0E0E10;--bg2:#141417;--fg:#F2F2F0;--mute:#8A8A92;--red:#E5392B;--line:#2A2A30}
+html,body{margin:0;background:#000}
+.t{position:relative;width:1280px;height:720px;overflow:hidden;background:var(--bg);font-family:Inter,sans-serif;color:var(--fg)}
+.grain{position:absolute;inset:0;opacity:.35;mix-blend-mode:screen;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.7) 100%);pointer-events:none}
+.grid{position:absolute;inset:0;opacity:.45;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:80px 80px}
+.glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(229,57,43,.35),transparent 65%)}
+.ab{position:relative;display:inline-block;color:var(--red)}
+.ab:before,.ab:after{content:attr(data-t);position:absolute;left:0;top:0;mix-blend-mode:screen;opacity:.75}
+.ab:before{color:#2BE5E5;transform:translateX(-5px)}.ab:after{color:#ff5a4d;transform:translateX(5px)}
+.ph{font-family:'JetBrains Mono',monospace;font-size:13px;color:#777;letter-spacing:.1em;text-transform:uppercase}
+
+/* A — 1 из 8 */
+#a .racks{position:absolute;left:50px;top:170px;display:flex;gap:12px;align-items:flex-end}
+#a .rack{width:56px;height:340px;background:#17171b;border:2px solid #2c2c33;border-radius:8px;position:relative;display:flex;flex-direction:column;gap:10px;padding:14px 8px;box-sizing:border-box}
+#a .rack i{display:block;height:18px;border-radius:3px;background:#24242a}
+#a .rack i:nth-child(odd){background:#2a2a31}
+#a .rack .ok{position:absolute;left:50%;bottom:-56px;transform:translateX(-50%);font:800 28px Inter;color:#4a4a52}
+#a .rack.bad{border-color:var(--red);background:#1d1012;box-shadow:0 0 50px rgba(229,57,43,.55),inset 0 0 30px rgba(229,57,43,.25);transform:translateY(-14px) scale(1.06)}
+#a .rack.bad i{background:#5a1d19}
+#a .rack.bad i:nth-child(3n){background:var(--red);box-shadow:0 0 10px var(--red)}
+#a .rack.bad .ok{color:var(--red)}
+#a .big{position:absolute;right:56px;top:190px;text-align:right}
+#a .big b{display:block;font:900 150px/0.9 Unbounded;letter-spacing:-.04em}
+#a .big span{display:block;margin-top:16px;font:800 46px Inter;color:var(--mute)}
+#a .glow{left:330px;top:110px;width:520px;height:520px}
+
+/* B — 45 минут поверх SEC */
+#b .doc{position:absolute;left:520px;top:70px;width:700px;height:560px;transform:rotate(2.5deg);background:#141417;border:1px solid #33333a;box-shadow:0 40px 80px rgba(0,0,0,.7);overflow:hidden}
+#b .doc .bar{height:38px;background:#1c1c21;border-bottom:1px solid #33333a;display:flex;align-items:center;padding:0 16px;font:500 14px 'JetBrains Mono';color:var(--mute);gap:8px}
+#b .doc .bar i{width:10px;height:10px;border-radius:50%;background:#3a3a42}
+#b .doc .body{background:#f6f5f1;color:#222;height:100%;padding:30px 36px;box-sizing:border-box;font:21px/1.7 Georgia,serif}
+#b .doc h4{font:700 20px Georgia;margin:0 0 14px;text-align:center}
+#b .hl{background:rgba(255,230,0,.9);outline:4px solid #E5392B;outline-offset:5px;border-radius:2px;box-shadow:0 0 0 3px rgba(255,230,0,.9),0 0 28px 8px rgba(229,57,43,.55)}
+#b .outline{position:absolute;left:28px;top:226px;width:640px;height:58px;border:4px solid var(--red);border-radius:6px;box-shadow:0 0 24px rgba(229,57,43,.7)}
+#b .big{position:absolute;left:60px;top:200px}
+#b .big b{display:block;font:900 230px/0.85 Unbounded;letter-spacing:-.05em;text-shadow:0 10px 40px rgba(0,0,0,.8)}
+#b .big span{display:block;font:900 72px/1 Unbounded;color:var(--red);letter-spacing:-.02em;margin-top:6px;text-shadow:0 6px 30px rgba(0,0,0,.9)}
+#b .glow{left:-80px;top:120px;width:640px;height:640px}
+
+/* C — график обвала */
+#c .chart{position:absolute;left:60px;top:90px;width:760px;height:500px;background:#121215;border:1px solid #2c2c33;border-radius:10px;overflow:hidden}
+#c .chart svg{position:absolute;inset:0}
+#c .chart .lbl{position:absolute;left:20px;top:16px;font:500 15px 'JetBrains Mono';color:var(--mute)}
+#c .big{position:absolute;right:60px;top:180px;text-align:right}
+#c .big b{display:block;font:900 200px/.85 Unbounded;letter-spacing:-.05em;color:var(--red)}
+#c .big span{display:block;margin-top:18px;font:800 44px Inter;color:var(--fg)}
+#c .glow{left:430px;top:280px;width:600px;height:500px}
+.tag{position:absolute;left:28px;bottom:22px;font:500 14px 'JetBrains Mono';color:#55555c;letter-spacing:.2em}
+</style></head><body>
+
+<div class="t" id="a">
+  <div class="grid"></div><div class="glow"></div>
+  <div class="racks"><div class="rack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✓</span></div><div class="rack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✓</span></div><div class="rack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✓</span></div><div class="rack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✓</span></div><div class="rack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✓</span></div><div class="rack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✓</span></div><div class="rack"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✓</span></div><div class="rack bad"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="ok">✕</span></div></div>
+  <div class="big"><b>1 из 8</b><span>= $460 000 000</span></div>
+  <div class="tag">A · ВОСЬМОЙ СЕРВЕР</div>
+  <div class="grain"></div><div class="vig"></div>
+</div>
+
+<div class="t" id="b">
+  <div class="grid"></div>
+  <div class="doc">
+    <div class="bar"><i></i><i></i><i></i>&nbsp;sec.gov / admin / 2013 / 34-70694.pdf</div>
+    <div class="body">
+      <div class="ph">[заглушка: настоящий скриншот приказа SEC]</div>
+      <h4>In the Matter of Knight Capital Americas LLC</h4>
+      1. On August 1, 2012, Knight Capital Americas LLC experienced a significant error in the operation of its automated routing system for equity orders … <span class="hl">Knight lost over $460 million</span> from these unwanted positions …
+    </div>
+    
+  </div>
+  <div class="glow"></div>
+  <div class="big"><b>45</b><span>МИНУТ</span></div>
+  <div class="tag">B · 45 МИНУТ + ДОКУМЕНТ SEC</div>
+  <div class="grain"></div><div class="vig"></div>
+</div>
+
+<div class="t" id="c">
+  <div class="grid"></div><div class="glow"></div>
+  <div class="chart">
+    <div class="lbl">KCG · 31.07 — 03.08.2012 · [заглушка: реальный график]</div>
+    <svg viewBox="0 0 760 500"><defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E5392B" stop-opacity=".35"/><stop offset="1" stop-color="#E5392B" stop-opacity="0"/></linearGradient></defs>
+      <path d="M0 120 L120 112 L200 118 L240 124 L280 260 L330 300 L380 340 L430 360 L490 400 L560 420 L640 412 L760 430 L760 500 L0 500Z" fill="url(#f)"/>
+      <path d="M0 120 L120 112 L200 118 L240 124 L280 260 L330 300 L380 340 L430 360 L490 400 L560 420 L640 412 L760 430" fill="none" stroke="#E5392B" stroke-width="5" style="filter:drop-shadow(0 0 8px #E5392B)"/>
+      <line x1="240" y1="0" x2="240" y2="500" stroke="#55555c" stroke-dasharray="6 8"/>
+      <text x="252" y="40" fill="#8A8A92" font-family="JetBrains Mono" font-size="15">01.08 · 09:30</text>
+    </svg>
+  </div>
+  <div class="big"><b>−60%</b><span>за три дня</span></div>
+  <div class="tag">C · ГРАФИК ОБВАЛА</div>
+  <div class="grain"></div><div class="vig"></div>
+</div>
+</body></html>
