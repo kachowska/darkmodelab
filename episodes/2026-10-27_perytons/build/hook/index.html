@@ -39,7 +39,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 #flash{position:absolute;inset:0;z-index:88;background:#fff;opacity:0;mix-blend-mode:screen;pointer-events:none}
 #rgb{position:absolute;inset:0;z-index:87;pointer-events:none}
-.dust{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(6px)}
+.dust{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);filter:blur(5px)}
 </style></head><body>
 <div id="frame">
 <div id="stage">
@@ -67,19 +67,24 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
   <div class="abs cav" id="nLo" style="left:1080px;top:760px;font-size:52px;transform:rotate(-3deg)">низкие — позже</div>
   <div class="abs cav" id="nGas" style="left:1000px;top:250px;font-size:46px;color:#c9a6ff">газ придерживает басы</div>
   <div class="abs h" id="y1998" style="left:120px;top:140px;font-size:200px;color:var(--tx)">1998</div>
-  <div class="pol" id="pParkes" style="left:640px;top:250px;width:560px;height:640px;transform:rotate(-6deg)"><img src="../../source-media/real/parkes_csiro-4350_moon.jpg" style="object-position:50% 40%"><span class="pc">Parkes, Австралия</span></div>
+  <div class="pol fl" id="p2" style="left:980px;top:300px;width:420px;height:470px;transform:rotate(7deg)"><img src="../../source-media/real/parkes_west_09.jpg" style="object-position:50% 30%"><span class="pc">64 метра</span></div>
+  <div class="pol fl" id="p3" style="left:330px;top:330px;width:440px;height:440px;transform:rotate(-12deg)"><img src="../../source-media/real/parkes_slater_low-angle.jpg"><span class="pc">фокальная кабина</span></div>
+  <div class="pol fl" id="p4" style="left:1250px;top:470px;width:420px;height:330px;transform:rotate(-4deg)"><img src="../../source-media/real/parkes_control-room_shaw.jpg"><span class="pc">пульт</span></div>
+  <div class="pol fl" id="pParkes" style="left:640px;top:250px;width:560px;height:640px;transform:rotate(-6deg)"><img src="../../source-media/real/parkes_csiro-4350_moon.jpg" style="object-position:50% 40%"><span class="pc">Parkes, Австралия</span></div>
  </div>
 
  <!-- SC3 · другой конец Вселенной -->
  <div class="sc" id="sc3">
   <img class="abs" id="night" src="../../source-media/real/commons_parkes_night.png" style="left:-100px;top:-60px;width:2120px;filter:brightness(.72)">
-  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><path id="arc2" d="M300 120 C 620 140 980 330 1500 600" stroke="#E5392B" stroke-width="9" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 18px rgba(229,57,43,.95))"/></svg>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><path id="arc2" d="M300 120 C 620 140 980 330 1500 600" stroke="#E5392B" stroke-width="9" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 18px rgba(229,57,43,.95))"/><circle id="blip" r="11" fill="#fff" style="filter:drop-shadow(0 0 14px #fff)"/></svg>
   <div class="src" style="left:1480px;top:1020px;color:#9a9aa2">Daniel John Reardon · CC BY-SA 4.0</div>
  </div>
 
  <!-- SC4 · имя мифического зверя, 17 лет споров -->
  <div class="sc" id="sc4">
   <div class="abs" style="inset:0;background:radial-gradient(ellipse at 55% 45%,#1b1719,#0b0a0b 75%)"></div>
+  <img class="abs" id="ctrl" src="../../source-media/real/parkes_control-room_shaw.jpg" style="left:-60px;top:-40px;width:2040px;height:1160px;object-fit:cover;filter:brightness(.75) saturate(.9)">
+  <div class="src" id="ctrlSrc" style="left:1480px;top:1020px;color:#cfcfd4">Benjamin Shaw · CC BY-SA 4.0</div>
   <div class="doc" id="tap" style="left:1180px;top:150px;width:640px;transform:rotate(5deg)"><img src="../../source-media/real/commons_tapestry_winged-stags.png"></div>
   <div class="src" id="tapSrc" style="left:1196px;top:780px">гобелен XV в. · Руан · общественное достояние</div>
   <div class="abs cav" id="tapNote" style="left:1230px;top:820px;font-size:56px;transform:rotate(-4deg)">крылатый олень</div>
@@ -120,6 +125,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 </div>
 <div id="rgb"></div><div id="flash"></div>
 <div id="tag"><i></i>B · НАУКА ИЗНУТРИ · 01</div>
+<div id="subbg" style="position:absolute;left:0;right:0;bottom:0;height:300px;z-index:84;pointer-events:none;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6))"></div>
 <div id="sub"></div>
 <div id="vig"></div><div id="grain"></div>
 </div>
@@ -149,10 +155,11 @@ const wtn = (s, n) => W.filter(x => x.w.startsWith(s))[n].t;
 
 // ── пыль у объектива
 const fg = document.getElementById('fg'); const R = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
-const DUST = Array.from({ length: 14 }, () => { const d = document.createElement('div'); d.className = 'dust'; const r = 4 + R() * 16; d.style.width = d.style.height = r + 'px'; d.style.opacity = .06 + R() * .14; fg.appendChild(d); return { d, x: R() * 2100, y: R() * 1260, vx: (R() - .5) * 14, vy: -4 - R() * 8 }; });
+const DUST = Array.from({ length: 14 }, () => { const d = document.createElement('div'); d.className = 'dust'; const r = 4 + R() * 16; d.style.width = d.style.height = r + 'px'; d.style.opacity = .1 + R() * .2; fg.appendChild(d); return { d, x: R() * 2100, y: R() * 1260, vx: (R() - .5) * 14, vy: -4 - R() * 8 }; });
 
 // ── таймлайн
 const tl = gsap.timeline({ paused: true });
+const FL = [...document.querySelectorAll('.doc,.pol,.obj')];
 const $ = s => document.querySelector(s);
 const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); };
 const EV = [];   // звук: [t, имя, опции]
@@ -177,7 +184,7 @@ EV.push([wt('1998') + .3, 'thud', { gain: .8 }]);
 tl.fromTo('#chart', { opacity: 0 }, { opacity: 1, duration: .6 }, 3.6);
 tl.set('#arc', { strokeDasharray: 1500, strokeDashoffset: 1500 }, 0);
 tl.fromTo('#pParkes', { y: -700, rotation: -18 }, { y: 0, rotation: -6, duration: .55, ease: 'back.out(1.4)' }, wt('знаменитых') - .1);
-EV.push([wt('знаменитых') + .4, 'shutter', { gain: .8 }]);
+EV.push([wt('знаменитых') + .4, 'shutter', { gain: .8 }], [wt('мира') + .2, 'shutter', { gain: .6 }], [wt('время') + .25, 'shutter', { gain: .6 }], [wt('ловил') + .25, 'shutter', { gain: .6 }]);
 // всплеск — вспышка вертикальной линии
 tl.to('#spikeL', { opacity: 1, duration: .1 }, wt('всплеск')).to('#spikeL', { opacity: 0, duration: .4 }, wt('характерный') - .5);
 tl.to('#spike', { opacity: 1, duration: .04 }, wt('всплеск')).to('#spike', { opacity: 0, duration: .35 }, wt('всплеск') + .12);
@@ -185,6 +192,11 @@ EV.push([wt('всплеск'), 'pop', { pitch: 1.6, gain: .9 }]);
 // 1998 и полароид уступают место (вытесняются назад)
 tl.to('#y1998', { scale: .4, x: 1480, y: -70, opacity: .55, transformOrigin: '0 0', duration: .8, ease: 'power2.inOut' }, wt('характерный') - .6);
 tl.to('#pParkes', { scale: .42, x: -560, y: -60, rotation: -9, transformOrigin: '0 0', duration: .8, ease: 'power2.inOut' }, wt('характерный') - .6);
+tl.fromTo('#p3', { x: -900, rotation: -40 }, { x: 0, rotation: -12, duration: .5, ease: 'power3.out' }, wt('мира') - .15);
+tl.fromTo('#p2', { x: 900, rotation: 40 }, { x: 0, rotation: 7, duration: .5, ease: 'power3.out' }, wt('время') - .1);
+tl.fromTo('#p4', { y: 800, rotation: 20 }, { y: 0, rotation: -4, duration: .5, ease: 'power3.out' }, wt('ловил') - .1);
+tl.to('#pParkes', { scale: 1.06, duration: .3, yoyo: true, repeat: 1 }, wt('всплеск'));
+tl.to('#p2,#p3,#p4', { x: (i) => [-1200, -1300, -1250][i], y: (i) => [-180, -120, -60][i], scale: .3, rotation: -9, opacity: 0, duration: .7, ease: 'power2.in' }, wt('характерный') - .6);
 tl.to('#arc', { strokeDashoffset: 0, duration: 2.6, ease: 'power1.inOut' }, wt('характерный'));
 EV.push([wt('характерный'), 'riser', { dur: 2.4, gain: .35 }]);
 tl.fromTo('#nHi', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .3 }, wt('высокие'));
@@ -197,13 +209,16 @@ EV.push([wt('огромное') - .3, 'drone', { dur: 3.2, note: 'A', gain: .35 
 // SC3 20.3–24.1: отъезд — та же дуга в небе над настоящим Parkes
 show('#sc3', 20.3, 24.1);
 tl.fromTo('#sc3', { opacity: 0 }, { opacity: 1, duration: .5 }, 20.3);
-tl.fromTo('#night', { scale: 1.3, transformOrigin: '50% 30%' }, { scale: 1, duration: 3.8, ease: 'power2.out' }, 20.3);
+tl.fromTo('#night', { scale: 1.3, transformOrigin: '50% 30%' }, { scale: 1, duration: 3.8, ease: 'sine.inOut' }, 20.3);
 tl.fromTo('#arc2', { strokeDasharray: 1400, strokeDashoffset: 1400 }, { strokeDashoffset: 0, duration: 1.4, ease: 'power2.out' }, 20.5);
 EV.push([20.3, 'reverse', { dur: .8, gain: .6 }], [wt('Вселенной') , 'sparkle', { n: 7, gain: .5 }]);
 
 // SC4 23.9–32.4: ПЕРИТОН, гобелен, статья 2011, 17 лет
 show('#sc4', 23.9, 32.45);
 tl.fromTo('#sc4', { opacity: 0 }, { opacity: 1, duration: .3 }, 23.9);
+tl.fromTo('#ctrl', { scale: 1.0 }, { scale: 1.12, duration: 2.0, ease: 'none', transformOrigin: '40% 50%' }, 23.9);
+tl.to('#ctrl', { opacity: .14, filter: 'blur(6px) brightness(.5)', duration: .6 }, wt('имя') - .2);
+tl.to('#ctrlSrc', { opacity: 0, duration: .3 }, wt('имя') - .2);
 tl.fromTo('#tap', { x: 900, rotation: 25 }, { x: 0, rotation: 5, duration: .6, ease: 'power3.out' }, wt('имя') - .2);
 tl.fromTo('#tapSrc,#tapNote', { opacity: 0 }, { opacity: 1, duration: .3, stagger: .2 }, wt('имя') + .5);
 EV.push([wt('имя') - .2, 'paper', { dur: .5, gain: .9 }]);
@@ -231,9 +246,9 @@ EV.push([wt('микроволновка'), 'swish', { gain: .6 }]);
 // SC6 36.1–54.5: стол расследования
 show('#sc6', 36.1);
 tl.fromTo('#sc6', { opacity: 0 }, { opacity: 1, duration: .35 }, 36.1);
-tl.fromTo('#petroff', { y: -700, rotation: -12 }, { y: 0, rotation: -2.5, duration: .55, ease: 'power3.out' }, wt('учёные') - .3);
-EV.push([wt('учёные') - .3, 'paper', { dur: .5 }]);
-tl.fromTo('#petroffSrc', { opacity: 0 }, { opacity: 1, duration: .3 }, wt('учёные') + .3);
+tl.fromTo('#petroff', { y: -700, rotation: -12 }, { y: 0, rotation: -2.5, duration: .55, ease: 'power3.out' }, 36.35);
+EV.push([36.35, 'paper', { dur: .5 }]);
+tl.fromTo('#petroffSrc', { opacity: 0 }, { opacity: 1, duration: .3 }, 37.0);
 tl.fromTo('#mkP', { scaleX: 0 }, { scaleX: 1, duration: .45, ease: 'power2.out' }, wt('вычислили'));
 tl.fromTo('#mw6', { x: 700, rotation: 18 }, { x: 0, rotation: 4, duration: .5, ease: 'back.out(1.2)' }, wt('печь') - .2);
 EV.push([wt('печь') + .1, 'thud', { gain: .7 }]);
@@ -262,11 +277,12 @@ tl.to({}, { duration: .01 }, DUR);
 
 // ── камера: живая всегда, жест на каждый план
 const cam = CAMLIFE.attach($('#stage'), {
-  drift: { x: 6, y: 4, rot: .25, seed: 5 },
-  moves: [[0, 1.0], [3.0, 1.10], [3.4, 1.06], [8.0, 1.0, 0, 0], [12.0, 1.03], [16.5, 1.12, -60, -10], [20.3, 1.12, -60, -10], [20.31, 1.0, 0, 0], [24.0, 1.04],
-          [24.01, 1.0], [29.0, 1.05, 0, -20], [32.3, 1.05, 0, -20], [32.31, 1.0], [36.1, 1.04], [36.11, 1.0], [43.0, 1.05, -20, 0], [44.6, 1.0, -60, -40], [47.0, 1.06, 40, -80], [51.9, 1.04, 30, -60], [54.5, 1.0, 0, 0]],
-  accents: [[wt('1998') + .3, .025], [wt('зверя') + .02, .04], [wt('микроволновка') + .15, .025], [wt('спас') + .1, .02]],
-  focus: [[0, '45% 38%'], [3.4, '50% 50%'], [16, '60% 50%'], [24, '35% 45%'], [36.1, '40% 35%'], [44, '70% 70%'], [47, '30% 70%'], [54, '50% 50%']]
+  drift: { x: 7, y: 5, rot: .3, seed: 5 },
+  moves: [[0, 1.0], [3.0, 1.16], [3.4, 1.0], [8.4, 1.07], [12.0, 1.0], [16.0, 1.08, -40, -10], [20.3, 1.14, -60, -10], [20.31, 1.0], [24.0, 1.05],
+          [24.01, 1.0], [28.8, 1.08], [32.3, 1.12, 0, -20], [32.31, 1.0], [36.1, 1.07], [36.11, 1.0], [39.8, 1.12], [41.0, 1.02], [44.2, 1.1], [45.0, 1.02], [47.2, 1.06],
+          [51.6, 1.24], [52.2, 1.2], [54.5, 1.02]],
+  accents: [[wt('1998') + .3, .025], [wt('всплеск'), .02], [wt('зверя') + .02, .04], [wt('микроволновка') + .15, .025], [wt('спас') + .1, .02]],
+  focus: [[0, '45% 38%'], [3.4, '50% 50%'], [12, '20% 20%'], [16, '60% 50%'], [24, '35% 45%'], [32.3, '30% 40%'], [36.1, '30% 25%'], [40.5, '30% 25%'], [41.5, '78% 25%'], [44.6, '75% 70%'], [46.8, '75% 70%'], [47.6, '32% 66%'], [52.3, '32% 66%'], [54, '50% 50%']]
 });
 
 // ── детерминированный кадр
@@ -283,6 +299,10 @@ function dyn(t) {
   const g = $('#notes'); if (!g.childElementCount) for (let i = 0; i < 6; i++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', 9 + i * 2.2); g.appendChild(c); }
   const arc = $('#arc'), L = arc.getTotalLength(), ts = wt('сигнал');
   [...g.children].forEach((c, i) => { const p = Math.max(0, Math.min(1, (t - ts - i * .25) / (2.6 + i * .5))); const pt = arc.getPointAtLength(L * p); c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y); c.setAttribute('opacity', t > ts && p < 1 ? .95 : 0); });
+  // бумага и фото дышат: отдельные свойства translate/rotate не спорят с GSAP-transform
+  FL.forEach((e, i) => { const a = .9 + (i % 3) * .3, ph = i * 1.7; e.style.translate = `${(Math.sin(t * .37 * a + ph) * 4).toFixed(2)}px ${(Math.sin(t * .51 * a + ph * 1.3) * 6).toFixed(2)}px`; e.style.rotate = `${(Math.sin(t * .29 * a + ph) * .7).toFixed(3)}deg`; });
+  // импульсы по дуге в небе
+  const a2 = $('#arc2'), L2 = a2.getTotalLength(); const pk = ((t - 20.6) % 1.1 + 1.1) % 1.1 / 1.1; const q2 = a2.getPointAtLength(L2 * pk); $('#blip').setAttribute('cx', q2.x); $('#blip').setAttribute('cy', q2.y);
   // пыль
   DUST.forEach(o => { const x = ((o.x + o.vx * t) % 2100 + 2100) % 2100, y = ((o.y + o.vy * t) % 1260 + 1260) % 1260; o.d.style.transform = `translate(${x}px,${y}px)`; });
   subs(t);
