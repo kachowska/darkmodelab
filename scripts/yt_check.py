@@ -11,7 +11,7 @@
 Слова-фильтр: ролик засчитывается, только если в названии или описании есть хотя бы одно из них
 (отсекает нерелевантную выдачу). Итог: таблица Markdown + вердикт по правилу ≤ 3 в каждом языке.
 """
-import argparse, json, os, pathlib, sys, urllib.parse, urllib.request
+import argparse, json, os, pathlib, re, sys, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -42,13 +42,27 @@ def check(key, query, lang, days, words):
     if not items:
         return []
     ids = ",".join(i["id"]["videoId"] for i in items)
-    v = get("videos", key=key, part="statistics,snippet", id=ids)
+    v = get("videos", key=key, part="statistics,snippet,contentDetails", id=ids)
     out = []
     for it in v.get("items", []):
-        out.append({"title": it["snippet"]["title"][:70], "channel": it["snippet"]["channelTitle"],
-                    "date": it["snippet"]["publishedAt"][:10], "views": int(it["statistics"].get("viewCount", 0)),
+        sn = it["snippet"]; title = sn["title"]
+        al = (sn.get("defaultAudioLanguage") or sn.get("defaultLanguage") or "").lower()
+        cyr = bool(re.search("[а-яё]", title.lower()))
+        # язык ролика: по заявленному языку, иначе по алфавиту заголовка
+        is_lang = (al.startswith(lang) if al else (cyr if lang == "ru" else (not cyr and title.isascii())))
+        if not is_lang:
+            continue
+        secs = dur(it["contentDetails"].get("duration", "PT0S"))
+        out.append({"title": title[:70], "channel": sn["channelTitle"], "date": sn["publishedAt"][:10],
+                    "views": int(it["statistics"].get("viewCount", 0)), "short": secs <= 180, "secs": secs,
                     "url": "https://youtu.be/" + it["id"]})
     return sorted(out, key=lambda x: -x["views"])
+
+
+def dur(iso):
+    m = re.match(r"P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", iso)
+    d, h, mi, se = [int(x or 0) for x in m.groups()] if m else (0, 0, 0, 0)
+    return d * 86400 + h * 3600 + mi * 60 + se
 
 
 def main():
@@ -68,14 +82,15 @@ def main():
         name, en, ru = parts[:3]
         words = [w.strip() for w in parts[3].split(",")] if len(parts) > 3 and parts[3] else []
         r_en, r_ru = check(key, en, "en", a.days, words), check(key, ru, "ru", a.days, words)
-        ok = len(r_en) <= a.limit and len(r_ru) <= a.limit
-        fmt = lambda r: f"{len(r)} (макс. {r[0]['views']:,})".replace(",", " ") if r else "0"
-        rows.append(f"| {name} | {fmt(r_en)} | {fmt(r_ru)} | {'✅' if ok else '❌'} |")
+        L = lambda r: [x for x in r if not x["short"]]
+        ok_en, ok_ru = len(L(r_en)) <= a.limit, len(L(r_ru)) <= a.limit
+        fmt = lambda r: (f"{len(L(r))} длинн. + {len(r)-len(L(r))} шортс (макс. {r[0]['views']:,})".replace(",", " ") if r else "0")
+        rows.append(f"| {name} | {fmt(r_en)} | {fmt(r_ru)} | {'✅' if ok_en else '❌'} EN · {'✅' if ok_ru else '❌'} RU |")
         details.append(f"\n### {name}\n" + "\n".join(
-            f"- {x['lang']} · {x['date']} · {x['views']:,} · {x['channel']} — {x['title']} · {x['url']}".replace(",", " ")
+            f"- {x['lang']} · {'шортс' if x['short'] else str(x['secs']//60)+' мин'} · {x['date']} · {x['views']:,} · {x['channel']} — {x['title']} · {x['url']}".replace(",", " ")
             for x in [dict(d, lang='EN') for d in r_en] + [dict(d, lang='RU') for d in r_ru]) or "\n(пусто)")
     stamp = datetime.now().strftime("%d.%m.%Y %H:%M")
-    md = (f"## Проверка YouTube за {a.days} дней — {stamp}\n\n| Тема | EN свежих | RU свежих | Итог (≤ {a.limit}) |\n"
+    md = (f"## Проверка YouTube за {a.days} дней — {stamp}\n\n| Тема | EN за период | RU за период | Итог (≤ {a.limit} длинных) |\n"
           "|------|-----------|-----------|---------|\n" + "\n".join(rows) + "\n" + "".join(details) + "\n")
     print(md)
     if a.out:
