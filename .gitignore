@@ -26,3 +26,5 @@ audio.raw.wav
 _gif/
 __pycache__/
 *.pyc
+*.render.json
+episodes/*/build/*/watch*/
