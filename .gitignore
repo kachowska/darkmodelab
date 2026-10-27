@@ -18,3 +18,5 @@ assets/gifs/*
 *.wav
 _preview/
 .tmp_prev/
+episodes/*/storyboard/frames/
+episodes/*/storyboard/styleframes-sheet.jpg
