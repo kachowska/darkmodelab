@@ -24,3 +24,5 @@ _frames/
 render.log
 audio.raw.wav
 _gif/
+__pycache__/
+*.pyc
