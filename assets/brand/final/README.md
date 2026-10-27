@@ -7,5 +7,5 @@
 | `banner-en.jpg` (2560×1440) | Баннер английского канала | то же |
 
 Концепт: G1 «Сбой» — лог системы, который ломается, за глитч-логотипом. Слоган: «Как ломаются системы, которым все доверяют» / «How the systems we trust break».
-Исходник: `assets/brand/brand-v4.html` (#g1; `#en` — английский слоган) → `scripts/glitch.py --seed 11 --amount 1.0 --protect 540,585,1900,815 --soft 556,600,1880,722 --soft-n 2`.
+Исходник: `assets/brand/brand-v4.html` (#g1; `#en` — английский слоган) → `scripts/glitch.py --seed 11 --amount 1.0 --protect 540,585,1900,815 --soft 556,600,1880,722 --soft-n 2` → фон размыт GaussianBlur 2.2, блок названия (520,570–1920,830, мягкий край 28) резкий.
 Шрифты: Unbounded 900 (название), JetBrains Mono (слоган, лог) — локально в `assets/common/fonts/`.
