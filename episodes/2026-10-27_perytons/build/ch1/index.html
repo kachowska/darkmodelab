@@ -119,6 +119,7 @@
   <svg class="abs" width="1920" height="1080" style="left:0;top:0">
    <g font-family="IBM Plex Mono" font-size="20" fill="#8A8A92"><text x="1640" y="912">время →</text><text transform="translate(470 330) rotate(-90)">частота →</text></g>
    <line x1="500" y1="880" x2="1780" y2="880" stroke="#3a3a42" stroke-width="2"/><line x1="500" y1="160" x2="500" y2="880" stroke="#3a3a42" stroke-width="2"/>
+   <g id="wf" opacity=".5"></g><line id="scan" x1="0" y1="170" x2="0" y2="870" stroke="#E5392B" stroke-width="3" style="filter:drop-shadow(0 0 10px #E5392B)"/><circle id="hit" r="18" fill="#E5392B" style="filter:drop-shadow(0 0 16px #E5392B)"/>
    <path id="arcL" d="M560 190 C 820 210 1100 420 1720 850" stroke="#F2F2F0" stroke-width="12" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 14px rgba(255,255,255,.6))"/>
   </svg>
   <div class="abs cav" id="late" style="left:1180px;top:640px;font-size:56px;transform:rotate(-4deg)">басы сильно опоздали</div>
@@ -138,10 +139,15 @@
  <!-- B6 · длинный путь = сильнее опоздание: подпись и расстояние -->
  <div class="sc" id="b6">
   <div class="abs" style="inset:0;background:#0f0f11"></div>
-  <div class="card" id="near" style="left:120px;top:230px;width:780px;height:520px;transform:rotate(-2deg)"><div class="mono" style="font-size:20px;color:var(--mu)">БЛИЖЕ · КОРОТКИЙ ПУТЬ</div>
-   <svg width="720" height="440"><path d="M20 40 C 300 50 460 140 700 400" stroke="#F2F2F0" stroke-width="9" fill="none" stroke-linecap="round" transform="scale(1,.55)"/></svg></div>
-  <div class="card" id="far" style="left:1020px;top:230px;width:780px;height:520px;transform:rotate(2deg)"><div class="mono" style="font-size:20px;color:var(--red)">ДАЛЬШЕ · ДЛИННЫЙ ПУТЬ</div>
-   <svg width="720" height="440"><path d="M20 40 C 300 60 460 260 700 420" stroke="#E5392B" stroke-width="9" fill="none" stroke-linecap="round"/></svg></div>
+  <div class="card" id="near" style="left:120px;top:230px;width:780px;height:520px;transform:rotate(-2deg);overflow:hidden"><img src="../../source-media/real/photo_F04_nasa_smc_herschel.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.38">
+   <div class="mono" style="position:relative;font-size:20px;color:#fff">БЛИЖЕ · КОРОТКИЙ ПУТЬ</div>
+   <svg width="720" height="440" style="position:relative"><path id="arcN" d="M20 40 C 300 50 460 140 700 400" stroke="#F2F2F0" stroke-width="9" fill="none" stroke-linecap="round" transform="scale(1,.55)"/><g id="pN"></g></svg>
+   <img src="../../source-media/cutouts/earth.png" style="position:absolute;left:683px;top:227px;width:90px">
+   <div class="src" style="left:28px;top:480px;color:#cfcfd4">ESA/NASA/JPL-Caltech/STScI</div></div>
+  <div class="card" id="far" style="left:1020px;top:230px;width:780px;height:520px;transform:rotate(2deg);overflow:hidden"><img class="seq" data-seq="k03_gas" data-t0="0" data-loop="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45">
+   <div class="mono" style="position:relative;font-size:20px;color:#ff6a5c">ДАЛЬШЕ · ДЛИННЫЙ ПУТЬ</div>
+   <svg width="720" height="440" style="position:relative"><path id="arcF" d="M20 40 C 300 60 460 260 700 420" stroke="#E5392B" stroke-width="9" fill="none" stroke-linecap="round"/><g id="pF"></g></svg>
+   <img src="../../source-media/cutouts/earth.png" style="position:absolute;left:683px;top:427px;width:90px"></div>
   <div class="abs cav" id="sign" style="left:600px;top:800px;font-size:72px;transform:rotate(-3deg)">подпись + расстояние</div>
   <svg class="abs" width="1920" height="1080" style="left:0;top:0"><path id="uline" class="hand" d="M600 900 C 900 890 1200 892 1320 900"/></svg>
  </div>
@@ -280,8 +286,8 @@ xin('ms5c', wt('тысячных'));
 EV.push([wt('пяти') + .17, 'thud', { gain: .9 }]);
 show('#b4', tB4, tB5);
 tl.fromTo('#b4', { opacity: 0 }, { opacity: 1, duration: .3 }, tB4);
-tl.fromTo('#arcL', { strokeDasharray: 1500, strokeDashoffset: 1500 }, { strokeDashoffset: 0, duration: 2.4, ease: 'power1.inOut' }, wt('дуге:') - .2);
-EV.push([wt('дуге:') - .2, 'riser', { dur: 2.2, gain: .3 }]);
+tl.fromTo('#arcL', { strokeDasharray: 1500, strokeDashoffset: 1500 }, { strokeDashoffset: 0, duration: 2.0, ease: 'power1.inOut' }, tB4 + .3);
+EV.push([tB4 + .3, 'riser', { dur: 2.0, gain: .3 }]);
 xin('late', wt('опаздывали'));
 tl.fromTo('#bly', { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: .35 }, wt('миллиарда') - .3);
 EV.push([wt('миллиарда'), 'impact', { size: .8, gain: .8 }]);
@@ -303,15 +309,15 @@ tl.fromTo('#uline', { strokeDasharray: 900, strokeDashoffset: 900 }, { strokeDas
 EV.push([wt('невозможно.') - .2, 'swish', { gain: .4 }]);
 show('#b7', tB7);
 tl.fromTo('#b7', { opacity: 0 }, { opacity: 1, duration: .3 }, tB7);
-tl.fromTo('#frb', { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in', transformOrigin: '0 50%' }, wt('быстрые') - .1);
-EV.push([wt('быстрые') + .15, 'impact', { size: 1.3 }]);
+tl.fromTo('#frb', { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in', transformOrigin: '0 50%' }, tB7 + .25);
+EV.push([tB7 + .5, 'impact', { size: 1.3 }]);
 xin('frbW', wt('радиовсплески.'));
 xin('newc', tB7 + .2);
-xin('slots', wt('Только') - .1); xin('slotsC', wt('один,'));
+xin('slots', wt('быстрые') + .3); xin('slotsC', wt('один,'));
 tl.fromTo('#fry', { scale: 1.4, opacity: 0, rotation: 12 }, { scale: 1, opacity: 1, rotation: 5, duration: .2, ease: 'power3.out' }, wt('находил.') + .1);
 tl.to('#fry', { x: '+=10', duration: .04, yoyo: true, repeat: 5 }, wt('находил.') + .3);
 EV.push([wt('находил.') + .1, 'pop', { gain: 1 }], [wt('находил.') + .12, 'glitch', { dur: .18, gain: .4 }]);
-seqAt('fry', wt('находил.') + .1); seqAt('tv', wt('Луны,') - .5); seqAt('violin', wt('высокие') - .3); seqAt('b5', tB5); seqAt('a7', tA7);
+seqAt('fry', wt('находил.') + .1); seqAt('tv', wt('Луны,') - .5); seqAt('violin', wt('высокие') - .3); seqAt('b5', tB5); seqAt('a7', tA7); seqAt('far', tB6);
 tl.to({}, { duration: .01 }, DUR);
 
 // слоты «найдено всплесков»
@@ -337,6 +343,20 @@ function dyn(t) {
   const g = $('#notes2'); if (!g.childElementCount) for (let i = 0; i < 7; i++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', 8 + i * 3); g.appendChild(c); }
   const road = $('#road'), L = road.getTotalLength(), ts = tB5 + .6;
   [...g.children].forEach((c, i) => { const per = 1.6 + i * .7 + 1.2, p = Math.min(1, ((t - ts) % per + per) % per / (1.6 + i * .7)); const q = road.getPointAtLength(L * p); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y); c.setAttribute('opacity', t > ts ? .95 : 0); c.setAttribute('fill', i > 4 ? '#E5392B' : '#F2F2F0'); });
+  // «водопад»: строки шума + сканирующая линия по времени, точка на дуге
+  const wf = $('#wf'); if (!wf.childElementCount) for (let r = 0; r < 24; r++) { const l = document.createElementNS('http://www.w3.org/2000/svg', 'path'); l.setAttribute('stroke', '#5a4a66'); l.setAttribute('stroke-width', '2'); l.setAttribute('fill', 'none'); wf.appendChild(l); }
+  [...wf.children].forEach((l, r) => { const y = 190 + r * 28; let d = ''; for (let i = 0; i <= 64; i++) { const x = 510 + i * 20, n = ((i * 7919 + r * 104729 + Math.floor(t * 12) * 15485863) % 97) / 97; d += (i ? 'L' : 'M') + x + ' ' + (y + (n - .5) * 8).toFixed(1); } l.setAttribute('d', d); });
+  { const a = $('#arcL'), L = a.getTotalLength(), u = ((t - tB4 - 2.4) % 3.2 + 3.2) % 3.2 / 3.2, on = t > tB4 + 2.4 ? 1 : 0; const q = a.getPointAtLength(L * u);
+    $('#scan').setAttribute('x1', q.x); $('#scan').setAttribute('x2', q.x); $('#scan').setAttribute('opacity', on * .8); $('#hit').setAttribute('cx', q.x); $('#hit').setAttribute('cy', q.y); $('#hit').setAttribute('opacity', on); }
+  // слоты «ищут» второй всплеск
+  [...$('#slots').children].forEach((e, i) => { if (!i) { e.style.transform = `scale(${1 + .08 * Math.sin(t * 6)})`; return; } const ph = ((t * 3) % 7) | 0; e.style.borderColor = ph + 1 === i ? '#8A8A92' : '#2A2A30'; });
+  // импульсы бегут по дугам: короткий путь — быстро, длинный — медленно
+  [['pN', 'arcN', 1.5, .55, '#fff'], ['pF', 'arcF', 2.6, 1, '#ff5a4a']].forEach(([gid, pid, per, sy, col]) => {
+    const g = $('#' + gid), pa = $('#' + pid), L = pa.getTotalLength();
+    if (!g.childElementCount) for (let k = 0; k < 6; k++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', 15 - k * 2); c.setAttribute('fill', col); g.appendChild(c); }
+    const u = ((t - tB6) % per + per) % per / per;
+    [...g.children].forEach((c, k) => { const q = pa.getPointAtLength(L * Math.max(0, u - k * .025)); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y * sy); c.setAttribute('opacity', (t > tB6 ? 1 : 0) * (1 - k / 6)); });
+  });
   dust(t); fl(t); DML.subs($('#sub'), V, t);
 }
 window.__duration = DUR;
