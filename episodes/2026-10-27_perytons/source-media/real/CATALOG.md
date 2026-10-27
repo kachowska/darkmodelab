@@ -59,3 +59,22 @@ Unsplash-фото — не Parkes: на превью без подписи «PAR
 | screenshot_arxiv_2601.09399_chime2026.png | шапка каталога CHIME/FRB 2 | https://arxiv.org/abs/2601.09399 | цитирование | бит 10 |
 | screenshot_physicsworld_magnetar.png | статья Physics World о магнетаре SGR 1935+2154 | https://physicsworld.com/a/milky-way-magnetar-could-be-the-source-of-a-fast-radio-burst/ | цитирование СМИ | бит 10 |
 | screenshot_theconversation_petroff.png | статья Петрофф в The Conversation | https://theconversation.com/how-we-found-the-source-of-the-mystery-signals-at-the-dish-41523 | цитирование СМИ | бит 7 |
+
+## Партия 3 — видеоклипы (скачано 27.10.2026 после ОК пользователя)
+
+| Файл | Что | Источник | Лицензия | Длит. | Размер | Бит |
+|---|---|---|---|---|---|---|
+| clip_K01_nasa_apollo11_moonwalk_first7min.mp4 | выход на Луну 1969 (первые 7 мин реставрированной трансляции; 0:10 — ЦУП, 1:00–6:50 — спуск по лестнице) | https://images.nasa.gov/details/KSC-20090716-MH-NAS01-0001-Apollo_11_Restored_Moonwalk-HM_795 | NASA — общественное достояние | 420 с | 124.5 МБ | 2 |
+| clip_K02_pixabay_violin.mp4 | скрипачка в темноте | https://pixabay.com/videos/id-177800/ | Pixabay Content License | 6 с | 1.9 МБ | 3 |
+| clip_K03_pixabay_nebula-gas.mp4 | облако газа (графика) | https://pixabay.com/videos/id-37783/ | Pixabay Content License | 15 с | 22.1 МБ | 3 |
+| clip_K04_klipy-clip_wait-what_despicable-me.mp4 | мем «Wait! Wait. — What?» («Гадкий я») | wait-wait-what--klKRBA5Ue | Klipy; чужой клип ≤3 с, звук свой | 2 с | 0.3 МБ | 3 |
+| clip_K05_klipy-clip_plot-twist_dramatic-chipmunk.mp4 | мем plot twist (Dramatic Chipmunk) | plot-twist-23--knTo9Jvf9 | Klipy; чужой клип ≤3 с, звук свой | 4 с | 0.2 МБ | 4 |
+| clip_K06_pixabay_microwave-heating.mp4 | микроволновка греет | https://pixabay.com/videos/id-42861/ | Pixabay Content License | 27 с | 6.3 МБ | 7 |
+| clip_K07_pixabay_pizza.mp4 | пицца крупно | https://pixabay.com/videos/id-123629/ | Pixabay Content License | 49 с | 16.3 МБ | 8 |
+| clip_K08_pixabay_starry-sky-timelapse.mp4 | звёздное небо, таймлапс | https://pixabay.com/videos/id-14955/ | Pixabay Content License | 17 с | 20.0 МБ | 9 |
+| clip_K09_pixabay_nebula-colorful.mp4 | туманность (графика) | https://pixabay.com/videos/id-217932/ | Pixabay Content License | 24 с | 9.7 МБ | 10 |
+| clip_K10_klipy-clip_microwave-beeps.mp4 | мем: микроволновка пищит | microwave-beeps-whirrs-popcorn-popping--kWBOkyD2X | Klipy; чужой клип ≤3 с, звук свой | 2 с | 0.3 МБ | 11 |
+| clip_K11_pixabay_coffee-mug-steam.mp4 | кружка с паром | https://pixabay.com/videos/id-3595/ | Pixabay Content License | 44 с | 6.1 МБ | 7 |
+| clip_K12_pixabay_airport-escalator.mp4 | эскалатор в аэропорту | https://pixabay.com/videos/id-3593/ | Pixabay Content License | 20 с | 6.9 МБ | 7 |
+| clip_K13_archive_young-mans-fancy-1952.mp4 | фильм «Young Man's Fancy» (1952), кухонная техника | https://archive.org/details/YoungMan1952 | http://creativecommons.org/licenses/publicdomain/ | 876 с | 61.8 МБ | 7 |
+Клипы-мемы Klipy (K04, K05, K10): в ролике 1–3 с, оригинальный звук не используем. Pixabay — автор указан на странице клипа; NASA и Prelinger — общественное достояние.
