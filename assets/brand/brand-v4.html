@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../common/fonts/fonts.css">
+<style>
+:root{--bg:#0B0B0D;--fg:#F2F2F0;--mute:#8A8A92;--red:#E5392B}
+html,body{margin:0;background:#000}
+.bn{position:relative;width:2560px;height:1440px;overflow:hidden;background:var(--bg);font-family:Inter,sans-serif;color:var(--fg)}
+.name{font:900 128px/0.95 Unbounded;letter-spacing:-.04em;text-transform:uppercase;white-space:nowrap}
+.name .r{color:var(--red)}
+.slog{font:500 34px 'JetBrains Mono';color:#C9C9CF;letter-spacing:.01em;white-space:nowrap}
+.slog:before{content:"> ";color:var(--red)}
+
+/* ---------- G1 СБОЙ: экран, который падает ---------- */
+#g1 .term{position:absolute;inset:40px 60px;font:500 25px/40px 'JetBrains Mono';color:#3a3a42;white-space:pre;overflow:hidden}
+#g1 .term .e{color:#6b2320}
+#g1 .lock{position:absolute;left:560px;top:600px}
+#g1 .lock .slog{margin-top:28px}
+#g1 .warm{position:absolute;left:300px;top:380px;width:1500px;height:700px;background:radial-gradient(ellipse at 30% 50%,rgba(229,57,43,.20),transparent 60%)}
+
+/* ---------- G2 ЗНАК: огромный DML за кадром ---------- */
+#g2 .huge{position:absolute;right:-420px;top:-170px;font:900 1500px/0.8 Unbounded;letter-spacing:-.07em;color:#141418;white-space:nowrap}
+#g2 .huge b{color:var(--red);font-weight:900}
+#g2 .rim{position:absolute;inset:0;background:linear-gradient(90deg,#0B0B0D 0%,#0B0B0D 26%,rgba(11,11,13,.55) 48%,rgba(11,11,13,0) 70%)}
+#g2 .lock{position:absolute;left:560px;top:612px}
+#g2 .lock .slog{margin-top:26px}
+
+/* ---------- G3 ГЛУБИНА: экраны и документы в пространстве ---------- */
+#g3 .space{position:absolute;inset:0;perspective:1400px;perspective-origin:68% 45%}
+#g3 .card{position:absolute;background:#151519;border:1px solid #2c2c33;color:#9a9aa2;font:500 30px/1.5 'JetBrains Mono';padding:30px 36px;box-shadow:0 30px 80px rgba(0,0,0,.7);white-space:pre}
+#g3 .card.doc{background:#efeee9;color:#333;font:30px/1.5 Georgia,serif;white-space:normal}
+#g3 .card .hl{background:rgba(255,230,0,.85)}
+#g3 .card .r{color:var(--red)}
+#g3 .card.err{background:#1a0f0f;border-color:#5a1d19;color:#e9b3ad}
+#g3 .lock{position:absolute;left:560px;top:600px;z-index:5}
+#g3 .lock .slog{margin-top:28px}
+#g3 .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.95) 0%,rgba(11,11,13,.85) 30%,rgba(11,11,13,.15) 58%,rgba(11,11,13,0) 100%);z-index:3}
+#g3 .redl{position:absolute;right:200px;top:200px;width:1100px;height:1000px;background:radial-gradient(circle,rgba(229,57,43,.22),transparent 60%);z-index:2}
+</style></head><body>
+
+<div class="bn" id="g1">
+  <div class="term" id="t1"></div>
+  <div class="warm"></div>
+  <div class="lock"><div class="name">Dark Mode <span class="r">Lab</span></div><div class="slog">Как ломаются системы, которым все доверяют</div></div>
+</div>
+
+<div class="bn" id="g2">
+  <div class="huge">DM<b>L</b></div>
+  <div class="rim"></div>
+  <div class="lock"><div class="name">Dark Mode <span class="r">Lab</span></div><div class="slog">Как ломаются системы, которым все доверяют</div></div>
+</div>
+
+<div class="bn" id="g3">
+  <div class="space" id="sp"></div>
+  <div class="redl"></div>
+  <div class="shade"></div>
+  <div class="lock"><div class="name">Dark Mode <span class="r">Lab</span></div><div class="slog">Как ломаются системы, которым все доверяют</div></div>
+</div>
+
+<script>
+// G1: «падающий» лог — только реальные строки (SEC 34-70694 и тексты событий) + системный мусор
+const L=["08:01 BNET REJECT  <e>Power Peg disabled</e>","08:01 BNET REJECT  <e>Power Peg disabled</e>","08:01 BNET REJECT  <e>Power Peg disabled</e>","09:30 MARKET OPEN","SMARS  route  parent=RLP  child order","SMARS  route  parent=RLP  child order","SMARS  route  parent=RLP  child order","ROLLBACK  servers 1-7  new code uninstalled","<e>this action worsened the problem</e>","10:15 SMARS halted","BALLISTIC MISSILE THREAT INBOUND TO HAWAII. SEEK IMMEDIATE SHELTER. THIS IS NOT A DRILL.","beneficiary: \"Shalika <e>Fandation</e>\"","kernel: watchdog: BUG: soft lockup - CPU#3 stuck","segfault at 0000000000000000 error 4"];
+let o=''; for(let i=0;i<34;i++){o+=L[(i*7)%L.length].replace(/<e>/g,'<span class="e">').replace(/<\/e>/g,'</span>')+'\n';}
+document.getElementById('t1').innerHTML=o;
+// G3: карточки в глубине
+const C=[
+ {c:'doc',t:'… over a 45-minute period … <span class="hl">Knight lost over $460 million</span> from these unwanted positions …',x:1380,y:120,z:60,ry:-16,w:860},
+ {c:'err',t:'BNET REJECT\n<span class="r">Power Peg disabled</span>\n× 97',x:2080,y:520,z:-120,ry:-22,w:520},
+ {c:'',t:'BALLISTIC MISSILE THREAT\nINBOUND TO HAWAII.\nSEEK IMMEDIATE SHELTER.\n<span class="r">THIS IS NOT A DRILL.</span>',x:1500,y:900,z:40,ry:-12,w:760},
+ {c:'doc',t:'Beneficiary: Shalika <span class="hl">Fandation</span>',x:2150,y:1060,z:-300,ry:-24,w:640},
+ {c:'',t:'ROLLBACK servers 1–7\n<span class="r">this action worsened\nthe problem</span>',x:1720,y:470,z:-420,ry:-18,w:560},
+ {c:'err',t:'KCG  ▼ −60%\n31.07 → 03.08.2012',x:2300,y:160,z:-650,ry:-28,w:440},
+ {c:'doc',t:'Knight did not have procedures in place to halt SMARS\'s operations in response to its own aberrant activity.',x:1150,y:1200,z:-500,ry:-10,w:820},
+];
+document.getElementById('sp').innerHTML=C.map(k=>{const blur=Math.max(0,(-k.z-100)/220).toFixed(1);return `<div class="card ${k.c}" style="left:${k.x}px;top:${k.y}px;width:${k.w}px;transform:translateZ(${k.z}px) rotateY(${k.ry}deg) rotateX(4deg);filter:blur(${blur}px)">${k.t}</div>`}).join('');
+</script>
+</body></html>
