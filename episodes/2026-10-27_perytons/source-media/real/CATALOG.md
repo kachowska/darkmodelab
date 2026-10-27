@@ -78,3 +78,30 @@ Unsplash-фото — не Parkes: на превью без подписи «PAR
 | clip_K12_pixabay_airport-escalator.mp4 | эскалатор в аэропорту | https://pixabay.com/videos/id-3593/ | Pixabay Content License | 20 с | 6.9 МБ | 7 |
 | clip_K13_archive_young-mans-fancy-1952.mp4 | фильм «Young Man's Fancy» (1952), кухонная техника | https://archive.org/details/YoungMan1952 | http://creativecommons.org/licenses/publicdomain/ | 876 с | 61.8 МБ | 7 |
 Клипы-мемы Klipy (K04, K05, K10): в ролике 1–3 с, оригинальный звук не используем. Pixabay — автор указан на странице клипа; NASA и Prelinger — общественное достояние.
+
+## Партия 4 — фото для битов 2–11 (скачано 27.10.2026 после ОК пользователя)
+
+| Файл | Что | Источник | Автор | Лицензия | Размер | Бит |
+|---|---|---|---|---|---|---|
+| photo_F01_nasa_aldrin_as11-40-5903.jpg | Базз Олдрин на Луне — вырезка | https://images.nasa.gov/details/as11-40-5903 | JSC | NASA — общественное достояние | 1280×1249, 0.26 МБ | 2 |
+| photo_F02_nasa_apollo11_mission-control.jpg | ЦУП во время высадки | https://images.nasa.gov/details/S69-39593 | JSC | NASA — общественное достояние | 1280×843, 0.15 МБ | 2 |
+| photo_F03_nasa_earth_blue-marble.jpg | Земля — вырезка шара | https://images.nasa.gov/details/GSFC_20171208_Archive_e001386 | GSFC | NASA — общественное достояние | 1280×1280, 0.25 МБ | 4 |
+| photo_F04_nasa_smc_herschel.jpg | Малое Магелланово облако | https://images.nasa.gov/details/PIA25164 | JPL | NASA — общественное достояние | 1280×1280, 0.15 МБ | 3 |
+| photo_F05_nasa_neutron-star-types.jpg | магнетар (иллюстрация) | https://images.nasa.gov/details/PIA23863 | JPL | NASA — общественное достояние | 1280×719, 0.08 МБ | 10 |
+| photo_F06_pixabay_mugs-two.jpg | кружка — вырезка | https://pixabay.com/photos/mugs-cups-empty-coffee-mugs-459324/ | Nikiko | Pixabay Content License | 1280×852, 0.13 МБ | 7 |
+| photo_F07_pixabay_mug-white.jpg | кружка — вырезка | https://pixabay.com/photos/drink-mug-coffee-espresso-5063295/ | Evgeniadakar | Pixabay Content License | 1280×853, 0.05 МБ | 7 |
+| photo_F08_pixabay_pizza-slice.jpg | кусок пиццы — вырезка | https://pixabay.com/photos/the-pizza-slice-of-pizza-slice-ham-1949157/ | marker_photography | Pixabay Content License | 1280×853, 0.42 МБ | 8 |
+| photo_F09_pixabay_alien-toys.jpg | игрушечный пришелец — вырезка | https://pixabay.com/photos/alien-animation-sci-fi-cartoon-10542016/ | Fromyourheadtoyoursoul | Pixabay Content License | 1280×1280, 0.20 МБ | 8 |
+| photo_F10_pixabay_world-clocks.jpg | часы | https://pixabay.com/photos/clocks-time-idea-concept-257911/ | jarmoluk | Pixabay Content License | 1280×905, 0.25 МБ | 9 |
+| photo_F11_pixabay_road-closed.jpg | табличка «закрыто» | https://pixabay.com/photos/signpost-closed-road-sign-end-stop-5274077/ | 00luvicecream | Pixabay Content License | 1280×857, 0.30 МБ | 9 |
+| photo_F13_pixabay_toy-plane.jpg | самолёт — вырезка (Сингапур) | https://pixabay.com/photos/plane-aviator-toy-aviation-2827329/ | Alexandra_Koch | Pixabay Content License | 1280×853, 0.20 МБ | 7 |
+| photo_F14_pixabay_letter-envelope.jpg | письмо | https://pixabay.com/photos/letter-envelope-flowers-stamps-1390463/ | Pezibear | Pixabay Content License | 1280×853, 0.29 МБ | 7 |
+| photo_F15_pixabay_compass-hand.jpg | компас — «на юг» | https://pixabay.com/photos/compass-hand-holding-outdoors-1850673/ | Pexels | Pixabay Content License | 1280×853, 0.14 МБ | 9 |
+| photo_F17_pixabay_calendar.jpg | календарь — будни | https://pixabay.com/photos/calendar-meeting-planning-10045176/ | Ralf1403 | Pixabay Content License | 1280×853, 0.10 МБ | 5 |
+| photo_F18_pixabay_magnifier.jpg | лупа — улика | https://pixabay.com/photos/magnifying-glass-enlargement-enlarge-450691/ | 422737 | Pixabay Content License | 1280×960, 0.21 МБ | 5 |
+| photo_F19_commons_duncan-lorimer.jpg | Дункан Лоример — портрет | https://commons.wikimedia.org/wiki/File:Duncan_Lorimer.jpg | Ranjan adarsh29 | CC BY 4.0 | 1154×1586, 0.56 МБ | 3 |
+| photo_F20_commons_csiro-3682_multibeam-receiver.jpg | многолучевой приёмник Parkes (13 лучей) | https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3682_A_receiver_technician_works_on_the_methanol_multibeam_receiver_package_at_the_CSIRO_Parkes_radio_telescope.jpg | David McClenaghan, CSIRO | CC BY 3.0 | 2657×1937, 2.66 МБ | 4 |
+| photo_F21_commons_magnetron_caso-smg20.jpg | микроволновка без кожуха: магнетрон внутри | https://commons.wikimedia.org/wiki/File:Caso_SMG20_-_Witol_2M219J-0171.jpg | Raimond Spekking | CC BY-SA 4.0 | 3630×3630, 6.10 МБ | 7 |
+| photo_F22_commons_changi-t1.jpg | Чанги, Сингапур — пересадка | https://commons.wikimedia.org/wiki/File:Changi_Airport_Terminal_1.jpg | Nigos | CC BY-SA 4.0 | 3671×2610, 2.50 МБ | 7 |
+| kym_coincidence-i-think-not_original.jpg | мем «Coincidence? I Think Not!» (Джимми Нейтрон) — замена политического клипа «Совпадение?», подпись RU поверх | https://knowyourmeme.com/memes/coincidence-i-think-not | — | мем; цитирование | 1429×803 | 5 — ЖДЁТ ОК пользователя |
+| petroff2015_abstract.png | аннотация статьи 2015: «микроволновки не могли вызвать FRB 010724… FRB — подлинные внегалактические» | вырезано из PDF, стр. 1 | Petroff et al. | цитирование | — | бит 9 |

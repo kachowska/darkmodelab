@@ -15,7 +15,7 @@ function pw() {
   }
   throw new Error("playwright not found: npm i -D playwright && npx playwright install chromium");
 }
-const a = process.argv.slice(2), opt = (k, d) => { const i = a.indexOf("--" + k); return i >= 0 ? a[i + 1] : d; };
+const a = process.argv.slice(2), JPG = process.argv.includes("--jpeg"), opt = (k, d) => { const i = a.indexOf("--" + k); return i >= 0 ? a[i + 1] : d; };
 (async () => {
   // a folder/file (file://) or --serve: start a local static server for pages that use ES modules (file:// blocks them)
   let src = path.resolve(a[0] || "."); if (fs.statSync(src).isDirectory()) src = path.join(src, "index.html");
@@ -26,7 +26,7 @@ const a = process.argv.slice(2), opt = (k, d) => { const i = a.indexOf("--" + k)
   const dir = path.dirname(src), fps = +opt("fps", 60), W = +opt("w", 1920), H = +opt("h", 1080);
   const out = path.resolve(opt("out", path.join(dir, "render.mp4"))), audio = opt("audio", "");
   const fr = path.join(dir, "_frames"); fs.rmSync(fr, { recursive: true, force: true }); fs.mkdirSync(fr);
-  const url = t => (httpBase || ("file://" + src)) + "?t=" + t.toFixed(5) + "&render=1";
+  const R720 = a.includes("--r720"); const url = t => (httpBase || ("file://" + src)) + "?t=" + t.toFixed(5) + "&render=1" + (R720 ? "&r720=1" : "");
   const { chromium } = pw(); const b = await chromium.launch({ args: ["--mute-audio", "--use-gl=angle", "--use-angle=metal", "--enable-gpu-rasterization", "--ignore-gpu-blocklist"] }); /* GPU: 1.95x faster, measured 19 Oct */ const p = await b.newPage({ viewport: { width: W, height: H } });
   const errs = []; p.on("pageerror", e => errs.push(String(e)));
   // NO SOUND during render (owner rule): silence every media element and WebAudio.
@@ -38,10 +38,10 @@ const a = process.argv.slice(2), opt = (k, d) => { const i = a.indexOf("--" + k)
   const from = +opt("from", 0); const n = Math.round(secs * fps);
   for (let i = 0; i < n; i++) {
     const t = from + i / fps;
-    if (api) await p.evaluate(([f, t]) => { window[f](t); return 0; }, [api, t]);
+    if (api) await p.evaluate(async ([f, t]) => { const r = window[f](t); if (r && r.then) await r; return 0; }, [api, t]); // Dark Mode Lab: __seek может вернуть Promise (кадры клипов и гифок)
     else { await p.goto(url(t), { waitUntil: "load" }); await p.evaluate(() => document.fonts && document.fonts.ready); }
     await p.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
-    await p.screenshot({ path: path.join(fr, `f${String(i).padStart(6, "0")}.png`) });
+    await p.screenshot(JPG ? { path: path.join(fr, `f${String(i).padStart(6, "0")}.jpg`), type: "jpeg", quality: 93 } : { path: path.join(fr, `f${String(i).padStart(6, "0")}.png`) }); // --jpeg: быстрее для черновиков
     if (i % (fps * 2) === 0) process.stdout.write(`\r${i}/${n}`);
   }
   // Procedural audio from the page itself (sfx.js): window.__audioWav() → base64 WAV, rendered offline (never played aloud).
@@ -62,7 +62,7 @@ const a = process.argv.slice(2), opt = (k, d) => { const i = a.indexOf("--" + k)
     execSync(`ffmpeg -loglevel error -y -ss ${from} -t ${secs} -i "${mixIn}" "${cut}"`); mixIn = cut;
   }
   const aud = mixIn ? `-i "${mixIn}" ${AAC} -map 0:v -map 1:a` : "";
-  execSync(`ffmpeg -loglevel error -y -framerate ${fps} -i "${fr}/f%06d.png" ${aud} -vf "scale=out_color_matrix=bt709:out_range=tv,setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv" -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv -r ${fps} -t ${(n / fps).toFixed(3)} -movflags +faststart "${out}"`);
+  execSync(`ffmpeg -loglevel error -y -framerate ${fps} -i "${fr}/f%06d.${JPG ? "jpg" : "png"}" ${aud} -vf "scale=out_color_matrix=bt709:out_range=tv,setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv" -c:v libx264 -preset veryfast -crf 16 -pix_fmt yuv420p -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv -r ${fps} -t ${(n / fps).toFixed(3)} -movflags +faststart "${out}"`);
   if (mixIn && !a.includes("--no-loudnorm") && !(+opt("from", 0) > 0)) { // AAC can overshoot the WAV true peak by ~3 dB on dense limited mixes: measure the MP4 and, if TP > −1 dBTP, re-master the WAV with a lower ceiling and remux (loudness stays at −14)
     const meas = f => { const r = require("child_process").spawnSync("ffmpeg", ["-hide_banner", "-nostats", "-i", f, "-map", "0:a", "-af", "ebur128=peak=true", "-f", "null", "-"], { encoding: "utf8" }).stderr; const m = r.match(/Peak:\s+(-?[\d.]+) dBFS/g); return m ? parseFloat(m[m.length - 1].split(/\s+/)[1]) : -99; };
     let tp = meas(out), ceil = -2.0;

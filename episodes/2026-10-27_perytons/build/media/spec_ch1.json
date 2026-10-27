@@ -1,0 +1,6 @@
+[{"name":"k01_moon","src":"clip_K01_nasa_apollo11_moonwalk_first7min.mp4","in":60,"dur":12,"fps":24,"w":960},
+ {"name":"k01_mc","src":"clip_K01_nasa_apollo11_moonwalk_first7min.mp4","in":6,"dur":5,"fps":24,"w":960},
+ {"name":"k03_gas","src":"clip_K03_pixabay_nebula-gas.mp4","in":0,"dur":12,"fps":24,"w":1280},
+ {"name":"k02_violin","src":"clip_K02_pixabay_violin.mp4","in":0,"dur":5.8,"fps":24,"w":960},
+ {"name":"k09_space","src":"clip_K09_pixabay_nebula-colorful.mp4","in":0,"dur":10,"fps":24,"w":1280},
+ {"name":"m_fry","src":"klipy_fry-not-sure_X8GdlOBx.gif","fps":20,"w":640}]

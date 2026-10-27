@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Перитоны — глава 5: тысячи настоящих · вопрос · дзынь (черновик)</title>
+<link rel="stylesheet" href="../../../../assets/common/fonts/fonts.css">
+<link rel="stylesheet" href="../lib/dml.css">
+<script src="../../../../templates/obsion/vendor/gsap.min.js"></script>
+<script src="../../../../templates/obsion/camlife.js"></script>
+<script src="../../../../templates/obsion/sfx.js"></script>
+<script src="../lib/dml.js"></script>
+<script src="../media/meta.js"></script>
+<style>.spec{position:absolute;background:#06110b;border:12px solid #23262a;border-radius:14px;box-shadow:0 30px 60px rgba(0,0,0,.7);overflow:hidden}</style>
+</head><body>
+<div id="frame">
+<div id="stage">
+
+ <!-- I1 · не один и не два -->
+ <div class="sc" id="i1">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 40% 45%,#1d1416,#0a090a 75%)"></div>
+  <div class="abs h red ab" id="frb" style="left:110px;top:120px;font-size:240px">FRB</div>
+  <div class="abs" id="slots" style="left:120px;top:440px;width:1700px;display:flex;flex-wrap:wrap;gap:14px"></div>
+ </div>
+
+ <!-- I2 · CHIME: 4 539 вспышек — карта неба сыплется точками -->
+ <div class="sc" id="i2">
+  <img class="abs" id="chime" src="../../source-media/real/commons_chime_overall.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:brightness(.42) saturate(.8)">
+  <canvas id="sky" width="1700" height="620" class="abs" style="left:110px;top:320px"></canvas>
+  <div class="abs h" id="n" style="left:110px;top:90px;font-size:230px">0</div>
+  <div class="abs cap" id="nc" style="left:820px;top:130px;color:#e6e6ea;font-size:38px;line-height:1.35">вспышек · <b style="color:#F2F2F0">3 641</b> источник · 2018–2023<br><span style="color:var(--mu)">второй каталог CHIME/FRB</span></div>
+  <div class="doc" id="cat" style="left:1160px;top:640px;width:660px;transform:rotate(-2deg)"><img src="../../source-media/real/screenshot_arxiv_2601.09399_chime2026.png" style="height:220px;object-fit:cover;object-position:0 0"></div>
+  <div class="src" style="left:110px;top:1020px;color:#cfcfd4">телескоп CHIME, Канада · Z22 · CC BY-SA 4.0</div>
+ </div>
+
+ <!-- I3 · 28.04.2020: всплеск в нашей Галактике — магнетар -->
+ <div class="sc" id="i3">
+  <div class="abs" style="inset:0;background:#05050a"></div>
+  <img class="abs" id="mw" src="../../source-media/real/commons_milkyway_nasa.jpg" style="left:820px;top:-160px;width:1360px">
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><g id="mark"><circle cx="1500" cy="510" r="30" fill="none" stroke="#E5392B" stroke-width="5" style="filter:drop-shadow(0 0 10px rgba(229,57,43,.9))"/><circle cx="1500" cy="510" r="7" fill="#E5392B"/><path d="M1500 510 L 1640 360" stroke="#E5392B" stroke-width="3"/></g>
+   <path id="dist" d="M1500 510 L 1490 760" stroke="#F2F2F0" stroke-width="3" stroke-dasharray="10 8"/><circle cx="1490" cy="770" r="9" fill="#F2F2F0"/></svg>
+  <div class="abs mono" id="sgr" style="left:1540px;top:320px;font-size:22px;color:#fff">SGR 1935+2154</div>
+  <div class="abs mono" id="sun" style="left:1510px;top:790px;font-size:20px;color:#cfcfd4">мы</div>
+  <div class="abs h" id="d2020" style="left:110px;top:130px;font-size:150px">28.04.<span class="red">2020</span></div>
+  <div class="abs cap" id="d2020c" style="left:120px;top:290px">впервые — внутри нашей Галактики</div>
+  <div class="src" style="left:1400px;top:1020px;color:#9a9aa2">NASA/JPL-Caltech/ESO/R. Hurt</div>
+ </div>
+
+ <!-- I4 · иллюстрация магнетара + Physics World -->
+ <div class="sc" id="i4">
+  <div class="abs" style="inset:0;background:#07070c"></div>
+  <div class="doc" id="nst" style="left:110px;top:120px;width:960px;transform:rotate(-2deg)"><img src="../../source-media/real/photo_F05_nasa_neutron-star-types.jpg"></div>
+  <div class="src" id="nstS" style="left:130px;top:80px">NASA/JPL · типы нейтронных звёзд, слева — магнетар</div>
+  <div class="card" id="mag" style="left:110px;top:700px;width:760px;z-index:5"><div class="mono" style="font-size:18px;color:var(--mu)">ИСТОЧНИК</div><div class="h" style="font-size:76px;margin-top:4px">МАГНЕ<span class="red">ТАР</span></div><div class="cap" style="margin-top:4px">сверхнамагниченная мёртвая звезда</div></div>
+  <div class="abs h" id="ly" style="left:1120px;top:810px;font-size:100px;z-index:5;text-shadow:0 6px 24px #000">~30 000 <span style="font-size:46px;color:#cfcfd4">св. лет</span></div>
+  <div class="doc" id="pw" style="left:1160px;top:140px;width:640px;transform:rotate(3deg)"><img src="../../source-media/real/screenshot_physicsworld_magnetar.png" style="height:560px;object-fit:cover;object-position:0 0"></div>
+ </div>
+
+ <!-- I5 · откуда остальные — неизвестно · существование — установлено -->
+ <div class="sc" id="i5">
+  <div class="full"><img src="../../source-media/real/commons_chime_overall.jpg" style="filter:blur(6px) brightness(.25)"></div>
+  <div class="abs h" id="open" style="left:110px;top:200px;font-size:110px;line-height:1">ОТКУДА ОСТАЛЬНЫЕ —<br><span class="red">ИСТОРИЯ ОТКРЫТА</span></div>
+  <div class="abs cav" id="qq" style="left:1300px;top:120px;font-size:260px">???</div>
+  <div class="card" id="ok" style="left:110px;top:560px;width:1100px;border-color:#E5392B"><div class="mono" style="font-size:20px;color:var(--mu)">СЕГОДНЯ СЧИТАЕТСЯ УСТАНОВЛЕННЫМ</div><div style="font:600 50px Inter;margin-top:10px">FRB существуют и приходят <span class="red">из других галактик</span></div></div>
+ </div>
+
+ <!-- J1 · главный вопрос — стол улик -->
+ <div class="sc" id="j1">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 45%,#1d1b1b,#0b0a0b 75%)"></div>
+  <div class="doc" id="e1" style="left:-60px;top:60px;width:620px;transform:rotate(-8deg)"><img src="../../source-media/real/petroff2015_fig7_localtime.png"></div>
+  <div class="doc" id="e2" style="left:1380px;top:40px;width:620px;transform:rotate(7deg)"><img src="../../source-media/real/petroff2015_title.png"></div>
+  <div class="doc" id="e3" style="left:1300px;top:720px;width:700px;transform:rotate(-5deg)"><img src="../../source-media/real/newdaily_2015-04-14_headline.png"></div>
+  <div class="pol" id="e4" style="left:-30px;top:640px;width:420px;height:360px;transform:rotate(6deg)"><img src="../../source-media/real/parkes_control-room_shaw.jpg"><span class="pc">журнал наблюдений</span></div>
+  <img class="obj" id="e5" src="../../source-media/real/cut_microwave_bgh_clean.png" style="left:900px;top:760px;width:380px;transform:rotate(-6deg)">
+  <img class="obj" id="e6" src="../../source-media/cutouts/mug_white.png" style="left:560px;top:820px;width:200px">
+  <div class="glow" style="left:420px;top:300px;width:1080px;height:460px"></div>
+  <div class="abs h" id="qa" style="left:0;right:0;top:330px;text-align:center;font-size:58px;z-index:7;text-shadow:0 4px 20px #000">КАК НАУКА ОТЛИЧАЕТ ОТКРЫТИЕ</div>
+  <div class="abs h red ab" id="qb" style="left:0;right:0;top:410px;text-align:center;font-size:190px;z-index:7">ОТ ШУМА?</div>
+  <div class="abs" id="notg" style="left:0;right:0;top:640px;text-align:center;font:600 46px Inter;z-index:7"><s id="g1" style="color:#8A8A92">гениальностью</s> · <s id="g2" style="color:#8A8A92">озарением</s></div>
+ </div>
+
+ <!-- J2 · скучные вещи: 4 улики -->
+ <div class="sc" id="j2">
+  <div class="abs" style="inset:0;background:#0f0f11"></div>
+  <div class="abs h" id="boring" style="left:110px;top:90px;font-size:100px">СКУЧНЫЕ <span class="red">ВЕЩИ</span></div>
+  <div class="pol" id="b1" style="left:110px;top:300px;width:400px;height:330px;transform:rotate(-5deg)"><img src="../../source-media/real/parkes_control-room_shaw.jpg"><span class="pc">журнал наблюдений</span></div>
+  <div class="spec" id="b2" style="left:570px;top:320px;width:420px;height:300px;transform:rotate(3deg)"><svg width="396" height="276" viewBox="0 0 396 276"><path id="tr" d="" stroke="#3dff9a" stroke-width="3" fill="none"/><text x="10" y="26" font-family="IBM Plex Mono" font-size="17" fill="#3dff9a">монитор помех</text></svg></div>
+  <div class="pol" id="b3" style="left:1050px;top:300px;width:380px;height:330px;transform:rotate(-2deg)"><img src="../../source-media/real/photo_F10_pixabay_world-clocks.jpg"><span class="pc">расписание обедов</span></div>
+  <div class="abs" id="b4" style="left:1480px;top:300px;width:360px;height:420px">
+   <img src="../../source-media/cutouts/mug_white.png" style="position:absolute;left:40px;top:150px;width:200px;filter:drop-shadow(0 20px 20px #000)">
+   <div class="cav" style="position:absolute;left:0;top:380px;font-size:44px">кружка + дверца</div></div>
+ </div>
+
+ <!-- J3 · труднее всего: написать, что это наша микроволновка -->
+ <div class="sc" id="j3">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
+  <div class="doc" id="pet" style="left:120px;top:160px;width:1100px;transform:rotate(-2deg)"><img src="../../source-media/real/petroff2015_title.png"><i class="mk" id="mkP" style="left:41.2%;top:19%;width:13.6%;height:9.5%"></i></div>
+  <img class="obj" id="ourmw" src="../../source-media/real/cut_microwave_bgh_clean.png" style="left:1340px;top:470px;width:560px;transform:rotate(4deg)">
+  <div class="abs h" id="our" style="left:110px;top:680px;font-size:96px;z-index:6;text-shadow:0 6px 24px #000">ЭТО НАША <span class="red">МИКРОВОЛНОВКА</span></div>
+ </div>
+
+ <!-- J4 · 1998: 16 перитонов за 7 минут — незакрытая деталь -->
+ <div class="sc" id="j4">
+  <div class="abs" style="inset:0;background:#0E0E10"></div>
+  <div class="abs h" id="y98" style="left:110px;top:110px;font-size:200px">1998</div>
+  <div class="abs h" id="od" style="left:110px;top:360px;font-size:64px">НЕЗАКРЫТАЯ <span class="red">ДЕТАЛЬ</span></div>
+  <div class="doc" id="pt2" style="left:1340px;top:690px;width:500px;transform:rotate(4deg)"><img src="../../source-media/real/petroff2015_title.png"></div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><line x1="160" y1="600" x2="1760" y2="600" stroke="#3a3a42" stroke-width="3"/>
+   <g font-family="IBM Plex Mono" font-size="22" fill="#8A8A92"><text x="150" y="650">0 мин</text><text x="1700" y="650">7 мин</text></g><g id="d16"></g></svg>
+  <div class="abs cap" id="c16" style="left:640px;top:180px;font-size:34px;color:#e6e6ea"><b class="red" style="font-size:60px">16</b> перитонов подряд за семь минут</div>
+  <div class="card" id="unk" style="left:160px;top:720px;width:1100px"><div style="font:600 42px Inter">повторить такую очередь дверцей <span class="red">не удалось</span></div><div class="mono" style="font-size:17px;color:var(--mu);margin-top:10px">MNRAS 451:3933 · §3.5</div></div>
+ </div>
+
+ <!-- J5 · финал: таймер 0:03 → 0:00 → дзынь (урожай семени) -->
+ <div class="sc" id="j5">
+  <img class="abs" id="mwbw" src="../../source-media/real/unsplash_VeU-4x4I7Xs_microwave-bw.jpg" style="left:-640px;top:-760px;width:3300px;filter:brightness(.8) contrast(1.15)">
+  <div class="abs" style="left:610px;top:342px;width:430px;height:150px;background:linear-gradient(90deg,#1e1e1e,#262626);filter:blur(3px)"></div>
+  <div class="abs seg" id="timer" style="left:640px;top:330px;font-size:132px">0:03</div>
+  <div class="abs h red ab" id="ding" style="left:1140px;top:600px;font-size:200px;transform:rotate(-4deg)">ДЗЫНЬ</div>
+ </div>
+ <div class="sc" id="j6">
+  <div class="abs" style="inset:0;background:#0E0E10"></div>
+  <img class="abs" id="dml" src="../../thumbs/dml_mark.png" style="left:810px;top:400px;width:300px">
+  <div class="abs mono" id="end" style="left:0;right:0;top:640px;text-align:center;font-size:24px;color:var(--mu);letter-spacing:.2em">DARK MODE LAB · КАК ЛОМАЮТСЯ СИСТЕМЫ, КОТОРЫМ ВСЕ ДОВЕРЯЮТ</div>
+ </div>
+
+ <div class="abs" id="fg" style="inset:-100px;z-index:40;pointer-events:none"></div>
+</div>
+<div id="rgb"></div><div id="flash"></div>
+<div id="tag"><i></i>B · НАУКА ИЗНУТРИ · 01</div>
+<div id="subbg" style="position:absolute;left:0;right:0;bottom:0;height:300px;z-index:84;pointer-events:none;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6))"></div>
+<div id="sub"></div>
+<div id="vig"></div><div id="grain"></div>
+</div>
+<script>
+const $ = DML.$;
+const SENT = [
+ ["Сегодня быстрых радиовсплесков известно не один и не два.", ["один", "два."]],
+ ["Канадский телескоп CHIME только в своём втором каталоге описал четыре с половиной тысячи вспышек от трёх с лишним тысяч источников, пойманных с 2018 по 2023 год.", ["CHIME", "четыре", "тысячи"]],
+ ["А 28 апреля 2020 года быстрый радиовсплеск впервые поймали внутри нашей собственной Галактики.", ["внутри", "Галактики."]],
+ ["Его источником оказался магнетар — сверхнамагниченная мёртвая звезда примерно в тридцати тысячах световых лет от нас.", ["магнетар", "тридцати"]],
+ ["Откуда берутся все остальные, до конца не знают до сих пор, и в этом смысле история открыта.", ["открыта."]],
+ ["Но то, что они существуют и приходят из других галактик, сегодня считается установленным.", ["установленным."]],
+ ["Так как же наука отличает открытие от собственного шума?", ["открытие", "шума?"]],
+ ["Не гениальностью и не озарением.", []],
+ ["Скучными вещами: журналом наблюдений, где записано время каждого события; монитором, который слушает лишние частоты; расписанием обедов, если угодно; экспериментом с кружкой воды и открытой дверцей.", ["Скучными", "вещами:"]],
+ ["И ещё одной вещью, которая даётся труднее всего: готовностью написать в научном журнале, что загадочный сигнал, о котором спорили годами, — это наша микроволновка.", ["наша", "микроволновка."]],
+ ["В статье 2015 года, кстати, осталась одна незакрытая деталь: в 1998 году за семь минут пришло шестнадцать перитонов подряд, и повторить такую очередь открыванием дверцы не удалось.", ["незакрытая", "шестнадцать"]],
+ ["Так что если вы когда-нибудь окажетесь на кухне обсерватории, дождитесь сигнала таймера.", ["таймера."]],
+ ["Телескоп скажет вам спасибо.", ["спасибо."]]
+];
+const V = DML.words(SENT, 0.4, 2.6), wt = V.wt, DING = V.end + .3, DUR = Math.ceil(DING + 4.2);
+const tl = gsap.timeline({ paused: true }), EV = [];
+const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: .3 }, a); };
+const xin = (id, t, d) => tl.fromTo('#' + id, { opacity: 0 }, { opacity: 1, duration: d || .35 }, t);
+const ent = (id, t, from, to, d, e) => tl.fromTo('#' + id, Object.assign({ opacity: 0 }, from), Object.assign({ opacity: 1, duration: d || .5, ease: e || 'power3.out' }, to), t);
+const slam = (id, t, s) => { tl.fromTo('#' + id, { scale: s || 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in' }, t); EV.push([t + .2, 'thud', { gain: .8 }]); };
+
+const tI2 = wt('Канадский') - .2, tI3 = wt('28') - .5, tI4 = wt('магнетар') - .5, tI5 = wt('Откуда') - .2, tJ1 = wt('наука') - .7, tJ2 = wt('Скучными') - .2, tJ3 = wt('ещё') - .5,
+      tJ4 = wt('незакрытая') - .9, tJ5 = wt('окажетесь') - 1.6, tJ6 = DING + 1.6;
+show('#i1', 0, tI2);
+slam('frb', .3, 1.8);
+xin('slots', wt('известно') - .2);
+show('#i2', tI2, tI3);
+tl.fromTo('#chime', { scale: 1.12 }, { scale: 1.0, duration: tI3 - tI2, ease: 'none' }, tI2);
+xin('n', wt('четыре') - .5, .2); xin('nc', wt('источников,') - .3); ent('cat', wt('каталоге') - .2, { y: 500, rotation: 10 }, { y: 0 });
+EV.push([wt('четыре') - .5, 'riser', { dur: 2.2, gain: .35 }], [wt('тысячи') + .2, 'impact', { size: 1.2 }], [wt('каталоге') - .2, 'paper', { dur: .35 }]);
+show('#i3', tI3, tI4);
+slam('d2020', wt('28') - .3, 1.5);
+tl.fromTo('#mw', { scale: 1.25, rotation: -6 }, { scale: 1, rotation: 0, duration: tI4 - tI3 + 4, ease: 'none' }, tI3);
+xin('d2020c', wt('внутри') - .2);
+tl.fromTo('#mark', { opacity: 0, scale: 2, svgOrigin: '1500 510' }, { opacity: 1, scale: 1, svgOrigin: '1500 510', duration: .35 }, wt('Галактики.') - .2); xin('sgr', wt('Галактики.'));
+EV.push([wt('Галактики.') - .2, 'pop', { gain: .8 }]);
+ent('mag', wt('магнетар') + .1, { x: -600 }, { x: 0 }); ent('ly', wt('тридцати') - .1, { scale: 1.5 }, { scale: 1 }, .3);
+EV.push([wt('магнетар'), 'thud', { gain: .7 }]);
+show('#i4', tI4, tI5);
+ent('nst', tI4 + .1, { y: -500, rotation: -10 }, { y: 0 }); xin('nstS', tI4 + .6);
+ent('pw', wt('звезда') - .2, { x: 700, rotation: 15 }, { x: 0 });
+EV.push([tI4 + .1, 'paper', { dur: .4 }], [wt('звезда') - .2, 'paper', { dur: .4 }]);
+// расстояние — на сцене I3 после возврата? показываем в I4 поверх
+show('#i5', tI5, tJ1);
+ent('open', tI5 + .1, { x: -60 }, { x: 0 }, .4); ent('qq', wt('знают') - .3, { scale: .5 }, { scale: 1 }, .4, 'back.out(1.8)');
+ent('ok', wt('существуют') - .2, { y: 300 }, { y: 0 });
+EV.push([wt('установленным.') - .3, 'chime', { freq: 880, gain: .4 }]);
+show('#j1', tJ1, tJ2);
+tl.fromTo('#j1 .doc, #j1 .pol, #j1 .obj', { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: .45, stagger: .12, ease: 'power3.out' }, tJ1);
+xin('qa', wt('отличает') - .2); slam('qb', wt('шума?') - .2, 1.6);
+xin('notg', wt('гениальностью') - .1);
+tl.fromTo('#g1', { textDecorationColor: 'rgba(229,57,43,0)' }, { textDecorationColor: 'rgba(229,57,43,1)', duration: .15 }, wt('гениальностью') + .4);
+tl.fromTo('#g2', { textDecorationColor: 'rgba(229,57,43,0)' }, { textDecorationColor: 'rgba(229,57,43,1)', duration: .15 }, wt('озарением.') + .3);
+EV.push([tJ1, 'paper', { dur: .8 }], [wt('гениальностью') + .4, 'swish', { gain: .4 }], [wt('озарением.') + .3, 'swish', { gain: .4 }]);
+show('#j2', tJ2, tJ3);
+slam('boring', tJ2 + .1, 1.4);
+[['b1', 'журналом'], ['b2', 'монитором,'], ['b3', 'расписанием'], ['b4', 'экспериментом']].forEach(([b, w]) => { ent(b, wt(w) - .2, { y: 500, rotation: 12 }, { y: 0 }, .45, 'back.out(1.3)'); EV.push([wt(w) + .1, 'thud', { gain: .6 }]); });
+show('#j3', tJ3, tJ4);
+ent('pet', tJ3 + .1, { y: -500 }, { y: 0 });
+tl.fromTo('#mkP', { scaleX: 0 }, { scaleX: 1, duration: .45 }, wt('журнале,') - .2);
+ent('ourmw', wt('наша') - .5, { x: 700, rotation: 20 }, { x: 0 }, .5, 'back.out(1.3)');
+slam('our', wt('наша') - .1, 1.4);
+show('#j4', tJ4, tJ5);
+slam('od', tJ4 + .3, 1.4); ent('pt2', tJ4 + .1, { y: 400, rotation: 14 }, { y: 0 }); slam('y98', wt('1998') - .2, 1.6); xin('c16', wt('шестнадцать') - .2);
+ent('unk', wt('повторить') - .2, { y: 300 }, { y: 0 });
+EV.push([wt('незакрытая'), 'downer', { dur: .8, gain: .4 }]);
+show('#j5', tJ5, tJ6);
+tl.fromTo('#mwbw', { scale: 1 }, { scale: 1.14, duration: DING - tJ5, ease: 'power1.in', transformOrigin: '850px 400px' }, tJ5);
+[2, 1, 0].forEach((k, i) => EV.push([DING - 3 + i, 'tick', { gain: .9 }]));
+EV.push([DING, 'chime', { freq: 2093, gain: 1.0 }], [DING + .02, 'chime', { freq: 1046, gain: .6 }]);
+slam('ding', DING + .05, 2.2);
+tl.fromTo('#flash', { opacity: 0 }, { opacity: .4, duration: .06, yoyo: true, repeat: 1 }, DING);
+show('#j6', tJ6);
+ent('dml', tJ6 + .1, { scale: .8 }, { scale: 1 }, .6); xin('end', tJ6 + .6, .6);
+tl.to({}, { duration: .01 }, DUR);
+
+$('#slots').innerHTML = Array.from({ length: 60 }, (_, i) => `<div class="sl" data-i="${i}" style="width:44px;height:44px;border-radius:50%;border:3px solid #2A2A30"></div>`).join('');
+const cut = [0, tI2, tI3, tI4, tI5, tJ1, tJ2, tJ3, tJ4, tJ5, tJ6, DUR];
+const moves = []; cut.forEach((c, i) => { if (i < cut.length - 1) { moves.push([c + (i ? .01 : 0), 1.0]); moves.push([cut[i + 1], i === 9 ? 1.12 : 1.07]); } });
+const cam = CAMLIFE.attach($('#stage'), { drift: { x: 7, y: 5, rot: .3, seed: 61 }, moves,
+  accents: [[wt('тысячи') + .2, .035], [wt('Галактики.'), .03], [wt('шума?'), .035], [wt('наша'), .03], [DING, .05]],
+  focus: [[0, '30% 40%'], [tI2, '45% 45%'], [tI3, '70% 45%'], [tI4, '40% 40%'], [tI5, '40% 45%'], [tJ1, '50% 45%'], [tJ2, '50% 50%'], [tJ3, '40% 40%'], [tJ4, '40% 50%'], [tJ5, '45% 38%'], [tJ6, '50% 50%']] });
+// карта неба CHIME: детерминированные точки
+const SKY = (() => { let s = 99; const R = () => (s = (s * 16807) % 2147483647) / 2147483647; return Array.from({ length: 4539 }, () => { const a = R() * Math.PI * 2, r = Math.sqrt(R()); return [850 + Math.cos(a) * r * 820, 310 + Math.sin(a) * r * 290, R()]; }); })();
+const ctx = $('#sky').getContext('2d');
+const dust = DML.dust($('#fg'), 14, 77), fl = DML.floaters();
+function dyn(t) {
+  document.querySelectorAll('.sl').forEach(e => { const i = +e.dataset.i, on = i === 0 || t > wt('известно') + i * .04; e.style.background = on ? '#E5392B' : 'transparent'; e.style.borderColor = on ? '#E5392B' : '#2A2A30'; });
+  const p = Math.max(0, Math.min(1, (t - wt('четыре') + .5) / 2.4)), k = Math.round(4539 * (1 - Math.pow(1 - p, 2)));
+  $('#n').innerHTML = k < 4539 ? k.toLocaleString('ru-RU') : '4 <span class="red">539</span>';
+  ctx.clearRect(0, 0, 1700, 620); ctx.fillStyle = '#ff4a3a'; ctx.shadowColor = 'rgba(229,57,43,.9)'; ctx.shadowBlur = 6;
+  for (let i = 0; i < k; i++) { const d = SKY[i]; ctx.globalAlpha = .5 + d[2] * .5; ctx.fillRect(d[0] - 2, d[1] - 2, 5, 5); }
+  ctx.globalAlpha = 1;
+  // 16 перитонов за 7 минут
+  const g = $('#d16'); if (!g.childElementCount) for (let i = 0; i < 16; i++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('cx', 160 + (i + .5) / 16 * 1600); c.setAttribute('cy', 600); c.setAttribute('r', 16); c.setAttribute('fill', '#E5392B'); g.appendChild(c); }
+  [...g.children].forEach((c, i) => c.setAttribute('opacity', t > wt('шестнадцать') - .2 + i * .09 ? 1 : 0));
+  // таймер 0:03 → 0:00
+  const left = Math.max(0, Math.ceil(DING - t)); $('#timer').textContent = '0:0' + Math.min(3, left);
+  const tr = $('#tr'); if (tr) { let d = ''; for (let i = 0; i <= 80; i++) { const x = i / 80 * 396, y = 215 + Math.sin(i * 1.7 + t * 9) * 5 + ((i * 7919 + Math.floor(t * 24) * 104729) % 17) - 8 - 120 * Math.exp(-Math.pow((x - 300) / 12, 2)); d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); } tr.setAttribute('d', d); }
+  dust(t); fl(t); DML.subs($('#sub'), V, t);
+}
+window.__duration = DUR;
+window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
+window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
+window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 80, key: 'D', mood: 'warm', db: -20, drums: true, end: DING - 3.2 }, sfxDb: -3 }));
+if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }
+</script>
+</body></html>
