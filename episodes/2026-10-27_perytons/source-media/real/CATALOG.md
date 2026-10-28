@@ -135,3 +135,13 @@ Unsplash-фото — не Parkes: на превью без подписи «PAR
 | klipy_roll-safe_kEAXKvAoy.gif | Roll Safe (палец у виска) | Klipy: february-2017--kEAXKvAoy | Klipy API terms; мем, цитирование | 0.38 МБ | 11 · «скучными вещами» — хитрая простота |
 | klipy_hide-the-pain-harold_kXF3DlCAy.gif | Hide the Pain Harold | Klipy: hide-the-pain-harold--kXF3DlCAy | Klipy API terms; мем, цитирование | 0.65 МБ | 11 · «это наша микроволновка» — неловкое признание |
 | klipy_confused-math-lady_kXfpRCAHw.gif | Confused Math Lady | Klipy: confused-squiggle--kXfpRCAHw | Klipy API terms; мем, цитирование | 1.27 МБ | 11 · 1998: 16 за 7 минут — не сходится |
+
+## Музыка (скачано 28.10.2026 из фонотеки YouTube Studio после ОК пользователя; файлы — `source-media/music/`, в git не попадают)
+
+| Файл | Трек | Исполнитель | Лицензия | Длит. | Где в ролике |
+|---|---|---|---|---|---|
+| m1_majestic-12_alex-jones.mp3 | Majestic-12 | Alex Jones / Xander Jones | Лицензия фонотеки YouTube (без указания авторства) | 3:17 | хук + глава 1 |
+| m2_ancient-civilisations_alex-jones.mp3 | Ancient Civilisations | Alex Jones / Xander Jones | Лицензия фонотеки YouTube | 3:22 | глава 2 |
+| m3_stake-out_alex-jones.mp3 | Stake Out | Alex Jones / Xander Jones | Лицензия фонотеки YouTube | 3:04 | глава 3 |
+| m4_event-horizon_the-grey-room.mp3 | Event Horizon | The Grey Room / Density & Time | Лицензия фонотеки YouTube | 4:00 | глава 4 |
+| m5_pulsar_the-grey-room.mp3 | Pulsar | The Grey Room / Density & Time | Лицензия фонотеки YouTube | 4:08 | глава 5, уходит перед «дзынь» |
