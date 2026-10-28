@@ -5,8 +5,8 @@ printf "file '%s'\n" hook/hook_draft.mp4 ch1/ch1_draft.mp4 ch2/ch2_draft.mp4 ch3
 nice ffmpeg -loglevel error -y -threads 2 -f concat -safe 0 -i concat.txt -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p -r 30 -c:a aac -b:a 192k -ar 48000 -ac 2 perytons_draft_full.mp4 && echo ASSEMBLED
 ffprobe -v error -show_entries format=duration -of csv=p=0 perytons_draft_full.mp4
 python3 ../../../templates/obsion/watch.py perytons_draft_full.mp4 watch_full --fps 1 2>&1 | grep -E "Motion|holds|Static|frozen|Audio|Black"
-# мастеринг громкости после склейки. На Маке — AAC от Apple (aac_at) держит пик, цель TP −2; иначе ffmpeg aac добавляет ~2–3 дБ, цель TP −4
-if ffmpeg -hide_banner -encoders 2>/dev/null | grep -q aac_at; then ACODEC="aac_at"; TP=-2; else ACODEC="aac"; TP=-4; fi
+# мастеринг громкости после склейки: AAC добавляет ~2–3 дБ пика на щелчках SFX, поэтому цель TP в WAV −4,5 (в mp4 выходит ≈ −2…−3)
+if ffmpeg -hide_banner -encoders 2>/dev/null | grep -q aac_at; then ACODEC="aac_at"; TP=-4.5; else ACODEC="aac"; TP=-4.5; fi
 T=$(mktemp -d)
 ffmpeg -loglevel error -y -i perytons_draft_full.mp4 -vn -ac 2 -ar 48000 $T/full.wav
 python3 ../../../templates/obsion/loudness.py $T/full.wav $T/full_m.wav --tp $TP
