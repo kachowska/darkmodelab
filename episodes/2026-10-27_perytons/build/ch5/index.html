@@ -39,6 +39,7 @@
   <div class="abs mono" id="sgr" style="left:1540px;top:320px;font-size:22px;color:#fff">SGR 1935+2154</div>
   <div class="abs mono" id="sun" style="left:1510px;top:790px;font-size:20px;color:#cfcfd4">мы</div>
   <div class="abs h" id="d2020" style="left:110px;top:130px;font-size:150px">28.04.<span class="red">2020</span></div>
+  <div class="meme" id="pika" style="left:120px;top:400px;width:560px;height:420px;transform:rotate(-4deg)"><img class="seq" data-seq="m_pika" data-t0="0" data-loop="1"></div>
   <div class="abs cap" id="d2020c" style="left:120px;top:290px">впервые — внутри нашей Галактики</div>
   <div class="src" style="left:1400px;top:1020px;color:#9a9aa2">NASA/JPL-Caltech/ESO/R. Hurt</div>
  </div>
@@ -80,6 +81,7 @@
  <!-- J2 · скучные вещи: 4 улики -->
  <div class="sc" id="j2">
   <div class="abs" style="inset:0;background:#0f0f11"></div>
+  <div class="meme" id="rollsafe" style="left:110px;top:680px;width:500px;height:300px;transform:rotate(-3deg);z-index:6"><img class="seq" data-seq="m_rollsafe" data-t0="0" data-loop="1"></div>
   <div class="abs h" id="boring" style="left:110px;top:90px;font-size:100px">СКУЧНЫЕ <span class="red">ВЕЩИ</span></div>
   <div class="pol" id="b1" style="left:110px;top:300px;width:400px;height:330px;transform:rotate(-5deg)"><img src="../../source-media/real/parkes_control-room_shaw.jpg"><span class="pc">журнал наблюдений</span></div>
   <div class="spec" id="b2" style="left:570px;top:320px;width:420px;height:300px;transform:rotate(3deg)"><svg width="396" height="276" viewBox="0 0 396 276"><path id="tr" d="" stroke="#3dff9a" stroke-width="3" fill="none"/><text x="10" y="26" font-family="IBM Plex Mono" font-size="17" fill="#3dff9a">монитор помех</text></svg></div>
@@ -94,6 +96,7 @@
   <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
   <div class="doc" id="pet" style="left:120px;top:160px;width:1100px;transform:rotate(-2deg)"><img src="../../source-media/real/petroff2015_title.png"><i class="mk" id="mkP" style="left:41.2%;top:19%;width:13.6%;height:9.5%"></i></div>
   <img class="obj" id="ourmw" src="../../source-media/real/cut_microwave_bgh_clean.png" style="left:1340px;top:470px;width:560px;transform:rotate(4deg)">
+  <div class="meme" id="harold" style="left:1260px;top:110px;width:560px;height:340px;transform:rotate(4deg);z-index:7"><img class="seq" data-seq="m_harold" data-t0="0" data-loop="1"></div>
   <div class="abs h" id="our" style="left:110px;top:680px;font-size:96px;z-index:6;text-shadow:0 6px 24px #000">ЭТО НАША <span class="red">МИКРОВОЛНОВКА</span></div>
  </div>
 
@@ -105,6 +108,7 @@
   <div class="doc" id="pt2" style="left:1340px;top:690px;width:500px;transform:rotate(4deg)"><img src="../../source-media/real/petroff2015_title.png"></div>
   <svg class="abs" width="1920" height="1080" style="left:0;top:0"><line x1="160" y1="600" x2="1760" y2="600" stroke="#3a3a42" stroke-width="3"/>
    <g font-family="IBM Plex Mono" font-size="22" fill="#8A8A92"><text x="150" y="650">0 мин</text><text x="1700" y="650">7 мин</text></g><g id="d16"></g></svg>
+  <div class="meme" id="mathlady" style="left:1300px;top:270px;width:520px;height:330px;transform:rotate(4deg);z-index:6"><img class="seq" data-seq="m_mathlady" data-t0="0" data-loop="1"></div>
   <div class="abs cap" id="c16" style="left:640px;top:180px;font-size:34px;color:#e6e6ea"><b class="red" style="font-size:60px">16</b> перитонов подряд за семь минут</div>
   <div class="card" id="unk" style="left:160px;top:720px;width:1100px"><div style="font:600 42px Inter">повторить такую очередь дверцей <span class="red">не удалось</span></div><div class="mono" style="font-size:17px;color:var(--mu);margin-top:10px">MNRAS 451:3933 · §3.5</div></div>
  </div>
@@ -152,10 +156,11 @@ const tl = gsap.timeline({ paused: true }), EV = [];
 const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: .3 }, a); };
 const xin = (id, t, d) => tl.fromTo('#' + id, { opacity: 0 }, { opacity: 1, duration: d || .35 }, t);
 const ent = (id, t, from, to, d, e) => tl.fromTo('#' + id, Object.assign({ opacity: 0 }, from), Object.assign({ opacity: 1, duration: d || .5, ease: e || 'power3.out' }, to), t);
+const meme = (id, t) => { tl.fromTo('#' + id, { scale: 1.4, opacity: 0 }, { scale: 1, opacity: 1, duration: .2, ease: 'power3.out' }, t); tl.to('#' + id, { x: '+=10', duration: .04, yoyo: true, repeat: 5 }, t + .2); EV.push([t, 'pop', { gain: 1 }], [t + .02, 'glitch', { dur: .16, gain: .35 }]); document.querySelectorAll('#' + id + ' img.seq').forEach(e => e.dataset.t0 = t); };
 const slam = (id, t, s) => { tl.fromTo('#' + id, { scale: s || 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in' }, t); EV.push([t + .2, 'thud', { gain: .8 }]); };
 
-const tI2 = wt('Канадский') - .2, tI3 = wt('28') - .5, tI4 = wt('магнетар') - .5, tI5 = wt('Откуда') - .2, tJ1 = wt('наука') - .7, tJ2 = wt('Скучными') - .2, tJ3 = wt('ещё') - .5,
-      tJ4 = wt('незакрытая') - .9, tJ5 = wt('окажетесь') - 1.6, tJ6 = DING + 1.6;
+const tI2 = wt('Канадский') - .2, tI3 = wt('28') - .5, tI4 = Math.max(wt('магнетар') - .5, wt('Галактики.') + .3 + 2.8), tI5 = wt('Откуда') - .2, tJ1 = wt('наука') - .7, tJ2 = wt('Скучными') - .2, tJ3 = wt('ещё') - .5,
+      tJ4 = Math.max(wt('незакрытая') - .9, wt('микроволновка.') + .2 + 2.8), tJ5 = Math.max(wt('окажетесь') - 1.6, wt('удалось.') + .1 + 2.8), tJ6 = DING + 1.6;
 show('#i1', 0, tI2);
 slam('frb', .3, 1.8);
 xin('slots', wt('известно') - .2);
@@ -207,7 +212,8 @@ slam('ding', DING + .05, 2.2);
 tl.fromTo('#flash', { opacity: 0 }, { opacity: .4, duration: .06, yoyo: true, repeat: 1 }, DING);
 show('#j6', tJ6);
 ent('dml', tJ6 + .1, { scale: .8 }, { scale: 1 }, .6); xin('end', tJ6 + .6, .6);
-DML.inserts(tl, EV, [[tI2 + 3.6, 'seq:k09_space', 2.3, 'full'], [tI4 + .3, 'seq:i_pulsar2', 2.0, 'circ', 'NASA · магнитное поле нейтронной звезды'], [tJ3 + 1.6, 'seq:k13_kitchen', 2.3, 'full', 'архивный фильм · общественное достояние'], [tJ3 + 6.0, 'seq:v11_kitchen', 2.2, 'circ'], [tJ4 + 6.2, 'seq:v09_static', 2.2, 'circ']]);
+meme('pika', wt('Галактики.') + .3); meme('rollsafe', wt('вещами:') + .1); meme('harold', wt('микроволновка.') + .2); meme('mathlady', wt('удалось.') + .1);
+DML.inserts(tl, EV, [[tI2 + 3.6, 'seq:k09_space', 2.3, 'full'], [tI4 + .3, 'seq:i_pulsar2', 2.0, 'circ', 'NASA · магнитное поле нейтронной звезды'], [tJ3 + 1.6, 'seq:k13_kitchen', 2.3, 'full', 'архивный фильм · общественное достояние'], [tJ3 + 6.0, 'seq:v11_kitchen', 2.2, 'circ']]);
 tl.to({}, { duration: .01 }, DUR);
 
 $('#slots').innerHTML = Array.from({ length: 60 }, (_, i) => `<div class="sl" data-i="${i}" style="width:44px;height:44px;border-radius:50%;border:3px solid #2A2A30"></div>`).join('');

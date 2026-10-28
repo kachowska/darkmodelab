@@ -126,3 +126,12 @@ Unsplash-фото — не Parkes: на превью без подписи «PAR
 | clip_V16_printing-press.mp4 | печатная машина | https://pixabay.com/videos/id-152728/ | Pixabay Content License | 11 с | 1.3 МБ | 8 (новости) · 0–8 с |
 | clip_V17_nasa_pulsar-simulation.mp4 | симуляция пульсара (NASA Goddard) | https://images.nasa.gov/details/GSFC_20181010_FERMI_m13058_Pulsar4K | NASA — общественное достояние | 174 с | 32.1 МБ | 10 (нейтронная звезда) · 10–18 с |
 | clip_V18_night-sky-rotation.mp4 | вращение звёздного неба (таймлапс) | https://pixabay.com/videos/id-1099/ | Pixabay Content License | 21 с | 6.4 МБ | 10 (тысячи всплесков) · 0–12 с |
+
+## Партия 6 — мемы для главы 5 (скачано 28.10.2026 после ОК пользователя)
+
+| Файл | Что | Источник | Лицензия | Размер | Бит · эмоция |
+|---|---|---|---|---|---|
+| klipy_surprised-pikachu_kETDR9WKk.gif | Surprised Pikachu | Klipy: surprised-pikachu-1--kETDR9WKk | Klipy API terms; мем, цитирование | 0.54 МБ | 10 · всплеск внутри нашей Галактики — удивление |
+| klipy_roll-safe_kEAXKvAoy.gif | Roll Safe (палец у виска) | Klipy: february-2017--kEAXKvAoy | Klipy API terms; мем, цитирование | 0.38 МБ | 11 · «скучными вещами» — хитрая простота |
+| klipy_hide-the-pain-harold_kXF3DlCAy.gif | Hide the Pain Harold | Klipy: hide-the-pain-harold--kXF3DlCAy | Klipy API terms; мем, цитирование | 0.65 МБ | 11 · «это наша микроволновка» — неловкое признание |
+| klipy_confused-math-lady_kXfpRCAHw.gif | Confused Math Lady | Klipy: confused-squiggle--kXfpRCAHw | Klipy API terms; мем, цитирование | 1.27 МБ | 11 · 1998: 16 за 7 минут — не сходится |
