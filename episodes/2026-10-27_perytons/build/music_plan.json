@@ -1,0 +1,169 @@
+{
+ "video": "perytons_draft_full.mp4",
+ "out": "perytons_draft_music.mp4",
+ "duration": 631.5,
+ "xfade": 10,
+ "music_lufs": -20,
+ "music_gain_db": 0,
+ "sfx_gain_db": 0,
+ "sections": [
+  {
+   "file": "../source-media/music/m1_majestic-12_alex-jones.mp3",
+   "start": 0,
+   "in": 0
+  },
+  {
+   "file": "../source-media/music/m2_ancient-civilisations_alex-jones.mp3",
+   "start": 159.5,
+   "in": 0
+  },
+  {
+   "file": "../source-media/music/m3_stake-out_alex-jones.mp3",
+   "start": 268.5,
+   "in": 0
+  },
+  {
+   "file": "../source-media/music/m4_event-horizon_the-grey-room.mp3",
+   "start": 443.5,
+   "in": 0
+  },
+  {
+   "file": "../source-media/music/m5_pulsar_the-grey-room.mp3",
+   "start": 543.5,
+   "in": 0
+  }
+ ],
+ "chapters": [
+  {
+   "wav": "hook/sfx.wav",
+   "start": 0,
+   "dur": 54.5
+  },
+  {
+   "wav": "ch1/sfx.wav",
+   "start": 54.5,
+   "dur": 105
+  },
+  {
+   "wav": "ch2/sfx.wav",
+   "start": 159.5,
+   "dur": 109
+  },
+  {
+   "wav": "ch3/sfx.wav",
+   "start": 268.5,
+   "dur": 175
+  },
+  {
+   "wav": "ch4/sfx.wav",
+   "start": 443.5,
+   "dur": 100
+  },
+  {
+   "wav": "ch5/sfx.wav",
+   "start": 543.5,
+   "dur": 88
+  }
+ ],
+ "dips": [
+  [
+   32.4,
+   3.0,
+   -8
+  ],
+  [
+   156.1,
+   2.6,
+   -9
+  ],
+  [
+   186.7,
+   2.6,
+   -9
+  ],
+  [
+   197.5,
+   2.6,
+   -9
+  ],
+  [
+   218.1,
+   2.6,
+   -9
+  ],
+  [
+   256.5,
+   2.6,
+   -9
+  ],
+  [
+   300.3,
+   2.6,
+   -9
+  ],
+  [
+   347.9,
+   2.6,
+   -9
+  ],
+  [
+   358.9,
+   2.6,
+   -9
+  ],
+  [
+   369.1,
+   2.6,
+   -9
+  ],
+  [
+   447.7,
+   2.6,
+   -9
+  ],
+  [
+   457.3,
+   2.6,
+   -9
+  ],
+  [
+   488.1,
+   2.6,
+   -9
+  ],
+  [
+   532.5,
+   2.6,
+   -9
+  ],
+  [
+   540.5,
+   2.6,
+   -9
+  ],
+  [
+   563.1,
+   2.6,
+   -9
+  ],
+  [
+   589.3,
+   2.6,
+   -9
+  ],
+  [
+   608.5,
+   2.6,
+   -9
+  ],
+  [
+   619.3,
+   2.6,
+   -9
+  ]
+ ],
+ "fade_out": [
+  622.0,
+  5.0
+ ]
+}

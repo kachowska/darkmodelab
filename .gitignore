@@ -37,3 +37,5 @@ episodes/*/build/hook/*.mp4
 package.json
 package-lock.json
 render_mac.log
+episodes/*/source-media/music/
+episodes/*/build/*/sfx.wav
