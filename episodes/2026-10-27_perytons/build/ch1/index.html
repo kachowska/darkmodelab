@@ -189,7 +189,7 @@ const SENT = [
  ["Так появился новый класс явлений — быстрые радиовсплески.", ["быстрые", "радиовсплески."]],
  ["Только вот всплеск был один, и второго никто не находил.", ["один,"]]
 ];
-const V = DML.words(SENT, 0.5, 2.6), wt = V.wt, DUR = Math.ceil(V.end + 1.2);
+const V = DML.words(SENT, 0.5, 2.6), wt = V.wt, DUR = Math.ceil(Math.max(V.end + 1.2, V.wt('находил.') + 3.2));
 const tl = gsap.timeline({ paused: true }), EV = [];
 const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); };
 const xin = (id, t, d) => tl.fromTo('#' + id, { opacity: 0 }, { opacity: 1, duration: d || .35 }, t);
@@ -320,6 +320,7 @@ tl.fromTo('#fry', { scale: 1.4, opacity: 0, rotation: 12 }, { scale: 1, opacity:
 tl.to('#fry', { x: '+=10', duration: .04, yoyo: true, repeat: 5 }, wt('находил.') + .3);
 EV.push([wt('находил.') + .1, 'pop', { gain: 1 }], [wt('находил.') + .12, 'glitch', { dur: .18, gain: .4 }]);
 seqAt('fry', wt('находил.') + .1); seqAt('tv', wt('Луны,') - .5); seqAt('violin', wt('высокие') - .3); seqAt('b5', tB5); seqAt('a7', tA7); seqAt('far', tB6); seqAt('a6', tA6); seqAt('tape', tB1); seqAt('b7bg', tB7);
+DML.inserts(tl, EV, [[tA4 + 1.4, 'seq:i_moon2', 2.2, 'full', 'NASA · Apollo 11, 1969'], [tB4 + 4.3, 'seq:k09_space', 2.3, 'tilt'], [tB4 + 10.6, 'seq:v18_rot', 2.4, 'full']]);
 tl.to({}, { duration: .01 }, DUR);
 
 // слоты «найдено всплесков»

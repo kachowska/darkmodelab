@@ -5,6 +5,8 @@
 <script src="../../../../templates/obsion/vendor/gsap.min.js"></script>
 <script src="../../../../templates/obsion/camlife.js"></script>
 <script src="../../../../templates/obsion/sfx.js"></script>
+<script src="../lib/dml.js"></script>
+<script src="../media/meta.js"></script>
 <style>
 :root{--bg:#0E0E10;--tx:#F2F2F0;--mu:#8A8A92;--ln:#2A2A30;--red:#E5392B;--glow:rgba(229,57,43,.55)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -42,6 +44,7 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 .dust{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);filter:blur(5px)}
 #sub,#subbg{display:none!important}
 </style><script>if (/r720/.test(location.search)) document.documentElement.style.zoom = String(2 / 3);</script><style>
+.ins{position:absolute;z-index:30;overflow:hidden}.ins img{width:100%;height:100%;object-fit:cover;display:block}.ins-full{left:-100px;top:-100px;width:2120px;height:1280px}.ins-full img{filter:brightness(.88)}.ins-tilt{left:260px;top:110px;width:1400px;height:820px;border:12px solid #f4f2ec;box-shadow:0 40px 80px rgba(0,0,0,.75)}.ins-circ{left:1260px;top:400px;width:560px;height:560px;border-radius:50%;box-shadow:0 0 0 12px #f4f2ec,0 40px 80px rgba(0,0,0,.75)}.inscap{position:absolute;left:28px;bottom:22px;font:500 20px "IBM Plex Mono";color:#e6e6ea;text-shadow:0 2px 8px #000}
 </style></head><body>
 <div id="frame">
 <div id="stage">
@@ -275,6 +278,7 @@ tl.to('#lori', { y: -20, scale: 1.04, rotation: 0, duration: .45, ease: 'back.ou
 tl.to('#loriShade', { opacity: 0, duration: .3 }, wt('спас') - .1);
 tl.fromTo('#save', { strokeDasharray: 900, strokeDashoffset: 900 }, { strokeDashoffset: 0, duration: .45 }, wt('спас') + .25);
 EV.push([wt('спас') - .1, 'chime', { freq: 880, gain: .6 }], [wt('спас') + .25, 'swish', { gain: .5 }]);
+DML.inserts(tl, EV, [[9.0, 'seq:v02_sky', 2.2, 'full'], [21.2, 'seq:k09_space', 2.2, 'circ'], [29.8, 'seq:v09_static', 2.2, 'full'], [37.6, 'seq:k13_oven', 2.3, 'tilt'], [47.9, 'seq:v11_kitchen', 2.3, 'circ', 'иллюстрация · Pixabay']]);
 tl.to({}, { duration: .01 }, DUR);
 
 // ── камера: живая всегда, жест на каждый план
@@ -310,8 +314,8 @@ function dyn(t) {
   subs(t);
 }
 window.__duration = DUR;
-window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); };
-window.__ready = document.fonts.ready.then(() => window.__seek(0));
+window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
+window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
 window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 84, key: 'D', mood: 'dark', db: -17, start: 3.4, drums: true, dropAt: 20.3 }, sfxDb: -2 }));
 window.EVENTS = EV;
 if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }

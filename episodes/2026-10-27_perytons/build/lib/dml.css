@@ -52,3 +52,16 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 
 /* субтитры в видео не вшиваем (решение 28.10.2026): зритель включает их сам на YouTube */
 #sub,#subbg{display:none!important}
+
+/* метку «МЕМ» не показываем (28.10.2026): мем узнаётся сам */
+.meme .mt{display:none!important}
+
+/* врезки (перебивки) поверх сцены */
+.ins{position:absolute;z-index:30;overflow:hidden}
+.ins img{width:100%;height:100%;object-fit:cover;display:block}
+.ins-full{left:-100px;top:-100px;width:2120px;height:1280px}
+.ins-full img{filter:brightness(.88)}
+.ins-tilt{left:260px;top:110px;width:1400px;height:820px;border:12px solid #f4f2ec;box-shadow:0 40px 80px rgba(0,0,0,.75)}
+.ins-circ{left:1260px;top:400px;width:560px;height:560px;border-radius:50%;box-shadow:0 0 0 12px #f4f2ec,0 40px 80px rgba(0,0,0,.75)}
+.inscap{position:absolute;left:28px;bottom:22px;font:500 20px 'IBM Plex Mono';color:#e6e6ea;text-shadow:0 2px 8px #000;letter-spacing:.06em}
+.ins-full .inscap{left:128px;bottom:122px}

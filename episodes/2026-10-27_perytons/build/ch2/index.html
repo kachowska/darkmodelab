@@ -178,8 +178,8 @@ const days = (el, hi) => el.innerHTML = ['ПН','ВТ','СР','ЧТ','ПТ','С�
 days($('#week')); days($('#week2'));
 
 // ───────── БИТ 4 ─────────
-const tC2 = wt('Но') - .2, tC3 = wt('Настоящий') - .2, tC4 = wt('Источник') - .2, tC5 = wt('Бёрк-Сполар', 1) - .2, tC6 = wt('вот') - .35;
-const tD1 = wt('Следующие') - .2, tD2 = wt('А', 1) - .2, tD3 = wt('У') - .2, tD4 = wt('Звёзды') - .2, tD5 = wt('Правда,') + .9;
+const tC2 = wt('Но') - .2, tC3 = wt('Настоящий') - .2, tC4 = wt('Источник') - .2, tC5 = Math.max(wt('Бёрк-Сполар', 1) - .2, wt('Земле.') - .1 + 2.8), tC6 = wt('вот') - .35;
+const tD1 = Math.max(wt('Следующие') - .2, wt('Лоримера') - .1 + 2.8), tD2 = wt('А', 1) - .2, tD3 = wt('У') - .2, tD4 = wt('Звёзды') - .2, tD5 = Math.max(wt('Правда,') + .9, wt('знают.') + .2 + 2.8);
 show('#c1', 0, tC2);
 tl.fromTo('#wall', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .8 }, 0.1);
 ent('bookV', wt('прочесала') - .3, { y: 500, rotation: 10 }, { y: 0, rotation: -4 }, .5); EV.push([wt('прочесала') - .3, 'paper', { dur: .4 }]);
@@ -270,6 +270,9 @@ ent('closed', wt('площадке') - .2, { y: 500, rotation: 10 }, { y: 0, rot
 ent('us', wt('версия') - .2, { x: 700 }, { x: 0 });
 EV.push([wt('площадке') - .2, 'thud', { gain: .6 }], [wt('версия') - .2, 'paper', { dur: .35 }]);
 seqAt('wait', wt('сразу') + .1); seqAt('spider', wt('Лоримера') - .1); seqAt('c4', tC4); seqAt('d4', tD4); seqAt('lunchTV', wt('рабочие') - .1); seqAt('bookV', wt('прочесала') - .3);
+DML.inserts(tl, EV, [[tC3 + 1.6, 'seq:k08_sky', 2.4, 'circ', '', 'left:760px;top:560px;width:400px;height:400px'], [tC3 + 5.0, 'parkes_control-room_shaw.jpg', 2.2, 'tilt', 'Parkes · пульт управления', 'left:1240px;top:560px;width:560px;height:340px'], [tC6 + 1.6, 'seq:k09_space', 2.4, 'full'],
+  [tD1 + 2.0, 'seq:v04_book', 2.4, 'tilt', 'иллюстрация · Pixabay'], [tD2 + 1.8, 'seq:k03_gas', 2.3, 'full'], [tD3 + 3.6, 'seq:v11_kitchen', 2.3, 'tilt', 'иллюстрация · Pixabay'],
+  [tD5 + 1.6, 'parkes_west_09.jpg', 2.4, 'full', 'Parkes'], [tD5 + 5.3, 'seq:k11_mug', 2.2, 'circ', '', 'left:820px;top:90px;width:340px;height:340px']]);
 tl.to({}, { duration: .01 }, DUR);
 
 const cam = CAMLIFE.attach($('#stage'), {

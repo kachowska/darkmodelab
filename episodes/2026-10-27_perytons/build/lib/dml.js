@@ -44,5 +44,32 @@ window.DML = (function () {
     });
     return P.length ? Promise.all(P) : null;
   }
-  return { $, words, subs, dust, floaters, loadMeta, seqs };
+  // врезки: короткие планы с видео или фото поверх сцены (перебивки), чтобы кадр менялся каждые 2–3 с.
+  // list: [t, 'seq:<name>' | '<файл из source-media/real>', dur, вид ('full'|'tilt'|'circ'), подпись, css-позиция (по желанию)]
+  function inserts(tl, EV, list, base) {
+    base = base || '../../source-media/real/';
+    const stage = document.getElementById('stage'), fg = document.getElementById('fg'), kinds = ['full', 'tilt', 'full', 'circ'];
+    list.forEach(([t, src, dur, kind, cap, pos], i) => {
+      kind = kind || kinds[i % kinds.length];
+      const d = document.createElement('div'); d.className = 'ins ins-' + kind; d.style.visibility = 'hidden'; if (pos) d.style.cssText += ';' + pos;
+      d.innerHTML = (src.startsWith('seq:') ? `<img class="seq" data-seq="${src.slice(4)}" data-t0="${t}" data-loop="1">` : `<img src="${base + src}">`) + (cap ? `<div class="inscap">${cap}</div>` : '');
+      stage.insertBefore(d, fg);
+      const im = d.firstChild;
+      tl.set(d, { visibility: 'visible' }, t); tl.set(d, { visibility: 'hidden' }, t + dur + .35);
+      if (kind === 'full') {
+        tl.fromTo(d, { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: .3, ease: 'power3.out' }, t);
+        tl.to(d, { clipPath: 'inset(0% 0% 0% 100%)', duration: .3, ease: 'power3.in' }, t + dur);
+        tl.fromTo(im, { scale: 1.14 }, { scale: 1, duration: dur + .35, ease: 'none' }, t);
+      } else if (kind === 'tilt') {
+        tl.fromTo(d, { x: 1500, rotation: 14 }, { x: 0, rotation: -3, duration: .42, ease: 'power3.out' }, t);
+        tl.to(d, { x: -1700, rotation: -14, duration: .35, ease: 'power2.in' }, t + dur);
+        tl.fromTo(im, { scale: 1.1 }, { scale: 1, duration: dur + .35, ease: 'none' }, t);
+      } else {
+        tl.fromTo(d, { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: .42, ease: 'back.out(1.4)' }, t);
+        tl.to(d, { scale: 0, rotation: 30, duration: .28, ease: 'power2.in' }, t + dur);
+      }
+      EV.push([t, 'whoosh', { dur: .45, size: .8, gain: .35 }], [t + dur, 'swish', { gain: .3 }]);
+    });
+  }
+  return { $, words, subs, dust, floaters, loadMeta, seqs, inserts };
 })();
