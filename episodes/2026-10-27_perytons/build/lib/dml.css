@@ -49,3 +49,6 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 .meme .ov{position:absolute;left:0;right:0;text-align:center;font:700 44px Oswald;text-transform:uppercase;color:#fff;-webkit-text-stroke:2px #000;paint-order:stroke;text-shadow:0 3px 0 #000}
 .stamp{position:absolute;border:5px solid var(--red);color:var(--red);font:700 46px Oswald;text-transform:uppercase;padding:4px 18px;letter-spacing:.04em}
 .hud{position:absolute;font:500 20px 'IBM Plex Mono';color:var(--mu)}
+
+/* субтитры в видео не вшиваем (решение 28.10.2026): зритель включает их сам на YouTube */
+#sub,#subbg{display:none!important}
