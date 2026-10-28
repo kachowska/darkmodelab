@@ -34,3 +34,5 @@ episodes/*/build/concat.txt
 episodes/*/build/perytons_draft_full.mp4
 episodes/*/build/watch_full/
 episodes/*/build/hook/*.mp4
+package.json
+package-lock.json
