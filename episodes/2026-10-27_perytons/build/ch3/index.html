@@ -21,7 +21,7 @@
 
  <!-- E1 · подозревать — одно, доказать — другое -->
  <div class="sc" id="e1">
-  <div class="abs" style="inset:0;background:#0d0d0f"></div>
+  <div class="full"><img class="seq" data-seq="v09_static" data-t0="0" data-loop="1" style="filter:brightness(.2) contrast(1.2)"></div>
   <div class="abs h" id="sus" style="left:120px;top:360px;font-size:150px;color:#6a6a72">ПОДОЗРЕВАТЬ</div>
   <div class="abs h red ab" id="prove" style="left:1060px;top:360px;font-size:150px">ДОКАЗАТЬ</div>
   <div class="abs" id="eqline" style="left:960px;top:300px;width:4px;height:300px;background:#2A2A30"></div>
@@ -56,7 +56,7 @@
  <!-- E4 · Wi-Fi и микроволновка + Pepe Silvia -->
  <div class="sc" id="e4">
   <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
-  <div class="pol" id="router" style="left:120px;top:140px;width:520px;height:400px;transform:rotate(-6deg)"><img src="../../source-media/real/unsplash_hXVVNB6Qctg_router_comparefibre.jpg"><span class="pc">Wi-Fi · 2,4 ГГц</span></div>
+  <div class="pol" id="router" style="left:120px;top:140px;width:520px;height:400px;transform:rotate(-6deg)"><img class="seq" data-seq="v10_router" data-t0="0" data-loop="1"><span class="pc">Wi-Fi · 2,4 ГГц</span></div>
   <img class="obj" id="mw4" src="../../source-media/real/cut_microwave_bgh_clean.png" style="left:160px;top:560px;width:600px;transform:rotate(3deg)">
   <div class="meme" id="pepe" style="left:860px;top:240px;width:900px;height:569px;transform:rotate(3deg)"><img class="seq" data-seq="m_pepe" data-t0="0" data-loop="1"><span class="mt">МЕМ</span></div>
  </div>
@@ -82,7 +82,7 @@
  <div class="sc" id="f2">
   <div class="abs" style="inset:0;background:#0f0f11"></div>
   <div class="abs" id="ovens" style="left:100px;top:200px;width:1720px;display:flex;justify-content:space-between">
-   <div style="width:520px;position:relative"><img id="o1" src="../../source-media/real/cut_microwave_bgh_clean.png" style="width:440px;filter:drop-shadow(0 30px 30px rgba(0,0,0,.7))"><div class="cav" style="font-size:46px">кухня сотрудников</div></div>
+   <div style="width:520px;position:relative"><div class="pol" id="o1" style="position:relative;width:440px;height:300px;transform:rotate(-3deg)"><img class="seq" data-seq="v11_kitchen" data-t0="0" data-loop="1"><span class="pc">иллюстрация · Pixabay</span></div><div class="cav" style="font-size:46px;margin-top:14px">кухня сотрудников</div></div>
    <div style="width:520px;position:relative"><div class="pol" style="position:relative;width:440px;height:300px;transform:rotate(3deg)"><img src="../../source-media/real/commons_csiro-3987_visitors-centre-cafe.jpg"><span class="pc">центр для посетителей</span></div></div>
    <div style="width:520px;position:relative"><img src="../../source-media/cutouts/parkes_dish_day.png" style="width:320px;filter:drop-shadow(0 30px 30px rgba(0,0,0,.7))"><div class="cav" style="font-size:46px">здание под телескопом</div></div></div>
   <div class="abs h" id="few" style="left:110px;top:70px;font-size:80px">НЕСКОЛЬКО <span class="red">ПЕЧЕЙ</span></div>
@@ -149,13 +149,14 @@
 
  <!-- F9 · Сингапур: письмо на пересадке — «Я так и знала» -->
  <div class="sc" id="f9">
-  <div class="full"><img src="../../source-media/real/photo_F22_commons_changi-t1.jpg" style="filter:brightness(.5)"></div>
+  <div class="full"><img class="seq" id="changiV" data-seq="v12_changi" data-t0="0" data-loop="1" style="filter:brightness(.5)"></div>
+  <div class="circ" id="takeoff" style="left:820px;top:80px;width:330px;height:330px"><img class="seq" data-seq="v13_takeoff" data-t0="0" data-loop="1"></div>
   <div class="crt" id="esc" style="left:1180px;top:130px;width:620px;height:350px;transform:rotate(3deg)"><img class="seq" data-seq="k12_airport" data-t0="0" data-loop="1"></div>
   <img class="obj stk" id="plane" src="../../source-media/cutouts/toy_plane.png" style="left:-400px;top:160px;width:420px">
   <div class="pol" id="letter" style="left:200px;top:430px;width:520px;height:370px;transform:rotate(-5deg)"><img src="../../source-media/real/photo_F14_pixabay_letter-envelope.jpg"><span class="pc">письмо коллег</span></div>
   <div class="abs h" id="sing" style="left:110px;top:110px;font-size:120px">СИНГАПУР</div>
   <div class="card" id="knew" style="left:900px;top:620px;width:860px;transform:rotate(2deg)"><div class="cav" style="font-size:90px;color:#fff">«Я так и знала!»</div><div class="mono" style="font-size:17px;color:var(--mu)">Эмили Петрофф · по её словам (Nature Index)</div></div>
-  <div class="src" style="left:110px;top:1020px;color:#e6e6ea">аэропорт Чанги · Nigos · CC BY-SA 4.0</div>
+  <div class="src" style="left:110px;top:1020px;color:#e6e6ea">аэропорт Чанги, Jewel · видео Pixabay</div>
  </div>
 
  <!-- F10 · почему дверца: магнетрон — сердце печи -->
@@ -277,7 +278,7 @@ xin('jan', tE3 + .1); tl.to('#jan', { x: 1010, y: -250, scale: .5, duration: .5,
 tl.fromTo('#hot', { opacity: 0 }, { opacity: 1, duration: .2, yoyo: true, repeat: 7 }, wt('вспышки') - .1);
 EV.push([wt('вспышки'), 'pop', { pitch: 1.5, gain: .7 }], [wt('вспышки') + .5, 'pop', { pitch: 1.5, gain: .7 }], [wt('вспышки') + 1, 'pop', { pitch: 1.5, gain: .7 }]);
 show('#e4', tE4, tE5);
-ent('router', wt('Wi-Fi') - .2, { x: -600, rotation: -20 }, { x: 0 });
+ent('router', tE4 + .1, { x: -600, rotation: -20 }, { x: 0 });
 ent('mw4', wt('микроволновые') - .2, { y: 500 }, { y: 0 }, .5, 'back.out(1.3)');
 ent('pepe', wt('печи.') + .15, { scale: 1.4, rotation: 10 }, { scale: 1, rotation: 3 }, .2);
 EV.push([wt('Wi-Fi') - .2, 'shutter', { gain: .6 }], [wt('микроволновые'), 'thud', { gain: .7 }], [wt('печи.') + .15, 'impact', { size: 1 }]);
@@ -330,7 +331,7 @@ tl.fromTo('#flash', { opacity: 0 }, { opacity: .55, duration: .06, yoyo: true, r
 EV.push([wt('бум»'), 'impact', { size: 1.5 }], [wt('графике'), 'swish', { gain: .5 }]);
 tl.to('#mind', { opacity: 0, duration: .3 }, wt('графике') - .2);
 show('#f9', tF9, tF10);
-ent('sing', wt('Сингапуре') - .3, { x: -80 }, { x: 0 }, .35);
+ent('sing', wt('Сингапуре') - .3, { x: -80 }, { x: 0 }, .35); ent('takeoff', tF9 + .2, { scale: 0 }, { scale: 1 }, .45, 'back.out(1.5)'); EV.push([tF9 + .2, 'whoosh', { dur: .6, gain: .4 }]);
 tl.fromTo('#plane', { x: 0, y: 0, rotation: 8 }, { x: 2500, y: -120, rotation: -4, duration: 3.4, ease: 'none' }, tF9);
 ent('esc', wt('пересадки') - .2, { x: 600 }, { x: 0 });
 ent('letter', wt('письма') - .2, { y: 500, rotation: 10 }, { y: 0 });
@@ -360,7 +361,7 @@ ent('k2', wt('центре', 1) - .3, { y: 400 }, { y: 0 }, .5, 'back.out(1.3)')
 slam('n6', wt('шесть') - .1, 1.8);
 ent('two', wt('Два') - .2, { y: -40 }, { y: 0 }, .35);
 EV.push([wt('«семейства»'), 'swish', { gain: .5 }], [wt('Два'), 'impact', { size: 1.2 }]);
-seqAt('f1', tF1); seqAt('f7', tF7); seqAt('f3', tF3); seqAt('f6', tF6); seqAt('pepe', wt('печи.') + .15); seqAt('fiasko', wt('ничего.') + .15); seqAt('mwopen', wt('открыть') - .2); seqAt('mind', wt('бум»')); seqAt('esc', tF9); seqAt('fam1', tF12);
+seqAt('f1', tF1); seqAt('f7', tF7); seqAt('f3', tF3); seqAt('f6', tF6); seqAt('pepe', wt('печи.') + .15); seqAt('fiasko', wt('ничего.') + .15); seqAt('mwopen', wt('открыть') - .2); seqAt('mind', wt('бум»')); seqAt('esc', tF9); seqAt('fam1', tF12); seqAt('e1', 0); seqAt('router', tE4 + .1); seqAt('o1', tF2); seqAt('takeoff', tF9); seqAt('f9', tF9); seqAt('esc', tF9);
 tl.to({}, { duration: .01 }, DUR);
 $('#tries').innerHTML = Array.from({ length: 10 }, (_, i) => `<div class="try" data-i="${i}" style="width:48px;height:48px;border-radius:50%;border:3px solid #2A2A30"></div>`).join('');
 

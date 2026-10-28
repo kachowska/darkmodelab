@@ -62,7 +62,7 @@
 
  <!-- A6 · «Тарелка» и Murriyang -->
  <div class="sc" id="a6">
-  <div class="abs" style="inset:0;background:linear-gradient(#1b1320,#0b0a0c 70%)"></div>
+  <div class="full"><img class="seq" data-seq="v02_sky" data-t0="0" data-loop="1" style="filter:brightness(.6) saturate(.9)"></div>
   <img class="obj" id="dishDusk" src="../../source-media/cutouts/parkes_dish_dusk.png" style="left:980px;top:180px;width:820px">
   <div class="card" id="film" style="left:120px;top:150px;width:620px;transform:rotate(-2deg)"><div class="mono" style="font-size:18px;color:var(--mu)">ФИЛЬМ · 2000</div><div class="h" style="font-size:96px;margin-top:6px">«ТАРЕЛКА»</div><div class="cap" style="margin-top:8px">The Dish — о той самой трансляции</div></div>
   <div class="abs h red ab" id="murr" style="left:110px;top:560px;font-size:180px">MURRIYANG</div>
@@ -87,6 +87,7 @@
  <div class="sc" id="b1">
   <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
   <div class="abs h" id="y2007" style="left:110px;top:110px;font-size:200px">2007</div>
+  <div class="circ" id="tape" style="left:740px;top:120px;width:400px;height:400px"><img class="seq" data-seq="v01_tape" data-t0="0" data-loop="1"></div>
   <img class="obj stk" id="lorimer" src="../../source-media/cutouts/lorimer.png" style="left:1180px;top:140px;width:500px">
   <img class="obj" id="magn" src="../../source-media/cutouts/magnifier.png" style="left:980px;top:520px;width:420px;transform:rotate(-18deg)">
   <div class="card" id="cardL" style="left:1180px;top:860px;width:520px;padding:14px 22px"><div class="mono" style="font-size:18px;color:var(--mu)">АСТРОНОМ</div><div style="font:600 34px Inter">Дункан Лоример</div></div>
@@ -154,7 +155,7 @@
 
  <!-- B7 · FRB · всплеск один -->
  <div class="sc" id="b7">
-  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 40% 45%,#1d1416,#0a090a 75%)"></div>
+  <div class="full" id="b7bg"><img class="seq" data-seq="v03_wave" data-t0="0" data-loop="1" style="filter:hue-rotate(160deg) saturate(1.2) brightness(.42)"></div>
   <div class="abs mono" id="newc" style="left:124px;top:80px;font-size:24px;color:var(--mu);letter-spacing:.14em">НОВЫЙ КЛАСС ЯВЛЕНИЙ · 2007</div>
   <div class="abs h red ab" id="frb" style="left:110px;top:120px;font-size:300px">FRB</div>
   <div class="abs" id="frbW" style="left:120px;top:420px;font:600 40px Inter">Fast Radio Burst · <span style="color:var(--red)">быстрый радиовсплеск</span></div>
@@ -257,6 +258,7 @@ xin('bill', wt('миллиарды') - .2, .5);
 const tB2 = wt('искал') - .4, tB3 = wt('нашёл') - .1, tB4 = wt('Самое') - .2, tB5 = wt('Космос') - .2, tB6 = wt('Чем') - .2, tB7 = wt('Так') - .2;
 show('#b1', tB1, tB2);
 tl.fromTo('#b1', { opacity: 0 }, { opacity: 1, duration: .3 }, tB1);
+tl.fromTo('#tape', { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(1.5)' }, tB1 + .4); EV.push([tB1 + .4, 'pop', { gain: .6 }]);
 tl.fromTo('#y2007', { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in', transformOrigin: '0 50%' }, wt('2007') - .05);
 EV.push([wt('2007') + .17, 'thud', { gain: .8 }]);
 tl.fromTo('#cardN', { x: -800, rotation: -12 }, { x: 0, rotation: -3, duration: .5, ease: 'power3.out' }, wt('студент') - .1);
@@ -317,7 +319,7 @@ xin('slots', wt('быстрые') + .3); xin('slotsC', wt('один,'));
 tl.fromTo('#fry', { scale: 1.4, opacity: 0, rotation: 12 }, { scale: 1, opacity: 1, rotation: 5, duration: .2, ease: 'power3.out' }, wt('находил.') + .1);
 tl.to('#fry', { x: '+=10', duration: .04, yoyo: true, repeat: 5 }, wt('находил.') + .3);
 EV.push([wt('находил.') + .1, 'pop', { gain: 1 }], [wt('находил.') + .12, 'glitch', { dur: .18, gain: .4 }]);
-seqAt('fry', wt('находил.') + .1); seqAt('tv', wt('Луны,') - .5); seqAt('violin', wt('высокие') - .3); seqAt('b5', tB5); seqAt('a7', tA7); seqAt('far', tB6);
+seqAt('fry', wt('находил.') + .1); seqAt('tv', wt('Луны,') - .5); seqAt('violin', wt('высокие') - .3); seqAt('b5', tB5); seqAt('a7', tA7); seqAt('far', tB6); seqAt('a6', tA6); seqAt('tape', tB1); seqAt('b7bg', tB7);
 tl.to({}, { duration: .01 }, DUR);
 
 // слоты «найдено всплесков»

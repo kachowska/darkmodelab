@@ -14,7 +14,7 @@
 
  <!-- G1 · апрель 2015: статья вышла, мир прочитал по-своему -->
  <div class="sc" id="g1">
-  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
+  <div class="full" id="pressBg"><img class="seq" data-seq="v16_press" data-t0="0" data-loop="1" style="filter:brightness(.32) blur(1.5px)"></div>
   <div class="abs h" id="apr" style="left:110px;top:110px;font-size:150px">АПРЕЛЬ <span class="red">2015</span></div>
   <div class="doc" id="pet" style="left:140px;top:360px;width:1000px;transform:rotate(-2deg)"><img src="../../source-media/real/petroff2015_title.png"></div>
   <div class="meme" id="aliens" style="left:1180px;top:380px;width:640px;height:358px;transform:rotate(5deg)"><img class="seq" data-seq="m_aliens" data-t0="0" data-loop="1"><span class="mt">МЕМ</span></div>
@@ -43,7 +43,9 @@
  <div class="sc" id="g4">
   <div class="abs" style="inset:0;background:radial-gradient(ellipse at 60% 50%,#1a1a1d,#0a0a0b 75%)"></div>
   <div class="doc" id="conv" style="left:1060px;top:120px;width:740px;transform:rotate(3deg)"><img src="../../source-media/real/screenshot_theconversation_petroff.png" style="height:420px;object-fit:cover;object-position:0 0"></div>
-  <img class="obj" id="alien" src="../../source-media/cutouts/alien_toys.png" style="left:180px;top:160px;width:330px;transform:rotate(-8deg)">
+  <div class="crt" id="saucer" style="left:150px;top:150px;width:470px;height:360px;transform:rotate(-3deg)"><img class="seq" data-seq="v15_saucer" data-t0="0" data-loop="1"></div>
+  <div class="abs mono" id="saucerC" style="left:160px;top:530px;font-size:18px;color:#8A8A92;z-index:4">«Teenagers from Outer Space», 1959</div>
+  <img class="obj" id="alien" src="../../source-media/cutouts/alien_toys.png" style="left:470px;top:330px;width:250px;transform:rotate(-8deg)">
   <svg class="abs" width="1920" height="1080" style="left:0;top:0;z-index:5"><g id="xa" class="hand" style="stroke-width:12"><path d="M170 180 L 520 560"/><path d="M520 180 L 170 560"/></g></svg>
   <div class="card" id="noal" style="left:140px;top:640px;width:1100px;transform:rotate(-1deg)"><div style="font:600 44px Inter">не искали пришельцев — <span class="red">искали, откуда помехи</span></div><div class="mono" style="font-size:17px;color:var(--mu);margin-top:10px">Эмили Петрофф · The Conversation</div></div>
  </div>
@@ -184,13 +186,13 @@ draw('xx', wt('пиццу»') + .5, .4, 600);
 meme('doubt', wt('нет:') - .1);
 ent('lunch', wt('заметке') - .2, { x: -600 }, { x: 0 });
 show('#g4', tG4, tG5);
-ent('conv', tG4 + .1, { x: 700, rotation: 15 }, { x: 0 });
+ent('conv', tG4 + .1, { x: 700, rotation: 15 }, { x: 0 }); ent('saucer', tG4 + .3, { y: -500, rotation: -12 }, { y: 0, rotation: -3 }, .5); xin('saucerC', tG4 + .7);
 ent('alien', wt('пришельцев,') - .3, { y: -400, rotation: -30 }, { y: 0 }, .45, 'back.out(1.5)');
 draw('xa', wt('пришельцев,') + .2, .35, 600);
 ent('noal', wt('искала,') - .2, { y: 300 }, { y: 0 });
 EV.push([wt('пришельцев,') + .2, 'swish', { gain: .6 }], [wt('искала,'), 'paper', { dur: .35 }]);
 show('#g5', tG5, tH1);
-ent('joke', wt('«учёные') - .2, { x: -700, rotation: -10 }, { x: 0 });
+ent('joke', tG5 + .15, { x: -700, rotation: -10 }, { x: 0 });
 ent('work', wt('«учёные', 1) - .2, { x: 700, rotation: 10 }, { x: 0 });
 tl.to('#joke', { scale: .92, opacity: .5, duration: .4 }, wt('работа.') - .3);
 EV.push([wt('анекдот,'), 'thud', { gain: .5 }], [wt('работа.'), 'impact', { size: 1.1 }]);
@@ -246,6 +248,8 @@ function dyn(t) {
   dust(t); fl(t); DML.subs($('#sub'), V, t);
 }
 window.__duration = DUR;
+const seqAt = (id, t) => document.querySelectorAll('#' + id + ' img.seq').forEach(e => e.dataset.t0 = t);
+seqAt('pressBg', 0); seqAt('saucer', tG4 + .3);
 window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
 window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
 window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 88, key: 'A', mood: 'dark', db: -20, drums: true }, sfxDb: -3 }));

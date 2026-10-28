@@ -16,6 +16,7 @@
  <div class="sc" id="c1">
   <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 45%,#1a1719,#0a090a 75%)"></div>
   <div class="abs" id="wall" style="left:60px;top:120px;width:1800px;height:900px;display:grid;grid-template-columns:repeat(10,1fr);gap:14px"></div>
+  <div class="pol" id="bookV" style="left:110px;top:560px;width:560px;height:330px;transform:rotate(-4deg);z-index:5"><img class="seq" data-seq="v04_book" data-t0="0" data-loop="1"><span class="pc">архивы Parkes</span></div>
   <img class="obj" id="magn2" src="../../source-media/cutouts/magnifier.png" style="left:200px;top:300px;width:520px;transform:rotate(-24deg)">
   <div class="card" id="sara" style="left:110px;top:110px;width:600px;transform:rotate(-2deg);z-index:5"><div class="mono" style="font-size:18px;color:var(--mu)">2010 · АСПИРАНТКА</div><div style="font:600 46px Inter;margin-top:6px">Сара Бёрк-Сполар</div><div class="cap" style="margin-top:6px">прочесала архивы Parkes</div></div>
   <div class="abs h" id="n16" style="left:1380px;top:110px;font-size:230px;z-index:5">16</div>
@@ -42,7 +43,8 @@
 
  <!-- C4 · на Земле: Always has been -->
  <div class="sc" id="c4">
-  <img class="abs" src="../../source-media/real/unsplash_ccxSX0f6fu8_milkyway_anderson.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:blur(3px) brightness(.35)">
+  <img class="abs seq" id="iss" data-seq="v05_iss" data-t0="0" data-loop="1" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:brightness(.55)">
+  <div class="src" style="left:1500px;top:1020px;color:#cfcfd4">видео: NASA, МКС</div>
   <img class="obj" id="earth2" src="../../source-media/cutouts/earth.png" style="left:1260px;top:140px;width:560px">
   <div class="meme" id="always" style="left:140px;top:170px;width:1000px;height:610px;transform:rotate(-4deg)"><img src="../../source-media/real/kym_always-has-been_original.jpg">
    <div class="abs" style="left:168px;top:286px;width:166px;height:74px;background:#2a5ea8;border-radius:10px"></div><div class="abs h" style="left:180px;top:298px;font-size:50px;color:#fff">ЗЕМЛЯ</div>
@@ -109,11 +111,13 @@
   <img class="obj" id="magn3" src="../../source-media/cutouts/magnifier.png" style="left:1150px;top:160px;width:560px;transform:rotate(14deg)">
   <div class="abs" id="week" style="left:1090px;top:720px;display:flex;gap:12px"></div>
   <img class="obj" id="clocks" src="../../source-media/cutouts/clocks.png" style="left:1100px;top:880px;width:640px">
+  <div class="crt" id="lunchTV" style="left:1180px;top:150px;width:560px;height:420px;transform:rotate(3deg)"><img class="seq" data-seq="v07_lunch" data-t0="0" data-loop="1"></div>
+  <div class="abs mono" id="lunchTVc" style="left:1200px;top:600px;font-size:20px;color:#cfcfd4">обеденный час · фильм «The City», 1939</div>
  </div>
 
  <!-- D4 · звёзды не знают про обед — а люди знают + мем -->
  <div class="sc" id="d4">
-  <img class="abs" id="mw" src="../../source-media/real/unsplash_ccxSX0f6fu8_milkyway_anderson.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:brightness(.7)">
+  <img class="abs seq" id="mw" data-seq="v08_mw" data-t0="0" data-loop="1" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:brightness(.8)">
   <div class="abs h" id="stars" style="left:110px;top:130px;font-size:100px;line-height:1">ЗВЁЗДЫ НЕ ЗНАЮТ<br>ПРО <span class="red">ОБЕД</span></div>
   <img class="obj" id="dk" src="../../source-media/cutouts/parkes_dish_dusk.png" style="left:120px;top:560px;width:420px">
   <div class="abs mono" id="dkT" style="left:560px;top:880px;font-size:26px;color:#fff">12:00 · обеденный перерыв · NSW</div>
@@ -178,6 +182,7 @@ const tC2 = wt('Но') - .2, tC3 = wt('Настоящий') - .2, tC4 = wt('Ис
 const tD1 = wt('Следующие') - .2, tD2 = wt('А', 1) - .2, tD3 = wt('У') - .2, tD4 = wt('Звёзды') - .2, tD5 = wt('Правда,') + .9;
 show('#c1', 0, tC2);
 tl.fromTo('#wall', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .8 }, 0.1);
+ent('bookV', wt('прочесала') - .3, { y: 500, rotation: 10 }, { y: 0, rotation: -4 }, .5); EV.push([wt('прочесала') - .3, 'paper', { dur: .4 }]);
 ent('sara', wt('аспирантка') - .2, { x: -700, rotation: -12 }, { x: 0, rotation: -2 });
 EV.push([wt('аспирантка') - .2, 'paper', { dur: .4 }]);
 tl.fromTo('#magn2', { x: 0, y: 0, opacity: 0 }, { opacity: 1, duration: .3 }, wt('прочесала'));
@@ -239,6 +244,7 @@ show('#d3', tD3, tD4);
 tl.fromTo('#d3', { opacity: 0 }, { opacity: 1, duration: .3 }, tD3);
 ent('fig7', tD3 + .1, { y: -600, rotation: -10 }, { y: 0, rotation: -2 });
 EV.push([tD3 + .1, 'paper', { dur: .4 }]);
+ent('lunchTV', wt('рабочие') - .1, { scale: .3, rotation: -20 }, { scale: 1, rotation: 3 }, .45, 'back.out(1.4)'); xin('lunchTVc', wt('рабочие') + .3); EV.push([wt('рабочие') - .1, 'pop', { gain: .6 }]);
 ent('magn3', wt('улика,') - .1, { x: 600, rotation: 50 }, { x: 0, rotation: 14 }, .55, 'back.out(1.5)');
 tl.to('#magn3', { x: -560, y: 60, duration: 1.4, ease: 'sine.inOut' }, wt('поверхности') - .1);
 tl.to('#magn3', { x: 0, y: 0, opacity: .0, duration: .6 }, wt('рабочие') - .3);
@@ -263,7 +269,7 @@ EV.push([wt('пять') + .12, 'thud', { gain: .8 }]);
 ent('closed', wt('площадке') - .2, { y: 500, rotation: 10 }, { y: 0, rotation: -3 }, .5, 'back.out(1.3)');
 ent('us', wt('версия') - .2, { x: 700 }, { x: 0 });
 EV.push([wt('площадке') - .2, 'thud', { gain: .6 }], [wt('версия') - .2, 'paper', { dur: .35 }]);
-seqAt('wait', wt('сразу') + .1); seqAt('spider', wt('Лоримера') - .1);
+seqAt('wait', wt('сразу') + .1); seqAt('spider', wt('Лоримера') - .1); seqAt('c4', tC4); seqAt('d4', tD4); seqAt('lunchTV', wt('рабочие') - .1); seqAt('bookV', wt('прочесала') - .3);
 tl.to({}, { duration: .01 }, DUR);
 
 const cam = CAMLIFE.attach($('#stage'), {

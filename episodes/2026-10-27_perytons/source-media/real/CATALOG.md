@@ -103,5 +103,26 @@ Unsplash-фото — не Parkes: на превью без подписи «PAR
 | photo_F20_commons_csiro-3682_multibeam-receiver.jpg | многолучевой приёмник Parkes (13 лучей) | https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3682_A_receiver_technician_works_on_the_methanol_multibeam_receiver_package_at_the_CSIRO_Parkes_radio_telescope.jpg | David McClenaghan, CSIRO | CC BY 3.0 | 2657×1937, 2.66 МБ | 4 |
 | photo_F21_commons_magnetron_caso-smg20.jpg | микроволновка без кожуха: магнетрон внутри | https://commons.wikimedia.org/wiki/File:Caso_SMG20_-_Witol_2M219J-0171.jpg | Raimond Spekking | CC BY-SA 4.0 | 3630×3630, 6.10 МБ | 7 |
 | photo_F22_commons_changi-t1.jpg | Чанги, Сингапур — пересадка | https://commons.wikimedia.org/wiki/File:Changi_Airport_Terminal_1.jpg | Nigos | CC BY-SA 4.0 | 3671×2610, 2.50 МБ | 7 |
-| kym_coincidence-i-think-not_original.jpg | мем «Coincidence? I Think Not!» (Джимми Нейтрон) — замена политического клипа «Совпадение?», подпись RU поверх | https://knowyourmeme.com/memes/coincidence-i-think-not | — | мем; цитирование | 1429×803 | 5 — ЖДЁТ ОК пользователя |
+| kym_coincidence-i-think-not_original.jpg | мем «Coincidence? I Think Not!» (Джимми Нейтрон) — замена политического клипа «Совпадение?», подпись RU поверх | https://knowyourmeme.com/memes/coincidence-i-think-not | — | мем; цитирование | 1429×803 | 5 — ОК пользователя 28.10.2026 |
 | petroff2015_abstract.png | аннотация статьи 2015: «микроволновки не могли вызвать FRB 010724… FRB — подлинные внегалактические» | вырезано из PDF, стр. 1 | Petroff et al. | цитирование | — | бит 9 |
+
+## Партия 5 — видеоклипы, вторая волна (скачано 28.10.2026 после ОК пользователя; V06 и V14 исключены)
+
+| Файл | Что | Источник | Лицензия | Длит. | Размер | Бит · что брать |
+|---|---|---|---|---|---|---|
+| clip_V01_magnetic-tape.mp4 | магнитная лента на бобинах | https://pixabay.com/videos/id-4942/ | Pixabay Content License | 18 с | 3.6 МБ | 1 (архив Parkes 2001) · 2–8 с |
+| clip_V02_night-sky-tent.mp4 | звёздное небо, горы, палатка | https://pixabay.com/videos/id-31569/ | Pixabay Content License | 11 с | 2.5 МБ | 2 («Тарелка») · 0–10 с |
+| clip_V03_signal-wave.mp4 | волна сигнала (графика) | https://pixabay.com/videos/id-350431/ | Pixabay Content License | 8 с | 5.6 МБ | 3 (FRB) · 0–8 с |
+| clip_V04_leafing-book.mp4 | руки листают страницы | https://pixabay.com/videos/id-4878/ | Pixabay Content License | 11 с | 3.0 МБ | 4 (архивы Parkes) · 1–7 с |
+| clip_V05_nasa_earth-from-iss.mp4 | Земля с МКС | https://images.nasa.gov/details/Earth Views from the International Space Station | NASA — общественное достояние | 201 с | 35.2 МБ | 4 («источник на Земле») · 20–30 с |
+| clip_V07_archive_the-city-1939-part2.mp4 | площадь в обеденный час, 1939 (The City, ч. II) | https://archive.org/details/CityTheP1939_2 | общественное достояние (Prelinger / Public Domain Mark) | 937 с | 66.2 МБ | 5 (обед) · 9.5–12.5 с |
+| clip_V08_milkyway-lake.mp4 | Млечный Путь над озером | https://pixabay.com/videos/id-10339/ | Pixabay Content License | 14 с | 4.5 МБ | 5 («звёзды не знают про обед») · 0–12 с |
+| clip_V09_tv-static.mp4 | шум старого ТВ | https://pixabay.com/videos/id-88738/ | Pixabay Content License | 10 с | 3.4 МБ | 6 (помехи) · 1–6 с |
+| clip_V10_network-router.mp4 | сетевое оборудование с огоньками | https://pixabay.com/videos/id-14906/ | Pixabay Content License | 8 с | 2.8 МБ | 6 (Wi-Fi 2,4 ГГц) · 0–7 с |
+| clip_V11_microwave-kitchen.mp4 | разогрев в микроволновке на офисной кухне | https://pixabay.com/videos/id-22514/ | Pixabay Content License | 21 с | 7.4 МБ | 7 (кухня сотрудников) · 2–10 с |
+| clip_V12_changi-jewel.mp4 | аэропорт Changi, Jewel | https://pixabay.com/videos/id-205021/ | Pixabay Content License | 7 с | 12.5 МБ | 7 (Сингапур) · 0–7 с |
+| clip_V13_plane-takeoff.mp4 | взлёт, вид из иллюминатора | https://pixabay.com/videos/id-160/ | Pixabay Content License | 16 с | 5.2 МБ | 7 (письмо из Сингапура) · 4–10 с |
+| clip_V15_archive_teenagers-outer-space-1959.mp4 | летающая тарелка, «Teenagers from Outer Space» (1959) | https://archive.org/details/TeenagersFromOuterSpace | общественное достояние (Prelinger / Public Domain Mark) | 5129 с (скачано только начало файла, 42 МБ) | 42.0 МБ | 8 («пришельцы») · 67–73 с |
+| clip_V16_printing-press.mp4 | печатная машина | https://pixabay.com/videos/id-152728/ | Pixabay Content License | 11 с | 1.3 МБ | 8 (новости) · 0–8 с |
+| clip_V17_nasa_pulsar-simulation.mp4 | симуляция пульсара (NASA Goddard) | https://images.nasa.gov/details/GSFC_20181010_FERMI_m13058_Pulsar4K | NASA — общественное достояние | 174 с | 32.1 МБ | 10 (нейтронная звезда) · 10–18 с |
+| clip_V18_night-sky-rotation.mp4 | вращение звёздного неба (таймлапс) | https://pixabay.com/videos/id-1099/ | Pixabay Content License | 21 с | 6.4 МБ | 10 (тысячи всплесков) · 0–12 с |

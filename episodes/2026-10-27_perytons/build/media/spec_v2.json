@@ -1,0 +1,130 @@
+[
+{
+"name": "v01_tape",
+"src": "clip_V01_magnetic-tape.mp4",
+"in": 2,
+"dur": 6,
+"fps": 24,
+"w": 800
+},
+{
+"name": "v02_sky",
+"src": "clip_V02_night-sky-tent.mp4",
+"in": 0,
+"dur": 10,
+"fps": 24,
+"w": 1280
+},
+{
+"name": "v03_wave",
+"src": "clip_V03_signal-wave.mp4",
+"in": 0,
+"dur": 8,
+"fps": 24,
+"w": 1280
+},
+{
+"name": "v04_book",
+"src": "clip_V04_leafing-book.mp4",
+"in": 1,
+"dur": 6,
+"fps": 24,
+"w": 800
+},
+{
+"name": "v05_iss",
+"src": "clip_V05_nasa_earth-from-iss.mp4",
+"in": 20,
+"dur": 10,
+"fps": 24,
+"w": 1280
+},
+{
+"name": "v07_lunch",
+"src": "clip_V07_archive_the-city-1939-part2.mp4",
+"in": 9.5,
+"dur": 3,
+"fps": 24,
+"w": 640
+},
+{
+"name": "v08_mw",
+"src": "clip_V08_milkyway-lake.mp4",
+"in": 0,
+"dur": 12,
+"fps": 24,
+"w": 1280
+},
+{
+"name": "v09_static",
+"src": "clip_V09_tv-static.mp4",
+"in": 1,
+"dur": 5,
+"fps": 24,
+"w": 960
+},
+{
+"name": "v10_router",
+"src": "clip_V10_network-router.mp4",
+"in": 0,
+"dur": 7,
+"fps": 24,
+"w": 800
+},
+{
+"name": "v11_kitchen",
+"src": "clip_V11_microwave-kitchen.mp4",
+"in": 2,
+"dur": 8,
+"fps": 24,
+"w": 800
+},
+{
+"name": "v12_changi",
+"src": "clip_V12_changi-jewel.mp4",
+"in": 0,
+"dur": 7,
+"fps": 24,
+"w": 1280
+},
+{
+"name": "v13_takeoff",
+"src": "clip_V13_plane-takeoff.mp4",
+"in": 4,
+"dur": 6,
+"fps": 24,
+"w": 800
+},
+{
+"name": "v15_saucer",
+"src": "clip_V15_archive_teenagers-outer-space-1959.mp4",
+"in": 67,
+"dur": 6,
+"fps": 24,
+"w": 640
+},
+{
+"name": "v16_press",
+"src": "clip_V16_printing-press.mp4",
+"in": 0,
+"dur": 8,
+"fps": 24,
+"w": 1280
+},
+{
+"name": "v17_pulsar",
+"src": "clip_V17_nasa_pulsar-simulation.mp4",
+"in": 10,
+"dur": 8,
+"fps": 24,
+"w": 800
+},
+{
+"name": "v18_rot",
+"src": "clip_V18_night-sky-rotation.mp4",
+"in": 0,
+"dur": 12,
+"fps": 24,
+"w": 1280
+}
+]

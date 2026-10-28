@@ -45,7 +45,8 @@
 
  <!-- I4 · иллюстрация магнетара + Physics World -->
  <div class="sc" id="i4">
-  <div class="abs" style="inset:0;background:#07070c"></div>
+  <div class="full"><img class="seq" data-seq="v17_pulsar" data-t0="0" data-loop="1" style="filter:brightness(.6)"></div>
+  <div class="src" style="left:1160px;top:1020px;color:#cfcfd4">видео: NASA Goddard · симуляция нейтронной звезды</div>
   <div class="doc" id="nst" style="left:110px;top:120px;width:960px;transform:rotate(-2deg)"><img src="../../source-media/real/photo_F05_nasa_neutron-star-types.jpg"></div>
   <div class="src" id="nstS" style="left:130px;top:80px">NASA/JPL · типы нейтронных звёзд, слева — магнетар</div>
   <div class="card" id="mag" style="left:110px;top:700px;width:760px;z-index:5"><div class="mono" style="font-size:18px;color:var(--mu)">ИСТОЧНИК</div><div class="h" style="font-size:76px;margin-top:4px">МАГНЕ<span class="red">ТАР</span></div><div class="cap" style="margin-top:4px">сверхнамагниченная мёртвая звезда</div></div>
@@ -55,7 +56,7 @@
 
  <!-- I5 · откуда остальные — неизвестно · существование — установлено -->
  <div class="sc" id="i5">
-  <div class="full"><img src="../../source-media/real/commons_chime_overall.jpg" style="filter:blur(6px) brightness(.25)"></div>
+  <div class="full"><img class="seq" data-seq="v18_rot" data-t0="0" data-loop="1" style="filter:brightness(.45)"></div>
   <div class="abs h" id="open" style="left:110px;top:200px;font-size:110px;line-height:1">ОТКУДА ОСТАЛЬНЫЕ —<br><span class="red">ИСТОРИЯ ОТКРЫТА</span></div>
   <div class="abs cav" id="qq" style="left:1300px;top:120px;font-size:260px">???</div>
   <div class="card" id="ok" style="left:110px;top:560px;width:1100px;border-color:#E5392B"><div class="mono" style="font-size:20px;color:var(--mu)">СЕГОДНЯ СЧИТАЕТСЯ УСТАНОВЛЕННЫМ</div><div style="font:600 50px Inter;margin-top:10px">FRB существуют и приходят <span class="red">из других галактик</span></div></div>
@@ -234,6 +235,8 @@ function dyn(t) {
   dust(t); fl(t); DML.subs($('#sub'), V, t);
 }
 window.__duration = DUR;
+const seqAt = (id, t) => document.querySelectorAll('#' + id + ' img.seq').forEach(e => e.dataset.t0 = t);
+seqAt('i4', tI4); seqAt('i5', tI5);
 window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
 window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
 window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 80, key: 'D', mood: 'warm', db: -20, drums: true, end: DING - 3.2 }, sfxDb: -3 }));
