@@ -36,3 +36,4 @@ episodes/*/build/watch_full/
 episodes/*/build/hook/*.mp4
 package.json
 package-lock.json
+render_mac.log
