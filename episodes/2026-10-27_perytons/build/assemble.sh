@@ -5,3 +5,10 @@ printf "file '%s'\n" hook/hook_720.mp4 ch1/ch1_draft.mp4 ch2/ch2_draft.mp4 ch3/c
 nice ffmpeg -loglevel error -y -threads 2 -f concat -safe 0 -i concat.txt -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p -r 30 -c:a aac -b:a 192k -ar 48000 -ac 2 perytons_draft_full.mp4 && echo ASSEMBLED
 ffprobe -v error -show_entries format=duration -of csv=p=0 perytons_draft_full.mp4
 python3 ../../../templates/obsion/watch.py perytons_draft_full.mp4 watch_full --fps 1 2>&1 | grep -E "Motion|holds|Static|frozen|Audio|Black"
+# мастеринг громкости после склейки (AAC добавляет ~2–3 дБ пика, поэтому цель TP −4 в WAV)
+T=$(mktemp -d)
+ffmpeg -loglevel error -y -i perytons_draft_full.mp4 -vn -ac 2 -ar 48000 $T/full.wav
+python3 ../../../templates/obsion/loudness.py $T/full.wav $T/full_m.wav --tp -4
+ffmpeg -loglevel error -y -i perytons_draft_full.mp4 -i $T/full_m.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 256k perytons_draft_full_m.mp4 && mv perytons_draft_full_m.mp4 perytons_draft_full.mp4
+ffmpeg -hide_banner -i perytons_draft_full.mp4 -af ebur128=peak=true -f null - 2>&1 | grep -E "I:|Peak:" | tail -2
+rm -rf $T
