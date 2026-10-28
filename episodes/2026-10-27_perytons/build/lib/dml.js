@@ -49,8 +49,15 @@ window.DML = (function () {
   function inserts(tl, EV, list, base) {
     base = base || '../../source-media/real/';
     const stage = document.getElementById('stage'), fg = document.getElementById('fg'), kinds = ['full', 'tilt', 'full', 'circ'];
+    // смены сцен: сцену должно быть видно ≥ 2,5 с до перебивки и ≥ 2 с после неё, иначе кадр мелькает
+    const cuts = [...new Set(tl.getChildren(false, true, false).filter(c => c.vars && c.vars.visibility === 'visible' && c.targets().some(e => e.classList && e.classList.contains('sc'))).map(c => +c.startTime().toFixed(2)))].sort((x, y) => x - y);
     list.forEach(([t, src, dur, kind, cap, pos], i) => {
       kind = kind || kinds[i % kinds.length];
+      if (kind !== 'circ' && !pos) {   // полноэкранные и большие перебивки закрывают сцену — держим поля
+        const c0 = Math.max(0, ...cuts.filter(c => c <= t + .01)), c1 = Math.min(1e9, ...cuts.filter(c => c > t + .01));
+        t = Math.max(t, c0 + 2.5);
+        if (t + dur > c1 - 2) { dur = c1 - 2 - t; if (dur < 1.6) { console.log('DML.inserts: пропуск', src, t.toFixed(1)); return; } }
+      }
       const d = document.createElement('div'); d.className = 'ins ins-' + kind; d.style.visibility = 'hidden'; if (pos) d.style.cssText += ';' + pos;
       d.innerHTML = (src.startsWith('seq:') ? `<img class="seq" data-seq="${src.slice(4)}" data-t0="${t}" data-loop="1">` : `<img src="${base + src}">`) + (cap ? `<div class="inscap">${cap}</div>` : '');
       stage.insertBefore(d, fg);

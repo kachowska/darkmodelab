@@ -278,7 +278,7 @@ tl.to('#lori', { y: -20, scale: 1.04, rotation: 0, duration: .45, ease: 'back.ou
 tl.to('#loriShade', { opacity: 0, duration: .3 }, wt('спас') - .1);
 tl.fromTo('#save', { strokeDasharray: 900, strokeDashoffset: 900 }, { strokeDashoffset: 0, duration: .45 }, wt('спас') + .25);
 EV.push([wt('спас') - .1, 'chime', { freq: 880, gain: .6 }], [wt('спас') + .25, 'swish', { gain: .5 }]);
-DML.inserts(tl, EV, [[9.0, 'seq:v02_sky', 2.2, 'full'], [21.2, 'seq:k09_space', 2.2, 'circ'], [29.8, 'seq:v09_static', 2.2, 'full'], [37.6, 'seq:k13_oven', 2.3, 'tilt'], [47.9, 'seq:v11_kitchen', 2.3, 'circ', 'иллюстрация · Pixabay']]);
+DML.inserts(tl, EV, [[9.0, 'seq:v02_sky', 2.2, 'full'], [21.2, 'seq:k09_space', 2.2, 'circ'], [27.0, 'seq:v09_static', 2.2, 'full'], [37.6, 'seq:k13_oven', 2.3, 'tilt'], [47.9, 'seq:v11_kitchen', 2.3, 'circ', 'иллюстрация · Pixabay']]);
 tl.to({}, { duration: .01 }, DUR);
 
 // ── камера: живая всегда, жест на каждый план
