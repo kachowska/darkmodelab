@@ -133,7 +133,7 @@
   <div class="abs" id="week2" style="left:150px;top:200px;display:flex;gap:16px"></div>
   <div class="abs h" id="n5" style="left:1150px;top:160px;font-size:200px">5</div>
   <div class="abs cap" id="n5c" style="left:1160px;top:380px">перитонов в выходные</div>
-  <img class="obj" id="closed" src="../../материалы/вырезки/стикеры/road_closed.png" style="left:120px;top:460px;width:760px;transform:rotate(-3deg)">
+  <img class="obj" id="closed" src="../../материалы/вырезки/стикеры/road_closed.png" style="left:140px;top:520px;width:560px;transform:rotate(-3deg)">
   <div class="card" id="us" style="left:1000px;top:560px;width:760px;transform:rotate(2deg)"><div style="font:600 46px Inter">«это кто-то из нас»</div><div class="cav" style="font-size:52px;margin-top:10px">убедительно, но не железно</div></div>
  </div>
 
@@ -275,7 +275,7 @@ ent('closed', wt('площадке') - .2, { y: 500, rotation: 10 }, { y: 0, rot
 ent('us', wt('версия') - .2, { x: 700 }, { x: 0 });
 EV.push([wt('площадке') - .2, 'thud', { gain: .6 }], [wt('версия') - .2, 'paper', { dur: .35 }]);
 seqAt('wait', wt('сразу') + .1);  // Акбар «It's a trap!» (Klipy) seqAt('spider', wt('Лоримера') - .1); seqAt('c4', tC4); seqAt('d4', tD4); seqAt('lunchTV', wt('рабочие') - .1); seqAt('bookV', wt('прочесала') - .3);
-DML.inserts(tl, EV, [[tD1 + 2.0, 'seq:v04_book', 2.4, 'tilt', 'иллюстрация · Pixabay'], [tD5 + 1.6, 'parkes_west_09.jpg', 2.4, 'full', 'Parkes'], [tD5 + 5.3, 'seq:k11_mug', 2.2, 'circ', '', 'left:820px;top:90px;width:340px;height:340px']]);
+DML.inserts(tl, EV, [[tD1 + 2.0, 'seq:v04_book', 2.4, 'tilt', 'иллюстрация · Pixabay'], [tD5 + 1.6, 'parkes_west_09.jpg', 2.4, 'full', 'Parkes'], [tD5 + 5.3, 'seq:k11_mug', 2.2, 'circ', '', 'left:1500px;top:110px;width:320px;height:320px']]);
 tl.to({}, { duration: .01 }, DUR);
 
 const cam = CAMLIFE.attach($('#stage'), {
