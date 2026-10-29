@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Перитоны — хук (черновик)</title>
+<link rel="stylesheet" href="../../../../2_бренд/шрифты/fonts.css">
+<script src="../../../../4_инструменты/анимация-obsion/vendor/gsap.min.js"></script>
+<script src="../../../../4_инструменты/анимация-obsion/camlife.js"></script>
+<script src="../../../../4_инструменты/анимация-obsion/sfx.js"></script>
+<script src="../lib/dml.js"></script>
+<script src="../media/meta.js"></script>
+<style>
+:root{--bg:#0E0E10;--tx:#F2F2F0;--mu:#8A8A92;--ln:#2A2A30;--red:#E5392B;--glow:rgba(229,57,43,.55)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
+#frame{position:absolute;inset:0;overflow:hidden;background:var(--bg);font-family:Inter,sans-serif;color:var(--tx)}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.sc{position:absolute;inset:0;visibility:hidden}
+.abs{position:absolute}
+.h{font-family:Oswald;font-weight:700;text-transform:uppercase;line-height:.92}
+.red{color:var(--red);text-shadow:0 0 28px var(--glow)}
+.ab{text-shadow:-4px 0 rgba(34,230,255,.55),4px 0 rgba(255,90,77,.6),0 0 30px var(--glow)}
+.mono{font-family:'IBM Plex Mono';font-weight:500}
+.cav{font-family:Caveat;font-weight:700;color:var(--red)}
+.cap{font:500 24px Inter;color:var(--mu)}
+.doc{position:absolute;background:#fff;padding:14px;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.doc img{display:block;width:100%}
+.pol{position:absolute;background:#f4f2ec;padding:14px 14px 60px;box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.pol img{display:block;width:100%;height:100%;object-fit:cover}
+.pol .pc{position:absolute;left:18px;bottom:12px;font:700 32px Caveat;color:#222}
+.src{position:absolute;font:500 16px 'IBM Plex Mono';color:var(--mu);letter-spacing:.03em}
+.obj{position:absolute;filter:drop-shadow(0 40px 40px rgba(0,0,0,.7))}
+.seg{font-family:'IBM Plex Mono';font-weight:500;color:#ff4536;text-shadow:0 0 18px rgba(255,69,54,.9),0 0 3px #ff8a80}
+.hand{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(229,57,43,.6))}
+.mk{position:absolute;background:rgba(255,230,0,.85);mix-blend-mode:multiply;transform-origin:0 50%}
+/* оверлеи поверх камеры */
+#tag{position:absolute;left:56px;top:44px;z-index:80;font:500 20px 'IBM Plex Mono';color:var(--mu);letter-spacing:.06em;display:flex;align-items:center;gap:12px}
+#tag i{width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--glow)}
+#sub{position:absolute;left:96px;bottom:64px;z-index:85;max-width:1300px;font:600 34px/1.3 Inter;text-shadow:0 2px 14px #000,0 0 2px #000}
+#sub span{color:#5d5d64}#sub span.on{color:var(--tx)}#sub span.k.on{color:var(--red)}
+#vig{position:absolute;inset:0;z-index:90;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(0,0,0,.62) 100%),repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+#grain{position:absolute;inset:-60px;z-index:91;pointer-events:none;opacity:.32;mix-blend-mode:screen;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#flash{position:absolute;inset:0;z-index:88;background:#fff;opacity:0;mix-blend-mode:screen;pointer-events:none}
+#rgb{position:absolute;inset:0;z-index:87;pointer-events:none}
+.dust{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);filter:blur(5px)}
+#sub,#subbg{display:none!important}
+</style><script>if (/r720/.test(location.search)) document.documentElement.style.zoom = String(2 / 3);</script><style>
+.ins{position:absolute;z-index:30;overflow:hidden}.ins img{width:100%;height:100%;object-fit:cover;display:block}.ins-full{left:-100px;top:-100px;width:2120px;height:1280px}.ins-full img{filter:brightness(.88)}.ins-tilt{left:260px;top:110px;width:1400px;height:820px;border:12px solid #f4f2ec;box-shadow:0 40px 80px rgba(0,0,0,.75)}.ins-circ{left:1260px;top:400px;width:560px;height:560px;border-radius:50%;box-shadow:0 0 0 12px #f4f2ec,0 40px 80px rgba(0,0,0,.75)}.inscap{position:absolute;left:28px;bottom:22px;font:500 20px "IBM Plex Mono";color:#e6e6ea;text-shadow:0 2px 8px #000}
+</style></head><body>
+<div id="frame">
+<div id="stage">
+
+ <!-- SC1 · таймер микроволновки (семя) -->
+ <div class="sc" id="sc1">
+  <img class="abs" id="mwbw" src="../../материалы/настоящие/unsplash_VeU-4x4I7Xs_microwave-bw.jpg" style="left:-640px;top:-760px;width:3300px;filter:brightness(.8) contrast(1.15)">
+  <div class="abs" style="left:610px;top:342px;width:430px;height:150px;background:linear-gradient(90deg,#1e1e1e,#262626);filter:blur(3px)"></div>
+  <div class="abs seg" id="timer" style="left:640px;top:330px;font-size:132px">0:07</div>
+ </div>
+
+ <!-- SC2 · дорога сигнала: дуга дисперсии -->
+ <div class="sc" id="sc2">
+  <img class="abs" src="../../материалы/настоящие/commons_parkes_night.png" style="left:-120px;top:-80px;width:2160px;filter:blur(7px) brightness(.22) saturate(.7)">
+  <div class="abs" id="gas" style="left:560px;top:250px;width:900px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(110,70,160,.55),rgba(110,70,160,.18) 60%,transparent);filter:blur(18px);opacity:0"></div>
+  <svg class="abs" id="chart" width="1920" height="1080" style="left:0;top:0">
+   <g font-family="IBM Plex Mono" font-size="20" fill="#8A8A92"><text x="1640" y="912">время →</text><text x="0" y="0" transform="translate(470 330) rotate(-90)">частота →</text></g>
+   <line x1="500" y1="880" x2="1780" y2="880" stroke="#3a3a42" stroke-width="2"/><line x1="500" y1="160" x2="500" y2="880" stroke="#3a3a42" stroke-width="2"/>
+   <line id="spike" x1="1500" y1="200" x2="1500" y2="860" stroke="#F2F2F0" stroke-width="5" opacity="0" style="filter:drop-shadow(0 0 14px #fff)"/>
+   <path id="arc" d="M560 190 C 820 210 1100 420 1720 850" stroke="#E5392B" stroke-width="12" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 16px rgba(229,57,43,.85))"/>
+   <g id="notes" fill="#F2F2F0"></g>
+   <text id="spikeL" x="1520" y="230" font-family="IBM Plex Mono" font-size="26" fill="#F2F2F0" opacity="0">&lt; 0,005 с</text>
+  </svg>
+  <div class="abs cav" id="nHi" style="left:600px;top:110px;font-size:52px;transform:rotate(-3deg)">высокие — раньше</div>
+  <div class="abs cav" id="nLo" style="left:1080px;top:760px;font-size:52px;transform:rotate(-3deg)">низкие — позже</div>
+  <div class="abs cav" id="nGas" style="left:1000px;top:250px;font-size:46px;color:#c9a6ff">газ придерживает басы</div>
+  <div class="abs h" id="y1998" style="left:120px;top:140px;font-size:200px;color:var(--tx)">1998</div>
+  <div class="pol fl" id="p2" style="left:980px;top:300px;width:420px;height:470px;transform:rotate(7deg)"><img src="../../материалы/настоящие/parkes_west_09.jpg" style="object-position:50% 30%"><span class="pc">64 метра</span></div>
+  <div class="pol fl" id="p3" style="left:330px;top:330px;width:440px;height:440px;transform:rotate(-12deg)"><img src="../../материалы/настоящие/parkes_slater_low-angle.jpg"><span class="pc">фокальная кабина</span></div>
+  <div class="pol fl" id="p4" style="left:1250px;top:470px;width:420px;height:330px;transform:rotate(-4deg)"><img src="../../материалы/настоящие/parkes_control-room_shaw.jpg"><span class="pc">пульт</span></div>
+  <div class="pol fl" id="pParkes" style="left:640px;top:250px;width:560px;height:640px;transform:rotate(-6deg)"><img src="../../материалы/настоящие/parkes_csiro-4350_moon.jpg" style="object-position:50% 40%"><span class="pc">Parkes, Австралия</span></div>
+ </div>
+
+ <!-- SC3 · другой конец Вселенной -->
+ <div class="sc" id="sc3">
+  <img class="abs" id="night" src="../../материалы/настоящие/commons_parkes_night.png" style="left:-100px;top:-60px;width:2120px;filter:brightness(.72)">
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><path id="arc2" d="M300 120 C 620 140 980 330 1500 600" stroke="#E5392B" stroke-width="9" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 18px rgba(229,57,43,.95))"/><circle id="blip" r="11" fill="#fff" style="filter:drop-shadow(0 0 14px #fff)"/></svg>
+  <div class="src" style="left:1480px;top:1020px;color:#9a9aa2">Daniel John Reardon · CC BY-SA 4.0</div>
+ </div>
+
+ <!-- SC4 · имя мифического зверя, 17 лет споров -->
+ <div class="sc" id="sc4">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 55% 45%,#1b1719,#0b0a0b 75%)"></div>
+  <img class="abs" id="ctrl" src="../../материалы/настоящие/parkes_control-room_shaw.jpg" style="left:-60px;top:-40px;width:2040px;height:1160px;object-fit:cover;filter:brightness(.75) saturate(.9)">
+  <div class="src" id="ctrlSrc" style="left:1480px;top:1020px;color:#cfcfd4">Benjamin Shaw · CC BY-SA 4.0</div>
+  <div class="doc" id="tap" style="left:1180px;top:150px;width:640px;transform:rotate(5deg)"><img src="../../материалы/настоящие/commons_tapestry_winged-stags.png"></div>
+  <div class="src" id="tapSrc" style="left:1196px;top:780px">гобелен XV в. · Руан · общественное достояние</div>
+  <div class="abs cav" id="tapNote" style="left:1230px;top:820px;font-size:56px;transform:rotate(-4deg)">крылатый олень</div>
+  <div class="abs h red ab" id="peryton" style="left:110px;top:330px;font-size:260px">ПЕРИТОН</div>
+  <div class="doc" id="burke" style="left:140px;top:600px;width:980px;transform:rotate(-2deg)"><img src="../../материалы/настоящие/screenshot_arxiv_1009.5392_burke2011.png" style="height:200px;object-fit:cover;object-position:0 0"></div>
+  <div class="src" id="burkeSrc" style="left:160px;top:840px">ApJ 727:18 · Burke-Spolaor et al. · 2011</div>
+  <div class="abs" id="yrs" style="left:110px;top:120px">
+   <div class="h" style="font-size:150px"><span id="yrN">1998</span> <span class="red" style="font-size:90px">→ 2015</span></div>
+   <div style="width:760px;height:6px;background:#2A2A30;margin-top:18px"><i id="yrBar" style="display:block;height:100%;width:0;background:var(--red);box-shadow:0 0 14px var(--glow)"></i></div>
+   <div class="cap" style="margin-top:12px">17 лет никто не знал, откуда они</div>
+  </div>
+ </div>
+
+ <!-- SC5 · заголовок ролика: виновата микроволновка -->
+ <div class="sc" id="sc5">
+  <div class="abs" style="inset:0;background:#0f0f11"></div>
+  <div class="abs" id="ttl" style="left:120px;top:260px;width:1300px;font:600 64px/1.18 Inter;color:var(--tx)"></div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0;z-index:5"><path id="ring" class="hand" d=""/></svg>
+  <img class="obj" id="mw5" src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="left:1260px;top:470px;width:640px;transform:rotate(4deg)">
+ </div>
+
+ <!-- SC6 · как вычислили · печь-передатчик · обед · похоронил / спас -->
+ <div class="sc" id="sc6">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
+  <div class="doc" id="petroff" style="left:110px;top:110px;width:980px;transform:rotate(-2.5deg)"><img src="../../материалы/настоящие/petroff2015_title.png"><i class="mk" id="mkP" style="left:41.2%;top:19%;width:13.6%;height:9.5%"></i></div>
+  <div class="src" id="petroffSrc" style="left:130px;top:470px">MNRAS 451:3933 · Petroff et al. · 2015</div>
+  <img class="obj" id="mw6" src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="left:1180px;top:120px;width:640px;transform:rotate(4deg)">
+  <svg class="abs" id="waves" width="420" height="420" style="left:1080px;top:110px;opacity:0"><g fill="none" stroke="#E5392B" stroke-width="6" stroke-linecap="round" style="filter:drop-shadow(0 0 8px rgba(229,57,43,.8))"><path id="w1" d="M300 120 A 90 90 0 0 0 300 300"/><path id="w2" d="M240 70 A 150 150 0 0 0 240 350"/><path id="w3" d="M180 20 A 210 210 0 0 0 180 400"/></g></svg>
+  <div class="abs cav" id="q" style="left:1420px;top:180px;font-size:150px">?</div>
+  <div class="pol" id="cafe" style="left:1180px;top:560px;width:560px;height:400px;transform:rotate(5deg)"><img src="../../материалы/настоящие/commons_csiro-3987_visitors-centre-cafe.jpg"><span class="pc">Parkes · кафе для посетителей</span></div>
+  <div class="doc" id="lori" style="left:150px;top:580px;width:900px;transform:rotate(1.5deg)"><img src="../../материалы/настоящие/screenshot_arxiv_0709.4301_lorimer2007.png" style="height:230px;object-fit:cover;object-position:0 0"><div class="abs" id="loriShade" style="inset:0;background:#000;opacity:0"></div></div>
+  <div class="src" id="loriSrc" style="left:170px;top:860px">Science 318:777 · Lorimer et al. · 2007</div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><path id="save" class="hand" d="M180 640 C 450 628 760 630 1020 650" style="stroke-width:7"/></svg>
+ </div>
+
+ <!-- пыль у объектива (передний план) -->
+ <div class="abs" id="fg" style="inset:-100px;z-index:40;pointer-events:none"></div>
+</div>
+<div id="rgb"></div><div id="flash"></div>
+<div id="tag"><i></i>B · НАУКА ИЗНУТРИ · 01</div>
+<div id="subbg" style="position:absolute;left:0;right:0;bottom:0;height:300px;z-index:84;pointer-events:none;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6))"></div>
+<div id="sub"></div>
+<div id="vig"></div><div id="grain"></div>
+</div>
+
+<script>
+const DUR = 54.5, VO = 3.0, WPS = 2.6;
+// ── текст диктора (до записи голоса — субтитры показывают темп): [предложение, ключевые слова]
+const SENT = [
+ ["С 1998 года один из самых знаменитых радиотелескопов мира время от времени ловил короткий всплеск длиной в доли секунды, и у этого всплеска был характерный почерк: высокие частоты приходили раньше, низкие чуть позже, как будто сигнал пролетел через огромное облако космического газа, которое придерживает басы.", ["всплеск","раньше,","позже,","басы."]],
+ ["Именно так выглядят сигналы, прилетевшие с другого конца Вселенной.", ["Вселенной."]],
+ ["Астрономы дали этим всплескам имя мифического зверя, спорили о них в научных журналах и семнадцать лет не могли понять, откуда они берутся.", ["мифического","зверя,","семнадцать"]],
+ ["Чем всё закончилось, вы уже знаете из названия: виновата микроволновка.", ["микроволновка."]],
+ ["Но самое интересное в этой истории другое — как учёные это вычислили, почему печь работала как передатчик только при одном условии, и как обед в столовой обсерватории чуть не похоронил одно из главных открытий радиоастрономии нашего века, а в итоге его спас.", ["вычислили,","условии,","обед","похоронил","спас."]]
+];
+const W = []; { let t = VO; SENT.forEach((s, si) => { const ws = s[0].split(/\s+/); let chunk = []; ws.forEach((w, i) => { W.push({ w, t, si, k: s[1].includes(w) }); t += 1 / WPS; }); }); }
+// чанки субтитров по ≤ 9 слов внутри предложения
+const CH = []; { let cur = []; W.forEach((x, i) => { cur.push(i); const nx = W[i + 1]; if (cur.length >= 9 && /[,:.—]$/.test(x.w) || cur.length >= 11 || !nx || nx.si !== x.si) { CH.push(cur); cur = []; } }); }
+const sub = document.getElementById('sub');
+function subs(t) {
+  if (t < VO - 0.05) { sub.innerHTML = ''; return; }
+  let ci = CH.findIndex(c => t < W[c[c.length - 1]].t + 1 / WPS); if (ci < 0) ci = CH.length - 1;
+  const c = CH[ci]; if (t > W[c[c.length - 1]].t + 1.2 && ci === CH.length - 1) { sub.innerHTML = ''; return; }
+  sub.innerHTML = c.map(i => `<span class="${W[i].k ? 'k ' : ''}${t >= W[i].t ? 'on' : ''}">${W[i].w}</span>`).join(' ');
+}
+const wt = s => { const i = W.findIndex(x => x.w.startsWith(s) ); return W[i].t; };      // время слова (первое вхождение)
+const wtn = (s, n) => W.filter(x => x.w.startsWith(s))[n].t;
+
+// ── пыль у объектива
+const fg = document.getElementById('fg'); const R = (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })();
+const DUST = Array.from({ length: 14 }, () => { const d = document.createElement('div'); d.className = 'dust'; const r = 4 + R() * 16; d.style.width = d.style.height = r + 'px'; d.style.opacity = .1 + R() * .2; fg.appendChild(d); return { d, x: R() * 2100, y: R() * 1260, vx: (R() - .5) * 14, vy: -4 - R() * 8 }; });
+
+// ── таймлайн
+const tl = gsap.timeline({ paused: true });
+const FL = [...document.querySelectorAll('.doc,.pol,.obj')];
+const $ = s => document.querySelector(s);
+const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); };
+const EV = [];   // звук: [t, имя, опции]
+
+// SC1 0–3.4: тишина, таймер 0:07 → 0:05, звук обрывается
+show('#sc1', 0, 3.45);
+EV.push([0, 'drone', { dur: 3.0, note: 'D', gain: .55 }]);
+[0.05, 1.05, 2.05].forEach(t => EV.push([t, 'tick', { gain: .9 }]));
+tl.set('#timer', { textContent: '0:06' }, 1.0).set('#timer', { textContent: '0:05' }, 2.0);
+tl.to('#timer', { opacity: .25, duration: .04, yoyo: true, repeat: 3 }, 3.0);
+EV.push([3.0, 'glitch', { dur: .2, gain: .7 }]);
+tl.fromTo('#rgb', { boxShadow: 'inset 0 0 0 0 transparent' }, { boxShadow: 'inset 6px 0 0 0 rgba(34,230,255,.5), inset -6px 0 0 0 rgba(255,90,77,.6)', duration: .05, yoyo: true, repeat: 3 }, 3.0);
+// переход: камера влетает в цифры, вспышка → дорога сигнала
+tl.to('#mwbw,#sc1 .seg', { scale: 2.6, transformOrigin: '850px 400px', duration: .45, ease: 'power3.in' }, 3.0);
+tl.fromTo('#flash', { opacity: 0 }, { opacity: .55, duration: .08, yoyo: true, repeat: 1 }, 3.38);
+EV.push([3.0, 'whoosh', { dur: .5, size: 1.2, gain: .8 }]);
+
+// SC2 3.4–20.6: 1998, Parkes, всплеск, дуга, газ
+show('#sc2', 3.4, 20.6);
+tl.fromTo('#y1998', { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in' }, wt('1998') + .05);
+EV.push([wt('1998') + .3, 'thud', { gain: .8 }]);
+tl.fromTo('#chart', { opacity: 0 }, { opacity: 1, duration: .6 }, 3.6);
+tl.set('#arc', { strokeDasharray: 1500, strokeDashoffset: 1500 }, 0);
+tl.fromTo('#pParkes', { y: -700, rotation: -18 }, { y: 0, rotation: -6, duration: .55, ease: 'back.out(1.4)' }, wt('знаменитых') - .1);
+EV.push([wt('знаменитых') + .4, 'shutter', { gain: .8 }], [wt('мира') + .2, 'shutter', { gain: .6 }], [wt('время') + .25, 'shutter', { gain: .6 }], [wt('ловил') + .25, 'shutter', { gain: .6 }]);
+// всплеск — вспышка вертикальной линии
+tl.to('#spikeL', { opacity: 1, duration: .1 }, wt('всплеск')).to('#spikeL', { opacity: 0, duration: .4 }, wt('характерный') - .5);
+tl.to('#spike', { opacity: 1, duration: .04 }, wt('всплеск')).to('#spike', { opacity: 0, duration: .35 }, wt('всплеск') + .12);
+EV.push([wt('всплеск'), 'pop', { pitch: 1.6, gain: .9 }]);
+// 1998 и полароид уступают место (вытесняются назад)
+tl.to('#y1998', { scale: .4, x: 1480, y: -70, opacity: .55, transformOrigin: '0 0', duration: .8, ease: 'power2.inOut' }, wt('характерный') - .6);
+tl.to('#pParkes', { scale: .42, x: -560, y: -60, rotation: -9, transformOrigin: '0 0', duration: .8, ease: 'power2.inOut' }, wt('характерный') - .6);
+tl.fromTo('#p3', { x: -900, rotation: -40 }, { x: 0, rotation: -12, duration: .5, ease: 'power3.out' }, wt('мира') - .15);
+tl.fromTo('#p2', { x: 900, rotation: 40 }, { x: 0, rotation: 7, duration: .5, ease: 'power3.out' }, wt('время') - .1);
+tl.fromTo('#p4', { y: 800, rotation: 20 }, { y: 0, rotation: -4, duration: .5, ease: 'power3.out' }, wt('ловил') - .1);
+tl.to('#pParkes', { scale: 1.06, duration: .3, yoyo: true, repeat: 1 }, wt('всплеск'));
+tl.to('#p2,#p3,#p4', { x: (i) => [-1200, -1300, -1250][i], y: (i) => [-180, -120, -60][i], scale: .3, rotation: -9, opacity: 0, duration: .7, ease: 'power2.in' }, wt('характерный') - .6);
+tl.to('#arc', { strokeDashoffset: 0, duration: 2.6, ease: 'power1.inOut' }, wt('характерный'));
+EV.push([wt('характерный'), 'riser', { dur: 2.4, gain: .35 }]);
+tl.fromTo('#nHi', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .3 }, wt('высокие'));
+tl.fromTo('#nLo', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .3 }, wt('низкие'));
+EV.push([wt('высокие'), 'chime', { freq: 1760, gain: .35 }], [wt('низкие'), 'chime', { freq: 220, gain: .5 }]);
+tl.to('#gas', { opacity: 1, duration: 1.2 }, wt('огромное') - .3);
+tl.fromTo('#nGas', { opacity: 0 }, { opacity: 1, duration: .4 }, wt('придерживает'));
+EV.push([wt('огромное') - .3, 'drone', { dur: 3.2, note: 'A', gain: .35 }]);
+
+// SC3 20.3–24.1: отъезд — та же дуга в небе над настоящим Parkes
+show('#sc3', 20.3, 24.1);
+tl.fromTo('#sc3', { opacity: 0 }, { opacity: 1, duration: .5 }, 20.3);
+tl.fromTo('#night', { scale: 1.3, transformOrigin: '50% 30%' }, { scale: 1, duration: 3.8, ease: 'sine.inOut' }, 20.3);
+tl.fromTo('#arc2', { strokeDasharray: 1400, strokeDashoffset: 1400 }, { strokeDashoffset: 0, duration: 1.4, ease: 'power2.out' }, 20.5);
+EV.push([20.3, 'reverse', { dur: .8, gain: .6 }], [wt('Вселенной') , 'sparkle', { n: 7, gain: .5 }]);
+
+// SC4 23.9–32.4: ПЕРИТОН, гобелен, статья 2011, 17 лет
+show('#sc4', 23.9, 32.45);
+tl.fromTo('#sc4', { opacity: 0 }, { opacity: 1, duration: .3 }, 23.9);
+tl.fromTo('#ctrl', { scale: 1.0 }, { scale: 1.12, duration: 2.0, ease: 'none', transformOrigin: '40% 50%' }, 23.9);
+tl.to('#ctrl', { opacity: .14, filter: 'blur(6px) brightness(.5)', duration: .6 }, wt('имя') - .2);
+tl.to('#ctrlSrc', { opacity: 0, duration: .3 }, wt('имя') - .2);
+tl.fromTo('#tap', { x: 900, rotation: 25 }, { x: 0, rotation: 5, duration: .6, ease: 'power3.out' }, wt('имя') - .2);
+tl.fromTo('#tapSrc,#tapNote', { opacity: 0 }, { opacity: 1, duration: .3, stagger: .2 }, wt('имя') + .5);
+EV.push([wt('имя') - .2, 'paper', { dur: .5, gain: .9 }]);
+tl.fromTo('#peryton', { scale: 2.4, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in', transformOrigin: '30% 50%' }, wt('зверя') - .2);
+EV.push([wt('зверя') + .02, 'impact', { size: 1.3, gain: 1 }]);
+tl.to('#tap', { rotation: 9, x: 20, duration: .12, yoyo: true, repeat: 1 }, wt('зверя') + .04);   // реакция гобелена на удар
+tl.fromTo('#burke', { y: 600, rotation: -8 }, { y: 0, rotation: -2, duration: .5, ease: 'power3.out' }, wt('спорили'));
+tl.fromTo('#burkeSrc', { opacity: 0 }, { opacity: 1, duration: .3 }, wt('спорили') + .4);
+EV.push([wt('спорили'), 'paper', { dur: .45 }]);
+// ПЕРИТОН отъезжает назад, место под счётчик лет
+tl.to('#peryton', { scale: .5, x: 20, y: 210, opacity: 0, transformOrigin: '0 0', duration: .6, ease: 'power2.inOut' }, wt('семнадцать') - .6);
+tl.to('#burke,#burkeSrc', { y: 60, opacity: .55, duration: .6 }, wt('семнадцать') - .6);
+tl.fromTo('#yrs', { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: .35 }, wt('семнадцать') - .2);
+tl.to('#yrBar', { width: '100%', duration: 2.2, ease: 'none' }, wt('семнадцать'));
+for (let i = 0; i < 17; i++) EV.push([wt('семнадцать') + i * 2.2 / 17, 'tick', { gain: .6 }]);
+
+// SC5 32.3–36.6: заголовок ролика печатается, «микроволновка» обведена
+show('#sc5', 32.3, 36.6);
+const TITLE = 'Перитоны: 17 лет радиотелескоп ловил загадочный сигнал, а это была <b>микроволновка</b> в столовой';
+tl.fromTo('#mw5', { x: 800, rotation: 20 }, { x: 0, rotation: 4, duration: .45, ease: 'back.out(1.2)' }, wt('микроволновка') - .25);
+EV.push([32.4, 'type', { n: 24, rate: 16, gain: .45 }], [wt('микроволновка') + .15, 'thud', { gain: .9 }]);
+tl.fromTo('#ring', { strokeDasharray: 1200, strokeDashoffset: 1200 }, { strokeDashoffset: 0, duration: .5, ease: 'power2.out' }, wt('микроволновка'));
+EV.push([wt('микроволновка'), 'swish', { gain: .6 }]);
+
+// SC6 36.1–54.5: стол расследования
+show('#sc6', 36.1);
+tl.fromTo('#sc6', { opacity: 0 }, { opacity: 1, duration: .35 }, 36.1);
+tl.fromTo('#petroff', { y: -700, rotation: -12 }, { y: 0, rotation: -2.5, duration: .55, ease: 'power3.out' }, 36.35);
+EV.push([36.35, 'paper', { dur: .5 }]);
+tl.fromTo('#petroffSrc', { opacity: 0 }, { opacity: 1, duration: .3 }, 37.0);
+tl.fromTo('#mkP', { scaleX: 0 }, { scaleX: 1, duration: .45, ease: 'power2.out' }, wt('вычислили'));
+tl.fromTo('#mw6', { x: 700, rotation: 18 }, { x: 0, rotation: 4, duration: .5, ease: 'back.out(1.2)' }, wt('печь') - .2);
+EV.push([wt('печь') + .1, 'thud', { gain: .7 }]);
+tl.to('#waves', { opacity: 1, duration: .2 }, wt('передатчик') - .1);
+['#w1', '#w2', '#w3'].forEach((w, i) => tl.fromTo(w, { opacity: 0 }, { opacity: 1, duration: .15, yoyo: true, repeat: 5, repeatDelay: .25 }, wt('передатчик') + i * .13));
+EV.push([wt('передатчик'), 'bubble', { gain: .6 }], [wt('передатчик') + .13, 'bubble', { gain: .5, k: 1.3 }], [wt('передатчик') + .26, 'bubble', { gain: .4, k: 1.6 }]);
+tl.fromTo('#q', { scale: 0, rotation: -20 }, { scale: 1, rotation: 8, duration: .35, ease: 'back.out(2)' }, wt('условии'));
+EV.push([wt('условии'), 'pop', { gain: .8 }]);
+// печь и вопрос уступают место кафе
+tl.to('#mw6,#waves,#q', { scale: .7, x: 140, y: -60, transformOrigin: '100% 0', duration: .6, ease: 'power2.inOut' }, wt('обед') - .5);
+tl.fromTo('#cafe', { y: 700, rotation: 18 }, { y: 0, rotation: 5, duration: .55, ease: 'power3.out' }, wt('обед') - .15);
+EV.push([wt('обед') + .25, 'shutter', { gain: .8 }]);
+// «похоронил»: статья 2007 приходит и тонет в темноте
+tl.fromTo('#lori', { x: -1100, rotation: -10 }, { x: 0, rotation: 1.5, duration: .55, ease: 'power3.out' }, wt('похоронил') - .9);
+tl.fromTo('#loriSrc', { opacity: 0 }, { opacity: 1, duration: .3 }, wt('похоронил') - .3);
+EV.push([wt('похоронил') - .9, 'paper', { dur: .4 }]);
+tl.to('#lori', { y: 70, scale: .94, rotation: 3, duration: 1.4, ease: 'power2.in' }, wt('похоронил'));
+tl.to('#loriShade', { opacity: .72, duration: 1.4 }, wt('похоронил'));
+EV.push([wt('похоронил'), 'downer', { dur: 1.4, gain: .7 }]);
+// «спас»: всплывает, красная черта
+tl.to('#lori', { y: -20, scale: 1.04, rotation: 0, duration: .45, ease: 'back.out(2)' }, wt('спас') - .1);
+tl.to('#loriShade', { opacity: 0, duration: .3 }, wt('спас') - .1);
+tl.fromTo('#save', { strokeDasharray: 900, strokeDashoffset: 900 }, { strokeDashoffset: 0, duration: .45 }, wt('спас') + .25);
+EV.push([wt('спас') - .1, 'chime', { freq: 880, gain: .6 }], [wt('спас') + .25, 'swish', { gain: .5 }]);
+DML.inserts(tl, EV, [[9.0, 'seq:v02_sky', 2.2, 'full'], [21.2, 'seq:k09_space', 2.2, 'circ'], [27.0, 'seq:v09_static', 2.2, 'full'], [37.6, 'seq:k13_oven', 2.3, 'tilt'], [47.9, 'seq:v11_kitchen', 2.3, 'circ', 'иллюстрация · Pixabay']]);
+tl.to({}, { duration: .01 }, DUR);
+
+// ── камера: живая всегда, жест на каждый план
+const cam = CAMLIFE.attach($('#stage'), {
+  drift: { x: 7, y: 5, rot: .3, seed: 5 },
+  moves: [[0, 1.0], [3.0, 1.16], [3.4, 1.0], [8.4, 1.07], [12.0, 1.0], [16.0, 1.08, -40, -10], [20.3, 1.14, -60, -10], [20.31, 1.0], [24.0, 1.05],
+          [24.01, 1.0], [28.8, 1.08], [32.3, 1.12, 0, -20], [32.31, 1.0], [36.1, 1.07], [36.11, 1.0], [39.8, 1.12], [41.0, 1.02], [44.2, 1.1], [45.0, 1.02], [47.2, 1.06],
+          [51.6, 1.24], [52.2, 1.2], [54.5, 1.02]],
+  accents: [[wt('1998') + .3, .025], [wt('всплеск'), .02], [wt('зверя') + .02, .04], [wt('микроволновка') + .15, .025], [wt('спас') + .1, .02]],
+  focus: [[0, '45% 38%'], [3.4, '50% 50%'], [12, '20% 20%'], [16, '60% 50%'], [24, '35% 45%'], [32.3, '30% 40%'], [36.1, '30% 25%'], [40.5, '30% 25%'], [41.5, '78% 25%'], [44.6, '75% 70%'], [46.8, '75% 70%'], [47.6, '32% 66%'], [52.3, '32% 66%'], [54, '50% 50%']]
+});
+
+// ── детерминированный кадр
+function dyn(t) {
+  // печать заголовка
+  const tt = Math.max(0, Math.min(1, (t - 32.4) / 1.5)), plain = TITLE.replace(/<\/?b>/g, ''), n = Math.round(plain.length * tt);
+  let out = plain.slice(0, n); const mi = plain.indexOf('микроволновка'); if (n > mi) out = plain.slice(0, mi) + '<span class="red" style="font-weight:800">' + plain.slice(mi, Math.min(n, mi + 13)) + '</span>' + plain.slice(mi + 13, n);
+  $('#ttl').innerHTML = out + (t < 34.2 && Math.floor(t * 3) % 2 ? '<span style="color:var(--red)">▍</span>' : '');
+  // кольцо вокруг «микроволновки» (по реальному положению слова)
+  const sp = $('#ttl .red'); if (sp && !$('#ring').dataset.ok && n >= mi + 13) { const r = sp.getBoundingClientRect(), st = $('#sc5').getBoundingClientRect(); const k = 1920 / st.width; const x = (r.left - st.left) * k, y = (r.top - st.top) * k, w = r.width * k, h = r.height * k; $('#ring').setAttribute('d', `M${x + w * .1} ${y + h * .05} C ${x - 30} ${y + h * .1}, ${x - 26} ${y + h * 1.05}, ${x + w * .5} ${y + h * 1.08} S ${x + w + 34} ${y + h * .6}, ${x + w * .7} ${y - 6} S ${x + w * .05} ${y - 4}, ${x - 8} ${y + h * .35}`); $('#ring').dataset.ok = 1; }
+  // счётчик лет
+  const yp = Math.max(0, Math.min(1, (t - wt('семнадцать')) / 2.2)); $('#yrN').textContent = 1998 + Math.round(17 * yp);
+  // ноты по дуге (скрипки впереди, басы отстают)
+  const g = $('#notes'); if (!g.childElementCount) for (let i = 0; i < 6; i++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', 9 + i * 2.2); g.appendChild(c); }
+  const arc = $('#arc'), L = arc.getTotalLength(), ts = wt('сигнал');
+  [...g.children].forEach((c, i) => { const p = Math.max(0, Math.min(1, (t - ts - i * .25) / (2.6 + i * .5))); const pt = arc.getPointAtLength(L * p); c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y); c.setAttribute('opacity', t > ts && p < 1 ? .95 : 0); });
+  // бумага и фото дышат: отдельные свойства translate/rotate не спорят с GSAP-transform
+  FL.forEach((e, i) => { const a = .9 + (i % 3) * .3, ph = i * 1.7; e.style.translate = `${(Math.sin(t * .37 * a + ph) * 4).toFixed(2)}px ${(Math.sin(t * .51 * a + ph * 1.3) * 6).toFixed(2)}px`; e.style.rotate = `${(Math.sin(t * .29 * a + ph) * .7).toFixed(3)}deg`; });
+  // импульсы по дуге в небе
+  const a2 = $('#arc2'), L2 = a2.getTotalLength(); const pk = ((t - 20.6) % 1.1 + 1.1) % 1.1 / 1.1; const q2 = a2.getPointAtLength(L2 * pk); $('#blip').setAttribute('cx', q2.x); $('#blip').setAttribute('cy', q2.y);
+  // пыль
+  DUST.forEach(o => { const x = ((o.x + o.vx * t) % 2100 + 2100) % 2100, y = ((o.y + o.vy * t) % 1260 + 1260) % 1260; o.d.style.transform = `translate(${x}px,${y}px)`; });
+  subs(t);
+}
+window.__duration = DUR;
+window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
+window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
+window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 84, key: 'D', mood: 'dark', db: -17, start: 3.4, drums: true, dropAt: 20.3 }, sfxDb: -2 }));
+window.EVENTS = EV;
+if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }
+</script>
+</body></html>

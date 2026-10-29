@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Перитоны — глава 3: монитор · кружки с водой (черновик)</title>
+<link rel="stylesheet" href="../../../../2_бренд/шрифты/fonts.css">
+<link rel="stylesheet" href="../lib/dml.css">
+<script src="../../../../4_инструменты/анимация-obsion/vendor/gsap.min.js"></script>
+<script src="../../../../4_инструменты/анимация-obsion/camlife.js"></script>
+<script src="../../../../4_инструменты/анимация-obsion/sfx.js"></script>
+<script src="../lib/dml.js"></script>
+<script src="../media/meta.js"></script>
+<style>
+.spec{position:absolute;background:#06110b;border:12px solid #23262a;border-radius:14px;box-shadow:0 30px 60px rgba(0,0,0,.7),inset 0 0 40px rgba(0,255,120,.06);overflow:hidden}
+.spec::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 2px,transparent 2px 4px)}
+.date{position:absolute;background:#f4f2ec;color:#111;padding:14px 22px 18px;box-shadow:0 30px 60px rgba(0,0,0,.6);font-family:Oswald;font-weight:700;text-transform:uppercase}
+.date small{display:block;font:500 18px 'IBM Plex Mono';color:#666;letter-spacing:.08em}
+.note{position:absolute;background:#ffe86b;color:#222;padding:22px 26px;box-shadow:0 20px 40px rgba(0,0,0,.55);font:700 44px/1.15 Caveat}
+</style>
+</head><body>
+<div id="frame">
+<div id="stage">
+
+ <!-- E1 · подозревать — одно, доказать — другое -->
+ <div class="sc" id="e1">
+  <div class="full"><img class="seq" data-seq="v09_static" data-t0="0" data-loop="1" style="filter:brightness(.2) contrast(1.2)"></div>
+  <div class="abs h" id="sus" style="left:120px;top:360px;font-size:150px;color:#6a6a72">ПОДОЗРЕВАТЬ</div>
+  <div class="abs h red ab" id="prove" style="left:1060px;top:360px;font-size:150px">ДОКАЗАТЬ</div>
+  <div class="abs" id="eqline" style="left:960px;top:300px;width:4px;height:300px;background:#2A2A30"></div>
+ </div>
+
+ <!-- E2 · монитор радиопомех: декабрь 2014 -->
+ <div class="sc" id="e2">
+  <img class="abs" src="../../материалы/настоящие/parkes_control-room_shaw.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:blur(7px) brightness(.32)">
+  <div class="abs h" id="dec" style="left:110px;top:110px;font-size:130px">ДЕКАБРЬ <span class="red">2014</span></div>
+  <div class="abs cap" id="decC" style="left:120px;top:250px;color:#e2e2e8">на площадке поставили монитор радиопомех</div>
+  <div class="spec" id="spec" style="left:200px;top:340px;width:1520px;height:560px">
+   <svg width="1496" height="536" viewBox="0 0 1496 536"><g stroke="rgba(0,255,140,.12)"><line x1="0" y1="134" x2="1496" y2="134"/><line x1="0" y1="268" x2="1496" y2="268"/><line x1="0" y1="402" x2="1496" y2="402"/></g>
+    <rect id="band" x="0" y="0" width="0" height="536" fill="rgba(255,255,255,.07)"/>
+    <path id="trace" d="" stroke="#3dff9a" stroke-width="3" fill="none" style="filter:drop-shadow(0 0 6px rgba(61,255,154,.8))"/>
+    <g font-family="IBM Plex Mono" font-size="20" fill="#3dff9a"><text x="14" y="520">400 МГц</text><text x="1380" y="520">3 ГГц</text><text id="bandT" x="0" y="30" fill="#bbb" opacity="0">телескоп · 1,2–1,5 ГГц</text><text id="hotT" x="1050" y="60" fill="#ff5a4d" opacity="0">2,4–2,5 ГГц</text></g></svg></div>
+ </div>
+
+ <!-- E3 · три перитона в январе + вспышки на мониторе -->
+ <div class="sc" id="e3">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#18171a,#0a0a0b 75%)"></div>
+  <div class="abs h" id="jan" style="left:120px;top:330px;font-size:120px;white-space:nowrap;transform-origin:0 0">ЯНВАРЬ 2015 · <span class="red">ОДНА НЕДЕЛЯ</span></div>
+  <div class="date" id="d19" style="left:150px;top:110px;transform:rotate(-5deg)"><small>ЯНВАРЬ 2015</small><span style="font-size:130px;line-height:1">19</span></div>
+  <div class="date" id="d22" style="left:470px;top:90px;transform:rotate(3deg)"><small>ЯНВАРЬ 2015</small><span style="font-size:130px;line-height:1">22</span></div>
+  <div class="date" id="d23" style="left:790px;top:120px;transform:rotate(-2deg)"><small>ЯНВАРЬ 2015</small><span style="font-size:130px;line-height:1">23</span></div>
+  <div class="abs cap" id="three" style="left:1130px;top:170px;font-size:34px;color:#e6e6ea;width:640px">три новых перитона<br><span style="color:var(--red)">и три вспышки на 2,4 ГГц — в те же моменты</span></div>
+  <div class="spec" id="spec2" style="left:200px;top:430px;width:1520px;height:480px">
+   <svg width="1496" height="456" viewBox="0 0 1496 456"><path id="trace2" d="" stroke="#3dff9a" stroke-width="3" fill="none" style="filter:drop-shadow(0 0 6px rgba(61,255,154,.8))"/>
+    <rect id="hot" x="1040" y="0" width="70" height="456" fill="rgba(229,57,43,.18)" opacity="0"/>
+    <g font-family="IBM Plex Mono" font-size="20" fill="#3dff9a"><text x="14" y="440">400 МГц</text><text x="1380" y="440">3 ГГц</text><text x="1000" y="36" fill="#ff5a4d">2,4–2,5 ГГц</text></g></svg></div>
+ </div>
+
+ <!-- E4 · Wi-Fi и микроволновка + Pepe Silvia -->
+ <div class="sc" id="e4">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
+  <div class="pol" id="router" style="left:120px;top:140px;width:520px;height:400px;transform:rotate(-6deg)"><img class="seq" data-seq="v10_router" data-t0="0" data-loop="1"><span class="pc">Wi-Fi · 2,4 ГГц</span></div>
+  <img class="obj" id="mw4" src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="left:160px;top:560px;width:600px;transform:rotate(3deg)">
+  <div class="meme" id="pepe" style="left:860px;top:240px;width:900px;height:569px;transform:rotate(3deg)"><img class="seq" data-seq="m_pepe" data-t0="0" data-loop="1"><span class="mt">МЕМ</span></div>
+ </div>
+
+ <!-- E5 · старое правило -->
+ <div class="sc" id="e5">
+  <img class="abs" src="../../материалы/настоящие/parkes_control-room_shaw.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:blur(4px) brightness(.4)">
+  <div class="note" id="rule" style="left:240px;top:200px;width:820px;transform:rotate(-3deg)">ПРАВИЛО: когда телескоп слушает 2,4 ГГц — микроволновки не включать!</div>
+  <div class="pin" style="left:640px;top:190px"></div>
+  <img class="obj" id="mw5" src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="left:1160px;top:380px;width:640px;transform:rotate(-3deg)">
+  <div class="abs h red ab" id="off" style="left:1300px;top:280px;font-size:110px;transform:rotate(-8deg)">ВЫКЛ</div>
+  <div class="abs cap" id="old" style="left:260px;top:520px;color:#e6e6ea;font-size:30px">мешают наблюдениям — об этом знали давно</div>
+ </div>
+
+ <!-- F1 · эксперимент: участники вспоминают с удовольствием (архивная кухня 1952) -->
+ <div class="sc" id="f1">
+  <div class="full"><img class="seq" data-seq="k13_kitchen" data-t0="0" style="filter:sepia(.35) contrast(1.05) brightness(.8)"></div>
+  <div class="abs h" id="exp" style="left:110px;top:130px;font-size:170px;text-shadow:0 6px 30px #000">ЭКСПЕ<span class="red">РИМЕНТ</span></div>
+  <div class="src" style="left:1400px;top:1020px;color:#e6e6ea">«Young Man's Fancy», 1952 · Prelinger Archives</div>
+ </div>
+
+ <!-- F2 · три печи на площадке -->
+ <div class="sc" id="f2">
+  <div class="abs" style="inset:0;background:#0f0f11"></div>
+  <div class="abs" id="ovens" style="left:100px;top:200px;width:1720px;display:flex;justify-content:space-between">
+   <div style="width:520px;position:relative"><div class="pol" id="o1" style="position:relative;width:440px;height:300px;transform:rotate(-3deg)"><img class="seq" data-seq="v11_kitchen" data-t0="0" data-loop="1"><span class="pc">иллюстрация · Pixabay</span></div><div class="cav" style="font-size:46px;margin-top:14px">кухня сотрудников</div></div>
+   <div style="width:520px;position:relative"><div class="pol" style="position:relative;width:440px;height:300px;transform:rotate(3deg)"><img src="../../материалы/настоящие/commons_csiro-3987_visitors-centre-cafe.jpg"><span class="pc">центр для посетителей</span></div></div>
+   <div style="width:520px;position:relative"><img src="../../материалы/вырезки/parkes_dish_day.png" style="width:320px;filter:drop-shadow(0 30px 30px rgba(0,0,0,.7))"><div class="cav" style="font-size:46px">здание под телескопом</div></div></div>
+  <div class="abs h" id="few" style="left:110px;top:70px;font-size:80px">НЕСКОЛЬКО <span class="red">ПЕЧЕЙ</span></div>
+ </div>
+
+ <!-- F3 · ФИРМЕННЫЙ МОМЕНТ: масштаб врёт — крошечная тарелка у гигантской печи -->
+ <div class="sc" id="f3">
+  <img class="abs" src="../../материалы/настоящие/commons_csiro-3987_visitors-centre-cafe.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:blur(9px) brightness(.28)">
+  <div class="abs" style="left:-100px;right:-100px;top:830px;height:400px;background:linear-gradient(#3a3028,#1a1511)"></div>
+  <img class="obj" id="bigmw" src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="left:640px;top:40px;width:1300px">
+  <div class="abs" id="win" style="left:1120px;top:250px;width:560px;height:380px;overflow:hidden;opacity:.85;mix-blend-mode:screen;border-radius:8px"><img class="seq" data-seq="k06_mw" data-t0="0" data-loop="1" style="width:100%;height:100%;object-fit:cover"></div>
+  <img class="obj" id="tinydish" src="../../материалы/вырезки/parkes_dish_day.png" style="left:270px;top:650px;width:190px">
+  <img class="obj" id="mug3" src="../../материалы/вырезки/mug_white.png" style="left:480px;top:700px;width:150px">
+  <div class="circ" id="steam" style="left:110px;top:130px;width:340px;height:340px"><img class="seq" data-seq="k11_mug" data-t0="0" data-loop="1"></div>
+  <div class="abs cav" id="cupT" style="left:470px;top:270px;font-size:56px;transform:rotate(-4deg)">кружка воды</div>
+  <div class="abs cav" id="dishT" style="left:150px;top:560px;font-size:44px;transform:rotate(-3deg)">тарелка 64 м ↓</div>
+ </div>
+
+ <!-- F4 · 27 февраля: перитон есть, печь неизвестна -->
+ <div class="sc" id="f4">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#18171a,#0a0a0b 75%)"></div>
+  <div class="date" id="d27" style="left:120px;top:110px;transform:rotate(-4deg)"><small>ФЕВРАЛЬ 2015</small><span style="font-size:150px;line-height:1">27</span></div>
+  <div class="abs" id="q3" style="left:520px;top:420px;display:flex;gap:80px">
+   <div style="position:relative"><img src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="width:360px;filter:brightness(.55) drop-shadow(0 20px 20px #000)"><div class="cav" style="position:absolute;left:140px;top:-60px;font-size:140px">?</div></div>
+   <div style="position:relative"><img src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="width:360px;filter:brightness(.55) drop-shadow(0 20px 20px #000)"><div class="cav" style="position:absolute;left:140px;top:-60px;font-size:140px">?</div></div>
+   <div style="position:relative"><img src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="width:360px;filter:brightness(.55) drop-shadow(0 20px 20px #000)"><div class="cav" style="position:absolute;left:140px;top:-60px;font-size:140px">?</div></div></div>
+  <div class="abs cap" id="maint" style="left:520px;top:200px;font-size:32px;color:#e6e6ea">телескоп на профилактике · <span style="color:var(--red)">1 перитон</span> · какая печь?</div>
+ </div>
+
+ <!-- F5 · 12 марта: ничего — фиаско -->
+ <div class="sc" id="f5">
+  <div class="abs" style="inset:0;background:#0f0f11"></div>
+  <div class="date" id="d12" style="left:120px;top:110px;transform:rotate(-3deg)"><small>МАРТ 2015</small><span style="font-size:150px;line-height:1">12</span></div>
+  <img class="obj" id="dishRot" src="../../материалы/вырезки/parkes_dish_day.png" style="left:180px;top:420px;width:420px">
+  <div class="card" id="zero" style="left:660px;top:140px;width:360px"><div class="mono" style="font-size:18px;color:var(--mu)">ПЕРИТОНОВ</div><div class="h" style="font-size:120px;color:#55555C">0</div></div>
+  <div class="meme" id="fiasko" style="left:1060px;top:330px;width:760px;height:424px;transform:rotate(4deg)"><img class="seq" data-seq="m_fiasko" data-t0="0" data-loop="1"><span class="mt">МЕМ</span></div>
+ </div>
+
+ <!-- F6 · печь честно грела — дуги нет (видео на весь экран) -->
+ <div class="sc" id="f6">
+  <div class="full"><img class="seq" data-seq="k06_mw" data-t0="0" data-loop="1" style="filter:brightness(.6)"></div>
+  <div class="spec" id="spec3" style="left:1100px;top:120px;width:700px;height:300px;transform:rotate(2deg)"><svg width="676" height="276" viewBox="0 0 676 276"><path id="trace3" d="" stroke="#3dff9a" stroke-width="3" fill="none"/><text x="10" y="26" font-family="IBM Plex Mono" font-size="18" fill="#3dff9a">монитор: печь работает</text></svg></div>
+  <div class="card" id="flat" style="left:1100px;top:480px;width:700px;height:300px;transform:rotate(-2deg)"><div class="mono" style="font-size:18px;color:var(--mu)">ТЕЛЕСКОП: ДУГИ НЕТ</div><svg width="640" height="220"><line x1="20" y1="120" x2="620" y2="120" stroke="#55555C" stroke-width="6"/></svg></div>
+ </div>
+
+ <!-- F7 · 17 марта: Рейнольдс — открыть дверцу посреди работы -->
+ <div class="sc" id="f7">
+  <div class="full"><img class="seq" data-seq="k13_oven" data-t0="0" style="filter:sepia(.3) brightness(.75)"></div>
+  <div class="date" id="d17" style="left:120px;top:110px;transform:rotate(-4deg);background:#E5392B;color:#fff"><small style="color:#ffd9d4">МАРТ 2015</small><span style="font-size:150px;line-height:1">17</span></div>
+  <div class="card" id="rey" style="left:120px;top:440px;width:620px;transform:rotate(-2deg)"><div class="mono" style="font-size:18px;color:var(--mu)">ПРЕДЛОЖИЛ</div><div style="font:600 46px Inter;margin-top:6px">Джон Рейнольдс</div><div class="cav" style="font-size:44px;margin-top:8px">не ждать нуля — открыть дверцу!</div></div>
+  <div class="meme" id="mwopen" style="left:1080px;top:470px;width:740px;height:416px;transform:rotate(4deg)"><img class="seq" data-seq="g_mwopen" data-t0="0" data-loop="1"></div>
+  <div class="src" style="left:1100px;top:1020px;color:#e6e6ea">кадр: «Young Man's Fancy», 1952</div>
+ </div>
+
+ <!-- F8 · «…и бум» + дуга на графике + mind blown -->
+ <div class="sc" id="f8">
+  <div class="abs" style="inset:0;background:#0f0e10"></div>
+  <div class="doc" id="conv" style="left:90px;top:110px;width:760px;transform:rotate(-3deg)"><img src="../../материалы/настоящие/screenshot_theconversation_petroff.png" style="height:420px;object-fit:cover;object-position:0 20%"></div>
+  <div class="card" id="quote" style="left:120px;top:600px;width:940px;transform:rotate(1deg)"><div style="font:600 38px/1.35 Inter">«мы попробовали остановить печь, открыв дверцу, — <span id="boom" style="background:rgba(255,230,0,.85);color:#000;padding:0 8px">и бум</span>»</div><div class="mono" style="font-size:17px;color:var(--mu);margin-top:12px">Эмили Петрофф · The Conversation · 2015</div></div>
+  <div class="doc" id="fig5" style="left:1120px;top:90px;width:680px;transform:rotate(3deg)"><img src="../../материалы/настоящие/petroff2015_fig5_plot.png"></div>
+  <div class="src" id="fig5S" style="left:1140px;top:640px;transform:rotate(3deg)">рис. 5 · перитон от микроволновки · 17.03.2015</div>
+  <div class="meme" id="mind" style="left:1180px;top:640px;width:620px;height:395px;transform:rotate(-5deg)"><img class="seq" data-seq="m_mind" data-t0="0" data-loop="1"><span class="mt">МЕМ</span></div>
+ </div>
+
+ <!-- F9 · Сингапур: письмо на пересадке — «Я так и знала» -->
+ <div class="sc" id="f9">
+  <div class="full"><img class="seq" id="changiV" data-seq="v12_changi" data-t0="0" data-loop="1" style="filter:brightness(.5)"></div>
+  <div class="circ" id="takeoff" style="left:820px;top:80px;width:330px;height:330px"><img class="seq" data-seq="v13_takeoff" data-t0="0" data-loop="1"></div>
+  <div class="crt" id="esc" style="left:1180px;top:130px;width:620px;height:350px;transform:rotate(3deg)"><img class="seq" data-seq="k12_airport" data-t0="0" data-loop="1"></div>
+  <img class="obj stk" id="plane" src="../../материалы/вырезки/toy_plane.png" style="left:-400px;top:160px;width:420px">
+  <div class="pol" id="letter" style="left:200px;top:430px;width:520px;height:370px;transform:rotate(-5deg)"><img src="../../материалы/настоящие/photo_F14_pixabay_letter-envelope.jpg"><span class="pc">письмо коллег</span></div>
+  <div class="abs h" id="sing" style="left:110px;top:110px;font-size:120px">СИНГАПУР</div>
+  <div class="card" id="knew" style="left:900px;top:620px;width:860px;transform:rotate(2deg)"><div class="cav" style="font-size:90px;color:#fff">«Я так и знала!»</div><div class="mono" style="font-size:17px;color:var(--mu)">Эмили Петрофф · по её словам (Nature Index)</div></div>
+  <div class="src" style="left:110px;top:1020px;color:#e6e6ea">аэропорт Чанги, Jewel · видео Pixabay</div>
+ </div>
+
+ <!-- F10 · почему дверца: магнетрон — сердце печи -->
+ <div class="sc" id="f10">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 60% 50%,#1d1a1a,#0a0909 75%)"></div>
+  <div class="glow" style="left:900px;top:200px;width:800px;height:700px"></div>
+  <img class="obj" id="mag" src="../../материалы/вырезки/magnetron_caso.png" style="left:1000px;top:130px;width:700px">
+  <img class="obj" id="magp" src="../../материалы/вырезки/magnetron_parts.png" style="left:130px;top:520px;width:560px;transform:rotate(-4deg)">
+  <div class="abs h" id="why" style="left:110px;top:120px;font-size:110px;line-height:1">ПОЧЕМУ<br><span class="red">ДВЕРЦА?</span></div>
+  <div class="abs" id="magT" style="left:130px;top:380px;font:600 40px Inter">магнетрон — <span style="color:var(--red)">сердце печи</span></div>
+  <div class="src" style="left:1020px;top:1010px;color:#cfcfd4">фото: Raimond Spekking, Schrauber5 · CC BY-SA 4.0</div>
+ </div>
+
+ <!-- F11 · схема: волны внутри → отключение → дверца открыта → всплеск к кабине -->
+ <div class="sc" id="f11">
+  <img class="abs" id="slater" src="../../материалы/настоящие/parkes_slater_low-angle.jpg" style="left:760px;top:-60px;width:1240px;height:1200px;object-fit:cover;filter:brightness(.45)">
+  <div class="abs" style="left:0;top:0;width:900px;height:1080px;background:linear-gradient(90deg,#0d0d0f 70%,rgba(13,13,15,0))"></div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0">
+   <g id="oven" transform="translate(120 250)">
+    <rect x="0" y="0" width="560" height="360" rx="22" fill="#1a1a1e" stroke="#cfcfd4" stroke-width="6"/>
+    <rect x="30" y="30" width="380" height="300" rx="10" fill="#0b0b0d" stroke="#55555C" stroke-width="4"/>
+    <g id="inner" fill="none" stroke="#ff8a3d" stroke-width="4" opacity=".85" stroke-dasharray="34 12"><path d="M60 180 q 30 -60 60 0 t 60 0 t 60 0 t 60 0 t 60 0"/><path d="M60 230 q 30 -60 60 0 t 60 0 t 60 0 t 60 0 t 60 0"/></g>
+    <rect id="door" x="30" y="30" width="380" height="300" rx="10" fill="rgba(200,220,255,.08)" stroke="#cfcfd4" stroke-width="6"/>
+    <rect x="430" y="40" width="100" height="160" rx="8" fill="#101012" stroke="#55555C" stroke-width="3"/><text id="ovt" x="480" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="34" fill="#ff4536">0:30</text></g>
+   <path id="esc2" d="M560 440 C 900 470 1250 300 1560 180" stroke="#E5392B" stroke-width="7" stroke-dasharray="22 14" fill="none" style="filter:drop-shadow(0 0 10px rgba(229,57,43,.85))"/>
+   <circle id="cab" cx="1560" cy="180" r="38" fill="none" stroke="#E5392B" stroke-width="5"/>
+  </svg>
+  <div class="abs cav" id="cabT" style="left:1330px;top:90px;font-size:50px">фокальная кабина</div>
+  <div class="abs" id="st1" style="left:120px;top:150px;font:600 38px Inter">1 · печь работает — волны внутри корпуса</div>
+  <div class="abs" id="st2" style="left:120px;top:150px;font:600 38px Inter;color:#ff8a3d">2 · отключение — магнетрон «искрит»</div>
+  <div class="abs" id="st3" style="left:120px;top:150px;font:600 38px Inter;color:var(--red)">3 · дверца открыта — всплеск наружу</div>
+  <div class="abs h" id="p50" style="left:120px;top:690px;font-size:150px">≈50<span class="red">%</span></div>
+  <div class="abs" id="tries" style="left:580px;top:750px;display:flex;gap:14px"></div>
+  <div class="abs cap" id="p50c" style="left:520px;top:830px">попыток дали дугу — для доказательства хватило</div>
+ </div>
+
+ <!-- F12 · два семейства = две кухни -->
+ <div class="sc" id="f12">
+  <div class="abs" style="inset:0;background:#0E0E10"></div>
+  <div class="card" id="fam1" style="left:110px;top:150px;width:800px;height:460px;transform:rotate(-2deg);overflow:hidden"><img class="seq" data-seq="k13_kitchen" data-t0="0" data-loop="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35"><div class="mono" style="position:relative;font-size:20px;color:#F2F2F0">СЕМЕЙСТВО 1</div>
+   <svg width="740" height="380" style="position:relative"><path id="fp1" d="M20 40 C 300 50 460 150 720 330" stroke="#F2F2F0" stroke-width="9" fill="none" stroke-linecap="round"/><g id="fu1"></g></svg></div>
+  <div class="card" id="fam2" style="left:1010px;top:150px;width:800px;height:460px;transform:rotate(2deg);overflow:hidden"><img src="../../материалы/настоящие/commons_csiro-3987_visitors-centre-cafe.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35"><div class="mono" style="position:relative;font-size:20px;color:#ff6a5c">СЕМЕЙСТВО 2</div>
+   <svg width="740" height="380" style="position:relative"><path id="fp2" d="M20 40 C 260 70 380 260 720 360" stroke="#E5392B" stroke-width="9" fill="none" stroke-linecap="round"/><g id="fu2"></g></svg></div>
+  <img class="obj" id="k1" src="../../материалы/настоящие/cut_microwave_bgh_clean.png" style="left:250px;top:640px;width:420px">
+  <div class="abs cav" id="k1t" style="left:690px;top:760px;font-size:48px">кухня сотрудников</div>
+  <div class="pol" id="k2" style="left:1150px;top:640px;width:430px;height:300px;transform:rotate(4deg)"><img src="../../материалы/настоящие/commons_csiro-3987_visitors-centre-cafe.jpg"><span class="pc">центр для посетителей</span></div>
+  <div class="abs h red" id="n6" style="left:1620px;top:640px;font-size:180px">6</div>
+  <div class="abs mono" id="odd" style="left:0;right:0;top:70px;text-align:center;font-size:26px;color:var(--mu);letter-spacing:.2em">ЕЩЁ ОДНА СТРАННОСТЬ</div>
+  <div class="abs h" id="two" style="left:0;right:0;top:40px;text-align:center;font-size:80px">ДВА СЕМЕЙСТВА = <span class="red">ДВЕ КУХНИ</span></div>
+ </div>
+
+ <div class="abs" id="fg" style="inset:-100px;z-index:40;pointer-events:none"></div>
+</div>
+<div id="rgb"></div><div id="flash"></div>
+<div id="tag"><i></i>B · НАУКА ИЗНУТРИ · 01</div>
+<div id="subbg" style="position:absolute;left:0;right:0;bottom:0;height:300px;z-index:84;pointer-events:none;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6))"></div>
+<div id="sub"></div>
+<div id="vig"></div><div id="grain"></div>
+</div>
+<script>
+const $ = DML.$;
+const SENT = [
+ ["Подозревать — одно, доказать — другое.", ["доказать"]],
+ ["В декабре 2014 года на площадке Parkes поставили монитор радиопомех, который слушал всё подряд от четырёхсот мегагерц до трёх гигагерц, то есть далеко за пределами частот самого телескопа.", ["монитор", "радиопомех,"]],
+ ["И в одну неделю января 2015-го — девятнадцатого, двадцать второго и двадцать третьего — телескоп поймал три новых перитона.", ["три"]],
+ ["В те же самые моменты монитор показал короткие вспышки на частоте около двух с половиной гигагерц.", ["вспышки", "половиной"]],
+ ["На этой частоте работают Wi-Fi и микроволновые печи.", ["Wi-Fi", "микроволновые", "печи."]],
+ ["Более того, у обсерватории было старое правило: когда телескоп наблюдает на 2,4 гигагерцах, микроволновки на площадке не включают: печи на этой частоте мешают наблюдениям, и об этом знали давно.", ["правило:", "не", "включают:"]],
+ ["Дальше началась часть, которую сами участники описывают с удовольствием.", ["удовольствием."]],
+ ["На площадке было несколько микроволновок: на кухне для сотрудников, в центре для посетителей и в здании под телескопом.", ["несколько"]],
+ ["Сотрудники обсерватории начали их испытывать — грели обычные кружки воды и смотрели, что видит телескоп.", ["кружки", "воды"]],
+ ["Первый звоночек прозвенел двадцать седьмого февраля: во время первых испытаний, пока телескоп стоял на профилактике, один перитон всё-таки появился, но было непонятно, какая из печей его дала.", ["седьмого", "один", "перитон"]],
+ ["Двенадцатого марта телескоп специально ставили в те положения, где перитонов раньше было больше всего, — и ничего.", ["ничего."]],
+ ["Печь честно грела, монитор фиксировал её работу, а дуги не было.", ["дуги", "было."]],
+ ["Семнадцатого марта Джон Рейнольдс предложил попробовать другое: не ждать, пока таймер дойдёт до нуля, а открыть дверцу посреди работы, как делает голодный человек, которому не терпится.", ["открыть", "дверцу"]],
+ ["Как написала потом Эмили Петрофф, «мы попробовали остановить печь, открыв дверцу, — и бум».", ["бум»."]],
+ ["На графике нарисовалась та самая дуга.", ["дуга."]],
+ ["Петрофф узнала об этом из письма коллег во время пересадки в Сингапуре и, по её словам, первым делом подумала: «Я так и знала».", ["Сингапуре", "знала»."]],
+ ["Почему именно дверца?", ["дверца?"]],
+ ["В микроволновке сердце — магнетрон, лампа, которая генерирует волны.", ["магнетрон,"]],
+ ["Пока печь работает в обычном режиме, всё, что она излучает, остаётся внутри металлического корпуса.", ["внутри"]],
+ ["А в момент отключения магнетрон ведёт себя нестабильно и может выдать короткий всплеск на других частотах.", ["отключения", "всплеск"]],
+ ["Если дверца в этот момент уже открыта, всплеск вырывается наружу — и, если телескоп повёрнут так, что печь «видит» его фокальную кабину, рисует на графике дугу, удивительно похожую на космическую.", ["открыта,", "наружу", "кабину,"]],
+ ["Получалось не каждый раз, примерно в половине попыток, но для доказательства этого хватило.", ["половине"]],
+ ["И заодно объяснилась ещё одна странность, над которой ломали голову: у перитонов было два «семейства» с разным опозданием басов.", ["«семейства»"]],
+ ["Оказалось, это просто две разные печи.", ["две", "печи."]],
+ ["Микроволновка на кухне сотрудников давала одно опоздание, а микроволновка в центре для посетителей — другое: в тот день она выдала шесть перитонов со своим, узнаваемым почерком.", ["шесть"]],
+ ["Два семейства загадочных сигналов оказались двумя кухнями.", ["двумя", "кухнями."]]
+];
+const V = DML.words(SENT, 0.4, 2.6), wt = V.wt, DUR = Math.ceil(V.end + 1.2);
+const tl = gsap.timeline({ paused: true }), EV = [];
+const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: .3 }, a); };
+const xin = (id, t, d) => tl.fromTo('#' + id, { opacity: 0 }, { opacity: 1, duration: d || .35 }, t);
+const ent = (id, t, from, to, d, e) => tl.fromTo('#' + id, Object.assign({ opacity: 0 }, from), Object.assign({ opacity: 1, duration: d || .5, ease: e || 'power3.out' }, to), t);
+const slam = (id, t, s) => { tl.fromTo('#' + id, { scale: s || 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in' }, t); EV.push([t + .2, 'thud', { gain: .8 }]); };
+const seqAt = (id, t) => document.querySelectorAll('#' + id + ' img.seq').forEach(e => e.dataset.t0 = t);
+const W1 = w => wt(w);
+
+// ───── времена сцен
+const tE2 = wt('декабре') - .3, tE3 = wt('одну') - .3, tE4 = wt('этой') - .3, tE5 = Math.max(wt('Более') - .2, wt('печи.') + .15 + 2.8), tF1 = wt('Дальше') - .2, tF2 = wt('площадке', 2) - .3, tF3 = wt('Сотрудники') - .2,
+      tF4 = wt('Первый') - .2, tF5 = wt('Двенадцатого') - .2, tF6 = Math.max(wt('Печь') - .2, wt('ничего.') + .15 + 2.8), tF7 = wt('Семнадцатого') - .2, tF8 = wt('Как') - .2, tF9 = Math.max(wt('узнала') - .5, wt('бум»') + .05 + 2.8), tF10 = wt('Почему') - .2,
+      tF11 = wt('Пока') - .2, tF12 = wt('И', 1) > 0 ? wt('заодно') - .4 : 0;
+// БИТ 6
+show('#e1', 0, tE2);
+ent('sus', .4, { x: -80 }, { x: 0 }, .4); ent('prove', wt('доказать') - .1, { x: 80 }, { x: 0 }, .35);
+tl.to('#sus', { opacity: .35, scale: .9, duration: .4 }, wt('доказать'));
+EV.push([wt('доказать'), 'impact', { size: .9 }]);
+show('#e2', tE2, tE3);
+slam('dec', wt('декабре') - .1, 1.5); xin('decC', wt('монитор') - .2);
+ent('spec', wt('монитор') - .3, { y: 600 }, { y: 0 }, .55);
+tl.fromTo('#band', { attr: { x: 300, width: 0 } }, { attr: { x: 300, width: 200 }, duration: .6 }, wt('пределами') - .2);
+tl.fromTo('#bandT', { attr: { x: 300 }, opacity: 0 }, { opacity: 1, duration: .3 }, wt('пределами'));
+EV.push([wt('монитор') - .3, 'swish', { gain: .5 }], [wt('четырёхсот'), 'click', { gain: .6 }], [wt('трёх'), 'click', { gain: .6 }]);
+show('#e3', tE3, tE4);
+[['d19', 'девятнадцатого'], ['d22', 'второго'], ['d23', 'третьего']].forEach(([d, w]) => { ent(d, wt(w) - .25, { y: -400, rotation: -20 }, { y: 0 }, .4, 'back.out(1.4)'); EV.push([wt(w) + .1, 'thud', { gain: .6 }]); });
+ent('spec2', wt('поймал') - .5, { y: 600 }, { y: 0 });
+xin('three', wt('поймал'));
+xin('jan', tE3 + .1); tl.to('#jan', { x: 1010, y: -250, scale: .5, duration: .5, ease: 'power2.inOut' }, wt('девятнадцатого') - .6);
+tl.fromTo('#hot', { opacity: 0 }, { opacity: 1, duration: .2, yoyo: true, repeat: 7 }, wt('вспышки') - .1);
+EV.push([wt('вспышки'), 'pop', { pitch: 1.5, gain: .7 }], [wt('вспышки') + .5, 'pop', { pitch: 1.5, gain: .7 }], [wt('вспышки') + 1, 'pop', { pitch: 1.5, gain: .7 }]);
+show('#e4', tE4, tE5);
+ent('router', tE4 + .1, { x: -600, rotation: -20 }, { x: 0 });
+ent('mw4', wt('микроволновые') - .2, { y: 500 }, { y: 0 }, .5, 'back.out(1.3)');
+ent('pepe', wt('печи.') + .15, { scale: 1.4, rotation: 10 }, { scale: 1, rotation: 3 }, .2);
+EV.push([wt('Wi-Fi') - .2, 'shutter', { gain: .6 }], [wt('микроволновые'), 'thud', { gain: .7 }], [wt('печи.') + .15, 'impact', { size: 1 }]);
+show('#e5', tE5, tF1);
+ent('rule', tE5 + .3, { y: -500, rotation: -15 }, { y: 0, rotation: -3 }, .5, 'back.out(1.3)');
+EV.push([tE5 + .3, 'paper', { dur: .35 }]);
+ent('mw5', wt('микроволновки') - .2, { x: 600 }, { x: 0 });
+slam('off', wt('включают:') - .1, 2);
+xin('old', wt('мешают'));
+// БИТ 7
+show('#f1', tF1, tF2);
+slam('exp', tF1 + .4, 1.5);
+EV.push([tF1, 'reverse', { dur: .6, gain: .5 }]);
+show('#f2', tF2, tF3);
+xin('few', tF2 + .1);
+tl.fromTo('#ovens > div', { y: 400, opacity: 0 }, { y: 0, opacity: 1, duration: .45, stagger: { each: (wt('здании') - tF2 - .4) / 2 }, ease: 'back.out(1.3)' }, tF2 + .4);
+EV.push([wt('кухне'), 'thud', { gain: .6 }], [wt('центре'), 'thud', { gain: .6 }], [wt('здании'), 'thud', { gain: .6 }]);
+show('#f3', tF3, tF4);
+tl.fromTo('#bigmw', { scale: .6, x: 300 }, { scale: 1, x: 0, duration: .9, ease: 'power3.out' }, tF3);
+xin('win', tF3 + .6);
+ent('tinydish', wt('испытывать') - .2, { y: -300 }, { y: 0 }, .45, 'bounce.out');
+ent('mug3', wt('кружки') - .2, { y: -300 }, { y: 0 }, .45, 'bounce.out');
+ent('steam', wt('кружки'), { scale: 0 }, { scale: 1 }, .4, 'back.out(1.6)'); xin('cupT', wt('воды') + .1); xin('dishT', wt('телескоп.') - .3);
+EV.push([tF3, 'whoosh', { dur: .8, size: 1.4, gain: .5 }], [wt('испытывать') + .25, 'thud', { gain: .5 }], [wt('кружки') + .25, 'click', { gain: .7 }], [tF3 + 1, 'drone', { dur: tF4 - tF3 - 1, note: 'D', gain: .3 }]);
+show('#f4', tF4, tF5);
+slam('d27', wt('седьмого') - .1);
+xin('maint', wt('профилактике') - .6);
+tl.fromTo('#q3 > div', { y: 300, opacity: 0 }, { y: 0, opacity: 1, duration: .4, stagger: .25 }, wt('испытаний') - .3);
+EV.push([wt('звоночек'), 'chime', { freq: 1760, gain: .4 }], [wt('непонятно'), 'pop', { gain: .5 }]);
+show('#f5', tF5, tF6);
+slam('d12', tF5 + .1);
+tl.fromTo('#dishRot', { rotation: -10 }, { rotation: 12, duration: 1.0, yoyo: true, repeat: 2, ease: 'sine.inOut', transformOrigin: '50% 80%' }, wt('положения') - .2);
+xin('zero', wt('ничего.') - .2);
+ent('fiasko', wt('ничего.') + .15, { scale: 1.4, rotation: 12 }, { scale: 1, rotation: 4 }, .2);
+EV.push([wt('положения'), 'whoosh', { dur: 1, gain: .3 }], [wt('ничего.') + .15, 'downer', { dur: .9, gain: .6 }]);
+show('#f6', tF6, tF7);
+ent('spec3', wt('монитор', 2) - .3, { x: 600 }, { x: 0 }); ent('flat', wt('дуги') - .3, { x: 600 }, { x: 0 });
+show('#f7', tF7, tF8);
+ent('d17', tF7 + .1, { scale: 1.6 }, { scale: 1 }, .22, 'power4.in'); EV.push([tF7 + .3, 'impact', { size: 1 }]);
+ent('rey', wt('Рейнольдс') - .2, { x: -700 }, { x: 0 });
+ent('mwopen', wt('открыть') - .2, { scale: 1.3, rotation: 10 }, { scale: 1, rotation: 4 }, .25);
+EV.push([wt('Рейнольдс') - .2, 'paper', { dur: .35 }], [wt('открыть'), 'click', { gain: .9 }]);
+show('#f8', tF8, tF9);
+ent('conv', tF8 + .1, { y: -600, rotation: -10 }, { y: 0 });
+ent('quote', wt('«мы') - .2, { y: 300 }, { y: 0 });
+tl.fromTo('#boom', { backgroundColor: 'rgba(255,230,0,0)' }, { backgroundColor: 'rgba(255,230,0,.85)', duration: .25 }, wt('бум»') - .1);
+ent('fig5', wt('графике') - .2, { x: 700, rotation: 15 }, { x: 0 }); xin('fig5S', wt('дуга.'));
+ent('mind', wt('бум»') + .05, { scale: 1.4 }, { scale: 1 }, .2);
+tl.fromTo('#flash', { opacity: 0 }, { opacity: .55, duration: .06, yoyo: true, repeat: 1 }, wt('бум»'));
+EV.push([wt('бум»'), 'impact', { size: 1.5 }], [wt('графике'), 'swish', { gain: .5 }]);
+tl.to('#mind', { opacity: 0, duration: .3 }, Math.max(wt('графике') - .2, wt('бум»') + 2.9));
+show('#f9', tF9, tF10);
+ent('sing', wt('Сингапуре') - .3, { x: -80 }, { x: 0 }, .35); ent('takeoff', tF9 + .2, { scale: 0 }, { scale: 1 }, .45, 'back.out(1.5)'); EV.push([tF9 + .2, 'whoosh', { dur: .6, gain: .4 }]);
+tl.fromTo('#plane', { x: 0, y: 0, rotation: 8 }, { x: 2500, y: -120, rotation: -4, duration: 3.4, ease: 'none' }, tF9);
+ent('esc', wt('пересадки') - .2, { x: 600 }, { x: 0 });
+ent('letter', wt('письма') - .2, { y: 500, rotation: 10 }, { y: 0 });
+ent('knew', wt('«Я') - .2, { scale: 1.3 }, { scale: 1 }, .3, 'back.out(1.6)');
+EV.push([tF9, 'whoosh', { dur: 2.5, size: 1.6, gain: .35 }], [wt('письма'), 'paper', { dur: .4 }], [wt('«Я'), 'sparkle', { n: 7, gain: .5 }]);
+show('#f10', tF10, tF11);
+slam('why', tF10 + .1, 1.5);
+ent('mag', tF10 + .5, { scale: .7, rotation: -15 }, { scale: 1, rotation: 0 }, .55, 'back.out(1.4)');
+ent('magp', wt('генерирует') - .2, { x: -500 }, { x: 0 }); xin('magT', wt('сердце') - .1);
+EV.push([wt('магнетрон,'), 'thud', { gain: .8 }], [wt('генерирует'), 'bubble', { gain: .5 }]);
+show('#f11', tF11, tF12);
+xin('st1', tF11 + .1, .3);
+tl.to('#st1', { opacity: 0, duration: .2 }, wt('отключения') - .3); xin('st2', wt('отключения') - .2, .25);
+tl.to('#st2', { opacity: 0, duration: .2 }, wt('открыта,') - .3); xin('st3', wt('открыта,') - .2, .25);
+tl.fromTo('#inner', { opacity: .85 }, { opacity: .2, duration: .08, yoyo: true, repeat: 9 }, wt('отключения'));
+EV.push([wt('отключения'), 'glitch', { dur: .5, gain: .5 }]);
+tl.to('#door', { attr: { x: -300 }, rotation: 0, duration: .5, ease: 'power3.out' }, wt('открыта,') - .2);
+tl.fromTo('#esc2', { strokeDasharray: '22 14', strokeDashoffset: 900, opacity: 0 }, { opacity: 1, strokeDashoffset: 0, duration: 1.4, ease: 'none' }, wt('наружу') - .2);
+xin('cab', wt('кабину,') - .3); xin('cabT', wt('кабину,') - .2);
+EV.push([wt('открыта,') - .2, 'click', { gain: .9 }], [wt('наружу') - .2, 'whoosh', { dur: 1.2, gain: .55 }], [wt('кабину,'), 'pop', { gain: .7 }]);
+slam('p50', wt('половине') - .2, 1.5); xin('tries', wt('половине')); xin('p50c', wt('хватило.') - .4);
+show('#f12', tF12);
+xin('odd', tF12 + .1); tl.to('#odd', { opacity: 0, duration: .3 }, wt('Два') - .4);
+ent('fam1', tF12 + .4, { x: -700 }, { x: 0 }); ent('fam2', wt('«семейства»') - .1, { x: 700 }, { x: 0 });
+ent('k1', wt('кухне', 1) - .3, { y: 400 }, { y: 0 }, .5, 'back.out(1.3)'); xin('k1t', wt('кухне', 1));
+ent('k2', wt('центре', 1) - .3, { y: 400 }, { y: 0 }, .5, 'back.out(1.3)');
+slam('n6', wt('шесть') - .1, 1.8);
+ent('two', wt('Два') - .2, { y: -40 }, { y: 0 }, .35);
+EV.push([wt('«семейства»'), 'swish', { gain: .5 }], [wt('Два'), 'impact', { size: 1.2 }]);
+seqAt('f1', tF1); seqAt('f7', tF7); seqAt('f3', tF3); seqAt('f6', tF6); seqAt('pepe', wt('печи.') + .15); seqAt('fiasko', wt('ничего.') + .15); seqAt('mwopen', wt('открыть') - .2); seqAt('mind', wt('бум»')); seqAt('esc', tF9); seqAt('fam1', tF12); seqAt('e1', 0); seqAt('router', tE4 + .1); seqAt('o1', tF2); seqAt('takeoff', tF9); seqAt('f9', tF9); seqAt('esc', tF9);
+DML.inserts(tl, EV, [[tE2 + 3.5, 'seq:v03_wave', 2.4, 'tilt'], [tE3 + 5.6, 'seq:k08_sky', 2.2, 'full'], [tF4 + 5.4, 'seq:k13_oven', 2.4, 'full', 'архивный фильм · общественное достояние'],
+  [tF5 + 3.0, 'seq:v18_rot', 2.2, 'circ'], [tF11 + 1.6, 'seq:k13_oven', 2.4, 'full', 'архивный фильм · общественное достояние'], [tF11 + 8.6, 'seq:v09_static', 2.4, 'tilt'], [tF11 + 16.3, 'seq:v11_kitchen', 2.3, 'tilt', 'иллюстрация · Pixabay', 'left:80px;top:640px;width:560px;height:340px'], [tF11 + 21.6, 'seq:k08_sky', 2.4, 'full']]);
+tl.to({}, { duration: .01 }, DUR);
+$('#tries').innerHTML = Array.from({ length: 10 }, (_, i) => `<div class="try" data-i="${i}" style="width:48px;height:48px;border-radius:50%;border:3px solid #2A2A30"></div>`).join('');
+
+const cut = [0, tE2, tE3, tE4, tE5, tF1, tF2, tF3, tF4, tF5, tF6, tF7, tF8, tF9, tF10, tF11, tF12, DUR];
+const moves = []; cut.forEach((c, i) => { if (i < cut.length - 1) { moves.push([c + (i ? .01 : 0), 1.0]); moves.push([cut[i + 1], i === 7 ? 1.14 : 1.07]); } });
+const cam = CAMLIFE.attach($('#stage'), {
+  drift: { x: 7, y: 5, rot: .3, seed: 17 }, moves,
+  accents: [[wt('доказать'), .03], [wt('печи.') + .15, .035], [wt('включают:'), .03], [wt('ничего.') + .15, .03], [wt('бум»'), .05], [wt('Два'), .035]],
+  focus: [[0, '50% 45%'], [tE2, '45% 55%'], [tE3, '45% 40%'], [tE4, '60% 50%'], [tE5, '45% 40%'], [tF1, '40% 40%'], [tF3, '30% 65%'], [wt('кружки'), '25% 40%'], [tF4, '50% 50%'], [tF7, '35% 40%'], [tF8, '35% 60%'], [tF9, '45% 55%'], [tF10, '65% 45%'], [tF11, '30% 50%'], [wt('наружу'), '75% 30%'], [wt('половине'), '25% 80%'], [tF12, '50% 50%']]
+});
+const dust = DML.dust($('#fg'), 14, 33), fl = DML.floaters();
+function noise(t, n, w, h, spikes) {     // след спектра: шум + пики, детерминированно от t
+  let d = ''; for (let i = 0; i <= n; i++) { const x = i / n * w; let y = h * .78 + Math.sin(i * 1.7 + t * 9) * 6 + Math.sin(i * .37 + t * 3) * 9 + ((i * 7919 + Math.floor(t * 24) * 104729) % 23) - 11;
+    for (const s of spikes) y -= s.a * Math.exp(-Math.pow((x - s.x) / s.w, 2)); d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); } return d; }
+function dyn(t) {
+  // волны в печи и бегущий пунктир всплеска
+  $('#inner').setAttribute('stroke-dashoffset', (-t * 140).toFixed(1)); $('#esc2').setAttribute('stroke-dashoffset', (-t * 90).toFixed(1));
+  // «какая печь?» — вопросы подпрыгивают по очереди
+  document.querySelectorAll('#q3 .cav').forEach((q, i) => { const b = Math.max(0, Math.sin(t * 3.2 - i * 1.4)); q.style.transform = `translateY(${-b * 26}px) rotate(${(b - .5) * 10}deg)`; q.style.color = b > .8 ? '#E5392B' : ''; });
+  // импульсы по дугам двух семейств: у второго опоздание больше
+  [['fu1', 'fp1', 1.6, '#fff'], ['fu2', 'fp2', 2.3, '#ff5a4a']].forEach(([gid, pid, per, col]) => { const g = $('#' + gid), pa = $('#' + pid), L = pa.getTotalLength();
+    if (!g.childElementCount) for (let k = 0; k < 6; k++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', 15 - k * 2); c.setAttribute('fill', col); g.appendChild(c); }
+    const u = ((t - tF12) % per + per) % per / per; [...g.children].forEach((c, k) => { const q = pa.getPointAtLength(L * Math.max(0, u - k * .025)); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y); c.setAttribute('opacity', 1 - k / 6); }); });
+  $('#trace').setAttribute('d', noise(t, 220, 1496, 536, []));
+  const sp = [0, .5, 1].map(k => wt('вспышки') + k * .5).some(s => t > s && t < s + .35);
+  $('#trace2').setAttribute('d', noise(t, 220, 1496, 456, sp ? [{ x: 1075, w: 20, a: 300 }] : []));
+  $('#trace3').setAttribute('d', noise(t, 120, 676, 276, [{ x: 520, w: 30, a: 120 + Math.sin(t * 6) * 20 }]));
+  const ct = Math.max(0, 30 - Math.floor((t - tF11) * 2)); $('#ovt').textContent = (t > wt('отключения') - .3 ? '0:' + String(Math.min(30, ct)).padStart(2, '0') : '0:30');
+  document.querySelectorAll('.try').forEach(e => { const i = +e.dataset.i, on = t > wt('половине') + i * .12 && [0, 2, 3, 6, 8].includes(i); e.style.background = on ? '#E5392B' : 'transparent'; e.style.borderColor = on ? '#E5392B' : '#2A2A30'; e.style.boxShadow = on ? '0 0 14px rgba(229,57,43,.8)' : 'none'; });
+  dust(t); fl(t); DML.subs($('#sub'), V, t);
+}
+window.__duration = DUR;
+window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
+window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
+window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 92, key: 'E', mood: 'tense', db: -20, drums: true }, sfxDb: -3 }));
+if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }
+</script>
+</body></html>

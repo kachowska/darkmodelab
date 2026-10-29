@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Перитоны — глава 1: Parkes и Луна · всплеск Лоримера (черновик)</title>
+<link rel="stylesheet" href="../../../../2_бренд/шрифты/fonts.css">
+<link rel="stylesheet" href="../lib/dml.css">
+<script src="../../../../4_инструменты/анимация-obsion/vendor/gsap.min.js"></script>
+<script src="../../../../4_инструменты/анимация-obsion/camlife.js"></script>
+<script src="../../../../4_инструменты/анимация-obsion/sfx.js"></script>
+<script src="../lib/dml.js"></script>
+<script src="../media/meta.js"></script>
+</head><body>
+<div id="frame">
+<div id="stage">
+
+ <!-- A1 · место действия: фото на весь экран -->
+ <div class="sc" id="a1">
+  <img class="abs" id="cafeFull" src="../../материалы/настоящие/commons_csiro-3987_visitors-centre-cafe.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:brightness(.8)">
+  <img class="abs" id="westFull" src="../../материалы/настоящие/parkes_west_09.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;object-position:50% 38%;filter:brightness(.78)">
+  <div class="abs mono" id="pin" style="left:110px;top:150px;font-size:26px;color:#fff;letter-spacing:.14em;text-shadow:0 2px 12px #000"></div>
+  <div class="src" style="left:1500px;top:1020px;color:#cfcfd4">Stephen West · CC BY-SA 3.0</div>
+ </div>
+
+ <!-- A2 · 64 метра: вырезка тарелки + размерная линия -->
+ <div class="sc" id="a2">
+  <img class="abs" src="../../материалы/настоящие/parkes_west_09.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:blur(8px) brightness(.28)">
+  <div class="glow" style="left:560px;top:160px;width:900px;height:800px"></div>
+  <img class="obj" id="dishDay" src="../../материалы/вырезки/parkes_dish_day.png" style="left:620px;top:120px;width:760px">
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><g id="ruler" stroke="#E5392B" stroke-width="4" style="filter:drop-shadow(0 0 8px rgba(229,57,43,.8))"><line id="rl" x1="620" y1="110" x2="1380" y2="110"/><line x1="620" y1="92" x2="620" y2="128"/><line x1="1380" y1="92" x2="1380" y2="128"/></g></svg>
+  <div class="abs h red ab" id="m64" style="left:1420px;top:50px;font-size:150px">64 М</div>
+  <div class="abs cap" id="m64c" style="left:1430px;top:200px">диаметр тарелки</div>
+ </div>
+
+ <!-- A3 · июль 1969: телевизор с настоящей трансляцией + вырезка Олдрина -->
+ <div class="sc" id="a3">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 60% 45%,#1d1b1c,#09090a 75%)"></div>
+  <img class="obj" id="dishSmall" src="../../материалы/вырезки/parkes_dish_day.png" style="left:80px;top:420px;width:430px">
+  <div class="crt" id="tv" style="left:640px;top:150px;width:900px;height:640px;transform:rotate(-3deg)"><img class="seq" data-seq="k01_moon" data-t0="0"></div>
+  <div class="src" id="tvSrc" style="left:660px;top:820px;color:#9a9aa2">NASA · трансляция 21.07.1969 · общественное достояние</div>
+  <img class="obj stk" id="aldrin" src="../../материалы/вырезки/aldrin.png" style="left:1520px;top:380px;width:300px">
+  <div class="abs h" id="y1969" style="left:110px;top:120px;font-size:170px">ИЮЛЬ <span class="red">1969</span></div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0;z-index:5"><path id="sig" d="M330 470 C 450 330 560 300 660 330" stroke="#E5392B" stroke-width="6" fill="none" stroke-dasharray="18 12" style="filter:drop-shadow(0 0 10px rgba(229,57,43,.9))"/></svg>
+ </div>
+
+ <!-- A4 · ЦУП: переключились на Parkes -->
+ <div class="sc" id="a4">
+  <img class="abs" id="mc" src="../../материалы/настоящие/photo_F02_nasa_apollo11_mission-control.jpg" style="left:-80px;top:-60px;width:2080px;height:1200px;object-fit:cover;filter:grayscale(1) brightness(.62) contrast(1.1)">
+  <div class="src" style="left:1560px;top:1020px;color:#cfcfd4">NASA · ЦУП, Хьюстон, 1969</div>
+  <div class="card" id="switch" style="left:120px;top:140px;width:640px"><div class="mono" style="font-size:20px;color:var(--mu)">ИСТОЧНИК ТВ-СИГНАЛА</div>
+   <div class="h" style="font-size:72px;margin-top:8px"><span id="srcA" style="color:#55555C;text-decoration:line-through">GOLDSTONE</span> → <span class="red">PARKES</span></div></div>
+ </div>
+
+ <!-- A5 · больше двух часов, 600 млн -->
+ <div class="sc" id="a5">
+  <div class="abs" style="inset:0;background:#050508"></div>
+  <img class="obj" id="earth" src="../../материалы/вырезки/earth.png" style="left:1060px;top:170px;width:760px">
+  <div class="abs h" id="h2" style="left:110px;top:150px;font-size:210px">&gt; 2 <span class="red">Ч</span></div>
+  <div class="bar" style="left:116px;top:380px;width:760px"><i id="h2bar" style="width:0"></i></div>
+  <div class="abs cap" id="h2c" style="left:116px;top:400px">почти вся прогулка по Луне — через Parkes</div>
+  <div class="abs h" id="v600" style="left:110px;top:520px;font-size:150px">0</div>
+  <div class="abs cap" id="v600c" style="left:116px;top:680px">зрителей по всему миру</div>
+ </div>
+
+ <!-- A6 · «Тарелка» и Murriyang -->
+ <div class="sc" id="a6">
+  <div class="full"><img class="seq" data-seq="v02_sky" data-t0="0" data-loop="1" style="filter:brightness(.6) saturate(.9)"></div>
+  <img class="obj" id="dishDusk" src="../../материалы/вырезки/parkes_dish_dusk.png" style="left:980px;top:180px;width:820px">
+  <div class="card" id="film" style="left:120px;top:150px;width:620px;transform:rotate(-2deg)"><div class="mono" style="font-size:18px;color:var(--mu)">ФИЛЬМ · 2000</div><div class="h" style="font-size:96px;margin-top:6px">«ТАРЕЛКА»</div><div class="cap" style="margin-top:8px">The Dish — о той самой трансляции</div></div>
+  <div class="abs h red ab" id="murr" style="left:110px;top:560px;font-size:180px">MURRIYANG</div>
+  <div class="abs cap" id="murrc" style="left:120px;top:760px">официальное имя телескопа сегодня</div>
+ </div>
+
+ <!-- A7 · самое чуткое ухо · 1,4 ГГц · миллиарды лет -->
+ <div class="sc" id="a7">
+  <div class="full"><img class="seq" data-seq="k09_space" data-t0="0" data-loop="1" style="filter:brightness(.55)"></div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><g id="waves" fill="none" stroke="#E5392B" stroke-width="6" stroke-linecap="round" style="filter:drop-shadow(0 0 10px rgba(229,57,43,.8))">
+   <path d="M1180 250 A 260 260 0 0 1 1460 520"/><path d="M1240 150 A 380 380 0 0 1 1580 520"/><path d="M1300 50 A 500 500 0 0 1 1700 520"/></g></svg>
+  <img class="obj" id="dishEar" src="../../материалы/вырезки/parkes_dish_dusk.png" style="left:560px;top:300px;width:820px">
+  <div class="abs" style="left:120px;right:120px;top:940px;height:2px;background:#5a5a62"></div>
+  <div class="hud" style="left:120px;top:960px">0,4 ГГц</div><div class="hud" style="left:1650px;top:960px">3 ГГц</div>
+  <div class="abs" id="f14" style="left:640px;top:880px;width:4px;height:62px;background:var(--red);box-shadow:0 0 18px var(--glow)"></div>
+  <div class="hud" id="f14t" style="left:580px;top:840px;color:var(--red);font-size:28px">1,4 ГГц</div>
+  <div class="abs h" id="ear" style="left:110px;top:130px;font-size:110px;line-height:1">САМОЕ ЧУТКОЕ<br><span class="red">УХО</span> НА ЗЕМЛЕ</div>
+  <div class="abs cap" id="bill" style="left:120px;top:400px;font-size:30px;color:#d0d0d6">слышит то, что старше нас на миллиарды лет</div>
+ </div>
+
+ <!-- B1 · 2007: Наркевич и Лоример — вырезка-коллаж -->
+ <div class="sc" id="b1">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 50% 40%,#1c1a1a,#0c0b0c 75%)"></div>
+  <div class="abs h" id="y2007" style="left:110px;top:110px;font-size:200px">2007</div>
+  <div class="circ" id="tape" style="left:740px;top:120px;width:400px;height:400px"><img class="seq" data-seq="v01_tape" data-t0="0" data-loop="1"></div>
+  <img class="obj stk" id="lorimer" src="../../материалы/вырезки/lorimer.png" style="left:1180px;top:140px;width:500px">
+  <img class="obj" id="magn" src="../../материалы/вырезки/magnifier.png" style="left:980px;top:520px;width:420px;transform:rotate(-18deg)">
+  <div class="card" id="cardL" style="left:1180px;top:860px;width:520px;padding:14px 22px"><div class="mono" style="font-size:18px;color:var(--mu)">АСТРОНОМ</div><div style="font:600 34px Inter">Дункан Лоример</div></div>
+  <div class="card" id="cardN" style="left:120px;top:430px;width:560px;transform:rotate(-3deg)"><div class="mono" style="font-size:18px;color:var(--mu)">СТУДЕНТ</div><div style="font:600 44px Inter;margin-top:6px">Дэвид Наркевич</div><div class="cap" style="margin-top:8px">разбирал старые записи Parkes</div></div>
+  <div class="card" id="arch" style="left:150px;top:640px;width:640px;height:260px;overflow:hidden;transform:rotate(2deg)"><div class="mono" style="font-size:18px;color:var(--red)">АРХИВ PARKES · 2001</div><pre id="data" class="mono" style="font-size:17px;line-height:1.35;color:#7d7d86;margin-top:10px;white-space:pre"></pre></div>
+  <div class="src" style="left:1190px;top:830px">фото: Ranjan adarsh29 · CC BY 4.0</div>
+ </div>
+
+ <!-- B2 · Малое Магелланово Облако -->
+ <div class="sc" id="b2">
+  <img class="abs" id="smc" src="../../материалы/настоящие/photo_F04_nasa_smc_herschel.jpg" style="left:200px;top:-420px;width:1600px;filter:brightness(.95) saturate(1.1)">
+  <div class="abs" style="inset:0;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.1) 55%)"></div>
+  <div class="abs h" id="smcT" style="left:110px;top:150px;font-size:96px;line-height:1">МАЛОЕ<br>МАГЕЛЛАНОВО<br><span class="red">ОБЛАКО</span></div>
+  <div class="abs cap" id="smcC" style="left:120px;top:470px">телескоп искал там пульсары · 2001</div>
+  <div class="src" style="left:1480px;top:1020px;color:#cfcfd4">NASA / ESA / Herschel · общественное достояние</div>
+ </div>
+
+ <!-- B3 · вспышка < 5 мс -->
+ <div class="sc" id="b3">
+  <div class="abs" style="inset:0;background:#0f0f11"></div>
+  <div class="doc" id="lori" style="left:100px;top:140px;width:1100px;transform:rotate(-2deg)"><img src="../../материалы/настоящие/screenshot_arxiv_0709.4301_lorimer2007.png"><i class="mk" id="mkL" style="left:2%;top:5%;width:72%;height:7%"></i></div>
+  <div class="src" id="loriS" style="left:120px;top:520px">arXiv 0709.4301 → Science 318:777 · 2007</div>
+  <div class="abs h" id="ms5" style="left:1260px;top:560px;font-size:220px">&lt;5 <span class="red">МС</span></div>
+  <div class="abs cap" id="ms5c" style="left:1270px;top:790px">длилась вспышка</div>
+ </div>
+
+ <!-- B4 · дуга и миллиард лет -->
+ <div class="sc" id="b4">
+  <div class="abs" style="inset:0;background:radial-gradient(ellipse at 60% 50%,#1a1220,#0E0E10 70%)"></div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0">
+   <g font-family="IBM Plex Mono" font-size="20" fill="#8A8A92"><text x="1640" y="912">время →</text><text transform="translate(470 330) rotate(-90)">частота →</text></g>
+   <line x1="500" y1="880" x2="1780" y2="880" stroke="#3a3a42" stroke-width="2"/><line x1="500" y1="160" x2="500" y2="880" stroke="#3a3a42" stroke-width="2"/>
+   <g id="wf" opacity=".5"></g><line id="scan" x1="0" y1="170" x2="0" y2="870" stroke="#E5392B" stroke-width="3" style="filter:drop-shadow(0 0 10px #E5392B)"/><circle id="hit" r="18" fill="#E5392B" style="filter:drop-shadow(0 0 16px #E5392B)"/>
+   <path id="arcL" d="M560 190 C 820 210 1100 420 1720 850" stroke="#F2F2F0" stroke-width="12" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 14px rgba(255,255,255,.6))"/>
+  </svg>
+  <div class="abs cav" id="late" style="left:1180px;top:640px;font-size:56px;transform:rotate(-4deg)">басы сильно опоздали</div>
+  <div class="abs" id="bly" style="left:110px;top:150px"><div class="h" style="font-size:150px">≈1 <span class="red">МЛРД</span></div><div class="cap">лет летел сигнал — по первой оценке</div></div>
+ </div>
+
+ <!-- B5 · газ между галактиками: скрипки первыми -->
+ <div class="sc" id="b5">
+  <div class="full"><img class="seq" data-seq="k03_gas" data-t0="0" data-loop="1" style="filter:brightness(.8)"></div>
+  <div class="circ" id="violin" style="left:140px;top:160px;width:420px;height:420px"><img class="seq" data-seq="k02_violin" data-t0="0" data-loop="1"></div>
+  <div class="abs cav" id="vioT" style="left:170px;top:600px;font-size:54px">высокие — первыми</div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><g id="notes2" fill="#F2F2F0"></g><path id="road" d="M600 360 C 900 380 1300 560 1820 820" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3" stroke-dasharray="6 10"/></svg>
+  <div class="abs cav" id="bassT" style="left:1240px;top:860px;font-size:54px">низкие отстают</div>
+  <div class="abs h" id="gasT" style="left:1040px;top:120px;font-size:84px;line-height:1">КОСМОС<br><span class="red">НЕ ПУСТОЙ</span></div>
+ </div>
+
+ <!-- B6 · длинный путь = сильнее опоздание: подпись и расстояние -->
+ <div class="sc" id="b6">
+  <div class="abs" style="inset:0;background:#0f0f11"></div>
+  <div class="card" id="near" style="left:120px;top:230px;width:780px;height:520px;transform:rotate(-2deg);overflow:hidden"><img src="../../материалы/настоящие/photo_F04_nasa_smc_herschel.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.38">
+   <div class="mono" style="position:relative;font-size:20px;color:#fff">БЛИЖЕ · КОРОТКИЙ ПУТЬ</div>
+   <svg width="720" height="440" style="position:relative"><path id="arcN" d="M20 40 C 300 50 460 140 700 400" stroke="#F2F2F0" stroke-width="9" fill="none" stroke-linecap="round" transform="scale(1,.55)"/><g id="pN"></g></svg>
+   <img src="../../материалы/вырезки/earth.png" style="position:absolute;left:683px;top:227px;width:90px">
+   <div class="src" style="left:28px;top:480px;color:#cfcfd4">ESA/NASA/JPL-Caltech/STScI</div></div>
+  <div class="card" id="far" style="left:1020px;top:230px;width:780px;height:520px;transform:rotate(2deg);overflow:hidden"><img class="seq" data-seq="k03_gas" data-t0="0" data-loop="1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45">
+   <div class="mono" style="position:relative;font-size:20px;color:#ff6a5c">ДАЛЬШЕ · ДЛИННЫЙ ПУТЬ</div>
+   <svg width="720" height="440" style="position:relative"><path id="arcF" d="M20 40 C 300 60 460 260 700 420" stroke="#E5392B" stroke-width="9" fill="none" stroke-linecap="round"/><g id="pF"></g></svg>
+   <img src="../../материалы/вырезки/earth.png" style="position:absolute;left:683px;top:427px;width:90px"></div>
+  <div class="abs cav" id="sign" style="left:600px;top:800px;font-size:72px;transform:rotate(-3deg)">подпись + расстояние</div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0"><path id="uline" class="hand" d="M600 900 C 900 890 1200 892 1320 900"/></svg>
+ </div>
+
+ <!-- B7 · FRB · всплеск один -->
+ <div class="sc" id="b7">
+  <div class="full" id="b7bg"><img class="seq" data-seq="v03_wave" data-t0="0" data-loop="1" style="filter:hue-rotate(160deg) saturate(1.2) brightness(.42)"></div>
+  <div class="abs mono" id="newc" style="left:124px;top:80px;font-size:24px;color:var(--mu);letter-spacing:.14em">НОВЫЙ КЛАСС ЯВЛЕНИЙ · 2007</div>
+  <div class="abs h red ab" id="frb" style="left:110px;top:120px;font-size:300px">FRB</div>
+  <div class="abs" id="frbW" style="left:120px;top:420px;font:600 40px Inter">Fast Radio Burst · <span style="color:var(--red)">быстрый радиовсплеск</span></div>
+  <div class="abs" id="slots" style="left:120px;top:560px;display:flex;gap:18px"></div>
+  <div class="abs mono" id="slotsC" style="left:124px;top:700px;font-size:22px;color:var(--mu)">НАЙДЕНО ВСПЛЕСКОВ: 1</div>
+  <div class="meme" id="fry" style="left:1180px;top:430px;width:640px;height:480px;transform:rotate(5deg)"><img class="seq" data-seq="m_fry" data-t0="0" data-loop="1"><span class="mt">МЕМ</span><div class="ov" style="top:6px;font-size:40px">ТО ЛИ ОТКРЫТИЕ…</div><div class="ov" style="bottom:8px;font-size:40px">…ТО ЛИ ПОМЕХА</div></div>
+ </div>
+
+ <div class="abs" id="fg" style="inset:-100px;z-index:40;pointer-events:none"></div>
+</div>
+<div id="rgb"></div><div id="flash"></div>
+<div id="tag"><i></i>B · НАУКА ИЗНУТРИ · 01</div>
+<div id="subbg" style="position:absolute;left:0;right:0;bottom:0;height:300px;z-index:84;pointer-events:none;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.6))"></div>
+<div id="sub"></div>
+<div id="vig"></div><div id="grain"></div>
+</div>
+
+<script>
+const $ = DML.$;
+const SENT = [
+ ["Начнём с места действия.", []],
+ ["Радиотелескоп Parkes в Новом Южном Уэльсе — это тарелка диаметром шестьдесят четыре метра недалеко от городка Паркс, и в июле 1969 года именно она принимала картинку с Луны, когда Нил Армстронг вышел на поверхность: телевидение переключилось на сигнал Parkes через несколько минут после начала и показывало почти всю прогулку, больше двух часов, примерно шестистам миллионам зрителей.", ["шестьдесят", "четыре", "Луны,", "Parkes", "двух", "часов,", "шестистам", "миллионам"]],
+ ["Про эту историю потом сняли фильм «Тарелка», а официальное имя телескопа сегодня — Murriyang.", ["«Тарелка»,", "Murriyang."]],
+ ["Важно для нашей истории вот что: это одно из самых чувствительных «ушей» на Земле, и оно слушает небо на частоте около полутора гигагерц, где можно услышать то, что на миллиарды лет старше нас.", ["«ушей»", "полутора", "гигагерц,", "миллиарды"]],
+ ["В 2007 году студент Дэвид Наркевич разбирал вместе с астрономом Дунканом Лоримером старые записи Parkes 2001 года — тогда телескоп искал пульсары в Малом Магеллановом Облаке — и нашёл в них очень яркую вспышку, которая длилась меньше пяти тысячных секунды.", ["2007", "вспышку,", "пяти", "тысячных"]],
+ ["Самое странное было в той самой дуге: низкие частоты опаздывали так сильно, что по этому опозданию получалось, будто сигнал летел к нам, по первой оценке, около миллиарда лет.", ["опаздывали", "миллиарда"]],
+ ["Здесь нужна одна простая идея, на которой держится весь ролик.", ["идея,"]],
+ ["Космос не пустой, между галактиками разлит очень разреженный газ, и радиоволны, проходя сквозь него, разбегаются: высокие ноты прилетают первыми, низкие отстают.", ["газ,", "первыми,", "отстают."]],
+ ["Чем длиннее путь, тем сильнее отстают басы.", ["басы."]],
+ ["Поэтому дуга на графике — это одновременно подпись и расстояние, и казалось, что такую подпись подделать невозможно.", ["подпись", "расстояние,", "невозможно."]],
+ ["Так появился новый класс явлений — быстрые радиовсплески.", ["быстрые", "радиовсплески."]],
+ ["Только вот всплеск был один, и второго никто не находил.", ["один,"]]
+];
+const V = DML.words(SENT, 0.5, 2.6), wt = V.wt, DUR = Math.ceil(Math.max(V.end + 1.2, V.wt('находил.') + 3.2));
+const tl = gsap.timeline({ paused: true }), EV = [];
+const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); };
+const xin = (id, t, d) => tl.fromTo('#' + id, { opacity: 0 }, { opacity: 1, duration: d || .35 }, t);
+const seqAt = (id, t) => { document.querySelectorAll('#' + id + ' img.seq,' + '#' + id + '.seq').forEach(e => e.dataset.t0 = t); };
+
+// ───────── БИТ 2 ─────────
+const tA2 = wt('тарелка') - .4, tA3 = wt('июле') - .3, tA4 = wt('телевидение') - .2, tA5 = wt('показывало') - .1, tA6 = wt('Про'), tA7 = wt('Важно') - .1, tB1 = wt('2007') - .45;
+show('#a1', 0, tA2);
+tl.fromTo('#cafeFull', { scale: 1.12 }, { scale: 1.0, duration: 1.6, ease: 'power2.out' }, 0);
+tl.to('#cafeFull', { opacity: 0, duration: .5 }, wt('Радиотелескоп') - .35);
+tl.fromTo('#westFull', { opacity: 0, scale: 1.0 }, { opacity: 1, scale: 1.12, duration: tA2 - wt('Радиотелескоп') + .8, ease: 'none' }, wt('Радиотелескоп') - .35);
+EV.push([wt('Радиотелескоп') - .35, 'whoosh', { dur: .6, gain: .5 }]);
+show('#a2', tA2, tA3);
+tl.fromTo('#a2', { opacity: 0 }, { opacity: 1, duration: .3 }, tA2);
+tl.fromTo('#dishDay', { y: 700, scale: .9 }, { y: 0, scale: 1, duration: .7, ease: 'power3.out' }, tA2);
+EV.push([tA2, 'riser', { dur: .7, gain: .3 }], [tA2 + .7, 'thud', { gain: .7 }]);
+tl.fromTo('#rl', { attr: { x2: 620 } }, { attr: { x2: 1380 }, duration: .7, ease: 'power2.inOut' }, wt('шестьдесят') - .1);
+tl.fromTo('#m64', { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in' }, wt('четыре'));
+xin('m64c', wt('метра'));
+EV.push([wt('четыре') + .25, 'impact', { size: .9, gain: .8 }]);
+show('#a3', tA3, tA4 + .4);
+tl.fromTo('#a3', { opacity: 0 }, { opacity: 1, duration: .3 }, tA3);
+tl.fromTo('#y1969', { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in', transformOrigin: '0 50%' }, wt('1969') - .1);
+EV.push([wt('1969') + .15, 'thud', { gain: .8 }]);
+tl.fromTo('#tv', { x: 900, rotation: 12 }, { x: 0, rotation: -3, duration: .6, ease: 'power3.out' }, wt('Луны,') - .7);
+xin('tvSrc', wt('Луны,'));
+EV.push([wt('Луны,') - .7, 'swish', { gain: .6 }], [wt('Луны,') - .1, 'glitch', { dur: .15, gain: .35 }]);
+tl.fromTo('#sig', { strokeDashoffset: 300 }, { strokeDashoffset: 0, duration: 1.2, ease: 'none', repeat: 3 }, wt('принимала'));
+tl.fromTo('#aldrin', { y: 600, rotation: 20 }, { y: 0, rotation: -6, duration: .55, ease: 'back.out(1.6)' }, wt('Армстронг') - .1);
+EV.push([wt('Армстронг') + .3, 'pop', { gain: .7 }]);
+tl.to('#y1969', { scale: .45, opacity: .5, x: -10, y: -60, transformOrigin: '0 0', duration: .6 }, wt('Армстронг') - .3);
+show('#a4', tA4, tA5);
+tl.fromTo('#a4', { opacity: 0 }, { opacity: 1, duration: .4 }, tA4);
+tl.fromTo('#mc', { scale: 1.0, x: 0 }, { scale: 1.12, x: -60, duration: tA5 - tA4, ease: 'none' }, tA4);
+tl.fromTo('#switch', { y: -400, rotation: -8 }, { y: 0, rotation: -2, duration: .5, ease: 'power3.out' }, wt('переключилось') - .1);
+tl.fromTo('#srcA', { textDecorationColor: 'rgba(229,57,43,0)' }, { textDecorationColor: 'rgba(229,57,43,1)', duration: .2 }, wt('сигнал'));
+EV.push([wt('переключилось'), 'click', { gain: .8 }], [wt('сигнал') + .1, 'click', { gain: .9 }]);
+show('#a5', tA5, tA6);
+tl.fromTo('#a5', { opacity: 0 }, { opacity: 1, duration: .3 }, tA5);
+tl.fromTo('#earth', { rotation: -8, scale: .9 }, { rotation: 6, scale: 1.02, duration: tA6 - tA5, ease: 'none' }, tA5);
+tl.fromTo('#h2', { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in', transformOrigin: '0 50%' }, tA5 + .25);
+tl.to('#h2bar', { width: '100%', duration: 2.2, ease: 'power1.inOut' }, tA5 + .4);
+xin('h2c', wt('часов,'));
+EV.push([tA5 + .47, 'impact', { size: .8 }]);
+xin('v600', wt('шестистам') - .2, .2); xin('v600c', wt('миллионам'));
+EV.push([wt('шестистам') - .2, 'riser', { dur: 1.3, gain: .3 }], [wt('зрителей.') , 'sparkle', { n: 8, gain: .5 }]);
+show('#a6', tA6, tA7);
+tl.fromTo('#a6', { opacity: 0 }, { opacity: 1, duration: .3 }, tA6);
+tl.fromTo('#dishDusk', { x: 300, scale: .95 }, { x: 0, scale: 1.05, duration: tA7 - tA6, ease: 'none' }, tA6);
+tl.fromTo('#film', { y: -500, rotation: -14 }, { y: 0, rotation: -2, duration: .5, ease: 'power3.out' }, tA6 + .1);
+EV.push([tA6 + .1, 'paper', { dur: .4 }]);
+tl.fromTo('#murr', { opacity: 0, letterSpacing: '0.3em' }, { opacity: 1, letterSpacing: '0em', duration: .6, ease: 'power3.out' }, wt('Murriyang') - .3);
+xin('murrc', wt('Murriyang') + .3);
+EV.push([wt('Murriyang') - .3, 'reverse', { dur: .6, gain: .5 }]);
+show('#a7', tA7, tB1);
+tl.fromTo('#a7', { opacity: 0 }, { opacity: 1, duration: .4 }, tA7);
+tl.fromTo('#dishEar', { scale: .9, y: 60 }, { scale: 1.05, y: 0, duration: tB1 - tA7, ease: 'none' }, tA7);
+tl.fromTo('#ear', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: .4 }, wt('чувствительных') - .3);
+['#waves path:nth-child(3)', '#waves path:nth-child(2)', '#waves path:nth-child(1)'].forEach((p, i) => tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: .18, yoyo: true, repeat: 7, repeatDelay: .3 }, wt('«ушей»') + i * .14));
+EV.push([wt('«ушей»'), 'bubble', { gain: .5 }], [wt('«ушей»') + .14, 'bubble', { gain: .45, k: 1.2 }], [wt('«ушей»') + .28, 'bubble', { gain: .4, k: 1.4 }]);
+tl.fromTo('#f14,#f14t', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .3 }, wt('полутора') - .1);
+EV.push([wt('полутора'), 'chime', { freq: 1400, gain: .35 }]);
+xin('bill', wt('миллиарды') - .2, .5);
+
+// ───────── БИТ 3 ─────────
+const tB2 = wt('искал') - .4, tB3 = wt('нашёл') - .1, tB4 = wt('Самое') - .2, tB5 = wt('Космос') - .2, tB6 = wt('Чем') - .2, tB7 = wt('Так') - .2;
+show('#b1', tB1, tB2);
+tl.fromTo('#b1', { opacity: 0 }, { opacity: 1, duration: .3 }, tB1);
+tl.fromTo('#tape', { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(1.5)' }, tB1 + .4); EV.push([tB1 + .4, 'pop', { gain: .6 }]);
+tl.fromTo('#y2007', { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in', transformOrigin: '0 50%' }, wt('2007') - .05);
+EV.push([wt('2007') + .17, 'thud', { gain: .8 }]);
+tl.fromTo('#cardN', { x: -800, rotation: -12 }, { x: 0, rotation: -3, duration: .5, ease: 'power3.out' }, wt('студент') - .1);
+EV.push([wt('студент'), 'paper', { dur: .35 }]);
+tl.fromTo('#lorimer', { x: 800, rotation: 10, opacity: 0 }, { x: 0, rotation: 2, opacity: 1, duration: .55, ease: 'back.out(1.4)' }, wt('астрономом') - .1);
+tl.fromTo('#magn', { x: 600, y: 300, rotation: 40, opacity: 0 }, { x: 0, y: 0, rotation: -18, opacity: 1, duration: .55, ease: 'back.out(1.6)' }, wt('Лоримером') - .1);
+xin('cardL', wt('Лоримером') + .2);
+EV.push([wt('астрономом'), 'pop', { gain: .6 }], [wt('Лоримером'), 'swish', { gain: .5 }]);
+tl.fromTo('#arch', { y: 500, rotation: 8 }, { y: 0, rotation: 2, duration: .5, ease: 'power3.out' }, wt('старые') - .1);
+EV.push([wt('старые'), 'type', { n: 14, rate: 18, gain: .35 }]);
+tl.to('#y2007', { scale: .5, opacity: .5, transformOrigin: '0 0', duration: .5 }, wt('старые') - .3);
+show('#b2', tB2, tB3);
+tl.fromTo('#b2', { opacity: 0 }, { opacity: 1, duration: .4 }, tB2);
+tl.fromTo('#smc', { scale: 1.15, rotation: 3 }, { scale: 1.0, rotation: 0, duration: tB3 - tB2, ease: 'none', transformOrigin: '60% 50%' }, tB2);
+tl.fromTo('#smcT', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: .4 }, wt('Малом') - .2);
+xin('smcC', wt('Облаке'));
+EV.push([tB2, 'reverse', { dur: .7, gain: .5 }]);
+show('#b3', tB3, tB4);
+tl.fromTo('#flash', { opacity: 0 }, { opacity: .6, duration: .06, yoyo: true, repeat: 1 }, wt('вспышку,') - .05);
+EV.push([wt('вспышку,') - .05, 'impact', { size: 1.2 }]);
+tl.fromTo('#lori', { y: -700, rotation: -12 }, { y: 0, rotation: -2, duration: .5, ease: 'power3.out' }, tB3);
+EV.push([tB3, 'paper', { dur: .4 }]);
+xin('loriS', tB3 + .5);
+tl.fromTo('#mkL', { scaleX: 0 }, { scaleX: 1, duration: .45 }, wt('яркую'));
+tl.fromTo('#ms5', { scale: 1.6, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in', transformOrigin: '0 50%' }, wt('пяти') - .05);
+xin('ms5c', wt('тысячных'));
+EV.push([wt('пяти') + .17, 'thud', { gain: .9 }]);
+show('#b4', tB4, tB5);
+tl.fromTo('#b4', { opacity: 0 }, { opacity: 1, duration: .3 }, tB4);
+tl.fromTo('#arcL', { strokeDasharray: 1500, strokeDashoffset: 1500 }, { strokeDashoffset: 0, duration: 2.0, ease: 'power1.inOut' }, tB4 + .3);
+EV.push([tB4 + .3, 'riser', { dur: 2.0, gain: .3 }]);
+xin('late', wt('опаздывали'));
+tl.fromTo('#bly', { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: .35 }, wt('миллиарда') - .3);
+EV.push([wt('миллиарда'), 'impact', { size: .8, gain: .8 }]);
+show('#b5', tB5, tB6);
+tl.fromTo('#b5', { opacity: 0 }, { opacity: 1, duration: .5 }, tB5);
+xin('gasT', tB5 + .1);
+tl.fromTo('#violin', { scale: 0 }, { scale: 1, duration: .45, ease: 'back.out(1.6)' }, wt('высокие') - .3);
+xin('vioT', wt('ноты'));
+xin('bassT', wt('отстают.') - .2);
+EV.push([wt('высокие'), 'chime', { freq: 1760, gain: .35 }], [wt('отстают.'), 'chime', { freq: 220, gain: .5 }]);
+show('#b6', tB6, tB7);
+tl.fromTo('#b6', { opacity: 0 }, { opacity: 1, duration: .3 }, tB6);
+tl.fromTo('#near', { x: -700 }, { x: 0, duration: .5, ease: 'power3.out' }, tB6 + .1);
+tl.fromTo('#far', { x: 900 }, { x: 0, duration: .5, ease: 'power3.out' }, wt('сильнее') - .2);
+EV.push([tB6 + .1, 'swish', { gain: .5 }], [wt('сильнее') - .2, 'swish', { gain: .5 }]);
+tl.to('#near', { scale: .9, opacity: .6, duration: .5 }, wt('басы.'));
+xin('sign', wt('подпись'));
+tl.fromTo('#uline', { strokeDasharray: 900, strokeDashoffset: 900 }, { strokeDashoffset: 0, duration: .5 }, wt('невозможно.') - .2);
+EV.push([wt('невозможно.') - .2, 'swish', { gain: .4 }]);
+show('#b7', tB7);
+tl.fromTo('#b7', { opacity: 0 }, { opacity: 1, duration: .3 }, tB7);
+tl.fromTo('#frb', { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in', transformOrigin: '0 50%' }, tB7 + .25);
+EV.push([tB7 + .5, 'impact', { size: 1.3 }]);
+xin('frbW', wt('радиовсплески.'));
+xin('newc', tB7 + .2);
+xin('slots', wt('быстрые') + .3); xin('slotsC', wt('один,'));
+tl.fromTo('#fry', { scale: 1.4, opacity: 0, rotation: 12 }, { scale: 1, opacity: 1, rotation: 5, duration: .2, ease: 'power3.out' }, wt('находил.') + .1);
+tl.to('#fry', { x: '+=10', duration: .04, yoyo: true, repeat: 5 }, wt('находил.') + .3);
+EV.push([wt('находил.') + .1, 'pop', { gain: 1 }], [wt('находил.') + .12, 'glitch', { dur: .18, gain: .4 }]);
+seqAt('fry', wt('находил.') + .1); seqAt('tv', wt('Луны,') - .5); seqAt('violin', wt('высокие') - .3); seqAt('b5', tB5); seqAt('a7', tA7); seqAt('far', tB6); seqAt('a6', tA6); seqAt('tape', tB1); seqAt('b7bg', tB7);
+DML.inserts(tl, EV, [[tA4 + 1.4, 'seq:i_moon2', 2.2, 'full', 'NASA · Apollo 11, 1969'], [tB4 + 4.3, 'seq:k09_space', 2.3, 'tilt'], [tB4 + 10.6, 'seq:v18_rot', 2.4, 'full']]);
+tl.to({}, { duration: .01 }, DUR);
+
+// слоты «найдено всплесков»
+$('#slots').innerHTML = Array.from({ length: 8 }, (_, i) => `<div style="width:70px;height:70px;border-radius:50%;border:3px solid ${i ? '#2A2A30' : '#E5392B'};background:${i ? 'transparent' : '#E5392B'};box-shadow:${i ? 'none' : '0 0 18px rgba(229,57,43,.8)'}"></div>`).join('');
+// «архив 2001» — строки данных
+let dl = ''; { let s = 11; const R = () => (s = (s * 16807) % 2147483647) / 2147483647; for (let i = 0; i < 40; i++) { let l = ''; for (let j = 0; j < 7; j++) l += (R() * 65535 | 0).toString(16).padStart(4, '0') + ' '; dl += l + '\n'; } }
+$('#data').textContent = dl;
+
+// ── камера
+const cam = CAMLIFE.attach($('#stage'), {
+  drift: { x: 7, y: 5, rot: .3, seed: 9 },
+  moves: [[0, 1.0], [tA2, 1.06], [tA2 + .01, 1.0], [tA3, 1.06], [tA3 + .01, 1.0], [tA4, 1.08, -40, 0], [tA4 + .01, 1.0], [tA5, 1.04], [tA5 + .01, 1.0], [tA6, 1.08], [tA6 + .01, 1.0], [tA7, 1.06], [tA7 + .01, 1.0], [tB1, 1.08],
+          [tB1 + .01, 1.0], [tB2, 1.08], [tB2 + .01, 1.0], [tB3, 1.04], [tB3 + .01, 1.0], [tB4, 1.1], [tB4 + .01, 1.0], [tB5, 1.07], [tB5 + .01, 1.0], [tB6, 1.08], [tB6 + .01, 1.0], [tB7, 1.06], [tB7 + .01, 1.0], [DUR, 1.08]],
+  accents: [[wt('четыре') + .25, .03], [wt('1969') + .15, .025], [wt('двух') + .17, .03], [wt('вспышку,'), .04], [wt('быстрые') + .15, .04], [wt('находил.') + .15, .03]],
+  focus: [[0, '50% 40%'], [tA2, '50% 40%'], [tA3, '60% 45%'], [tA5, '30% 30%'], [tA6, '30% 30%'], [tA7, '50% 50%'], [tB1, '40% 40%'], [tB3, '30% 25%'], [wt('пяти') - .5, '75% 65%'], [tB4, '60% 50%'], [tB5, '30% 40%'], [tB6, '50% 50%'], [tB7, '30% 30%'], [wt('находил.'), '70% 60%']]
+});
+const dust = DML.dust($('#fg'), 14, 7), fl = DML.floaters();
+function dyn(t) {
+  $('#pin').textContent = 'PARKES · НОВЫЙ ЮЖНЫЙ УЭЛЬС · АВСТРАЛИЯ'.slice(0, Math.max(0, Math.round((t - wt('Радиотелескоп')) * 30)));
+  const v = Math.max(0, Math.min(1, (t - wt('шестистам') + .2) / 1.3)); $('#v600').innerHTML = (Math.round(600 * (1 - Math.pow(1 - v, 3))) + ' 000 000').replace(/^0 000 000$/, '0') .replace(/(\d+) 000 000/, '≈ <span class="red">$1</span> 000 000');
+  $('#data').style.transform = `translateY(${-((t * 40) % 300)}px)`;
+  // ноты по «дороге» в газе: высокие быстрые, низкие отстают
+  const g = $('#notes2'); if (!g.childElementCount) for (let i = 0; i < 7; i++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', 8 + i * 3); g.appendChild(c); }
+  const road = $('#road'), L = road.getTotalLength(), ts = tB5 + .6;
+  [...g.children].forEach((c, i) => { const per = 1.6 + i * .7 + 1.2, p = Math.min(1, ((t - ts) % per + per) % per / (1.6 + i * .7)); const q = road.getPointAtLength(L * p); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y); c.setAttribute('opacity', t > ts ? .95 : 0); c.setAttribute('fill', i > 4 ? '#E5392B' : '#F2F2F0'); });
+  // «водопад»: строки шума + сканирующая линия по времени, точка на дуге
+  const wf = $('#wf'); if (!wf.childElementCount) for (let r = 0; r < 24; r++) { const l = document.createElementNS('http://www.w3.org/2000/svg', 'path'); l.setAttribute('stroke', '#5a4a66'); l.setAttribute('stroke-width', '2'); l.setAttribute('fill', 'none'); wf.appendChild(l); }
+  [...wf.children].forEach((l, r) => { const y = 190 + r * 28; let d = ''; for (let i = 0; i <= 64; i++) { const x = 510 + i * 20, n = ((i * 7919 + r * 104729 + Math.floor(t * 12) * 15485863) % 97) / 97; d += (i ? 'L' : 'M') + x + ' ' + (y + (n - .5) * 8).toFixed(1); } l.setAttribute('d', d); });
+  { const a = $('#arcL'), L = a.getTotalLength(), u = ((t - tB4 - 2.4) % 3.2 + 3.2) % 3.2 / 3.2, on = t > tB4 + 2.4 ? 1 : 0; const q = a.getPointAtLength(L * u);
+    $('#scan').setAttribute('x1', q.x); $('#scan').setAttribute('x2', q.x); $('#scan').setAttribute('opacity', on * .8); $('#hit').setAttribute('cx', q.x); $('#hit').setAttribute('cy', q.y); $('#hit').setAttribute('opacity', on); }
+  // слоты «ищут» второй всплеск
+  [...$('#slots').children].forEach((e, i) => { if (!i) { e.style.transform = `scale(${1 + .08 * Math.sin(t * 6)})`; return; } const ph = ((t * 3) % 7) | 0; e.style.borderColor = ph + 1 === i ? '#8A8A92' : '#2A2A30'; });
+  // импульсы бегут по дугам: короткий путь — быстро, длинный — медленно
+  [['pN', 'arcN', 1.5, .55, '#fff'], ['pF', 'arcF', 2.6, 1, '#ff5a4a']].forEach(([gid, pid, per, sy, col]) => {
+    const g = $('#' + gid), pa = $('#' + pid), L = pa.getTotalLength();
+    if (!g.childElementCount) for (let k = 0; k < 6; k++) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', 15 - k * 2); c.setAttribute('fill', col); g.appendChild(c); }
+    const u = ((t - tB6) % per + per) % per / per;
+    [...g.children].forEach((c, k) => { const q = pa.getPointAtLength(L * Math.max(0, u - k * .025)); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y * sy); c.setAttribute('opacity', (t > tB6 ? 1 : 0) * (1 - k / 6)); });
+  });
+  dust(t); fl(t); DML.subs($('#sub'), V, t);
+}
+window.__duration = DUR;
+window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
+window.__ready = document.fonts.ready.then(() => DML.loadMeta('../media/')).then(() => window.__seek(0));
+window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 84, key: 'D', mood: 'dark', db: -19, drums: true }, sfxDb: -3 }));
+if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }
+</script>
+</body></html>
