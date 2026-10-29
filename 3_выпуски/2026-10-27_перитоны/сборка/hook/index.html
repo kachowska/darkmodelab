@@ -187,22 +187,23 @@ EV.push([3.0, 'whoosh', { dur: .5, size: 1.2, gain: .8 }]);
 show('#sc2', 3.4, 20.6);
 tl.fromTo('#y1998', { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in' }, wt('1998') + .05);
 EV.push([wt('1998') + .3, 'thud', { gain: .8 }]);
-tl.fromTo('#chart', { opacity: 0 }, { opacity: 1, duration: .5 }, wt('всплеск') - .45);
-tl.to('#bg2', { opacity: 0, duration: .6 }, wt('всплеск') - .6);
+tl.fromTo('#chart', { opacity: 0 }, { opacity: 1, duration: .5 }, wt('характерный') - .45);
+tl.to('#bg2', { opacity: 0, duration: .6 }, wt('характерный') - .6);
 tl.set('#arc', { strokeDasharray: 1500, strokeDashoffset: 1500 }, 0);
-tl.fromTo('#pParkes', { y: -700, rotation: -18 }, { y: 0, rotation: -6, duration: .55, ease: 'back.out(1.4)' }, wt('знаменитых') - .1);
+tl.fromTo('#pParkes', { y: -1150, rotation: -18 }, { y: 0, rotation: -6, duration: .55, ease: 'back.out(1.4)' }, wt('знаменитых') - .1);
 EV.push([wt('знаменитых') + .4, 'shutter', { gain: .8 }], [wt('мира') + .2, 'shutter', { gain: .6 }], [wt('время') + .25, 'shutter', { gain: .6 }]);
 // всплеск — вспышка вертикальной линии
-tl.to('#spikeL', { opacity: 1, duration: .1 }, wt('всплеск')).to('#spikeL', { opacity: 0, duration: .4 }, wt('характерный') - .5);
-tl.to('#spike', { opacity: 1, duration: .04 }, wt('всплеск')).to('#spike', { opacity: 0, duration: .35 }, wt('всплеск') + .12);
+// «короткий всплеск»: телескоп на фото вздрагивает, по кадру проходит вспышка
+tl.to('#pParkes', { scale: 1.06, duration: .18, yoyo: true, repeat: 1 }, wt('всплеск'));
+tl.fromTo('#flash', { opacity: 0 }, { opacity: .35, duration: .06, yoyo: true, repeat: 1 }, wt('всплеск'));
 EV.push([wt('всплеск'), 'pop', { pitch: 1.6, gain: .9 }]);
 // на «всплеск» фото и 1998 уходят целиком — график остаётся один на чистом фоне
-tl.to('#y1998', { x: -700, opacity: 0, duration: .55, ease: 'power3.in' }, wt('всплеск') - .6);
-tl.to('#pParkes', { y: -1100, rotation: -16, duration: .6, ease: 'power3.in' }, wt('всплеск') - .6);
+tl.to('#y1998', { x: -700, opacity: 0, duration: .55, ease: 'power3.in' }, wt('характерный') - .6);
+tl.to('#pParkes', { y: -1300, rotation: -16, duration: .6, ease: 'power3.in' }, wt('характерный') - .6);
 tl.fromTo('#p3', { x: -900, rotation: -40 }, { x: 0, rotation: -12, duration: .5, ease: 'power3.out' }, wt('мира') - .15);
-tl.fromTo('#p2', { x: 900, rotation: 40 }, { x: 0, rotation: 7, duration: .5, ease: 'power3.out' }, wt('время') - .1);
-tl.to('#p2,#p3', { y: (i) => [1200, 1250][i], rotation: (i) => [20, -18][i], duration: .6, ease: 'power3.in', stagger: .05 }, wt('всплеск') - .65);
-EV.push([wt('всплеск') - .6, 'whoosh', { dur: .5, size: 1.1, gain: .6 }]);
+tl.fromTo('#p2', { x: 1500, rotation: 40 }, { x: 0, rotation: 7, duration: .5, ease: 'power3.out' }, wt('время') - .1);
+tl.to('#p2,#p3', { y: (i) => [1200, 1250][i], rotation: (i) => [20, -18][i], duration: .6, ease: 'power3.in', stagger: .05 }, wt('характерный') - .65);
+EV.push([wt('характерный') - .6, 'whoosh', { dur: .5, size: 1.1, gain: .6 }]);
 tl.to('#arc', { strokeDashoffset: 0, duration: 2.6, ease: 'power1.inOut' }, wt('характерный'));
 EV.push([wt('характерный'), 'riser', { dur: 2.4, gain: .35 }]);
 tl.fromTo('#nHi', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .3 }, wt('высокие'));
