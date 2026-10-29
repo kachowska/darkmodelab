@@ -10,5 +10,6 @@ cp -R 3_выпуски/_шаблон "$DST"
 mkdir -p "$DST/сборка/lib" "$DST/сборка/media" "_черновики/${DATE}_${SLUG}"
 cp 4_инструменты/движок-глав/{dml.js,dml.css,prep_media.py} "$DST/сборка/lib/"
 cp 4_инструменты/движок-глав/{render_ch.sh,render_mac.sh,assemble.sh} "$DST/сборка/"
+cp 3_выпуски/_шаблон/сборка/voice.json "$DST/сборка/"
 find "$DST" -name .gitkeep -delete
 echo "создано: $DST  (черновики: _черновики/${DATE}_${SLUG})"

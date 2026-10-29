@@ -1,5 +1,7 @@
 # ключи и системное
 .env
+.env.*
+!.env.example
 .DS_Store
 node_modules/
 package.json
