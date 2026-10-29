@@ -363,8 +363,7 @@ slam('n6', wt('шесть') - .1, 1.8);
 ent('two', wt('Два') - .2, { y: -40 }, { y: 0 }, .35);
 EV.push([wt('«семейства»'), 'swish', { gain: .5 }], [wt('Два'), 'impact', { size: 1.2 }]);
 seqAt('f1', tF1); seqAt('f7', tF7); seqAt('f3', tF3); seqAt('f6', tF6); seqAt('pepe', wt('печи.') + .15); seqAt('fiasko', wt('ничего.') + .15); seqAt('mwopen', wt('открыть') - .2); seqAt('mind', wt('бум»')); seqAt('esc', tF9); seqAt('fam1', tF12); seqAt('e1', 0); seqAt('router', tE4 + .1); seqAt('o1', tF2); seqAt('takeoff', tF9); seqAt('f9', tF9); seqAt('esc', tF9);
-DML.inserts(tl, EV, [[tE2 + 3.5, 'seq:v03_wave', 2.4, 'tilt'], [tE3 + 5.6, 'seq:k08_sky', 2.2, 'full'], [tF4 + 5.4, 'seq:k13_oven', 2.4, 'full', 'архивный фильм · общественное достояние'],
-  [tF5 + 3.0, 'seq:v18_rot', 2.2, 'circ'], [tF11 + 1.6, 'seq:k13_oven', 2.4, 'full', 'архивный фильм · общественное достояние'], [tF11 + 8.6, 'seq:v09_static', 2.4, 'tilt'], [tF11 + 16.3, 'seq:v11_kitchen', 2.3, 'tilt', 'иллюстрация · Pixabay', 'left:80px;top:640px;width:560px;height:340px'], [tF11 + 21.6, 'seq:k08_sky', 2.4, 'full']]);
+DML.inserts(tl, EV, [[tE2 + 3.5, 'seq:v03_wave', 2.4, 'tilt'], [tF11 + 1.6, 'seq:k13_oven', 2.4, 'full', 'архивный фильм · общественное достояние']]);
 tl.to({}, { duration: .01 }, DUR);
 $('#tries').innerHTML = Array.from({ length: 10 }, (_, i) => `<div class="try" data-i="${i}" style="width:48px;height:48px;border-radius:50%;border:3px solid #2A2A30"></div>`).join('');
 

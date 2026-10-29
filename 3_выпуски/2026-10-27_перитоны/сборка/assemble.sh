@@ -1,7 +1,8 @@
 #!/bin/bash
-# склейка черновика: хук + главы 1–5 (720p30), затем самопроверка
+# склейка черновика: главы по порядку из music_plan.json (720p30), затем самопроверка
 cd "$(dirname "$0")"
-printf "file '%s'\n" hook/hook_draft.mp4 ch1/ch1_draft.mp4 ch2/ch2_draft.mp4 ch3/ch3_draft.mp4 ch4/ch4_draft.mp4 ch5/ch5_draft.mp4 > concat.txt
+CH=$(python3 -c "import json;print(' '.join(json.load(open('music_plan.json'))['chapters']))" 2>/dev/null || echo hook intro ch1 ch2 ch3 ch4 ch5)   # порядок глав — из music_plan.json
+for c in $CH; do echo "file '$c/${c}_draft.mp4'"; done > concat.txt
 nice ffmpeg -loglevel error -y -threads 2 -f concat -safe 0 -i concat.txt -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p -r 30 -c:a aac -b:a 192k -ar 48000 -ac 2 _без-музыки.mp4 && echo ASSEMBLED
 ffprobe -v error -show_entries format=duration -of csv=p=0 _без-музыки.mp4
 python3 ../../../4_инструменты/анимация-obsion/watch.py _без-музыки.mp4 watch_full --fps 1 2>&1 | grep -E "Motion|holds|Static|frozen|Audio|Black"

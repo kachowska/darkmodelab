@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Dark Mode Lab — интро канала</title>
+<!-- Интро канала (4 с) между хуком и первой главой: лог системы → глитч-логотип → слоган → глитч-уход.
+     Новый выпуск: новый-выпуск.sh кладёт копию в сборка/intro/index.html. Меняется только блок INTRO ниже. -->
+<link rel="stylesheet" href="../../../../2_бренд/шрифты/fonts.css">
+<link rel="stylesheet" href="../lib/dml.css">
+<script src="../../../../4_инструменты/анимация-obsion/vendor/gsap.min.js"></script>
+<script src="../../../../4_инструменты/анимация-obsion/sfx.js"></script>
+<script src="../lib/dml.js"></script>
+<style>
+ #frame{background:#0b0b0d}
+ .log{position:absolute;top:0;width:620px;font:500 24px/1.55 'JetBrains Mono';color:#44444c;white-space:pre;opacity:.7;filter:blur(1.1px)}
+ #band{position:absolute;left:0;right:0;top:330px;height:420px;background:linear-gradient(rgba(11,11,13,0),rgba(11,11,13,.85) 30%,rgba(11,11,13,.85) 70%,rgba(11,11,13,0))}
+ .log .r{color:#7a2a24}
+ #mark{position:absolute;left:0;right:0;top:400px;height:200px}
+ .wm{position:absolute;left:0;right:0;top:0;text-align:center;font:900 136px/200px 'Unbounded';letter-spacing:-.02em;color:#F2F2F0;white-space:nowrap}
+ .wm b{color:#E5392B;font-weight:900}
+ .wm.c{color:rgba(34,230,255,.85);mix-blend-mode:screen}.wm.c b{color:rgba(34,230,255,.85)}
+ .wm.m{color:rgba(255,60,70,.85);mix-blend-mode:screen}.wm.m b{color:rgba(255,60,70,.85)}
+ #slogan{position:absolute;left:0;right:0;top:640px;text-align:center;font:500 40px 'JetBrains Mono';color:#d8d8dc}
+ #slogan i{color:#E5392B;font-style:normal}
+ #line{position:absolute;left:560px;width:800px;top:615px;height:4px;background:#E5392B;transform-origin:0 50%;box-shadow:0 0 18px rgba(229,57,43,.8)}
+ #tag2{position:absolute;left:0;right:0;top:960px;text-align:center;font:500 22px 'IBM Plex Mono';letter-spacing:.2em;color:#8A8A92}
+ #glow{position:absolute;left:460px;top:250px;width:1000px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(229,57,43,.28),transparent);filter:blur(30px)}
+ #flash2{position:absolute;inset:0;background:#fff;opacity:0}
+ #black{position:absolute;inset:0;background:#000;opacity:0}
+</style>
+</head><body>
+<div id="frame"><div id="stage">
+ <div class="log" style="left:40px"></div><div class="log" style="left:680px"></div><div class="log" style="left:1320px"></div>
+ <div id="band"></div>
+ <div id="glow"></div>
+ <div id="mark"><div class="wm c">DARK MODE <b>LAB</b></div><div class="wm m">DARK MODE <b>LAB</b></div><div class="wm bd">DARK MODE <b>LAB</b></div><div class="wm bd">DARK MODE <b>LAB</b></div><div class="wm bd">DARK MODE <b>LAB</b></div></div>
+ <div id="line"></div>
+ <div id="slogan"></div>
+ <div id="tag2"></div>
+ <div id="flash2"></div>
+ <div id="black"></div>
+ <div id="fg"></div><div id="vig"></div><div id="grain"></div>
+</div></div>
+<script>
+// ── INTRO: меняется на выпуск ──────────────────────────────────────────
+const INTRO = {
+  slogan: 'Как ломаются системы, которым все доверяют',      // EN: How the systems we trust break
+  tag: 'B · НАУКА ИЗНУТРИ · 01',                              // полоса · номер выпуска
+  line: 'PERYTON 12:05 · beams 1–13 · source: kitchen?'      // строка лога про этот выпуск
+};
+// ───────────────────────────────────────────────────────────────────────
+const DUR = 4.0, $ = s => document.querySelector(s);
+const LOG = ['08:01 BNET REJECT  <span class="r">Power Peg disabled</span>', 'segfault at 0000000000000000 error 4', 'kernel: watchdog: BUG: soft lockup - CPU#3 stuck',
+  'SMARS  route  parent=RLP  child order', '09:30 MARKET OPEN', '<span class="r">this action worsened the problem</span>', 'ROLLBACK  servers 1-7  new code uninstalled',
+  INTRO.line, 'ballistic missile threat inbound', '10:15 SMARS halted', 'beneficiary: "Shalika Fandation"'];
+document.querySelectorAll('.log').forEach((e, c) => { e.innerHTML = Array.from({ length: 70 }, (_, i) => LOG[(i * 7 + c * 3) % LOG.length]).join('\n'); });
+$('#tag2').textContent = INTRO.tag;
+const tl = gsap.timeline({ paused: true }), EV = [];
+// лог бежит вверх всё время, к концу ускоряется
+tl.fromTo('.log', { y: (i) => [-60, -300, -160][i] }, { y: (i) => [-1500, -1800, -1650][i], duration: DUR, ease: 'power1.in' }, 0);
+// знак влетает глитчем
+tl.fromTo('#mark', { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: .28, ease: 'power4.in' }, .2);
+tl.fromTo('#glow', { opacity: 0 }, { opacity: 1, duration: .6 }, .35);
+tl.fromTo('#flash2', { opacity: 0 }, { opacity: .35, duration: .05, yoyo: true, repeat: 1 }, .47);
+tl.fromTo('#line', { scaleX: 0 }, { scaleX: 1, duration: .6, ease: 'power3.out' }, .75);
+tl.fromTo('#tag2', { opacity: 0 }, { opacity: 1, duration: .4 }, 2.2);
+tl.to('#mark', { scale: 1.04, duration: 2.6, ease: 'none' }, .5);
+// уход: глитч, вспышка, чернота
+tl.to('.log', { opacity: 0, duration: .3 }, 3.45);
+tl.fromTo('#flash2', { opacity: 0 }, { opacity: .5, duration: .04, yoyo: true, repeat: 1 }, 3.62);
+tl.to('#black', { opacity: 1, duration: .2 }, 3.78);
+EV.push([.2, 'glitch', { dur: .3, gain: .8 }], [.47, 'impact', { size: 1.3, gain: 1 }], [.75, 'swish', { gain: .5 }], [1.0, 'type', { n: 22, rate: 26, gain: .35 }],
+  [3.3, 'glitch', { dur: .35, gain: .7 }], [3.62, 'whoosh', { dur: .45, size: 1.1, gain: .7 }]);
+tl.to({}, { duration: .01 }, DUR);
+// глитч: полосы смещаются по хэшу кадра (детерминированно), RGB-копии расходятся
+const GL = [[.2, .62], [1.85, 1.95], [2.9, 2.97], [3.3, 3.85]];
+const hsh = n => { let x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+function dyn(t) {
+  const g = GL.some(([a, b]) => t >= a && t < b), k = Math.floor(t * 30);
+  const amp = g ? (t > 3.3 ? 34 + (t - 3.3) * 120 : 26) : 0;
+  // знак собран из трёх полос; в глитче полосы разъезжаются по горизонтали
+  const cuts = g ? [0, 25 + hsh(k) * 20, 55 + hsh(k + 9) * 20, 100] : [0, 33, 66, 100];
+  document.querySelectorAll('.wm.bd').forEach((e, i) => {
+    e.style.clipPath = `inset(${cuts[i]}% -5% ${100 - cuts[i + 1]}% -5%)`;
+    e.style.transform = `translateX(${g ? ((hsh(k * 3 + i) - .5) * amp * 1.6).toFixed(1) : 0}px)`;
+  });
+  const dx = g ? (hsh(k + 5) - .5) * amp : 0;
+  document.querySelector('.wm.c').style.transform = `translate(${-6 - (g ? amp * .5 : 0) + dx}px,${g ? (hsh(k + 7) - .5) * 10 : 0}px)`;
+  document.querySelector('.wm.m').style.transform = `translate(${6 + (g ? amp * .5 : 0) - dx}px,0)`;
+  $('#mark').style.filter = g ? `blur(${(hsh(k + 11) * 1.5).toFixed(2)}px)` : 'none';
+  // слоган печатается
+  const s = INTRO.slogan, n = Math.round(s.length * Math.max(0, Math.min(1, (t - 1.0) / 1.0)));
+  $('#slogan').innerHTML = t < 1.0 ? '' : '<i>&gt;</i> ' + s.slice(0, n) + (t < 3.3 && Math.floor(t * 3) % 2 ? '<i>▍</i>' : '');
+}
+window.__duration = DUR;
+window.__seek = t => { tl.seek(t, false); dyn(t); };
+window.__ready = document.fonts.ready.then(() => window.__seek(0));
+window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { sfxDb: -3, tail: 0 }));
+if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }
+</script>
+</body></html>
