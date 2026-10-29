@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 .DS_Store
+._*
 node_modules/
 .venv/
 package.json
