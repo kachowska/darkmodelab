@@ -114,5 +114,25 @@ window.DML = (function () {
     window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, dur, { sfxDb: -3, tail: 0 }));
     return WARP;
   }
-  return { $, words, subs, dust, floaters, loadMeta, seqs, inserts, retime };
+  // ── графики «как в статье»: тонкие оси с делениями и числами, сетка, подписи моно, кривая по настоящей формуле.
+  // plot(svg, {box:[x,y,w,h], x:[min,max], y:[min,max], xt:[...], yt:[...], xl, yl, fs, grid}) → {X, Y, disp}
+  // disp(fHi, fLo, T) — кривая дисперсии t ∝ f⁻² (так приходит радиовсплеск: высокие частоты раньше, низкие позже)
+  function plot(svg, o) {
+    const NS = 'http://www.w3.org/2000/svg', [bx, by, bw, bh] = o.box, fs = o.fs || 18, ax = o.axis || '#6a6a72', tx = o.text || '#9a9aa2';
+    const X = v => bx + (v - o.x[0]) / (o.x[1] - o.x[0]) * bw, Y = v => by + bh - (v - o.y[0]) / (o.y[1] - o.y[0]) * bh;
+    const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'plot');
+    const el = (n, a, txt) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; g.appendChild(e); return e; };
+    const num = v => String(v).replace('.', ',');
+    (o.yt || []).forEach(v => { if (o.grid !== false) el('line', { x1: bx, x2: bx + bw, y1: Y(v), y2: Y(v), stroke: 'rgba(255,255,255,.06)', 'stroke-width': 1 });
+      el('line', { x1: bx - 8, x2: bx, y1: Y(v), y2: Y(v), stroke: ax, 'stroke-width': 2 }); el('text', { x: bx - 14, y: Y(v) + fs * .35, 'text-anchor': 'end', 'font-family': 'IBM Plex Mono', 'font-size': fs, fill: tx }, num(v)); });
+    (o.xt || []).forEach(v => { if (o.grid !== false) el('line', { x1: X(v), x2: X(v), y1: by, y2: by + bh, stroke: 'rgba(255,255,255,.06)', 'stroke-width': 1 });
+      el('line', { x1: X(v), x2: X(v), y1: by + bh, y2: by + bh + 8, stroke: ax, 'stroke-width': 2 }); el('text', { x: X(v), y: by + bh + fs + 10, 'text-anchor': 'middle', 'font-family': 'IBM Plex Mono', 'font-size': fs, fill: tx }, num(v)); });
+    el('line', { x1: bx, x2: bx + bw, y1: by + bh, y2: by + bh, stroke: ax, 'stroke-width': 2 }); el('line', { x1: bx, x2: bx, y1: by, y2: by + bh, stroke: ax, 'stroke-width': 2 });
+    if (o.xl) el('text', { x: bx + bw, y: by + bh + fs * 2.5 + 10, 'text-anchor': 'end', 'font-family': 'IBM Plex Mono', 'font-size': fs, fill: tx }, o.xl);
+    if (o.yl) el('text', { transform: `translate(${bx - fs * 3.2} ${by}) rotate(-90)`, 'text-anchor': 'end', 'font-family': 'IBM Plex Mono', 'font-size': fs, fill: tx }, o.yl);
+    svg.insertBefore(g, svg.firstChild);
+    const disp = (fHi, fLo, T, n) => { n = n || 60; let d = ''; for (let i = 0; i <= n; i++) { const f = fHi - (fHi - fLo) * i / n, t = T * (f ** -2 - fHi ** -2) / (fLo ** -2 - fHi ** -2); d += (i ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(f).toFixed(1); } return d; };
+    return { X, Y, disp };
+  }
+  return { $, words, subs, dust, floaters, loadMeta, seqs, inserts, retime, plot };
 })();

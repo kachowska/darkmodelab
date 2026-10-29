@@ -6,7 +6,7 @@
  "music_lufs": -24,
  "voice_lufs": -16,
  "duck_db": -16,
- "music_gain_db": 0,
+ "music_gain_db": -3,
  "sfx_gain_db": -3,
  "sections": [
   {

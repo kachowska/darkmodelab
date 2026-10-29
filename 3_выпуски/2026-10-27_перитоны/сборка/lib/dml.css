@@ -65,3 +65,18 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 .ins-circ{left:1260px;top:400px;width:560px;height:560px;border-radius:50%;box-shadow:0 0 0 12px #f4f2ec,0 40px 80px rgba(0,0,0,.75)}
 .inscap{position:absolute;left:28px;bottom:22px;font:500 20px 'IBM Plex Mono';color:#e6e6ea;text-shadow:0 2px 8px #000;letter-spacing:.06em}
 .ins-full .inscap{left:128px;bottom:122px}
+
+/* кассета-стикер: видео внутри окошка кассеты (архивы, записи, плёнка) */
+.cass{position:absolute;width:520px;height:330px;border-radius:22px;background:#26262b;box-shadow:0 0 0 7px #f4f2ec,0 30px 60px rgba(0,0,0,.65)}
+.cass .lab{position:absolute;left:26px;right:26px;top:22px;height:200px;border-radius:10px;background:#f4f2ec;overflow:hidden}
+.cass .lab b{position:absolute;left:0;right:0;top:0;height:16px;background:var(--red)}
+.cass .lab span{position:absolute;left:16px;top:24px;font:500 20px 'IBM Plex Mono';color:#222;letter-spacing:.06em}
+.cass .win{position:absolute;left:84px;top:62px;width:300px;height:96px;border-radius:48px;overflow:hidden;background:#000;box-shadow:inset 0 0 0 4px #1a1a1e}
+.cass .win img{width:100%;height:100%;object-fit:cover}
+.cass .reel{position:absolute;top:80px;width:60px;height:60px;border-radius:50%;border:6px dashed #f4f2ec;box-sizing:border-box;background:rgba(0,0,0,.25)}
+.cass .foot{position:absolute;left:96px;right:96px;bottom:0;height:74px;background:#1d1d21;clip-path:polygon(10% 0,90% 0,100% 100%,0 100%)}
+.cass .foot i{position:absolute;bottom:22px;width:14px;height:14px;border-radius:50%;background:#0c0c0e}
+.cass .scr{position:absolute;width:12px;height:12px;border-radius:50%;background:#55555c}
+
+/* аннотации на графиках и схемах — моно, ровно, как подписи в статье */
+.ann{font:500 26px 'IBM Plex Mono';color:var(--red);letter-spacing:.03em;white-space:nowrap}
