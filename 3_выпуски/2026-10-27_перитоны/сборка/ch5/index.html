@@ -8,6 +8,7 @@
 <script src="../../../../4_инструменты/анимация-obsion/sfx.js"></script>
 <script src="../lib/dml.js"></script>
 <script src="../media/meta.js"></script>
+<script src="voice_words.js"></script>
 <style>.spec{position:absolute;background:#06110b;border:12px solid #23262a;border-radius:14px;box-shadow:0 30px 60px rgba(0,0,0,.7);overflow:hidden}</style>
 </head><body>
 <div id="frame">
@@ -247,6 +248,7 @@ seqAt('i4', tI4); seqAt('i5', tI5);
 window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
 window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
 window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { bed: { bpm: 80, key: 'D', mood: 'warm', db: -20, drums: true, end: DING - 3.2 }, sfxDb: -3 }));
+DML.retime(V.W, EV, DUR);   // перевод главы на настоящий голос (voice_words.js)
 if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }
 </script>
 </body></html>

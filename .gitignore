@@ -40,3 +40,5 @@ _черновики/
 *.render.json
 _frames/
 _gif/
+3_выпуски/*/сборка/*/timing.json
+3_выпуски/*/сборка/*/voice_align.json
