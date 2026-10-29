@@ -1,0 +1,143 @@
+{
+ "aldrin": {
+  "src": "настоящие/photo_F01_nasa_aldrin_as11-40-5903.jpg",
+  "box": [
+   503,
+   0,
+   865,
+   725
+  ]
+ },
+ "alien_toys": {
+  "src": "настоящие/photo_F09_pixabay_alien-toys.jpg",
+  "box": [
+   496,
+   453,
+   793,
+   819
+  ]
+ },
+ "clocks": {
+  "src": "настоящие/photo_F10_pixabay_world-clocks.jpg",
+  "box": [
+   240,
+   320,
+   1056,
+   493
+  ],
+  "keep": 4
+ },
+ "compass_hand": {
+  "src": "настоящие/photo_F15_pixabay_compass-hand.jpg",
+  "box": [
+   6,
+   244,
+   768,
+   853
+  ]
+ },
+ "earth": {
+  "src": "настоящие/photo_F03_nasa_earth_blue-marble.jpg",
+  "box": [
+   83,
+   81,
+   1193,
+   1167
+  ]
+ },
+ "lorimer": {
+  "src": "настоящие/photo_F19_commons_duncan-lorimer.jpg",
+  "box": [
+   253,
+   174,
+   997,
+   1586
+  ]
+ },
+ "magnetron_caso": {
+  "src": "настоящие/photo_F21_commons_magnetron_caso-smg20.jpg",
+  "box": [
+   347,
+   178,
+   3300,
+   3630
+  ]
+ },
+ "magnetron_parts": {
+  "src": "настоящие/commons_magnetron_detail.jpg",
+  "box": [
+   32,
+   5,
+   1565,
+   1143
+  ],
+  "keep": 4
+ },
+ "magnifier": {
+  "src": "настоящие/photo_F18_pixabay_magnifier.jpg",
+  "box": [
+   146,
+   48,
+   1184,
+   960
+  ]
+ },
+ "mug_white": {
+  "src": "настоящие/photo_F07_pixabay_mug-white.jpg"
+ },
+ "mugs_two": {
+  "src": "настоящие/photo_F06_pixabay_mugs-two.jpg",
+  "box": [
+   79,
+   166,
+   1217,
+   755
+  ],
+  "keep": 2
+ },
+ "parkes_dish_day": {
+  "src": "настоящие/parkes_west_09.jpg",
+  "box": [
+   183,
+   77,
+   1827,
+   1985
+  ]
+ },
+ "parkes_dish_dusk": {
+  "src": "настоящие/parkes_csiro-4350_moon.jpg",
+  "box": [
+   128,
+   726,
+   1770,
+   2323
+  ]
+ },
+ "pizza_slice": {
+  "src": "настоящие/photo_F08_pixabay_pizza-slice.jpg",
+  "box": [
+   113,
+   65,
+   1193,
+   734
+  ]
+ },
+ "road_closed": {
+  "src": "настоящие/photo_F11_pixabay_road-closed.jpg",
+  "box": [
+   0,
+   287,
+   1023,
+   772
+  ]
+ },
+ "toy_plane": {
+  "src": "настоящие/photo_F13_pixabay_toy-plane.jpg",
+  "box": [
+   307,
+   85,
+   1280,
+   852
+  ]
+ }
+}
