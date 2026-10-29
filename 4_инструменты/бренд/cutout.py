@@ -33,13 +33,13 @@ keep = [i for i in order[:max(1, a.keep)]] + [i for i in order[a.keep:] if st[i,
 region = cv2.dilate(np.isin(lab, keep).astype(np.uint8), np.ones((9, 9), np.uint8))
 mask *= region
 # 2) края по фото и без ореола
-guide = cv2.cvtColor((rgb * 255).astype(np.uint8), cv2.COLOR_RGB2GRAY)
+guide = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)   # float 0–1: с uint8-направляющей guided filter даёт NaN
 r = max(2, round(min(img.size) / 400))
 mask = cv2.ximgproc.guidedFilter(guide, mask, r, 1e-3)
-mask = np.clip((mask - .12) / .8, 0, 1)
+mask = np.clip((np.nan_to_num(mask) - .12) / .8, 0, 1)
 # 3) цвет краёв без фона
 fg = estimate_foreground_ml(rgb.astype(np.float64), mask.astype(np.float64))
-out = np.dstack([np.clip(fg, 0, 1), mask])
+out = np.nan_to_num(np.dstack([np.clip(fg, 0, 1), mask]))
 ys, xs = np.where(mask > .02)
 pad = round(max(img.size) * .02)
 y0, y1, x0, x1 = max(0, ys.min() - pad), min(mask.shape[0], ys.max() + pad), max(0, xs.min() - pad), min(mask.shape[1], xs.max() + pad)
