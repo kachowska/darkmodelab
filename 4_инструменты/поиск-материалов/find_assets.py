@@ -5,7 +5,8 @@
 Выход: _черновики/<ep>/кандидаты.md + папка _черновики/<ep>/кандидаты/ (только с --download) — контактный лист для выбора; выбранное переносится в материалы выпуска.
 Источники: Klipy (гифки + клипы-мемы из фильмов/сериалов mp4), Pixabay (фото/видео), Wikimedia Commons (история/документы, видео),
 NASA Image and Video Library (видео/фото NASA — общественное достояние), Internet Archive (старые фильмы, Prelinger — общественное достояние). Ключи из .env.
-Ключи сцены: gif, clip, photo, video, commons, commons_video, nasa, archive.
+Ключи сцены: gif, sticker, clip, photo, video, commons, commons_video, nasa, archive.
+sticker — стикеры Klipy с прозрачным фоном (анимированные: webm с альфой, gif; превью png) — котики-мемы и предметы.
 """
 import json, os, sys, pathlib, argparse, urllib.parse
 import requests
@@ -60,6 +61,19 @@ def commons(q, n=6):
                     "author": (md.get("Artist", {}) or {}).get("value", "")})
     return out
 
+def klipy_stickers(q, n=6):
+    """Стикеры Klipy: прозрачный фон. url — анимированный webm (с альфой), preview — png, gif — запасной."""
+    if not KLIPY: return []
+    r = requests.get(f"https://api.klipy.com/api/v1/{KLIPY}/stickers/search", params={"q": q, "per_page": n}, headers=UA, timeout=20)
+    if r.status_code != 200: return [{"error": f"klipy-sticker {r.status_code}"}]
+    out = []
+    for it in (r.json().get("data", {}).get("data") or []):
+        f = it.get("file", {}); hd = f.get("hd") or f.get("md") or {}; sm = f.get("sm") or f.get("md") or {}
+        out.append({"src": "klipy-sticker", "title": it.get("title", ""), "url": (hd.get("webm") or hd.get("gif") or {}).get("url"),
+                    "gif": (hd.get("gif") or {}).get("url"), "preview": (sm.get("png") or sm.get("webp") or {}).get("url"),
+                    "page": it.get("url", ""), "slug": it.get("slug", ""), "license": "Klipy API terms"})
+    return out
+
 def klipy_clips(q, n=6):
     """Клипы-мемы (фильмы, сериалы, шоу) — mp4, часто со звуком. Правило устава: ≤ 3 с, свой звук поверх."""
     if not KLIPY: return []
@@ -105,6 +119,7 @@ def main():
         qs = s.get("queries", {})
         found = []
         for q in qs.get("gif", []):   found += klipy(q)
+        for q in qs.get("sticker", []): found += klipy_stickers(q)
         for q in qs.get("photo", []): found += pixabay(q)
         for q in qs.get("video", []): found += pixabay(q, video=True)
         for q in qs.get("commons", []): found += commons(q)
