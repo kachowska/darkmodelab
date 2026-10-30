@@ -154,7 +154,7 @@ const SENT = [
 ];
 const V = DML.words(SENT, 0.4, 2.6), wt = V.wt, DING = V.end + .3, DUR = Math.ceil(DING + 4.2);
 const tl = gsap.timeline({ paused: true }), EV = [];
-const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: .3 }, a); };
+const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); if (a > 0) tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: .3 }, a); };   // первый план — сразу на экране
 const xin = (id, t, d) => tl.fromTo('#' + id, { opacity: 0 }, { opacity: 1, duration: d || .35 }, t);
 const ent = (id, t, from, to, d, e) => tl.fromTo('#' + id, Object.assign({ opacity: 0 }, from), Object.assign({ opacity: 1, duration: d || .5, ease: e || 'power3.out' }, to), t);
 const meme = (id, t) => { tl.fromTo('#' + id, { scale: 1.4, opacity: 0 }, { scale: 1, opacity: 1, duration: .2, ease: 'power3.out' }, t); tl.to('#' + id, { x: '+=10', duration: .04, yoyo: true, repeat: 5 }, t + .2); EV.push([t, 'pop', { gain: 1 }], [t + .02, 'glitch', { dur: .16, gain: .35 }]); document.querySelectorAll('#' + id + ' img.seq').forEach(e => e.dataset.t0 = t); };
@@ -163,7 +163,7 @@ const slam = (id, t, s) => { tl.fromTo('#' + id, { scale: s || 1.6, opacity: 0 }
 const tI2 = wt('Канадский') - .2, tI3 = wt('28') - .5, tI4 = Math.max(wt('магнетар') - .5, wt('Галактики.') + .3 + 2.8), tI5 = wt('Откуда') - .2, tJ1 = wt('наука') - .7, tJ2 = wt('Скучными') - .2, tJ3 = wt('ещё') - .5,
       tJ4 = Math.max(wt('незакрытая') - .9, wt('микроволновка.') + .2 + 2.8), tJ5 = Math.max(wt('окажетесь') - 1.6, wt('удалось.') + .1 + 2.8), tJ6 = DING + 1.6;
 show('#i1', 0, tI2);
-slam('frb', .3, 1.8);
+tl.fromTo('#frb', { scale: 1.25, opacity: .5 }, { scale: 1, opacity: 1, duration: .25, ease: 'power3.out' }, 0); EV.push([.2, 'thud', { gain: .8 }]);   // план открывается материалом
 xin('slots', wt('известно') - .2);
 show('#i2', tI2, tI3);
 tl.fromTo('#chime', { scale: 1.12 }, { scale: 1.0, duration: tI3 - tI2, ease: 'none' }, tI2);

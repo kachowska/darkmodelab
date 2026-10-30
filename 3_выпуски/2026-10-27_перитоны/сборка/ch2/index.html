@@ -186,7 +186,7 @@ days($('#week')); days($('#week2'));
 const tC2 = wt('Но') - .2, tC3 = wt('Настоящий') - .2, tC4 = wt('Источник') - .2, tC5 = Math.max(wt('Бёрк-Сполар', 1) - .2, wt('Земле.') - .1 + 2.8), tC6 = wt('вот') - .35;
 const tD1 = Math.max(wt('Следующие') - .2, wt('Лоримера') - .1 + 2.8), tD2 = wt('А', 1) - .2, tD3 = wt('У') - .2, tD4 = wt('Звёзды') - .2, tD5 = Math.max(wt('Правда,') + .9, wt('знают.') + .2 + 2.8);
 show('#c1', 0, tC2);
-tl.fromTo('#wall', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: .8 }, 0.1);
+tl.fromTo('#wall', { opacity: .75, y: 30 }, { opacity: 1, y: 0, duration: .8 }, 0);   // план открывается материалом
 ent('bookV', wt('прочесала') - .3, { y: 500, rotation: 10 }, { y: 0, rotation: -4 }, .5); EV.push([wt('прочесала') - .3, 'paper', { dur: .4 }]);
 ent('sara', wt('аспирантка') - .2, { x: -700, rotation: -12 }, { x: 0, rotation: -2 });
 EV.push([wt('аспирантка') - .2, 'paper', { dur: .4 }]);

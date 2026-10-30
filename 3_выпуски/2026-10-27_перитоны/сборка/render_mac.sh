@@ -1,11 +1,12 @@
 #!/bin/bash
 # Рендер выпуска на Маке: хук и главы параллельно (J одновременно, по умолчанию 3), затем склейка и мастеринг.
 # Запуск: J=3 ./render_mac.sh — черновик 720p30;  FINAL=1 J=3 ./render_mac.sh — финал 1080p60 → готово/<final из music_plan.json>
+# Точечная правка: ONLY="ch2 ch5" FINAL=1 ./render_mac.sh — заново рендерятся только эти главы, остальные берутся готовыми; склейка и сведение — как обычно
 cd "$(dirname "$0")"
 J=${J:-3}
 CH=$(python3 -c "import json;print(' '.join(json.load(open('music_plan.json'))['chapters']))" 2>/dev/null || echo hook intro ch1 ch2 ch3 ch4 ch5)   # порядок глав — из music_plan.json
 start=$(date +%s)
-printf "%s\n" $CH | xargs -P "$J" -I{} sh -c 'rm -rf {}/_frames; ./render_ch.sh {}'
+printf "%s\n" ${ONLY:-$CH} | xargs -P "$J" -I{} sh -c 'rm -rf {}/_frames; ./render_ch.sh {}'
 ./assemble.sh
 # голос + настоящая музыка (если есть план): звуки глав без процедурной подложки, голос, треки с кроссфейдами и приглушением под голосом
 if [ -f music_plan.json ]; then
