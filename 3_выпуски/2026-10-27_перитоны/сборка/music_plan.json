@@ -1,6 +1,7 @@
 {
  "video": "_без-музыки.mp4",
  "out": "../готово/перитоны_RU_черновик.mp4",
+ "final": "перитоны_RU.mp4",
  "chapters": ["hook", "intro", "ch1", "ch2", "ch3", "ch4", "ch5"],
  "xfade": 10,
  "music_lufs": -24,

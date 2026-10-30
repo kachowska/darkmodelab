@@ -13,6 +13,8 @@ plan.json (пути — от папки плана, обычно сборка/):
 дольше 1,6 с; затем всё сводится, мастерится до −14 LUFS и подкладывается под видео."""
 import json, subprocess, sys, tempfile, pathlib, re
 P = json.load(open(sys.argv[1])); base = pathlib.Path(sys.argv[1]).parent
+for k in ("video", "out"):   # --video / --out: другой источник и итог (финал 1080p60), пути от папки плана
+    if "--" + k in sys.argv: P[k] = sys.argv[sys.argv.index("--" + k) + 1]
 def run(a): subprocess.run(a, check=True)
 def ab(p): return str((base / p).resolve())
 CH = P["chapters"]; TM = [json.load(open(ab(f"{c}/timing.json"))) for c in CH]

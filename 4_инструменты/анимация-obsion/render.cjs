@@ -36,12 +36,22 @@ const a = process.argv.slice(2), JPG = process.argv.includes("--jpeg"), opt = (k
   const api = await p.evaluate(() => typeof window.__seek === "function" ? "__seek" : typeof window.__frame === "function" ? "__frame" : "");
   const from0 = +opt("from", 0); const secs = +(opt("secs", 0) || Math.max(0, (await p.evaluate(() => window.__duration || 0)) - from0) || 20);
   const from = +opt("from", 0); const n = Math.round(secs * fps);
+  // --pipe: кадры сразу в ffmpeg, без папки кадров на диске (финальный 1080p60 иначе занимает гигабайты)
+  const PIPE = a.includes("--pipe"), vtmp = out.replace(/\.mp4$/, ".video.mp4");
+  let enc = null, encDone = null;
+  if (PIPE) {
+    enc = require("child_process").spawn("ffmpeg", ["-loglevel", "error", "-y", "-f", "image2pipe", "-c:v", "mjpeg", "-framerate", String(fps), "-i", "-",
+      "-vf", "scale=out_color_matrix=bt709:out_range=tv,setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv",
+      "-c:v", "libx264", "-preset", "veryfast", "-crf", "16", "-pix_fmt", "yuv420p", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", "-color_range", "tv", "-r", String(fps), vtmp], { stdio: ["pipe", "inherit", "inherit"] });
+    encDone = new Promise((res, rej) => enc.on("close", c => c ? rej(new Error("ffmpeg " + c)) : res()));
+  }
   for (let i = 0; i < n; i++) {
     const t = from + i / fps;
     if (api) await p.evaluate(async ([f, t]) => { const r = window[f](t); if (r && r.then) await r; return 0; }, [api, t]); // Dark Mode Lab: __seek может вернуть Promise (кадры клипов и гифок)
     else { await p.goto(url(t), { waitUntil: "load" }); await p.evaluate(() => document.fonts && document.fonts.ready); }
     await p.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
-    await p.screenshot(JPG ? { path: path.join(fr, `f${String(i).padStart(6, "0")}.jpg`), type: "jpeg", quality: 93 } : { path: path.join(fr, `f${String(i).padStart(6, "0")}.png`) }); // --jpeg: быстрее для черновиков
+    if (PIPE) { const buf = await p.screenshot({ type: "jpeg", quality: 95 }); if (!enc.stdin.write(buf)) await new Promise(r => enc.stdin.once("drain", r)); }
+    else await p.screenshot(JPG ? { path: path.join(fr, `f${String(i).padStart(6, "0")}.jpg`), type: "jpeg", quality: 93 } : { path: path.join(fr, `f${String(i).padStart(6, "0")}.png`) }); // --jpeg: быстрее для черновиков
     if (i % (fps * 2) === 0) process.stdout.write(`\r${i}/${n}`);
   }
   // Procedural audio from the page itself (sfx.js): window.__audioWav() → base64 WAV, rendered offline (never played aloud).
@@ -51,6 +61,7 @@ const a = process.argv.slice(2), JPG = process.argv.includes("--jpeg"), opt = (k
     pageAudio = path.join(dir, "audio.raw.wav"); fs.writeFileSync(pageAudio, Buffer.from(b64, "base64"));
   }
   await b.close(); if (srv) srv.close();
+  if (PIPE) { enc.stdin.end(); await encDone; }
   let mixIn = audio ? path.resolve(audio) : pageAudio;
   if (mixIn && !a.includes("--no-loudnorm")) { // master to −14 LUFS / −1.5 dBTP: compressor → searched gain → oversampled limiter (loudness.py)
     const norm = path.join(dir, "audio.wav");
@@ -62,7 +73,8 @@ const a = process.argv.slice(2), JPG = process.argv.includes("--jpeg"), opt = (k
     execSync(`ffmpeg -loglevel error -y -ss ${from} -t ${secs} -i "${mixIn}" "${cut}"`); mixIn = cut;
   }
   const aud = mixIn ? `-i "${mixIn}" ${AAC} -map 0:v -map 1:a` : "";
-  execSync(`ffmpeg -loglevel error -y -framerate ${fps} -i "${fr}/f%06d.${JPG ? "jpg" : "png"}" ${aud} -vf "scale=out_color_matrix=bt709:out_range=tv,setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv" -c:v libx264 -preset veryfast -crf 16 -pix_fmt yuv420p -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv -r ${fps} -t ${(n / fps).toFixed(3)} -movflags +faststart "${out}"`);
+  if (PIPE) { execSync(`ffmpeg -loglevel error -y -i "${vtmp}" ${aud} -c:v copy -t ${(n / fps).toFixed(3)} -movflags +faststart "${out}"`); fs.rmSync(vtmp, { force: true }); }
+  else execSync(`ffmpeg -loglevel error -y -framerate ${fps} -i "${fr}/f%06d.${JPG ? "jpg" : "png"}" ${aud} -vf "scale=out_color_matrix=bt709:out_range=tv,setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709:range=tv" -c:v libx264 -preset veryfast -crf 16 -pix_fmt yuv420p -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv -r ${fps} -t ${(n / fps).toFixed(3)} -movflags +faststart "${out}"`);
   if (mixIn && !a.includes("--no-loudnorm") && !(+opt("from", 0) > 0)) { // AAC can overshoot the WAV true peak by ~3 dB on dense limited mixes: measure the MP4 and, if TP > −1 dBTP, re-master the WAV with a lower ceiling and remux (loudness stays at −14)
     const meas = f => { const r = require("child_process").spawnSync("ffmpeg", ["-hide_banner", "-nostats", "-i", f, "-map", "0:a", "-af", "ebur128=peak=true", "-f", "null", "-"], { encoding: "utf8" }).stderr; const m = r.match(/Peak:\s+(-?[\d.]+) dBFS/g); return m ? parseFloat(m[m.length - 1].split(/\s+/)[1]) : -99; };
     let tp = meas(out), ceil = -2.0;
