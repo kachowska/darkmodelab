@@ -282,7 +282,7 @@ tl.to({}, { duration: .01 }, DUR);
 const PAPER = [[T.s5, T.s7]];
 // камера: на каждый план — медленный подъезд, на смене сцены — сброс
 const cuts = [0, T.s2, T.s3, T.s4, T.s5, T.s6, T.s7, T.s8, T.s9, DUR];
-const moves = []; cuts.slice(0, -1).forEach((c, i) => { moves.push([c, 1.0]); moves.push([cuts[i + 1] - .02, i === 5 ? 1.07 : 1.05]); });
+const moves = []; cuts.slice(0, -1).forEach((c, i) => { moves.push([c, 1.0]); moves.push([cuts[i + 1] - .02, i === 4 ? 1.12 : i === 5 || i === 7 ? 1.08 : 1.05]); });
 const cam = CAMLIFE.attach($('#stage'), {
   drift: { x: 6, y: 4, rot: .25, seed: 11 }, moves,
   accents: [[wt('Кенни'), .02], [wt('видел.'), .025], [wt('тридцать') + .02, .035], [wt('шестнадцать'), .02], [wt('суде.'), .02]],
