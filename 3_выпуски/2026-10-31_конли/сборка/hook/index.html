@@ -278,7 +278,10 @@ tl.to({}, { duration: .01 }, DUR);
 const DARK = [[0, T.s3 + .25], [T.s7, T.s8 + .25]];
 // камера: на каждом плане медленный подъезд, на смене — сброс; фокус — на то, о чём речь
 const cuts = order.map(id => START[id]).concat(DUR);
-const moves = []; cuts.slice(0, -1).forEach((c, i) => { moves.push([c, 1.0]); moves.push([cuts[i + 1] - .02, i === 4 ? 1.12 : [2, 3, 7, 8].includes(i) ? 1.07 : 1.05]); });
+// бумажные сцены: подъезд 12–14 % с проездом в сторону речи (на бумаге нет видео во весь кадр — камера даёт жизнь кадру)
+const PAPERSC = [2, 3, 4, 5, 7, 8];
+const moves = []; cuts.slice(0, -1).forEach((c, i) => { const pp = PAPERSC.includes(i), dx = i % 2 ? -70 : 70;
+  moves.push([c, 1.0, 0, 0]); moves.push([cuts[i + 1] - .02, pp ? 1.14 : 1.06, pp ? dx : 0, pp ? -24 : 0]); });
 const cam = CAMLIFE.attach($('#stage'), {
   drift: { x: 6, y: 4, rot: .25, seed: 11 }, moves,
   accents: [[wt('Кенни'), .02], [wt('видел.'), .025], [wt('тридцать') + .02, .035], [wt('шестнадцать'), .02], [wt('суде.'), .02]],
