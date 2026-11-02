@@ -56,7 +56,7 @@ svg text{font-family:Alegreya,serif}
 
  <!-- SC2 · где · когда: мигалка на весь кадр, своими цветами -->
  <div class="sc" id="sc2" style="background:#000">
-  <img class="vid seq" data-seq="c01_light" data-in="3.7" data-rate=".2">
+  <img class="vid seq" data-seq="c01_light" data-in="0" data-loop="1">
   <div class="strip" id="wkbar" style="left:-20px;top:700px;width:1100px;height:250px;transform:rotate(-1deg)"></div>
   <div class="h" id="where" style="left:90px;top:722px;font-size:120px">Бостон</div>
   <div class="sub" id="when1" style="left:96px;top:860px;color:var(--ink);font-size:44px">25 января 1995</div>
@@ -280,12 +280,13 @@ const DARK = [[0, T.s3 + .25], [T.s7, T.s8 + .25]];
 const cuts = order.map(id => START[id]).concat(DUR);
 // бумажные сцены: подъезд 12–14 % с проездом в сторону речи (на бумаге нет видео во весь кадр — камера даёт жизнь кадру)
 const PAPERSC = [2, 3, 4, 5, 7, 8];
-const moves = []; cuts.slice(0, -1).forEach((c, i) => { const pp = PAPERSC.includes(i), dx = i % 2 ? -70 : 70;
-  moves.push([c, 1.0, 0, 0]); moves.push([cuts[i + 1] - .02, pp ? 1.14 : 1.06, pp ? dx : 0, pp ? -24 : 0]); });
+const PAN = { 2: [1.12, 0], 3: [1.12, 50], 4: [1.14, 0], 5: [1.12, -40], 7: [1.08, 50], 8: [1.08, 50] };   // [подъезд, проезд px] — текст слева остаётся в кадре
+const moves = []; cuts.slice(0, -1).forEach((c, i) => { const [k, dx] = PAN[i] || [1.06, 0];
+  moves.push([c, 1.0, 0, 0]); moves.push([cuts[i + 1] - .02, k, dx, PAN[i] ? -20 : 0]); });
 const cam = CAMLIFE.attach($('#stage'), {
   drift: { x: 6, y: 4, rot: .25, seed: 11 }, moves,
   accents: [[wt('Кенни'), .02], [wt('видел.'), .025], [wt('тридцать') + .02, .035], [wt('шестнадцать'), .02], [wt('суде.'), .02]],
-  focus: [[0, '54% 20%'], [T.s2, '25% 80%'], [T.s3, '35% 30%'], [wt('Кенни'), '65% 30%'], [wt('перелез'), '50% 70%'], [T.s4, '25% 25%'], [wt('минуту'), '50% 70%'], [T.s5, '60% 40%'], [T.s6, '70% 50%'], [T.s7, '30% 75%'], [T.s8, '25% 30%'], [wt('психологов'), '70% 40%'], [T.s9, '25% 30%'], [wt('спорят'), '30% 70%']]
+  focus: [[0, '54% 20%'], [T.s2, '25% 80%'], [T.s3, '35% 30%'], [wt('Кенни'), '65% 30%'], [wt('перелез'), '50% 70%'], [T.s4, '25% 25%'], [wt('минуту'), '50% 70%'], [T.s5, '60% 40%'], [T.s6, '70% 50%'], [T.s7, '30% 75%'], [T.s8, '25% 30%'], [wt('психологов'), '45% 40%'], [T.s9, '25% 30%'], [wt('спорят'), '30% 70%']]
 });
 const fl = DML.floaters('.sheet,.pol');
 function dyn(t) {
