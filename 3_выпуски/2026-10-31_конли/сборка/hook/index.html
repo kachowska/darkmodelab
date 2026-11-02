@@ -68,8 +68,8 @@ svg text{font-family:Alegreya,serif}
  <div class="sc" id="sc3">
   <div class="sheet" id="dec3" style="left:110px;top:150px;width:860px;transform:rotate(-2.5deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"></div>
   <svg id="und3" width="900" height="80" style="position:absolute;left:250px;top:268px;transform:rotate(-2.5deg);z-index:12"><path class="hand" d="M10 40 C 200 30, 480 46, 720 34"/></svg>
-  <div class="note" id="n3" style="left:130px;top:760px;font-size:44px">бежал за подозреваемым в стрельбе</div>
-  <div class="cap" id="dec3c" style="left:130px;top:690px">решение апелляционного суда, 2005 · 415 F.3d 183</div>
+  <div class="note" id="n3" style="left:130px;top:790px;font-size:44px">бежал за подозреваемым в стрельбе</div>
+  <div class="cap" id="dec3c" style="left:130px;top:715px">решение апелляционного суда, 2005 · 415 F.3d 183</div>
   <div class="h" id="kenny" style="left:1040px;top:180px;font-size:130px">Кенни<br>Конли</div>
   <div class="pl" id="kennyPl" style="left:1046px;top:470px;transform:rotate(-1.5deg)">полицейский Бостона, 27 лет</div>
   <div class="pol" id="run" style="left:1060px;top:610px;width:600px;height:360px;transform:rotate(3deg)"><div class="clip"></div><div class="win"><img class="seq" data-seq="c06_run" data-rate=".9" style="transform:scale(1.9);transform-origin:50% 100%"></div><div class="pc">бег · иллюстрация · Pixabay</div></div>
@@ -99,7 +99,7 @@ svg text{font-family:Alegreya,serif}
  <!-- SC5 · под присягой: «не видел» -->
  <div class="sc" id="sc5">
   <div class="sheet" id="dec" style="left:150px;top:190px;width:900px;transform:rotate(-3deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"></div>
-  <div class="cap" id="decSrc" style="left:170px;top:720px">Апелляционный суд США, 1-й округ · 2005 · law.resource.org</div>
+  <div class="cap" id="decSrc" style="left:170px;top:790px">Апелляционный суд США, 1-й округ · 2005 · law.resource.org</div>
   <div class="note" id="oath" style="left:1150px;top:300px">позже, под присягой:</div>
   <div class="h" id="nsaw" style="left:1150px;top:380px;font-size:150px;color:var(--red)">«не видел»</div>
  </div>
@@ -284,16 +284,20 @@ const PAN = { 2: [1.12, 0], 3: [1.12, 50], 4: [1.14, 0], 5: [1.12, -40], 7: [1.0
 const moves = []; cuts.slice(0, -1).forEach((c, i) => { const [k, dx] = PAN[i] || [1.06, 0];
   moves.push([c, 1.0, 0, 0]); moves.push([cuts[i + 1] - .02, k, dx, PAN[i] ? -20 : 0]); });
 const cam = CAMLIFE.attach($('#stage'), {
-  drift: { x: 6, y: 4, rot: .25, seed: 11 }, moves,
+  drift: { x: 14, y: 9, rot: .4, seed: 11 }, moves,
   accents: [[wt('Кенни'), .02], [wt('видел.'), .025], [wt('тридцать') + .02, .035], [wt('шестнадцать'), .02], [wt('суде.'), .02]],
   focus: [[0, '54% 20%'], [T.s2, '25% 80%'], [T.s3, '35% 30%'], [wt('Кенни'), '65% 30%'], [wt('перелез'), '50% 70%'], [T.s4, '25% 25%'], [wt('минуту'), '50% 70%'], [T.s5, '60% 40%'], [T.s6, '70% 50%'], [T.s7, '30% 75%'], [T.s8, '25% 30%'], [wt('психологов'), '45% 40%'], [T.s9, '25% 30%'], [wt('спорят'), '30% 70%']]
 });
-const fl = DML.floaters('.sheet,.pol');
+// бумага и полароиды дышат заметнее, по бумаге медленно идёт свет от окна (живой кадр без видео во весь экран)
+const FL = [...document.querySelectorAll('.sheet,.pol')];
+const fl = t => FL.forEach((e, i) => { const a = .9 + (i % 3) * .3, ph = i * 1.7; e.style.translate = `${(Math.sin(t * .45 * a + ph) * 12).toFixed(2)}px ${(Math.sin(t * .6 * a + ph * 1.3) * 14).toFixed(2)}px`; e.style.rotate = `${(Math.sin(t * .35 * a + ph) * 1.4).toFixed(3)}deg`; });
+const LIGHT = [...document.querySelectorAll('.sc')].filter(e => !e.style.background).map(sc => { const d = document.createElement('div'); d.className = 'abs'; d.style.cssText = 'inset:-20%;pointer-events:none;mix-blend-mode:multiply;z-index:30;background:linear-gradient(105deg,rgba(0,0,0,0) 30%,rgba(60,50,40,.16) 50%,rgba(0,0,0,0) 70%)'; sc.appendChild(d); return d; });
+const light = t => LIGHT.forEach((d, i) => { d.style.transform = `translateX(${((t * 38 + i * 300) % 1400 - 700).toFixed(1)}px)`; });
 function dyn(t) {
   const dark = DARK.some(([a, b]) => t >= a && t < b);
   $('#top').style.color = dark ? '#E8E8E4' : 'var(--grey)'; $('#top b').style.color = dark ? '#fff' : 'var(--ink)';
   $('#top').style.textShadow = dark ? '0 1px 3px rgba(0,0,0,.6)' : 'none';
-  fl(t);
+  fl(t); light(t);
 }
 window.__duration = DUR;
 window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
