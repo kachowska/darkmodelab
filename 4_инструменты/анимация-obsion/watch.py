@@ -12,6 +12,8 @@ Writes to OUTDIR:
   motion.csv            per-frame motion energy (mean abs luma difference to the previous frame, 0..255)
   holds.csv             intervals where motion energy < 0.6 for ≥ 1.0 s (static / dead air candidates)
   black.csv, freeze.csv ffmpeg blackdetect / freezedetect intervals
+  luma.csv              per-frame mean brightness (0..255); flashes.csv — jumps dark → bright (+110 or more within 0.25 s, ending ≥ 170),
+                        murky.csv — stretches darker than 40 for ≥ 2 s (over-darkened footage), creep.csv — ≥ 4 s where the 4-s mean motion stays < 1.0 (a still frame with a slow zoom)
   audio.json            integrated LUFS, LRA, true peak, silences ≥ 0.4 s (if the file has audio)
   spectrogram.png       whole-file spectrogram (if audio)
   summary.md            the numbers in one page + which files to open first
@@ -107,6 +109,44 @@ def main():
         for f in fr: os.remove(os.path.join(tmp, f))
     os.rmdir(tmp)
 
+    # 4b) brightness: dark → bright flashes and murky stretches; long low-motion shots
+    rl = run(["ffmpeg", "-hide_banner", *span, "-i", v, "-vf", "scale=160:-2,signalstats,metadata=print:key=lavfi.signalstats.YAVG", "-an", "-f", "null", "-"]).stderr
+    lt = [float(x) + t0 for x in re.findall(r"pts_time:([\d.]+)", rl)]; lv = [float(x) for x in re.findall(r"lavfi\.signalstats\.YAVG=([\d.]+)", rl)]
+    luma = list(zip(lt, lv))
+    with open(os.path.join(out, "luma.csv"), "w") as f:
+        f.write("time_s,luma\n"); [f.write(f"{t:.3f},{y:.1f}\n") for t, y in luma]
+    flashes = []
+    for i, (t, y) in enumerate(luma):
+        if y >= 170:
+            back = [yy for tt, yy in luma[max(0, i - 12):i] if t - tt <= 0.25]
+            if back and y - min(back) >= 110 and (not flashes or t - flashes[-1][0] > 1): flashes.append((t, min(back), y))
+    murky, m0 = [], None
+    for t, y in luma + [(t1 + 1, 255)]:
+        if 8 < y < 40: m0 = t if m0 is None else m0
+        else:
+            if m0 is not None and t - m0 >= 2: murky.append((m0, t))
+            m0 = None
+    longshots, c0, fr = [], None, (eval(vfps) if '/' in vfps else float(vfps)) or 30
+    win = max(1, int(4 * fr)); ys = [y for _, y in mot]; ts = [t for t, _ in mot]
+    for i in range(len(ys)):
+        mean4 = sum(ys[max(0, i - win + 1):i + 1]) / min(win, i + 1)
+        low = i >= win - 1 and mean4 < 1.0
+        if low and c0 is None: c0 = ts[max(0, i - win + 1)]
+        if (not low or i == len(ys) - 1) and c0 is not None:
+            if ts[i] - c0 >= 4: longshots.append((c0, ts[i], mean4))
+            c0 = None
+    merged = []
+    for x in sorted(longshots):
+        if merged and x[0] <= merged[-1][1]: merged[-1] = (merged[-1][0], max(merged[-1][1], x[1]), min(merged[-1][2], x[2]))
+        else: merged.append(x)
+    longshots = merged
+    with open(os.path.join(out, "flashes.csv"), "w") as f:
+        f.write("time_s,from_luma,to_luma\n"); [f.write(f"{t:.2f},{a:.0f},{b:.0f}\n") for t, a, b in flashes]
+    with open(os.path.join(out, "murky.csv"), "w") as f:
+        f.write("start_s,end_s\n"); [f.write(f"{a:.2f},{b:.2f}\n") for a, b in murky]
+    with open(os.path.join(out, "creep.csv"), "w") as f:
+        f.write("start_s,end_s,median_motion\n"); [f.write(f"{a:.2f},{b:.2f},{m:.2f}\n") for a, b, m in longshots]
+
     # 5) black / freeze
     def detect(flt, key):
         rr = run(["ffmpeg", "-hide_banner", *span, "-i", v, "-vf", flt, "-an", "-f", "null", "-"]).stderr
@@ -147,6 +187,9 @@ def main():
     S.append(f"- Low-motion time (energy < 0.6, NOT stillness): {sum(1 for y in e if y < 0.6)/fpsv:.1f} s of {len(e)/fpsv:.1f} s; holds ≥ 1 s total {sum(b-a for a,b in holds):.1f} s")
     S.append(f"- Static holds ≥ 1 s: {len(holds)}" + ("; longest " + ", ".join(f"{a:.1f}–{b:.1f}" for a, b in sorted(holds, key=lambda h: h[0]-h[1])[:5]) if holds else ""))
     S.append(f"- Black intervals: {len(blk)} · frozen ≥ 1 s: {len(frz)}")
+    S.append(f"- Brightness: flashes dark→bright {len(flashes)}" + (" at " + ", ".join(f"{t:.1f}" for t, _, _ in flashes[:6]) if flashes else "") +
+             f" · murky (< 40) ≥ 2 s: {len(murky)}" + (" — " + ", ".join(f"{a:.1f}–{b:.1f}" for a, b in murky[:4]) if murky else "") +
+             f" · creep (still frame + slow zoom ≥ 4 s): {len(longshots)}" + (" — " + ", ".join(f"{a:.1f}–{b:.1f}" for a, b, _ in longshots[:4]) if longshots else ""))
     if has_a:
         S.append(f"- Audio: {au['integrated_lufs']} LUFS integrated, LRA {au['lra_lu']} LU, true peak {au['true_peak_dbfs']} dBFS, silences ≥ 0.4 s: {len(au['silences'])}")
     S.append("\n## Open these (mandatory before scoring)\n- every `sheets/sheet_*.jpg` (whole video, in order)\n- every `seams/cut_*.jpg` (each transition at 12 fps)\n- `spectrogram.png` and `audio.json`\n- the intervals in `holds.csv` and `freeze.csv`: watch them densely (re-run with --from/--to --fps 12)")

@@ -1,6 +1,9 @@
 // layout_check.mjs <dir-or-index.html> [--step 0.5] — text QA for a seekable motion page (window.__seek / __duration).
 // Every --step seconds: finds visible text boxes and reports (1) text outside a 5 % safe margin, (2) overlapping text boxes,
 // (3) contrast < 4.5 between text colour and the nearest opaque background colour, (4) text smaller than 30 px.
+// Dark Mode Lab (light-style bible): (5) more than 2 text blocks on screen at once (service line #top/#tag and source captions .t-src/.src/.cap/.pc excluded),
+// (6) more than one plate style at once (opaque-background text blocks with different background/border), (7) stock credits on screen
+// (Pixabay, Unsplash, Pexels, «иллюстрация» — stock licences live in the catalog and the YouTube description), (8) tight plate padding (< 18 px vertical / < 30 px horizontal).
 // In 2.5D with rotation, text boxes are approximate: when in doubt, look at the frame. Intentional lens fly-throughs are allowed.
 // Exit 1 if any issue. Needs Playwright (`npm i -D playwright` or PLAYWRIGHT_PATH). Nothing is played aloud.
 import path from "path"; import fs from "fs"; import { createRequire } from "module";
@@ -37,11 +40,24 @@ for (let t = 0; t <= dur + 1e-6; t += step) {
       boxes.push([q.left, q.top, q.right, q.bottom, txt, blk(el)]);
     }
     for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) { const A = boxes[i], B = boxes[j]; if (A[5] === B[5]) continue; { const iw = Math.min(A[2], B[2]) - Math.max(A[0], B[0]), ih = Math.min(A[3], B[3]) - Math.max(A[1], B[1]); if (iw > 0 && ih > 0 && iw * ih >= 0.25 * Math.min((A[2] - A[0]) * (A[3] - A[1]), (B[2] - B[0]) * (B[3] - B[1]))) out.push(["overlap", A[4] + " × " + B[4]]); } }
+    // (5)–(8): блоки текста — ближайший блочный предок, видимый, с непрозрачностью ≥ 0,5
+    const svc = e => e.closest('#top,#tag,.t-src,.src,.cap,.pc,.inscap,.hud');
+    const blocks = [...new Set(boxes.map(x => x[5]).filter(e => e && !svc(e)))];
+    const top = blocks.filter(e => !blocks.some(o => o !== e && o.contains(e)));
+    if (top.length > 2) out.push(["texts>2", top.map(e => e.textContent.trim().slice(0, 18)).join(" | ")]);
+    const plates = new Set();
+    top.forEach(e => { const c = getComputedStyle(e), bg = c.backgroundColor, m = bg.match(/[\d.]+/g);
+      if (m && (m[3] === undefined || +m[3] > 0.5) && !(+m[0] > 250 && +m[1] > 250 && +m[2] > 250 && c.borderStyle === "none")) {
+        plates.add(bg + "|" + c.borderTopStyle + "|" + c.borderTopColor);
+        if (parseFloat(c.paddingTop) < 18 || parseFloat(c.paddingLeft) < 30) out.push(["tight-padding", e.textContent.trim().slice(0, 24) + ` (${c.paddingTop} ${c.paddingLeft})`]); } });
+    if (plates.size > 1) out.push(["plate-styles", plates.size + " вида плашек в кадре"]);
+    const all = boxes.map(x => x[4]).join(" ");
+    if (/pixabay|unsplash|pexels|shutterstock|иллюстрация/i.test(all)) out.push(["stock-credit", (all.match(/[^|]{0,20}(pixabay|unsplash|pexels|shutterstock|иллюстрация)[^|]{0,12}/i) || [""])[0]]);
     return out;
   }, t);
   for (const x of r) issues.push(`${t.toFixed(1)}s ${x[0]}: ${x[1]}`);
 }
 await b.close();
 const uniq = [...new Set(issues)];
-console.log(uniq.length ? uniq.slice(0, 80).join("\n") + (uniq.length > 80 ? `\n… ${uniq.length - 80} more` : "") : "OK: no text outside margins, no overlaps, contrast ≥ 4.5, size ≥ 30 px");
+console.log(uniq.length ? uniq.slice(0, 80).join("\n") + (uniq.length > 80 ? `\n… ${uniq.length - 80} more` : "") : "OK: no text outside margins, no overlaps, contrast ≥ 4.5, size ≥ 30 px, ≤ 2 texts, one plate style, no stock credits");
 process.exit(uniq.length ? 1 : 0);
