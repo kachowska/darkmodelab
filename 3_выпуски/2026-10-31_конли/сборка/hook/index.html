@@ -39,7 +39,7 @@ svg.map text{font:400 32px Alegreya,serif;fill:#6E6E76}
  <div class="sc" id="sc3">
   <div class="sheet" id="decB" style="left:180px;top:190px;width:900px;transform:rotate(-2.5deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"><div class="t-src">Апелляционный суд США, 1-й округ · 2005</div>
    <svg class="uline" id="und" width="460" height="40" style="left:170px;top:146px"><path d="M6 20 C 120 14, 300 26, 448 16"/></svg></div>
-  <div class="t-title" id="kenny" style="left:1130px;top:150px;font-size:130px">Кенни<br>Конли</div>
+  <div class="t-title" id="kenny" style="left:1120px;top:175px;font-size:130px">Кенни<br>Конли</div>
   <img class="cut" id="car" src="../../материалы/вырезки/стикеры/полицейская-машина.png" style="left:1110px;top:560px;width:700px;transform:rotate(-2deg)">
  </div>
 
@@ -69,8 +69,8 @@ svg.map text{font:400 32px Alegreya,serif;fill:#6E6E76}
  <div class="sc" id="sc6">
   <div class="pol" id="court" style="left:200px;top:150px;width:860px;height:700px;transform:rotate(-2.5deg)"><div class="win"><img src="../../материалы/настоящие/13_суд-моакли_фасад.jpg" style="object-position:50% 60%"></div><div class="pc">Федеральный суд, Бостон · фото 2024 · Wikimedia Commons</div></div>
   <div class="tape" style="left:860px;top:110px;transform:rotate(28deg)"></div>
-  <div class="t-num" id="n34" style="left:1200px;top:300px">34</div>
-  <div class="t-title" id="mon" style="left:1210px;top:560px;font-size:80px">месяца тюрьмы</div>
+  <div class="t-num" id="n34" style="left:1150px;top:300px">34</div>
+  <div class="t-title" id="mon" style="left:1160px;top:560px;font-size:80px">месяца тюрьмы</div>
  </div>
 
  <!-- SC7 · «пробежать мимо и не заметить»: дождь на весь кадр, 2,5 с → лист ложится поверх -->
@@ -88,7 +88,7 @@ svg.map text{font:400 32px Alegreya,serif;fill:#6E6E76}
   <div class="tape" style="left:1630px;top:80px;transform:rotate(32deg)"></div>
   <div class="sheet" id="ill" style="left:170px;top:580px;width:980px;transform:rotate(-1.5deg)"><img src="../../материалы/скриншоты/illinois_2011_кроп.png"><div class="t-src">news.illinois.edu · 9 июня 2011</div>
    <svg class="uline" id="undI" width="980" height="80" style="left:26px;top:26px"><path d="M530 50 C 620 47, 720 51, 816 48"/></svg></div>
-  <div class="pclip" id="clipI" style="left:210px;top:540px;transform:rotate(-8deg)"></div>
+  <div class="pclip" id="clipI" style="left:196px;top:540px;transform:rotate(-8deg)"></div>
  </div>
 
  <!-- SC9 · всё дело на столе → название выпуска -->
@@ -139,16 +139,16 @@ const out = (id, t) => tl.to(id, { opacity: 0, y: -20, duration: .3, ease: 'powe
 
 // планы по голосу
 const T = {
-  s2: wt('около') - .25, s3: wt('бостонский') + .35, s4: wt('перелез') - .3, s5: S0(2) - .3, s6: S0(3) - .3,
+  s2: wt('около') - .25, s3: wt('бостонский') - .15, s4: wt('перелез') - .3, s5: S0(2) - .3, s6: S0(3) - .3,
   s7: S0(4) - .3, s7b: wt('звучит') - .35, s8: wt('шестнадцать') - .35, s9: S0(6) - .3 };
 const START = { sc1: 0, sc2: T.s2, sc3: T.s3, sc4: T.s4, sc5: T.s5, sc6: T.s6, sc7: T.s7, sc8: T.s8, sc9: T.s9 };
 document.querySelectorAll('img.seq').forEach(e => { e.dataset.t0 = START[e.closest('.sc').id]; });
 const order = Object.keys(START);
-const KIND = { sc2: 'dark', sc3: 'up', sc7: 'dark' }, TR = { up: .72, dark: .47, wipe: .52 };
+const KIND = { sc2: 'dark', sc3: 'up', sc7: 'dark' }, TR = { up: 1.32, dark: .47, wipe: .52 };
 order.forEach((id, i) => { const a = START[id], nx = order[i + 1]; show('#' + id, a, nx ? START[nx] + TR[KIND[nx] || 'wipe'] : null); });
 // входы: на бумагу из тёмного кадра — лист поднимается поверх (0,7 с), между бумажными сценами — шторка
 const enter = (id, kind) => { const a = START[id];
-  if (kind === 'up') tl.fromTo('#' + id, { yPercent: 100 }, { yPercent: 0, duration: .7, ease: 'power2.inOut' }, a);
+  if (kind === 'up') tl.fromTo('#' + id, { yPercent: 100 }, { yPercent: 0, duration: 1.3, ease: 'sine.inOut' }, a);   // лист медленно ложится поверх тёмного кадра — без вспышки
   else if (kind === 'dark') tl.fromTo('#' + id, { clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: .45, ease: 'power3.inOut' }, a);
   else tl.fromTo('#' + id, { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: .5, ease: 'power3.inOut' }, a);
   EV.push([a, kind === 'up' ? 'paper' : 'whoosh', kind === 'up' ? { dur: .6, gain: .6 } : { dur: .45, size: .7, gain: .35 }]); };
@@ -195,8 +195,8 @@ EV.push([wt('тридцать') + .02, 'impact', { size: 1.1, gain: .85 }]); CAM
 pop('#mon', wt('месяца') - .1);
 
 // SC7 — дождь 2,5 с; лист ложится поверх кадра — «удобная ложь?»
-tl.fromTo('#lie', { yPercent: 100 }, { yPercent: 0, duration: .7, ease: 'power2.inOut' }, T.s7b); EV.push([T.s7b, 'paper', { dur: .6, gain: .6 }]);
-tl.set('#sc7 .vid', { visibility: 'hidden' }, T.s7b + .72);
+tl.fromTo('#lie', { yPercent: 100 }, { yPercent: 0, duration: 1.3, ease: 'sine.inOut' }, T.s7b - .4); EV.push([T.s7b, 'paper', { dur: .6, gain: .6 }]);
+tl.set('#sc7 .vid', { visibility: 'hidden' }, T.s7b + .95);
 
 // SC8 — 2011: колледж и новость
 tl.fromTo('#y2011', { scale: 1.4, opacity: 0, transformOrigin: '0 50%' }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in' }, wt('шестнадцать') - .2);
@@ -219,21 +219,21 @@ tl.to({}, { duration: .01 }, DUR);
 window.CAM_EVENTS = CAM_EVENTS;
 
 // верхняя строка: светлая на видео во весь кадр
-const DARK = [[T.s2 + .3, T.s3 + .5], [T.s7 + .3, T.s7b + .5]];
+const DARK = [[T.s2 + .3, T.s3 + .9], [T.s7 + .3, T.s7b + .5]];
 // камера: на бумаге — подъезд 8–12 % с переводом фокуса на предмет речи; на видео — мягкий подъезд
-const PAN = { sc1: [1.10, 30], sc3: [1.10, 0], sc4: [1.08, 0], sc5: [1.12, 0], sc6: [1.10, 0], sc8: [1.08, 30], sc9: [1.0, 0] };
+const PAN = { sc1: [1.10, 20], sc3: [1.11, 0], sc4: [1.10, 0], sc5: [1.11, 0], sc6: [1.11, 0], sc8: [1.10, 20], sc9: [0.98, 0] };
 const moves = []; order.forEach((id, i) => { const a = START[id], z = (START[order[i + 1]] || DUR) - .02, [k, dx] = PAN[id] || [1.06, 0];
-  moves.push([a, id === 'sc9' ? 1.06 : 1.0, 0, 0]); moves.push([z, k, dx, PAN[id] ? -16 : 0]); });
+  moves.push([a, id === 'sc9' ? 1.1 : 1.0, 0, 0]); moves.push([z, k, dx, PAN[id] ? -16 : 0]); });
 const cam = CAMLIFE.attach($('#stage'), {
-  drift: { x: 12, y: 8, rot: .35, seed: 11 }, moves,
+  drift: { x: 18, y: 12, rot: .45, seed: 11 }, moves,
   accents: [[wt('Кенни'), .02], [wt('видел.'), .025], [wt('тридцать') + .02, .035], [wt('шестнадцать'), .02], [wt('суде.'), .02]],
-  focus: [[0, '35% 40%'], [1.6, '60% 40%'], [T.s3, '35% 30%'], [wt('Кенни'), '70% 30%'], [wt('подозреваемым'), '70% 70%'], [T.s4, '40% 60%'], [wt('нескольких'), '60% 55%'],
-          [wt('минуту'), '25% 75%'], [wt('коллегой') - .2, '65% 50%'], [T.s5, '40% 30%'], [wt('Конли', 1), '70% 55%'], [T.s6, '35% 50%'], [wt('тридцать'), '75% 40%'],
+  focus: [[0, '35% 40%'], [1.6, '60% 40%'], [T.s3, '35% 30%'], [wt('Кенни'), '58% 40%'], [wt('подозреваемым'), '62% 55%'], [T.s4, '40% 60%'], [wt('нескольких'), '55% 45%'],
+          [wt('минуту'), '25% 75%'], [wt('коллегой') - .2, '60% 45%'], [T.s5, '40% 30%'], [wt('Конли', 1), '70% 55%'], [T.s6, '35% 50%'], [wt('тридцать'), '62% 45%'],
           [T.s8, '20% 25%'], [wt('кампусу'), '78% 35%'], [wt('результат'), '45% 70%'], [T.s9, '50% 40%'], [T.s9 + 2.5, '50% 50%'], [wt('спорят'), '40% 75%'], [wt('суде.') + .9, '30% 70%']]
 });
 // бумага и полароиды чуть дышат, по столу медленно идёт свет от окна
 const FL = [...document.querySelectorAll('.sheet,.pol,.cut,.f9')];
-const fl = t => FL.forEach((e, i) => { const a = .9 + (i % 3) * .3, ph = i * 1.7; e.style.translate = `${(Math.sin(t * .45 * a + ph) * 10).toFixed(2)}px ${(Math.sin(t * .6 * a + ph * 1.3) * 12).toFixed(2)}px`; e.style.rotate = `${(Math.sin(t * .35 * a + ph) * 1.1).toFixed(3)}deg`; });
+const fl = t => FL.forEach((e, i) => { const a = .9 + (i % 3) * .3, ph = i * 1.7; e.style.translate = `${(Math.sin(t * .55 * a + ph) * 14).toFixed(2)}px ${(Math.sin(t * .7 * a + ph * 1.3) * 16).toFixed(2)}px`; e.style.rotate = `${(Math.sin(t * .45 * a + ph) * 1.4).toFixed(3)}deg`; });
 const LIGHT = [...document.querySelectorAll('.sc')].filter(e => !e.style.background).map(sc => { const d = document.createElement('div'); d.style.cssText = 'position:absolute;inset:-20%;pointer-events:none;mix-blend-mode:multiply;z-index:30;background:linear-gradient(105deg,rgba(0,0,0,0) 30%,rgba(60,50,40,.14) 50%,rgba(0,0,0,0) 70%)'; sc.appendChild(d); return d; });
 const light = t => LIGHT.forEach((d, i) => { d.style.transform = `translateX(${((t * 38 + i * 300) % 1400 - 700).toFixed(1)}px)`; });
 function dyn(t) {
