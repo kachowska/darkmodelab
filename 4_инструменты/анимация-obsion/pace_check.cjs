@@ -5,7 +5,8 @@
 //  • видео на весь кадр — короткими планами ≤ 3,5 с; дальше сцена возвращается на стол (видео внутри полароида/карточки — видео-сцена).
 //  • фото на весь кадр без крупного события — ≤ 4 с.
 //  • первый кадр (0,3 с) — якорь: документ, улика, полароид, схема или заголовок/штамп поверх кадра.
-//  • видео и настоящая съёмка в кадре ≥ 70 % времени; в главе есть вырезки (.cut / .stk / .cutout).
+//  • видео и настоящая съёмка в кадре ≥ 70 % времени: видео, фото мест и людей, вырезки (картинки внутри .sheet/.doc — документы, они в долю не входят);
+//    в главе есть вырезки (.cut / .stk / .cutout).
 //  • мемы: время на экране.
 const { chromium } = require('playwright'); const path = require('path');
 (async () => {
@@ -36,7 +37,8 @@ const { chromium } = require('playwright'); const path = require('path');
       const fullV = vids.some(e => cover(e) > 0.8), fullP = imgs.some(e => !e.classList.contains('seq') && cover(e) > 0.8);
       const memes = [...document.querySelectorAll('.meme')].filter(vis).map(e => e.id);
       const sc = [...document.querySelectorAll('.sc')].filter(vis).map(e => e.id).join('+');
-      samples.push([Math.round(t * 10) / 10, vids.length + imgs.length, memes, sc, fullV, fullP, vids.length]);
+      const shoot = imgs.filter(e => !e.closest('.sheet,.doc')).length;
+      samples.push([Math.round(t * 10) / 10, shoot, memes, sc, fullV, fullP, vids.length, imgs.length]);
     }
     await window.__seek(0.3);
     const anchorEls = [...document.querySelectorAll('.sheet,.doc,.pol,.ev,.cut,.stk,.cutout,.t-title,.t-stamp,.t-num,.t-quote,.h,.big,.pl,svg path')].filter(vis);
@@ -58,12 +60,12 @@ const { chromium } = require('playwright'); const path = require('path');
   const stillLong = fullPhoto.filter(([a, z]) => { const inside = starts.filter(t => t > a && t < z); const pts = [a, ...inside, z]; return pts.some((t, i) => i && t - pts[i - 1] > MAXSTILL); });
   if (stillLong.length) fail.push(`фото на весь кадр без события дольше ${MAXSTILL} с: ${stillLong.length}`);
   if (!anchor) fail.push('первый кадр без якоря: нет документа, улики, схемы или заголовка на 0,3 с');
-  const vidShare = Math.round(samples.filter(s => s[6] > 0).length / samples.length * 100), realShare = Math.round(samples.filter(s => s[1] > 0).length / samples.length * 100);
+  const vidShare = Math.round(samples.filter(s => s[6] > 0).length / samples.length * 100), realShare = Math.round(samples.filter(s => s[1] > 0).length / samples.length * 100), docShare = Math.round(samples.filter(s => s[7] > 0 && !s[1]).length / samples.length * 100);
   const fullShare = Math.round(samples.filter(s => s[4]).length / samples.length * 100);
   if (realShare < 70) fail.push(`видео и настоящая съёмка в кадре ${realShare} % < 70 %`);
   if (!cuts) fail.push('в главе нет вырезок (.cut / .stk / .cutout)');
   const memeT = {}; samples.forEach(s => s[2].forEach(m => { memeT[m] = memeT[m] || [s[0], s[0]]; memeT[m][1] = s[0] + 0.2; }));
-  console.log(JSON.stringify({ D, events: starts.length, perMin: +(starts.length / D * 60).toFixed(1), vidShare, realShare, fullVideoShare: fullShare, anchor, cutouts: cuts,
+  console.log(JSON.stringify({ D, events: starts.length, perMin: +(starts.length / D * 60).toFixed(1), vidShare, realShare, docOnlyShare: docShare, fullVideoShare: fullShare, anchor, cutouts: cuts,
     gaps, fullVideo, fullPhotoStill: stillLong, memes: Object.entries(memeT).map(([k, v]) => [k, v[0], +(v[1] - v[0]).toFixed(1)]), fail }, null, 0));
   process.exit(fail.length ? 1 : 0);
 })();

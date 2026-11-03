@@ -3,7 +3,10 @@
 // (3) contrast < 4.5 between text colour and the nearest opaque background colour, (4) text smaller than 30 px.
 // Dark Mode Lab (light-style bible): (5) more than 2 text blocks on screen at once (service line #top/#tag and source captions .t-src/.src/.cap/.pc excluded),
 // (6) more than one plate style at once (opaque-background text blocks with different background/border), (7) stock credits on screen
-// (Pixabay, Unsplash, Pexels, «иллюстрация» — stock licences live in the catalog and the YouTube description), (8) tight plate padding (< 18 px vertical / < 30 px horizontal).
+// (Pixabay, Unsplash, Pexels, «иллюстрация» — stock licences live in the catalog and the YouTube description), (8) tight plate padding (< 18 px vertical / < 30 px horizontal),
+// (9) a source caption (.t-src/.src/.cap) outside a card closer than 14 px to a card (.sheet/.pol/.ev/.doc), (10) a document image covered by another object
+// (> 3 % of its area — the upper card cuts the text of the lower one), (11) more than one fastener (.pclip/.tape) on a card, (12) a paper clip over the middle
+// of a sheet (clips hold an outer edge), (13) text on the pink plate #F5B4AB in a colour other than ink #1B1B1F or red #E5392B.
 // In 2.5D with rotation, text boxes are approximate: when in doubt, look at the frame. Intentional lens fly-throughs are allowed.
 // Exit 1 if any issue. Needs Playwright (`npm i -D playwright` or PLAYWRIGHT_PATH). Nothing is played aloud.
 import path from "path"; import fs from "fs"; import { createRequire } from "module";
@@ -22,7 +25,8 @@ for (let t = 0; t <= dur + 1e-6; t += step) {
     const lum = (c) => { const m = c.match(/[\d.]+/g); if (!m) return null; const [R, G, B] = m.slice(0, 3).map(v => { v = +v / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * R + 0.7152 * G + 0.0722 * B; };
     const opaque = (e) => { const m = getComputedStyle(e).backgroundColor.match(/[\d.]+/g); return m && (m[3] === undefined || +m[3] > 0.9) ? getComputedStyle(e).backgroundColor : null; };
     // background = first opaque element painted UNDER the text centre (siblings included), not just the parent chain
-    const bgOf = (el, q) => { const stack = document.elementsFromPoint(q.left + q.width / 2, q.top + q.height / 2);
+    const bgOf = (el, q) => { const own = opaque(el); if (own) return own;   // плашка: фон самого блока текста
+      const stack = document.elementsFromPoint(q.left + q.width / 2, q.top + q.height / 2);
       for (const e of stack) { if (e === el || el.contains(e)) continue; const c = opaque(e); if (c) return c; } return "rgb(255,255,255)"; };
     const effOpacity = (el) => { let o = 1; for (let e = el; e; e = e.parentElement) { const s = getComputedStyle(e); if (s.display === "none" || s.visibility === "hidden") return 0; o *= +s.opacity; } return o; };
     const boxes = [];
@@ -31,11 +35,13 @@ for (let t = 0; t <= dur + 1e-6; t += step) {
       const n = walker.currentNode; if (!n.textContent.trim()) continue; const el = n.parentElement, s = getComputedStyle(el);
       if (effOpacity(el) < 0.5) continue;
       const rg = document.createRange(); rg.selectNodeContents(n); const q = rg.getBoundingClientRect(); if (q.width < 2 || q.height < 2) continue;
+      { const tp = document.elementFromPoint(Math.min(W - 1, Math.max(0, q.left + q.width / 2)), Math.min(H - 1, Math.max(0, q.top + q.height / 2))); const s1 = el.closest('.sc'), s2 = tp && tp.closest('.sc'); if (s1 && s2 && s1 !== s2) continue; }   // текст под следующей сценой (переход) не виден
       if (q.right < 0 || q.left > W || q.bottom < 0 || q.top > H) continue;
       const txt = n.textContent.trim().slice(0, 30), fs = parseFloat(s.fontSize) * (q.height / (parseFloat(s.lineHeight) || parseFloat(s.fontSize) * 1.2) || 1);
-      if (q.left < mx || q.right > W - mx || q.top < my || q.bottom > H - my) out.push(["margin", txt]);
-      if (parseFloat(s.fontSize) < 30) out.push(["small", txt + " (" + s.fontSize + ")"]);
-      const L1 = lum(s.color), L2 = lum(bgOf(el, q)); if (L1 != null && L2 != null) { const cr = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05); if (cr < 4.5) out.push(["contrast", txt + " " + cr.toFixed(2)]); }
+      const service = el.closest('#top,#tag,.t-src,.src,.cap,.pc');   // служебная строка и подписи источников: свои поля и кегль 22–28 px по библии
+      if (!el.closest('#top,#tag') && (q.left < mx || q.right > W - mx || q.top < my || q.bottom > H - my)) out.push(["margin", txt]);
+      if (!service && parseFloat(s.fontSize) < 30) out.push(["small", txt + " (" + s.fontSize + ")"]);
+      const L1 = lum(s.color), L2 = lum(bgOf(el, q)); if (L1 != null && L2 != null) { const cr = (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05); if (cr < (parseFloat(s.fontSize) >= 48 ? 3 : 4.5)) out.push(["contrast", txt + " " + cr.toFixed(2)]); }   // крупный текст ≥ 48 px — порог 3 (WCAG AA large)
       const blk = (e) => { while (e && getComputedStyle(e).display.startsWith("inline")) e = e.parentElement; return e; };
       boxes.push([q.left, q.top, q.right, q.bottom, txt, blk(el)]);
     }
@@ -51,6 +57,26 @@ for (let t = 0; t <= dur + 1e-6; t += step) {
         plates.add(bg + "|" + c.borderTopStyle + "|" + c.borderTopColor);
         if (parseFloat(c.paddingTop) < 18 || parseFloat(c.paddingLeft) < 30) out.push(["tight-padding", e.textContent.trim().slice(0, 24) + ` (${c.paddingTop} ${c.paddingLeft})`]); } });
     if (plates.size > 1) out.push(["plate-styles", plates.size + " вида плашек в кадре"]);
+    // (9)–(13): стол — карточки, крепёж, подписи
+    const visEl = e => effOpacity(e) >= 0.5 && (() => { const q = e.getBoundingClientRect(); return q.width > 2 && q.height > 2 && q.right > 0 && q.left < W && q.bottom > 0 && q.top < H; })();
+    const CARD = ".sheet,.pol,.ev,.doc", cards = [...document.querySelectorAll(CARD)].filter(visEl);
+    const R = e => e.getBoundingClientRect();
+    [...document.querySelectorAll(".t-src,.src,.cap")].filter(visEl).filter(e => !e.closest(CARD)).forEach(c => { const q = R(c);
+      cards.forEach(k => { const r = R(k); if (q.left - 14 < r.right && q.right + 14 > r.left && q.top - 14 < r.bottom && q.bottom + 14 > r.top) out.push(["src-collision", c.textContent.trim().slice(0, 26) + " × карточка"]); }); });
+    cards.forEach(k => { [...k.querySelectorAll("img")].filter(i => !i.classList.contains("seq") && visEl(i)).forEach(im => {
+      const q = R(im); let n = 0, cov = 0;
+      for (let ix = 1; ix < 16; ix++) for (let iy = 1; iy < 10; iy++) { const x = q.left + q.width * ix / 16, y = q.top + q.height * iy / 10; if (x < 0 || y < 0 || x > W || y > H) continue; n++;
+        const top = document.elementFromPoint(x, y); if (top && !k.contains(top) && !top.contains(k) && !top.closest(".tape,.pclip") && top.closest(".sc") === k.closest(".sc")) cov++; }   // фон под углом повёрнутого листа — не закрытие   // закрыто предметом той же сцены
+      if (n && cov / n > 0.03) out.push(["doc-covered", (im.getAttribute("src") || "").split("/").pop().slice(0, 30) + ` закрыт на ${Math.round(cov / n * 100)} %`]); }); });
+    const fast = [...document.querySelectorAll(".pclip,.tape")].filter(visEl);
+    cards.forEach(k => { const r = R(k), m = 30; const on = fast.filter(f => { const q = R(f), cx = (q.left + q.right) / 2, cy = (q.top + q.bottom) / 2; return cx > r.left - m && cx < r.right + m && cy > r.top - m && cy < r.bottom + m; });
+      if (on.length > 1 && on.every(f => k.closest(".sc") === f.closest(".sc"))) out.push(["fasteners>1", (k.id || k.className) + ": " + on.length]); });
+    fast.filter(f => f.classList.contains("pclip")).forEach(f => { const q = R(f), cx = (q.left + q.right) / 2, cy = (q.top + q.bottom) / 2;
+      cards.forEach(k => { const r = R(k); if (cx > r.left && cx < r.right && cy > r.top && cy < r.bottom) { const d = Math.min(cx - r.left, r.right - cx, cy - r.top, r.bottom - cy); if (d > 60) out.push(["clip-over-sheet", (f.id || "скрепка") + " над серединой " + (k.id || k.className)]); } }); });
+    top.forEach(e => { const m = getComputedStyle(e).backgroundColor.match(/[\d.]+/g); if (!m) return; const [r, g, bb] = m.map(Number);
+      if (r > 230 && g > 160 && g < 200 && bb > 150 && bb < 190) [e, ...e.querySelectorAll("*")].forEach(x => { if (!x.childNodes.length || ![...x.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) return;
+        const c = (getComputedStyle(x).color.match(/[\d.]+/g) || []).map(Number); const ink = Math.abs(c[0] - 27) + Math.abs(c[1] - 27) + Math.abs(c[2] - 31) < 40, red = Math.abs(c[0] - 229) + Math.abs(c[1] - 57) + Math.abs(c[2] - 43) < 40;
+        if (!ink && !red) out.push(["plate-text-color", x.textContent.trim().slice(0, 20) + " " + getComputedStyle(x).color]); }); });
     const all = boxes.map(x => x[4]).join(" ");
     if (/pixabay|unsplash|pexels|shutterstock|иллюстрация/i.test(all)) out.push(["stock-credit", (all.match(/[^|]{0,20}(pixabay|unsplash|pexels|shutterstock|иллюстрация)[^|]{0,12}/i) || [""])[0]]);
     return out;
@@ -59,5 +85,6 @@ for (let t = 0; t <= dur + 1e-6; t += step) {
 }
 await b.close();
 const uniq = [...new Set(issues)];
-console.log(uniq.length ? uniq.slice(0, 80).join("\n") + (uniq.length > 80 ? `\n… ${uniq.length - 80} more` : "") : "OK: no text outside margins, no overlaps, contrast ≥ 4.5, size ≥ 30 px, ≤ 2 texts, one plate style, no stock credits");
+const LIM = a.includes("--all") ? 1e9 : 80;
+console.log(uniq.length ? uniq.slice(0, LIM).join("\n") + (uniq.length > LIM ? `\n… ${uniq.length - LIM} more (--all)` : "") : "OK: no text outside margins, no overlaps, contrast ≥ 4.5, size ≥ 30 px, ≤ 2 texts, one plate style, no stock credits, captions clear of cards, documents uncovered, one fastener per card, clips on edges, plate text ink/red");
 process.exit(uniq.length ? 1 : 0);

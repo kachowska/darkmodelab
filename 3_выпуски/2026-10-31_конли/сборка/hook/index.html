@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8">
-<title>Конли — пролог (черновик 2)</title>
+<title>Конли — пролог (черновик 3, под голос)</title>
 <link rel="stylesheet" href="../../../../2_бренд/шрифты/fonts.css">
+<link rel="stylesheet" href="../lib/dml.css">
 <script src="../../../../4_инструменты/анимация-obsion/vendor/gsap.min.js"></script>
 <script src="../../../../4_инструменты/анимация-obsion/camlife.js"></script>
 <script src="../../../../4_инструменты/анимация-obsion/sfx.js"></script>
@@ -9,138 +10,98 @@
 <script src="../media/meta.js"></script>
 <script src="voice_words.js"></script>
 <style>
-/* светлый стиль «разбор дела по уликам» — 1_правила/библия-стиля_светлая-эксперимент.txt.
-   Сцена — бумага: документы и места в кадре главные; сток играет внутри полароидов; на весь экран — только кадры без людей и мест (забор, мигалка, дождь), в своих цветах. */
-:root{--ink:#1B1B1F;--grey:#6E6E76;--line:#C9C9CF;--paper:#F1F1EE;--red:#E5392B;--pink:#F5B4AB}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
-#frame{position:absolute;inset:0;overflow:hidden;background:var(--paper);font-family:Alegreya,serif;font-variant-numeric:lining-nums;color:var(--ink)}
-#stage{position:absolute;left:0;top:0;width:1920px;height:1080px}
-.sc{position:absolute;inset:0;visibility:hidden;overflow:hidden;background:var(--paper)}
-.abs{position:absolute}
-.vid{position:absolute;left:-96px;top:-54px;width:2112px;height:1188px;object-fit:cover}
-.deep{filter:brightness(.72) saturate(.5) contrast(1.2)}
-.tint{position:absolute;inset:0;background:#1d2a44;mix-blend-mode:multiply;opacity:.55}
-.h{position:absolute;font-weight:500;line-height:1.02;letter-spacing:-.5px}
-.sub{position:absolute;font-size:36px;line-height:1.3;color:var(--grey)}
-.pl{position:absolute;background:var(--pink);border:2px dashed var(--ink);padding:12px 26px 14px;font-size:54px;font-weight:500;line-height:1.1;box-shadow:0 10px 24px rgba(0,0,0,.18);white-space:nowrap}
-.big{position:absolute;font-weight:500;font-size:260px;line-height:.9}
-.note{position:absolute;color:var(--red);font-weight:500;font-size:50px;line-height:1.1}
-.cap{position:absolute;font-size:23px;color:var(--grey)}
-.cap.d{color:#E8E8E4;text-shadow:0 1px 3px rgba(0,0,0,.7)}
-.sheet{position:absolute;background:#fff;border:2px dashed var(--line);padding:26px;box-shadow:0 18px 40px rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.12)}
-.sheet img{display:block;width:100%}
-.pol{position:absolute;background:#fff;padding:18px 18px 64px;box-shadow:0 20px 44px rgba(0,0,0,.25),0 2px 6px rgba(0,0,0,.15)}
-.pol .win{position:relative;width:100%;height:100%;overflow:hidden;background:#111}
-.pol .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.pol .pc{position:absolute;bottom:16px;left:20px;right:20px;font-size:24px;color:var(--grey)}
-.clip{position:absolute;width:26px;height:78px;border:5px solid #9a9aa2;border-radius:14px;top:-34px;left:46%;z-index:3}
-.strip{position:absolute;background:var(--paper);box-shadow:0 20px 50px rgba(0,0,0,.35)}
-.hand{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
-svg text{font-family:Alegreya,serif}
-#top{position:absolute;top:38px;left:64px;right:64px;display:flex;justify-content:space-between;font-size:23px;z-index:80}
+/* пролог «Конли» — светлый стиль (#frame.paper из dml.css), собран под голос Олега (voice_words.js).
+   Стол — главное место: документы дела, схема места, вырезки; на весь кадр — только мигалка и дождь, по 2,5–3 с. */
+#top{position:absolute;top:38px;left:64px;right:64px;display:flex;justify-content:space-between;font:400 23px Alegreya,serif;z-index:80}
 #top b{font-weight:500}
-#grain{position:absolute;inset:0;z-index:90;pointer-events:none;opacity:.09;
- background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+.uline{position:absolute;pointer-events:none}
+.uline path{fill:none;stroke:#E5392B;stroke-width:6;stroke-linecap:round}
+svg.map text{font:400 32px Alegreya,serif;fill:#6E6E76}
+#band{position:absolute;left:-20px;right:-20px;top:790px;height:230px;background:#fff;border-top:2px dashed #C9C9CF;border-bottom:2px dashed #C9C9CF;box-shadow:0 -10px 40px rgba(0,0,0,.12)}
 </style></head><body>
-<div id="frame">
+<div id="frame" class="paper">
 <div id="stage">
 
- <!-- SC1 · семя: ночной сетчатый забор, шаги обрываются -->
- <div class="sc" id="sc1" style="background:#000">
-  <img class="vid seq deep" data-seq="c53_fence" data-in="0" data-rate=".8">
-  <div class="tint"></div>
-  <div class="abs" id="glow1" style="inset:0;background:radial-gradient(circle at 54% 4%,rgba(255,206,140,.55),transparent 16%),radial-gradient(circle at 92% 4%,rgba(255,206,140,.45),transparent 13%);mix-blend-mode:screen"></div>
-  <div class="cap d" style="left:64px;bottom:52px">иллюстрация · Pixabay</div>
+ <!-- SC1 · 0:00 якорь: решение суда по делу Конли + штамп «где · когда» + знак Маттапана -->
+ <div class="sc" id="sc1">
+  <div class="sheet" id="decA" style="left:180px;top:190px;width:900px;transform:rotate(-2.5deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"><div class="t-src">Апелляционный суд США, 1-й округ · 2005</div></div>
+  <div class="t-stamp" id="wk1" style="left:1150px;top:250px;transform:rotate(-1.5deg)">Бостон · 25 января 1995</div>
+  <img class="cut" id="sign" src="../../материалы/вырезки/стикеры/знак-маттапан.png" style="left:1300px;top:420px;width:300px;transform:rotate(5deg)">
  </div>
 
- <!-- SC2 · где · когда: мигалка на весь кадр, своими цветами -->
+ <!-- SC2 · «около двух часов ночи»: мигалка на весь кадр, 3 с -->
  <div class="sc" id="sc2" style="background:#000">
   <img class="vid seq" data-seq="c01_light" data-in="0" data-loop="1">
-  <div class="strip" id="wkbar" style="left:-20px;top:700px;width:1100px;height:250px;transform:rotate(-1deg)"></div>
-  <div class="h" id="where" style="left:90px;top:722px;font-size:120px">Бостон</div>
-  <div class="sub" id="when1" style="left:96px;top:860px;color:var(--ink);font-size:44px">25 января 1995</div>
-  <div class="note" id="when2" style="left:470px;top:854px">≈ 2:00 ночи</div>
-  <div class="cap d" style="right:64px;bottom:40px">иллюстрация · Pixabay</div>
+  <div class="t-stamp" id="wk2" style="left:110px;top:780px;transform:rotate(-1deg)">≈ 2:00 ночи</div>
  </div>
 
- <!-- SC3 · Кенни Конли: имя — из решения суда; бег — только ноги -->
+ <!-- SC3 · Кенни Конли: имя в документе, полицейская машина Бостона -->
  <div class="sc" id="sc3">
-  <div class="sheet" id="dec3" style="left:110px;top:150px;width:860px;transform:rotate(-2.5deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"></div>
-  <svg id="und3" width="900" height="80" style="position:absolute;left:250px;top:268px;transform:rotate(-2.5deg);z-index:12"><path class="hand" d="M10 40 C 200 30, 480 46, 720 34"/></svg>
-  <div class="note" id="n3" style="left:130px;top:790px;font-size:44px">бежал за подозреваемым в стрельбе</div>
-  <div class="cap" id="dec3c" style="left:130px;top:715px">решение апелляционного суда, 2005 · 415 F.3d 183</div>
-  <div class="h" id="kenny" style="left:1040px;top:180px;font-size:130px">Кенни<br>Конли</div>
-  <div class="pl" id="kennyPl" style="left:1046px;top:470px;transform:rotate(-1.5deg)">полицейский Бостона, 27 лет</div>
-  <div class="pol" id="run" style="left:1060px;top:610px;width:600px;height:360px;transform:rotate(3deg)"><div class="clip"></div><div class="win"><img class="seq" data-seq="c06_run" data-rate=".9" style="transform:scale(1.9);transform-origin:50% 100%"></div><div class="pc">бег · иллюстрация · Pixabay</div></div>
-  <div class="pol" id="fence3" style="left:1040px;top:600px;width:620px;height:380px;transform:rotate(-3deg)"><div class="clip"></div><div class="win"><img class="seq" data-seq="c53_fence" data-in="0" data-rate=".5" style="filter:brightness(.6) saturate(.6)"></div><div class="pc">сетчатый забор · иллюстрация · Pixabay</div></div>
+  <div class="sheet" id="decB" style="left:180px;top:190px;width:900px;transform:rotate(-2.5deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"><div class="t-src">Апелляционный суд США, 1-й округ · 2005</div>
+   <svg class="uline" id="und" width="460" height="40" style="left:170px;top:146px"><path d="M6 20 C 120 14, 300 26, 448 16"/></svg></div>
+  <div class="t-title" id="kenny" style="left:1130px;top:150px;font-size:130px">Кенни<br>Конли</div>
+  <img class="cut" id="car" src="../../материалы/вырезки/стикеры/полицейская-машина.png" style="left:1110px;top:560px;width:700px;transform:rotate(-2deg)">
  </div>
 
- <!-- SC4 · в нескольких метрах: схема тупика + ночная улица в полароиде -->
+ <!-- SC4 · схема тупика: путь Конли через забор, в нескольких метрах — избиение -->
  <div class="sc" id="sc4">
-  <div class="h" id="h4" style="left:90px;top:120px;font-size:116px">В нескольких<br>метрах</div>
-  <div class="sub" id="s41" style="left:96px;top:380px;width:980px">в ту же минуту другие полицейские избивали человека,</div>
-  <div class="sub" id="s42" style="left:96px;top:428px;width:980px">которого приняли за преступника</div>
-  <div class="pol" id="st4" style="left:1160px;top:120px;width:660px;height:430px;transform:rotate(3.5deg)"><div class="clip"></div><div class="win"><img class="seq" data-seq="c28_street" data-rate=".8"></div><div class="pc">ночь · иллюстрация · Pixabay</div></div>
-  <svg id="map4" style="position:absolute;left:60px;top:500px" width="1200" height="520" viewBox="0 0 1200 520">
-   <defs><pattern id="m4" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 H20 M0 0 V20" stroke="#1B1B1F" stroke-width="1.5"/></pattern></defs>
-   <path id="road4" d="M30 180 H700 A140 140 0 1 1 700 360 H30" fill="#fff" stroke="#1B1B1F" stroke-width="3"/>
-   <rect x="980" y="90" width="26" height="360" fill="url(#m4)" stroke="#1B1B1F" stroke-width="2"/>
-   <text x="1020" y="80" font-size="30" fill="#6E6E76">забор</text>
-   <path id="cpath" d="M80 300 C 420 300, 760 290, 1110 160" fill="none" stroke="#1B1B1F" stroke-width="5" stroke-dasharray="16 12"/>
-   <text x="90" y="285" font-size="34">Конли</text>
-   <circle id="x4" cx="950" cy="250" r="22" fill="none" stroke="#E5392B" stroke-width="6"/>
-   <path id="x4l" d="M950 274 L900 445" stroke="#E5392B" stroke-width="2" stroke-dasharray="6 8"/>
+  <div class="t-title" id="h4" style="left:140px;top:150px">В нескольких метрах</div>
+  <svg class="map" id="map" width="1760" height="700" viewBox="0 0 1760 700" style="position:absolute;left:80px;top:300px;display:block">
+   <defs><pattern id="mesh" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 H22 M0 0 V22" stroke="#1B1B1F" stroke-width="1.6"/></pattern></defs>
+   <path id="road" d="M20 250 H1060 A170 170 0 1 1 1060 470 H20" fill="#fff" stroke="#1B1B1F" stroke-width="3"/>
+   <rect id="fence" x="1400" y="120" width="30" height="470" fill="url(#mesh)" stroke="#1B1B1F" stroke-width="2"/>
+   <text x="1450" y="110">забор</text>
+   <path id="pCon" d="M60 400 C 500 400, 900 420, 1180 370 S 1480 250, 1700 210" fill="none" stroke="#1B1B1F" stroke-width="6" stroke-dasharray="18 13"/>
+   <path id="pCox" d="M900 300 C 1080 290, 1250 300, 1390 330" fill="none" stroke="#E5392B" stroke-width="7"/>
+   <circle id="xCox" cx="1388" cy="332" r="26" fill="none" stroke="#E5392B" stroke-width="7"/>
   </svg>
-  <div class="pl" id="col4" style="left:820px;top:940px;background:#fff;border:4px solid var(--red)">их коллегу в штатском</div>
-  <div class="cap" style="left:96px;bottom:40px">схема по решению суда 2005 · без масштаба</div>
+  <img class="cut" id="car4" src="../../материалы/вырезки/стикеры/полицейская-машина.png" style="left:120px;top:560px;width:330px;transform:rotate(-3deg)">
  </div>
 
- <!-- SC5 · под присягой: «не видел» -->
+ <!-- SC5 · под присягой: «не видел» — строка из решения суда -->
  <div class="sc" id="sc5">
-  <div class="sheet" id="dec" style="left:150px;top:190px;width:900px;transform:rotate(-3deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"></div>
-  <div class="cap" id="decSrc" style="left:170px;top:790px">Апелляционный суд США, 1-й округ · 2005 · law.resource.org</div>
-  <div class="note" id="oath" style="left:1150px;top:300px">позже, под присягой:</div>
-  <div class="h" id="nsaw" style="left:1150px;top:380px;font-size:150px;color:var(--red)">«не видел»</div>
+  <div class="t-quote" id="nsaw" style="left:200px;top:220px;font-size:150px">«не видел»</div>
+  <div class="sheet" id="jury" style="left:180px;top:480px;width:1560px;transform:rotate(-1deg)"><img src="../../материалы/скриншоты/суд05_показания_кроп.png"><div class="t-src">решение апелляционного суда, 2005 · 415 F.3d 183</div>
+   <svg class="uline" id="undJ" width="1540" height="120" style="left:26px;top:26px"><path id="uj1" d="M884 52 C 1050 49, 1250 53, 1418 50"/><path id="uj2" d="M42 88 C 110 86, 180 89, 232 87"/></svg></div>
  </div>
 
- <!-- SC6 · 34 месяца -->
+ <!-- SC6 · 34 месяца: федеральный суд Бостона -->
  <div class="sc" id="sc6">
-  <div class="pol" id="gav" style="left:170px;top:150px;width:900px;height:700px;transform:rotate(-3deg)"><div class="clip"></div><div class="win"><img class="seq" data-seq="c34_gavel"></div><div class="pc">иллюстрация · Pixabay</div></div>
-  <div class="note" id="notbel" style="left:1180px;top:220px">ему не поверили</div>
-  <div class="big" id="n34" style="left:1180px;top:360px">34</div>
-  <div class="h" id="mon" style="left:1190px;top:620px;font-size:72px">месяца тюрьмы</div>
+  <div class="pol" id="court" style="left:200px;top:150px;width:860px;height:700px;transform:rotate(-2.5deg)"><div class="win"><img src="../../материалы/настоящие/13_суд-моакли_фасад.jpg" style="object-position:50% 60%"></div><div class="pc">Федеральный суд, Бостон · фото 2024 · Wikimedia Commons</div></div>
+  <div class="tape" style="left:860px;top:110px;transform:rotate(28deg)"></div>
+  <div class="t-num" id="n34" style="left:1200px;top:300px">34</div>
+  <div class="t-title" id="mon" style="left:1210px;top:560px;font-size:80px">месяца тюрьмы</div>
  </div>
 
- <!-- SC7 · удобная ложь? дождь на весь кадр, своими цветами -->
+ <!-- SC7 · «пробежать мимо и не заметить»: дождь на весь кадр, 2,5 с → лист ложится поверх -->
  <div class="sc" id="sc7" style="background:#000">
   <img class="vid seq" data-seq="c02_rain" data-rate=".8">
-  <div class="strip" id="bar7" style="left:-20px;top:640px;width:1240px;height:310px;transform:rotate(-1.2deg)"></div>
-  <div class="sub" id="p71" style="left:96px;top:672px">пробежать мимо и не заметить —</div>
-  <div class="h" id="p72" style="left:90px;top:730px;font-size:150px">удобная <span style="color:var(--red)">ложь?</span></div>
-  <div class="cap d" style="right:64px;bottom:40px">иллюстрация · Pixabay</div>
+  <div class="abs" id="lie" style="position:absolute;inset:0;background:#F1F1EE">
+   <div class="t-title" style="left:180px;top:420px;font-size:170px">удобная <span style="color:#E5392B">ложь?</span></div>
+  </div>
  </div>
 
- <!-- SC8 · 2011: опыт на кампусе -->
+ <!-- SC8 · 2011: опыт на кампусе — колледж и новость университета -->
  <div class="sc" id="sc8">
-  <div class="big" id="y2011" style="left:90px;top:120px">2011</div>
-  <div class="pl" id="p81" style="left:100px;top:380px;transform:rotate(-1.5deg)">16 лет спустя</div>
-  <div class="sub" id="p82" style="left:100px;top:510px;width:780px;color:var(--ink)">двое психологов проверили это на студентах, которые бежали ночью по кампусу</div>
-  <div class="pol" id="nott" style="left:960px;top:110px;width:520px;height:470px;transform:rotate(-4deg)"><div class="clip"></div><div class="win"><img src="../../материалы/настоящие/17_юнион-колледж_нотт.jpg"></div><div class="pc">Юнион-колледж · Commons</div></div>
-  <div class="pol" id="park" style="left:1220px;top:470px;width:600px;height:400px;transform:rotate(5deg)"><div class="clip"></div><div class="win"><img class="seq" data-seq="c05_park" data-rate=".9" style="filter:brightness(.6) saturate(.5) contrast(1.15)"></div><div class="pc">ночная пробежка · иллюстрация · Pixabay</div></div>
-  <div class="note" id="p83" style="left:100px;top:720px;width:800px">результат — совсем не тот, что ждёшь</div>
+  <div class="t-num" id="y2011" style="left:170px;top:170px">2011</div>
+  <div class="pol" id="nott" style="left:1180px;top:110px;width:600px;height:520px;transform:rotate(3.5deg)"><div class="win"><img src="../../материалы/настоящие/17_юнион-колледж_нотт.jpg"></div><div class="pc">Юнион-колледж, Скенектади · Wikimedia Commons</div></div>
+  <div class="tape" style="left:1630px;top:80px;transform:rotate(32deg)"></div>
+  <div class="sheet" id="ill" style="left:170px;top:580px;width:980px;transform:rotate(-1.5deg)"><img src="../../материалы/скриншоты/illinois_2011_кроп.png"><div class="t-src">news.illinois.edu · 9 июня 2011</div>
+   <svg class="uline" id="undI" width="980" height="80" style="left:26px;top:26px"><path d="M530 50 C 620 47, 720 51, 816 48"/></svg></div>
+  <div class="pclip" id="clipI" style="left:210px;top:540px;transform:rotate(-8deg)"></div>
  </div>
 
- <!-- SC9 · что мы видим / что нам кажется / во что обходится → название выпуска -->
+ <!-- SC9 · всё дело на столе → название выпуска -->
  <div class="sc" id="sc9">
-  <div class="pol" id="emp" style="left:1300px;top:110px;width:540px;height:380px;transform:rotate(3deg)"><div class="clip"></div><div class="win"><img class="seq" data-seq="c29_empty" data-rate=".8"></div><div class="pc">ночь · иллюстрация · Pixabay</div></div>
-  <div class="note" id="p90" style="left:96px;top:120px">это история о том,</div>
-  <div class="h" id="p91" style="left:90px;top:190px;font-size:92px">что мы видим,</div>
-  <div class="h" id="p92" style="left:90px;top:300px;font-size:92px;color:var(--grey)">что нам только кажется</div>
-  <div class="h" id="p93" style="left:90px;top:410px;font-size:84px">и во что это обходится <span style="color:var(--red)">в суде</span></div>
-  <div class="strip" id="ttlbar" style="left:-20px;right:-20px;top:640px;height:280px;background:#fff;border-top:2px dashed var(--line);border-bottom:2px dashed var(--line)"></div>
-  <div class="h" id="ttl" style="left:110px;top:690px;font-size:104px">Полицейский, который <span style="color:var(--red)">«не видел»</span></div>
-  <div class="cap" id="ttlcap" style="left:116px;top:850px">Dark Mode Lab · выпуск 2 · разум</div>
+  <div class="sheet f9" id="f1" style="left:120px;top:120px;width:480px;transform:rotate(-3deg)"><img src="../../материалы/скриншоты/суд05_шапка_кроп.png"></div>
+  <svg class="f9" id="f2" width="520" height="207" viewBox="0 0 1760 700" style="position:absolute;left:680px;top:170px;display:block;background:#fff;box-shadow:0 14px 30px rgba(0,0,0,.15);transform:rotate(2deg)"><use href="#road"/><use href="#fence"/><use href="#pCon"/><use href="#pCox"/><use href="#xCox"/></svg>
+  <div class="pol f9" id="f3" style="left:1290px;top:120px;width:430px;height:310px;transform:rotate(3deg)"><div class="win"><img src="../../материалы/настоящие/13_суд-моакли_фасад.jpg" style="object-position:50% 60%"></div></div>
+  <div class="sheet f9" id="f4" style="left:130px;top:610px;width:720px;transform:rotate(1.5deg)"><img src="../../материалы/скриншоты/суд05_показания_кроп.png"></div>
+  <div class="pol f9" id="f5" style="left:990px;top:470px;width:330px;height:270px;transform:rotate(-3deg)"><div class="win"><img src="../../материалы/настоящие/17_юнион-колледж_нотт.jpg"></div></div>
+  <div class="sheet f9" id="f6" style="left:1380px;top:520px;width:430px;transform:rotate(2.5deg)"><img src="../../материалы/скриншоты/illinois_2011_кроп.png"></div>
+  <img class="cut f9" id="f7" src="../../материалы/вырезки/стикеры/полицейская-машина.png" style="left:170px;top:430px;width:250px;transform:rotate(-5deg)">
+  <div id="band"></div>
+  <div class="t-title" id="ttl" style="left:150px;top:830px;font-size:100px">Полицейский, который <span style="color:#E5392B">«не видел»</span></div>
  </div>
 
 </div>
@@ -149,8 +110,8 @@ svg text{font-family:Alegreya,serif}
 </div>
 
 <script>
-const VO = 3.0, WPS = 2.2;
-// ── текст диктора (сценарий v3, пролог): [предложение, ключевые слова]
+const VO = 0.6, WPS = 2.2;
+// ── текст диктора (сценарий v3, пролог): [предложение, ключевые слова] — по нему записан голос (voice.mjs)
 const SENT = [
  ["Двадцать пятого января тысяча девятьсот девяносто пятого года, около двух часов ночи, бостонский полицейский Кенни Конли бежал за подозреваемым в стрельбе, перелез через сетчатый забор и побежал дальше.", ["Конли"]],
  ["В нескольких метрах от этого забора в ту же минуту другие полицейские избивали человека, которого приняли за преступника, а он оказался их коллегой в штатском.", ["коллегой"]],
@@ -160,142 +121,124 @@ const SENT = [
  ["Но через шестнадцать лет двое психологов проверили это на студентах, которые бежали ночью по кампусу, и результат оказался совсем не таким, каким его ждёшь.", ["шестнадцать"]],
  ["Это история о том, что мы видим, что нам только кажется, что мы видим, и о том, во что это обходится, когда об этом спорят в суде.", ["суде."]]
 ];
+// глава собрана под готовый голос: время каждого слова — из voice_words.js
 const V = DML.words(SENT, VO, WPS), W = V.W, wt = V.wt;
+const HAS_VOICE = window.VOICE && VOICE.words.length === W.length;
+if (HAS_VOICE) W.forEach((x, i) => { x.t = VO + VOICE.words[i].t; });
 const S0 = si => W.find(x => x.si === si).t;
-const DUR = +(V.end + 2.6).toFixed(2);
+const DUR = +((HAS_VOICE ? VO + VOICE.dur : V.end) + 2.4).toFixed(2);
+window.VOICE_AT = VO;
 const $ = s => document.querySelector(s);
 const tl = gsap.timeline({ paused: true });
-const EV = [];
+const EV = [], CAM_EVENTS = [];
 const show = (id, a, b) => { tl.set(id, { visibility: 'visible' }, a); if (b != null) tl.set(id, { visibility: 'hidden' }, b); };
 const pop = (id, t, from) => tl.fromTo(id, Object.assign({ opacity: 0, y: 26 }, from || {}), { opacity: 1, y: 0, x: 0, duration: .4, ease: 'power3.out' }, t);
 const drop = (id, t, from, to) => tl.fromTo(id, from, Object.assign({ x: 0, y: 0, duration: .55, ease: 'power3.out' }, to), t);
-const wipe = (id, t, dir) => tl.fromTo(id, { clipPath: dir || 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: .5, ease: 'power3.inOut' }, t);
+const draw = (sel, t, d, len) => tl.fromTo(sel, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: d, ease: 'power2.out' }, t);
+const out = (id, t) => tl.to(id, { opacity: 0, y: -20, duration: .3, ease: 'power2.in' }, t);
 
-// границы сцен (по голосу); сцены перекрываются на время перехода — между ними нет пустого кадра
-const T = { s2: VO, s3: wt('полицейский') - .3, s4: S0(1) - .3, s5: S0(2) - .3, s6: S0(3) - .3, s7: S0(4) - .3, s8: S0(5) - .3, s9: S0(6) - .3 };
+// планы по голосу
+const T = {
+  s2: wt('около') - .25, s3: wt('бостонский') + .35, s4: wt('перелез') - .3, s5: S0(2) - .3, s6: S0(3) - .3,
+  s7: S0(4) - .3, s7b: wt('звучит') - .35, s8: wt('шестнадцать') - .35, s9: S0(6) - .3 };
 const START = { sc1: 0, sc2: T.s2, sc3: T.s3, sc4: T.s4, sc5: T.s5, sc6: T.s6, sc7: T.s7, sc8: T.s8, sc9: T.s9 };
 document.querySelectorAll('img.seq').forEach(e => { e.dataset.t0 = START[e.closest('.sc').id]; });
-const order = ['sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8', 'sc9'];
-order.forEach((id, i) => {
-  const a = START[id], nx = order[i + 1];
-  show('#' + id, a, nx ? START[nx] + .55 : null);
-  if (i) { wipe('#' + id, a, i % 2 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)'); EV.push([a, 'whoosh', { dur: .45, size: .7, gain: .35 }]); }
-});
+const order = Object.keys(START);
+const KIND = { sc2: 'dark', sc3: 'up', sc7: 'dark' }, TR = { up: .72, dark: .47, wipe: .52 };
+order.forEach((id, i) => { const a = START[id], nx = order[i + 1]; show('#' + id, a, nx ? START[nx] + TR[KIND[nx] || 'wipe'] : null); });
+// входы: на бумагу из тёмного кадра — лист поднимается поверх (0,7 с), между бумажными сценами — шторка
+const enter = (id, kind) => { const a = START[id];
+  if (kind === 'up') tl.fromTo('#' + id, { yPercent: 100 }, { yPercent: 0, duration: .7, ease: 'power2.inOut' }, a);
+  else if (kind === 'dark') tl.fromTo('#' + id, { clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: .45, ease: 'power3.inOut' }, a);
+  else tl.fromTo('#' + id, { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: .5, ease: 'power3.inOut' }, a);
+  EV.push([a, kind === 'up' ? 'paper' : 'whoosh', kind === 'up' ? { dur: .6, gain: .6 } : { dur: .45, size: .7, gain: .35 }]); };
+enter('sc2', 'dark'); enter('sc3', 'up'); enter('sc4', 'wipe'); enter('sc5', 'wipe'); enter('sc6', 'wipe'); enter('sc7', 'dark'); enter('sc8', 'wipe'); enter('sc9', 'wipe');
 
-// SC1 0–3: забор ночью, шаги бегут и обрываются
-for (let k = 0; k < 7; k++) EV.push([.15 + k * .34, 'thud', { gain: .32 - k * .02, size: .35 }]);
-EV.push([0, 'drone', { dur: 3.2, note: 'D', gain: .4 }]);
-tl.fromTo('#glow1', { opacity: .6 }, { opacity: 1, duration: 3, ease: 'sine.inOut' }, 0);
-tl.to('#sc1 .vid', { scale: 1.035, duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' }, 2.55);
+// SC1 0:00 — документ уже на столе, штамп, знак Маттапана; шаги
+tl.fromTo('#decA', { y: 40, rotation: -4 }, { y: 0, rotation: -2.5, duration: 1.2, ease: 'power2.out' }, 0);
+pop('#wk1', .3, { x: -30 }); EV.push([.35, 'paper', { dur: .3, gain: .5 }]);
+drop('#sign', 1.6, { x: 700, rotation: 25 }, { rotation: 5 }); EV.push([1.7, 'shutter', { gain: .55 }]);
+tl.to('#sign', { rotation: 2, y: -10, duration: .5, ease: 'power2.out' }, wt('девяносто'));
+for (let k = 0; k < 8; k++) EV.push([.1 + k * .34, 'thud', { gain: .26, size: .35 }]);
 
-// SC2: Бостон · 25 января 1995 · ≈ 2:00
-tl.fromTo('#wkbar', { xPercent: -100 }, { xPercent: 0, duration: .5, ease: 'power3.out' }, T.s2 + .3);
-pop('#where', T.s2 + .55, { x: -30 }); EV.push([T.s2 + .6, 'paper', { dur: .35, gain: .5 }]);
-pop('#when1', wt('Двадцать') + .5, { x: -20 });
-tl.to('#when1', { scale: 1.06, duration: .2, yoyo: true, repeat: 1, transformOrigin: '0 50%' }, wt('девяносто'));
-pop('#when2', wt('около'), { x: -20 }); EV.push([wt('около'), 'tick', { gain: .5 }]);
+// SC2 — мигалка 3 с, штамп времени
+pop('#wk2', T.s2 + .5, { x: -30 }); EV.push([T.s2 + .2, 'drone', { dur: 3, note: 'D', gain: .35 }]);
 
-// SC3: решение суда, имя подчёркнуто; бег в полароиде; «сетчатый забор» — второй полароид ложится сверху
-drop('#dec3', T.s3 + .2, { y: -900, rotation: -12 }, { rotation: -2.5 }); EV.push([T.s3 + .5, 'paper', { dur: .45, gain: .7 }]);
-tl.fromTo('#dec3c', { opacity: 0 }, { opacity: 1, duration: .3 }, T.s3 + .8);
-pop('#kenny', wt('Кенни') - .15, { x: 30 }); EV.push([wt('Кенни'), 'thud', { gain: .55 }]);
-tl.fromTo('#und3 path', { strokeDasharray: 760, strokeDashoffset: 760 }, { strokeDashoffset: 0, duration: .5, ease: 'power2.out' }, wt('Конли'));
-EV.push([wt('Конли'), 'swish', { gain: .35 }]);
-pop('#kennyPl', wt('бежал') - .2, { x: 30 });
-drop('#run', wt('подозреваемым') - .3, { x: 900, rotation: 14 }, { rotation: 3 }); EV.push([wt('подозреваемым'), 'shutter', { gain: .6 }]);
-tl.to('#run', { x: 1000, rotation: 16, duration: .45, ease: 'power3.in' }, wt('перелез') - .35);
-drop('#fence3', wt('перелез') - .1, { y: 800, rotation: -14 }, { rotation: -3 }); EV.push([wt('перелез'), 'shutter', { gain: .6 }]);
+// SC3 — лист дела поднимается поверх; имя подчёркнуто; машина полиции Бостона
+pop('#kenny', wt('Кенни') - .15, { x: 30 }); EV.push([wt('Кенни'), 'thud', { gain: .5 }]);
+draw('#und path', wt('Конли'), .5, 460); EV.push([wt('Конли'), 'swish', { gain: .35 }]);
+drop('#car', wt('подозреваемым') - .4, { x: 1000, rotation: 4 }, { rotation: -2, duration: .8 }); EV.push([wt('подозреваемым') - .3, 'whoosh', { dur: .7, size: 1, gain: .5 }]);
 
-// SC4: в нескольких метрах — схема, путь Конли, круг на месте избиения
-pop('#h4', T.s4 + .25, { x: -30 });
-drop('#st4', wt('забора') - .3, { x: 900, rotation: 12 }, { rotation: 3.5 }); EV.push([wt('забора'), 'shutter', { gain: .55 }]);
-tl.fromTo('#map4', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, wt('минуту') - .4);
-tl.fromTo('#cpath', { strokeDashoffset: 1400 }, { strokeDashoffset: 0, duration: 1.6, ease: 'none' }, wt('минуту') - .2);
-pop('#s41', wt('минуту') - .1);
-tl.fromTo('#x4', { scale: 0, transformOrigin: '950px 250px' }, { scale: 1, duration: .35, ease: 'back.out(2)' }, wt('избивали') - .1);
-tl.fromTo('#x4l', { opacity: 0 }, { opacity: 1, duration: .3 }, wt('избивали') + .2);
-EV.push([wt('избивали'), 'pop', { gain: .5 }]);
-pop('#s42', wt('приняли') - .2);
-pop('#col4', wt('коллегой') - .2, { x: 30 }); EV.push([wt('коллегой'), 'thud', { gain: .6 }]);
+// SC4 — схема: дорога → путь Конли через забор → «в нескольких метрах» → избиение у забора
+draw('#road', T.s4 + .1, .8, 3600); draw('#fence', T.s4 + .3, .5, 1100);
+draw('#pCon', wt('перелез'), 2.6, 1900); EV.push([wt('перелез'), 'swish', { gain: .4 }]);
+pop('#h4', wt('нескольких') - .2, { x: -30 }); CAM_EVENTS.push(wt('нескольких'));
+drop('#car4', wt('минуту') - .4, { x: -700, rotation: -12 }, { rotation: -3 }); EV.push([wt('минуту') - .3, 'whoosh', { dur: .6, size: .8, gain: .4 }]);
+tl.fromTo('#xCox', { scale: 0, transformOrigin: '1388px 332px' }, { scale: 1, duration: .35, ease: 'back.out(2)' }, wt('избивали') - .1); EV.push([wt('избивали'), 'pop', { gain: .5 }]);
+draw('#pCox', wt('приняли') - .1, .9, 560);
+tl.to('#xCox', { scale: 1.35, duration: .22, yoyo: true, repeat: 1, transformOrigin: '1388px 332px' }, wt('коллегой')); CAM_EVENTS.push(wt('коллегой') - .2);
+out('#h4', wt('приняли') - .4);
 
-// SC5: решение суда, «не видел»
-drop('#dec', T.s5 + .3, { y: -900, rotation: -14 }, { rotation: -3 }); EV.push([T.s5 + .6, 'paper', { dur: .5, gain: .8 }]);
-tl.fromTo('#decSrc', { opacity: 0 }, { opacity: 1, duration: .3 }, T.s5 + .9);
-pop('#oath', wt('присягой') - .2, { x: 30 });
-tl.to('#dec', { x: -40, rotation: -5, duration: .5, ease: 'power2.out' }, wt('сказал'));
-tl.fromTo('#nsaw', { scale: 1.5, opacity: 0, transformOrigin: '0 50%' }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in' }, wt('видел.') - .25);
-EV.push([wt('видел.'), 'impact', { size: .8, gain: .7 }]);
+// SC5 — строка показаний, «не видел»
+drop('#jury', T.s5 + .3, { y: 600, rotation: 4 }, { rotation: -1 }); EV.push([T.s5 + .5, 'paper', { dur: .45, gain: .7 }]);
+CAM_EVENTS.push(wt('Конли', 1));
+draw('#uj1', wt('сказал'), .5, 560); draw('#uj2', wt('сказал') + .45, .25, 200);
+tl.fromTo('#nsaw', { scale: 1.4, opacity: 0, transformOrigin: '0 60%' }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in' }, wt('ничего') - .2);
+EV.push([wt('ничего'), 'impact', { size: .8, gain: .65 }]);
+tl.to('#nsaw', { scale: 1.06, duration: .2, yoyo: true, repeat: 1, transformOrigin: '0 60%' }, wt('видел.'));
 
-// SC6: полароид с молотком, 34 месяца
-drop('#gav', T.s6 + .2, { x: -1300, rotation: -16 }, { rotation: -3 }); EV.push([T.s6 + .5, 'shutter', { gain: .7 }]);
-pop('#notbel', wt('поверили') - .1, { x: 30 });
+// SC6 — суд и 34 месяца
+drop('#court', T.s6 + .25, { x: -1300, rotation: -12 }, { rotation: -2.5 }); EV.push([T.s6 + .5, 'shutter', { gain: .6 }]);
+tl.fromTo('#sc6 .tape', { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: .25 }, T.s6 + .8);
 tl.fromTo('#n34', { scale: 1.6, opacity: 0, transformOrigin: '0 60%' }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in' }, wt('тридцать') - .2);
-EV.push([wt('тридцать') + .02, 'impact', { size: 1.1, gain: .9 }]);
+EV.push([wt('тридцать') + .02, 'impact', { size: 1.1, gain: .85 }]); CAM_EVENTS.push(wt('тридцать'));
 pop('#mon', wt('месяца') - .1);
 
-// SC7: дождь — «удобная ложь?»
-tl.fromTo('#bar7', { xPercent: -100 }, { xPercent: 0, duration: .5, ease: 'power3.out' }, T.s7 + .5);
-pop('#p71', wt('Пробежать') + .1, { x: -20 });
-tl.fromTo('#p72', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .4, ease: 'power3.out' }, wt('удобная') - .15);
-EV.push([wt('удобная'), 'pop', { gain: .5 }]);
-tl.to('#p72', { x: 12, duration: .08, yoyo: true, repeat: 3 }, wt('ложь.') + .1);
+// SC7 — дождь 2,5 с; лист ложится поверх кадра — «удобная ложь?»
+tl.fromTo('#lie', { yPercent: 100 }, { yPercent: 0, duration: .7, ease: 'power2.inOut' }, T.s7b); EV.push([T.s7b, 'paper', { dur: .6, gain: .6 }]);
+tl.set('#sc7 .vid', { visibility: 'hidden' }, T.s7b + .72);
 
-// SC8: 2011, два полароида
+// SC8 — 2011: колледж и новость
 tl.fromTo('#y2011', { scale: 1.4, opacity: 0, transformOrigin: '0 50%' }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in' }, wt('шестнадцать') - .2);
-EV.push([wt('шестнадцать'), 'thud', { gain: .7 }]);
-pop('#p81', wt('шестнадцать') + .45, { x: -30 });
-drop('#nott', wt('психологов') - .3, { y: -1000, rotation: 16 }, { rotation: -4 }); EV.push([wt('психологов'), 'shutter', { gain: .7 }]);
-pop('#p82', wt('студентах') - .3);
-drop('#park', wt('бежали') - .3, { x: 900, rotation: 18 }, { rotation: 5 }); EV.push([wt('бежали'), 'shutter', { gain: .6 }]);
-tl.to('#nott', { rotation: -6, x: -20, duration: .4, ease: 'power2.out' }, wt('бежали'));
-pop('#p83', wt('результат') - .2, { x: -20 }); EV.push([wt('совсем'), 'chime', { freq: 660, gain: .35 }]);
+EV.push([wt('шестнадцать'), 'thud', { gain: .6 }]);
+drop('#nott', wt('психологов') - .35, { y: -1000, rotation: 14 }, { rotation: 3.5 }); EV.push([wt('психологов') - .1, 'shutter', { gain: .6 }]);
+tl.fromTo('#sc8 .tape', { opacity: 0 }, { opacity: 1, duration: .2 }, wt('психологов') + .3);
+drop('#ill', wt('студентах') - .35, { y: 700, rotation: 5 }, { rotation: -1.5 }); EV.push([wt('студентах') - .1, 'paper', { dur: .45, gain: .6 }]);
+tl.fromTo('#clipI', { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: .25 }, wt('студентах') + .3);
+CAM_EVENTS.push(wt('кампусу'), wt('результат'));
+draw('#undI path', wt('совсем'), .5, 320); EV.push([wt('совсем'), 'swish', { gain: .35 }]);
 
-// SC9: три строки → название
-drop('#emp', T.s9 + .3, { x: 900, rotation: 12 }, { rotation: 3 }); EV.push([T.s9 + .6, 'shutter', { gain: .5 }]);
-pop('#p90', T.s9 + .5, { x: -20 });
-pop('#p91', wt('видим,') - .25, { x: -30 });
-pop('#p92', wt('кажется,') - .25, { x: -30 });
-tl.to('#p91', { scale: 1.05, duration: .2, yoyo: true, repeat: 1, transformOrigin: '0 50%' }, wt('видим', 1));
-pop('#p93', wt('обходится,') - .25, { x: -30 });
-tl.fromTo('#ttlbar', { yPercent: 120 }, { yPercent: 0, duration: .5, ease: 'power3.out' }, wt('спорят') - .3);
-tl.to('#emp', { y: -60, opacity: .4, duration: .5 }, wt('спорят') - .3);
-tl.fromTo('#ttl', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' }, wt('суде.') - .1);
-tl.fromTo('#ttlcap', { opacity: 0 }, { opacity: 1, duration: .4 }, wt('суде.') + .5);
-EV.push([wt('суде.'), 'impact', { size: .9, gain: .6 }], [wt('суде.') + .2, 'drone', { dur: 2.4, note: 'D', gain: .35 }]);
-// связки: кадр меняется каждые ≤ 2,5 с
-pop('#n3', wt('стрельбе') - .3, { x: -20 }); tl.to('#n3', { opacity: 0, duration: .3 }, wt('перелез') - .3);
-tl.to('#x4', { scale: 1.35, duration: .2, yoyo: true, repeat: 1, transformOrigin: '950px 250px' }, wt('человека,'));
-tl.to('#p71', { x: 10, duration: .08, yoyo: true, repeat: 3 }, wt('заметить'));
-tl.to('#y2011', { scale: 1.05, duration: .2, yoyo: true, repeat: 1, transformOrigin: '0 50%' }, wt('кампусу'));
-tl.to('#p92', { x: 16, duration: .3, ease: 'power2.out' }, wt('том,', 1));
-tl.to('#fence3', { x: -40, rotation: -6, duration: .5, ease: 'power2.out' }, wt('побежал'));
-tl.to('#s42', { color: '#1B1B1F', duration: .3 }, wt('оказался'));
-tl.to('#park', { x: -30, rotation: 3, duration: .5, ease: 'power2.out' }, wt('таким,'));
-tl.to('#p83', { x: 14, duration: .3, ease: 'power2.out' }, wt('ждёшь.'));
+// SC9 — всё дело на столе, по одному предмету на мысль; название выпуска
+const fan = ['#f1', '#f2', '#f3', '#f4', '#f5', '#f6', '#f7'], at = [T.s9 + .3, wt('видим,') - .2, wt('кажется,') - .2, wt('видим,', 1) - .2, wt('том,', 1) - .2, wt('обходится,') - .2, wt('спорят') - .9];
+fan.forEach((f, i) => { drop(f, at[i], { y: i % 2 ? 900 : -900, rotation: i % 2 ? 12 : -12 }); EV.push([at[i] + .1, i === 6 ? 'whoosh' : 'paper', { dur: .35, gain: .45 }]); });
+tl.fromTo('#band', { yPercent: 130 }, { yPercent: 0, duration: .55, ease: 'power3.out' }, wt('спорят') - .3);
+tl.fromTo('#ttl', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .45, ease: 'power3.out' }, wt('суде.') - .15);
+EV.push([wt('суде.'), 'impact', { size: .9, gain: .55 }], [wt('суде.') + .2, 'drone', { dur: 2.3, note: 'D', gain: .3 }]);
+CAM_EVENTS.push(T.s9 + 2.5, wt('суде.') + .9);
 tl.to({}, { duration: .01 }, DUR);
+window.CAM_EVENTS = CAM_EVENTS;
 
-// верхняя строка: светлая на видео во весь кадр, тёмная на бумаге
-const DARK = [[0, T.s3 + .25], [T.s7, T.s8 + .25]];
-// камера: на каждом плане медленный подъезд, на смене — сброс; фокус — на то, о чём речь
-const cuts = order.map(id => START[id]).concat(DUR);
-// бумажные сцены: подъезд 12–14 % с проездом в сторону речи (на бумаге нет видео во весь кадр — камера даёт жизнь кадру)
-const PAPERSC = [2, 3, 4, 5, 7, 8];
-const PAN = { 2: [1.12, 0], 3: [1.12, 50], 4: [1.14, 0], 5: [1.12, -40], 7: [1.08, 50], 8: [1.08, 50] };   // [подъезд, проезд px] — текст слева остаётся в кадре
-const moves = []; cuts.slice(0, -1).forEach((c, i) => { const [k, dx] = PAN[i] || [1.06, 0];
-  moves.push([c, 1.0, 0, 0]); moves.push([cuts[i + 1] - .02, k, dx, PAN[i] ? -20 : 0]); });
+// верхняя строка: светлая на видео во весь кадр
+const DARK = [[T.s2 + .3, T.s3 + .5], [T.s7 + .3, T.s7b + .5]];
+// камера: на бумаге — подъезд 8–12 % с переводом фокуса на предмет речи; на видео — мягкий подъезд
+const PAN = { sc1: [1.10, 30], sc3: [1.10, 0], sc4: [1.08, 0], sc5: [1.12, 0], sc6: [1.10, 0], sc8: [1.08, 30], sc9: [1.0, 0] };
+const moves = []; order.forEach((id, i) => { const a = START[id], z = (START[order[i + 1]] || DUR) - .02, [k, dx] = PAN[id] || [1.06, 0];
+  moves.push([a, id === 'sc9' ? 1.06 : 1.0, 0, 0]); moves.push([z, k, dx, PAN[id] ? -16 : 0]); });
 const cam = CAMLIFE.attach($('#stage'), {
-  drift: { x: 14, y: 9, rot: .4, seed: 11 }, moves,
+  drift: { x: 12, y: 8, rot: .35, seed: 11 }, moves,
   accents: [[wt('Кенни'), .02], [wt('видел.'), .025], [wt('тридцать') + .02, .035], [wt('шестнадцать'), .02], [wt('суде.'), .02]],
-  focus: [[0, '54% 20%'], [T.s2, '25% 80%'], [T.s3, '35% 30%'], [wt('Кенни'), '65% 30%'], [wt('перелез'), '50% 70%'], [T.s4, '25% 25%'], [wt('минуту'), '50% 70%'], [T.s5, '60% 40%'], [T.s6, '70% 50%'], [T.s7, '30% 75%'], [T.s8, '25% 30%'], [wt('психологов'), '45% 40%'], [T.s9, '25% 30%'], [wt('спорят'), '30% 70%']]
+  focus: [[0, '35% 40%'], [1.6, '60% 40%'], [T.s3, '35% 30%'], [wt('Кенни'), '70% 30%'], [wt('подозреваемым'), '70% 70%'], [T.s4, '40% 60%'], [wt('нескольких'), '60% 55%'],
+          [wt('минуту'), '25% 75%'], [wt('коллегой') - .2, '65% 50%'], [T.s5, '40% 30%'], [wt('Конли', 1), '70% 55%'], [T.s6, '35% 50%'], [wt('тридцать'), '75% 40%'],
+          [T.s8, '20% 25%'], [wt('кампусу'), '78% 35%'], [wt('результат'), '45% 70%'], [T.s9, '50% 40%'], [T.s9 + 2.5, '50% 50%'], [wt('спорят'), '40% 75%'], [wt('суде.') + .9, '30% 70%']]
 });
-// бумага и полароиды дышат заметнее, по бумаге медленно идёт свет от окна (живой кадр без видео во весь экран)
-const FL = [...document.querySelectorAll('.sheet,.pol')];
-const fl = t => FL.forEach((e, i) => { const a = .9 + (i % 3) * .3, ph = i * 1.7; e.style.translate = `${(Math.sin(t * .45 * a + ph) * 12).toFixed(2)}px ${(Math.sin(t * .6 * a + ph * 1.3) * 14).toFixed(2)}px`; e.style.rotate = `${(Math.sin(t * .35 * a + ph) * 1.4).toFixed(3)}deg`; });
-const LIGHT = [...document.querySelectorAll('.sc')].filter(e => !e.style.background).map(sc => { const d = document.createElement('div'); d.className = 'abs'; d.style.cssText = 'inset:-20%;pointer-events:none;mix-blend-mode:multiply;z-index:30;background:linear-gradient(105deg,rgba(0,0,0,0) 30%,rgba(60,50,40,.16) 50%,rgba(0,0,0,0) 70%)'; sc.appendChild(d); return d; });
+// бумага и полароиды чуть дышат, по столу медленно идёт свет от окна
+const FL = [...document.querySelectorAll('.sheet,.pol,.cut,.f9')];
+const fl = t => FL.forEach((e, i) => { const a = .9 + (i % 3) * .3, ph = i * 1.7; e.style.translate = `${(Math.sin(t * .45 * a + ph) * 10).toFixed(2)}px ${(Math.sin(t * .6 * a + ph * 1.3) * 12).toFixed(2)}px`; e.style.rotate = `${(Math.sin(t * .35 * a + ph) * 1.1).toFixed(3)}deg`; });
+const LIGHT = [...document.querySelectorAll('.sc')].filter(e => !e.style.background).map(sc => { const d = document.createElement('div'); d.style.cssText = 'position:absolute;inset:-20%;pointer-events:none;mix-blend-mode:multiply;z-index:30;background:linear-gradient(105deg,rgba(0,0,0,0) 30%,rgba(60,50,40,.14) 50%,rgba(0,0,0,0) 70%)'; sc.appendChild(d); return d; });
 const light = t => LIGHT.forEach((d, i) => { d.style.transform = `translateX(${((t * 38 + i * 300) % 1400 - 700).toFixed(1)}px)`; });
 function dyn(t) {
   const dark = DARK.some(([a, b]) => t >= a && t < b);
-  $('#top').style.color = dark ? '#E8E8E4' : 'var(--grey)'; $('#top b').style.color = dark ? '#fff' : 'var(--ink)';
+  $('#top').style.color = dark ? '#E8E8E4' : '#626269'; $('#top b').style.color = dark ? '#fff' : '#1B1B1F';
   $('#top').style.textShadow = dark ? '0 1px 3px rgba(0,0,0,.6)' : 'none';
   fl(t); light(t);
 }
@@ -303,7 +246,6 @@ window.__duration = DUR;
 window.__seek = t => { tl.seek(t, false); cam(t); dyn(t); return DML.seqs(t, '../media/'); };
 window.__ready = document.fonts.ready.then(() => DML.loadMeta()).then(() => window.__seek(0));
 window.__audioWav = async () => SFX.toWavBase64(await SFX.render(EV, DUR, { sfxDb: -3 }));
-DML.retime(W, EV, DUR);
 window.EVENTS = EV;
 if (!/render=1/.test(location.search)) { const t0 = +(new URLSearchParams(location.search).get('t') || 0); window.__ready.then(() => window.__seek(t0)); }
 </script>
