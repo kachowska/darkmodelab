@@ -187,7 +187,7 @@ go(wt('суде.') + .3, 6640, 1960, .84, 2.0);                     // посл�
 KEYS.forEach(([t, cx, cy, z, d], i) => {
   if (i) { tl.to(cam, { cx, cy, z, duration: d, ease: 'sine.inOut' }, t); CAM_EVENTS.push(t); CAM_MOVES.push([t, t + d]); EV.push([t, 'whoosh', { dur: d * .7, size: .5, gain: .14 }]); }
   const nx = KEYS[i + 1] ? KEYS[i + 1][0] : DUR, a = t + d;
-  if (nx - a > .3) tl.to(cam, { z: z * 1.045, cx: cx + (i % 2 ? 24 : -24), duration: nx - a, ease: 'none' }, a);   // медленный подъезд между проездами
+  if (nx - a > .3) tl.to(cam, { z: z * (i === 0 || z < .8 ? 1.09 : 1.045), cx: cx + (i % 2 ? 24 : -24), duration: nx - a, ease: 'none' }, a);   // медленный подъезд между проездами (на общих планах и первом кадре — сильнее: тонкие линии схемы почти не дают движения)
 });
 window.CAM_EVENTS = CAM_EVENTS; window.CAM_MOVES = CAM_MOVES;
 
