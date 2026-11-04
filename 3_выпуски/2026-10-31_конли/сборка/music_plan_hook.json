@@ -1,0 +1,14 @@
+{
+ "video": "hook/hook_draft.mp4",
+ "out": "../готово/конли_пролог_черновик-4.mp4",
+ "chapters": ["hook"],
+ "xfade": 10,
+ "music_lufs": -24,
+ "voice_lufs": -16,
+ "duck_db": -16,
+ "music_gain_db": -3,
+ "sfx_gain_db": -3,
+ "sections": [{"file": "../материалы/музыка/m3_stake-out_alex-jones.mp3", "chapter": 0, "in": 0}],
+ "dips": [],
+ "fade_out": [0, 55.3, 1.8]
+}
